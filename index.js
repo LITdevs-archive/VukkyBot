@@ -1,10 +1,10 @@
-require('dotenv').config(); 
+require('dotenv').config();
 const fs = require('fs');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
 const embeds = require("./embeds.js");
-const { prefix } = require('./crayons.json');
+const prefix = process.env.PREFIX;
 client.commands = new Discord.Collection();
 const newUsers = new Discord.Collection();
 

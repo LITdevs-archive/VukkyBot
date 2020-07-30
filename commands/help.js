@@ -1,4 +1,5 @@
-const { prefix } = require('../crayons.json');
+require('dotenv').config();
+const prefix = process.env.PREFIX;
 const embeds = require("../embeds.js");
 
 module.exports = {
