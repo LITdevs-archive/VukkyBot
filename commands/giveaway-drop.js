@@ -80,7 +80,7 @@ module.exports = {
 	guildOnly: true,
 	execute(message, args) {
     message.channel.send("Welcome to the giveaway drop creator!")
-    if (message.member.permissions.has('ADMINISTRATOR') || message.member.roles.cache.has(726555661286244382)) {
+    if (message.member.permissions.has('ADMINISTRATOR') || message.member.roles.cache.has('726555661286244382')) {
         if (message.mentions.channels.size !== 0) {
             if ((message.content.substring(message.content.search(' ') + 1).search(' ') + 1) !== 0) {
                 message.channel.send(embeds.inputEmbed('does this drop have a special code?'))
@@ -131,7 +131,7 @@ module.exports = {
           message.channel.send(embeds.errorEmbed('A channel is required! (<#channel> <prize>)'));
         }
       } else {
-        message.channel.send(embeds.errorEmbed('Starting giveaway drops requires the \`ADMINISTRATOR\` permission.'));
+        message.channel.send(embeds.errorEmbed('Starting giveaway drops requires the \`ADMINISTRATOR\` permission or the **Drop Permissions** role.'));
       }
     }
 };
