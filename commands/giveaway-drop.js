@@ -4,8 +4,8 @@ var specialCodeContents;
 
 function confirmDroppy(message) {
   const prize = message.content.substring(message.content.search(' ') + 1).substring(message.content.substring(message.content.search(' ') + 1).search(' ') + 1);
-  if(!specialCodeContents) { var stringy = `make a giveaway drop with the prize ${prize}?`}
-  if(specialCodeContents) { var stringy = `make a giveaway drop with the prize ${prize}, containing a code (**${specialCodeContents}**)?`}
+  var stringy = `make a giveaway drop with the prize ${prize}?`
+  if(specialCode == true) { var stringy = `make a giveaway drop with the prize ${prize}, containing a code (**${specialCodeContents}**)?`}
   message.channel.send(embeds.inputEmbed(stringy))
   .then(checkmessage => {
     checkmessage.react('👍').then(() => checkmessage.react('👎'));
@@ -79,6 +79,7 @@ module.exports = {
   usage: '<#channel> <prize>',
 	guildOnly: true,
 	execute(message, args) {
+    specialCodeContents = null;
     message.channel.send("Welcome to the giveaway drop creator!")
     if (message.member.permissions.has('ADMINISTRATOR') || message.member.roles.cache.has('726555661286244382')) {
         if (message.mentions.channels.size !== 0) {
