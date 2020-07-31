@@ -53,8 +53,10 @@ function droppy(message, prize) {
                           gmessage.edit(embeds.GiveawayWinner(prize, message.author, `<@!${winner.id}>`));
                           message.channel.send(embeds.infoEmbed(`<@!${winner.id}> got a drop (**${prize}**)`))
                           gmessage.channel.send(`Congratulations to <@!${winner.id}> for getting a giveaway drop! 🥳\nThe prize was ${prize} - better luck next time to everyone else!`);
-                          winner.send(`🎉 __**You got a giveaway drop!**__ 🎉\nYour prize is \`${prize}\`.\nContact <@!${message.member.id}> to collect your prize!`);
-                          if(specialCode) winner.send(`This drop comes with a special code. That code is **${specialCodeContents}**!\n\nYou may not have to contact <@!${message.member.id}>.`);
+                          var winnerBase = `🎉 __**You got a giveaway drop!**__ 🎉\nYour prize is \`${prize}\`.\n`
+                          if(!specialCode) { winnerMsg = `${winnerBase}Contact <@!${message.member.id}> to collect your prize!`; }
+                          if(specialCode) { winnerMsg = `${winnerBase}This drop comes with a special code. That code is **${specialCodeContents}**!\nYou may not have to contact <@!${message.member.id}>.`; }
+                          winner.send(winnerMsg);
                       }
                   }).catch(collected => {
                       gmessage.channel.stopTyping();
@@ -107,7 +109,6 @@ module.exports = {
                           message.channel.awaitMessages(filter2, { max: 1, time: 30000, errors: ['time'] })
                             .then(collected => {
                               specialCodeContents = collected.first().content;
-                              message.channel.send(embeds.infoEmbed('The code has been set!'));
                               confirmDroppy(message)
                             })
                             .catch(collected => {
