@@ -4,8 +4,8 @@ var specialCodeContents;
 
 function confirmDroppy(message) {
   const prize = message.content.substring(message.content.search(' ') + 1).substring(message.content.substring(message.content.search(' ') + 1).search(' ') + 1);
-  var stringy = `make a giveaway drop with the prize ${prize}?`
-  if(specialCode == true) { var stringy = `make a giveaway drop with the prize ${prize}, containing a code (**${specialCodeContents}**)?`}
+  var stringy = `Make a giveaway drop with the prize ${prize}?`
+  if(specialCode == true) { var stringy = `Make a giveaway drop with the prize ${prize}, containing a code (**${specialCodeContents}**)?`}
   message.channel.send(embeds.inputEmbed(stringy))
   .then(checkmessage => {
     checkmessage.react('👍').then(() => checkmessage.react('👎'));
@@ -21,7 +21,7 @@ function confirmDroppy(message) {
         if (reaction.emoji.name === '👍') {
           droppy(message, prize)
         } else {
-          message.channel.send(embeds.successEmbed('giveaway drop creation has been cancelled!'));
+          message.channel.send(embeds.successEmbed('Giveaway drop creation has been cancelled!'));
         }
       })
       .catch(collected => {
@@ -84,7 +84,7 @@ module.exports = {
     if (message.member.permissions.has('ADMINISTRATOR') || message.member.roles.cache.has('726555661286244382')) {
         if (message.mentions.channels.size !== 0) {
             if ((message.content.substring(message.content.search(' ') + 1).search(' ') + 1) !== 0) {
-                message.channel.send(embeds.inputEmbed('does this drop have a special code?'))
+                message.channel.send(embeds.inputEmbed('Does this drop have a special code?'))
                   .then(checkmessage => {
                     checkmessage.react('👍').then(() => checkmessage.react('👎'));
 
@@ -98,7 +98,7 @@ module.exports = {
 
                         if (reaction.emoji.name === '👍') {
                           specialCode = true;
-                          message.channel.send(embeds.inputEmbed('what\'s the code?'));
+                          message.channel.send(embeds.inputEmbed('What\'s the code?'));
 
                           const filter2 = responsy => {
                             return responsy.author.id === message.author.id;
@@ -107,7 +107,7 @@ module.exports = {
                           message.channel.awaitMessages(filter2, { max: 1, time: 30000, errors: ['time'] })
                             .then(collected => {
                               specialCodeContents = collected.first().content;
-                              message.channel.send(embeds.infoEmbed('the code has been set!'));
+                              message.channel.send(embeds.infoEmbed('The code has been set!'));
                               confirmDroppy(message)
                             })
                             .catch(collected => {
