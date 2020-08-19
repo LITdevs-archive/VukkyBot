@@ -1,8 +1,11 @@
 # VukkyBot
 A bot made for **Vukky's Chat Place**
 
+## Help VukkyBot
+[Submit feature requests or bug reports](https://github.com/Vukky123/VukkyBot/issues/new/choose)
+
 ## Deploy VukkyBot to Heroku
-*Experimental feature.*
+*Experimental feature. If you find a bug, please [report it!](https://github.com/Vukky123/VukkyBot/issues/new/choose)*
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
