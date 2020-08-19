@@ -3,7 +3,9 @@ const embeds = require("../embeds.js");
 module.exports = {
 	name: 'roles',
 	description: 'roles',
-	dcPermissions: ['EMBED_LINKS', 'MANAGE_ROLES', 'ADD_REACTIONS'],
+    dcPermissions: ['EMBED_LINKS', 'MANAGE_ROLES', 'ADD_REACTIONS'],
+    args: true,
+    usage: '<add/remove> <mention> <role name>',
 	execute(message, args) {
         if(message.member.hasPermission("KICK_MEMBERS")) {
             if(args[0] == 'add') {
