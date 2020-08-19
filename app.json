@@ -10,8 +10,7 @@
   "repository": "https://github.com/Vukky123/VukkyBot",
   "env": {
     "BOT_TOKEN": {
-      "description": "The token for your VukkyBot.",
-      "value": "Not your client secret!"
+      "description": "The token for your VukkyBot. Not your client secret!"
     },
     "PREFIX": {
       "description": "The prefix your VukkyBot will use.",
