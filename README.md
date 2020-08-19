@@ -1,11 +1,17 @@
 # VukkyBot
-A bot made for **Vukky's Chat Place**
+A bot made for **Vukky's Chat Place**.
+Giving VukkyBot permissions is not needed, it will notify you if it needs permissions.
 
 ## Help VukkyBot
 [Submit feature requests or bug reports](https://github.com/Vukky123/VukkyBot/issues/new/choose)
 
 ## Get your own VukkyBot
 *Experimental feature. If you find a bug, please [report it!](https://github.com/Vukky123/VukkyBot/issues/new/choose)*
+
+### Invite the normal VukkyBot
+*There are no plans to verify VukkyBot if it hits the server cap.*
+
+[![invite bot badge](https://img.shields.io/badge/Invite%20Bot-(may%20go%20offline)-yellow?style=social)](https://discord.com/api/oauth2/authorize?client_id=738380754249318531&permissions=0&scope=bot)
 
 ### Deploy VukkyBot to Heroku
 
