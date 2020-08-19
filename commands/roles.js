@@ -6,6 +6,7 @@ module.exports = {
     dcPermissions: ['EMBED_LINKS', 'MANAGE_ROLES', 'ADD_REACTIONS'],
     args: true,
     usage: '<add/remove> <mention> <role name>',
+    aliases: 'role',
 	execute(message, args) {
         if(message.member.hasPermission("KICK_MEMBERS")) {
             if(args[0] == 'add') {
