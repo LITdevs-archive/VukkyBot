@@ -1,0 +1,26 @@
+{
+  "name": "VukkyBot",
+  "description": "The bot from the Vukky's Chat Place Discord!",
+  "keywords": [
+    "discord",
+    "giveaways",
+    "vukky"
+  ],
+  "website": "https://vukky123.github.io/vukkybot",
+  "repository": "https://github.com/Vukky123/VukkyBot",
+  "env": {
+    "BOT_TOKEN": {
+      "description": "The token for your VukkyBot.",
+      "generator": "secret"
+    },
+    "PREFIX": {
+      "description": "The prefix your VukkyBot will use.",
+      "value": "v!"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
