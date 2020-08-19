@@ -94,4 +94,15 @@ client.on('message', message => {
   }
 });
 
+client.on('presenceUpdate', (oldPresence, newPresence) => {
+    if(client.user.id == 738380754249318531 && newPresence.member.id == 738394416145760318) {
+		if (newPresence.status === "online") {
+			text = "VukkyBot Dev is online now!";
+		} else if (newPresence.status === "offline") {
+			text = "VukkyBot Dev has gone offline.";
+		}
+		member.guild.channels.cache.get('745666571242045522').send(text);
+	}
+});
+
 client.login(process.env.BOT_TOKEN);
