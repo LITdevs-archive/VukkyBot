@@ -6,7 +6,6 @@ const client = new Discord.Client();
 const embeds = require("./embeds.js");
 const prefix = process.env.PREFIX;
 client.commands = new Discord.Collection();
-const newUsers = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 let embedPermissions = 1;
