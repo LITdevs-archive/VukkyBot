@@ -13,6 +13,8 @@ A bot made for **Vukky's Chat Place**
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
+*If the above button doesn't work, try [this link](https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FVukky123%2FVukkyBot&template=https%3A%2F%2Fgithub.com%2FVukky123%2FVukkyBot%2Fapp.json).*
+
 When your VukkyBot has been deployed, check its Resources tab.
 
 Disable the *web* process and enable the *service* process to start up your VukkyBot.
