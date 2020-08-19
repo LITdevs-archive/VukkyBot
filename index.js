@@ -22,7 +22,7 @@ for (const file of commandFiles) {
 
 client.once('ready', () => {
 	console.log('Ready!');
-	client.user.setActivity('my Salad balance', { type: 'WATCHING' });
+	client.user.setActivity('with code', { type: 'PLAYING' });
 });
 
 client.on('message', message => {
