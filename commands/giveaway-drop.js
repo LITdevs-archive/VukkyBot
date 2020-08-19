@@ -83,7 +83,7 @@ module.exports = {
 	execute(message, args) {
     specialCodeContents = null;
     message.channel.send("Welcome to the giveaway drop creator!\n⚠ **Please note**: The prize name is logged for debugging purposes.")
-    if (message.member.permissions.has('ADMINISTRATOR') || message.member.roles.cache.has('726555661286244382')) {
+    if (message.member.permissions.has('ADMINISTRATOR') || message.member.roles.cache.find(r => r.name === "Drop Permissions")) {
         if (message.mentions.channels.size !== 0) {
             if ((message.content.substring(message.content.search(' ') + 1).search(' ') + 1) !== 0) {
                 message.channel.send(embeds.inputEmbed('Does this drop have a special code?'))
