@@ -38,18 +38,18 @@ client.on('message', message => {
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
   if (!command) {
-			reply = `Uh ${message.author}... that command (**${commandName}**) isn't a thing, sorry!`
+			reply = `I've been looking around for a while now, but I don't think **${commandName}** is a command.`
 			if (embedPermissions == 0) return message.channel.send(reply)
       message.channel.send(embeds.errorEmbed(reply))
       return;
   }
 
   if (command.guildOnly && message.channel.type !== 'text') {
-	   return message.channel.send(embeds.errorEmbed(`Uh ${message.author}... I can't use that command inside a DM.`))
+	   return message.channel.send(embeds.errorEmbed(`**${commandName}** cannot be used inside DMs.`))
   }
 
   if (command.args && !args.length) {
-    let reply = `Uh ${message.author}... that command requires some arguments, but you didn't provide me any.`;
+    let reply = `I expected you to give me some arguments for **${commandName}**, but I didn't see any.`;
 
     if (command.usage) {
 			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
