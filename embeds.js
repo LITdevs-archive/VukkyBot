@@ -17,7 +17,7 @@ module.exports = {
 function errorEmbed(errorMsg) {
   return new Discord.MessageEmbed()
     .setColor('#ff0000')
-    .setTitle('❌ ERROR!')
+    .setTitle('❌ There was an error.')
     .setDescription(errorMsg)
     .setTimestamp()
     .setFooter(versionString, avatarURL);
