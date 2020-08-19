@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const pjson = require('./package.json')
 const avatarURL = 'https://i.imgur.com/oFvEuwb.jpg'
-const versionString = `Running version ${pjson.version} using discord.js 12.2.0`
+const versionString = `Running version ${pjson.version} using discord.js ${pjson.dependencies['discord.js'].substring(1)}`
 
 module.exports = {
     errorEmbed,
