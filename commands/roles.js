@@ -6,7 +6,7 @@ module.exports = {
    	dcPermissions: ['EMBED_LINKS', 'MANAGE_ROLES', 'ADD_REACTIONS'],
 	guildOnly: true,
     	args: true,
-    	usage: '<add/remove> <mention> <role name>',
+    	usage: '<add/remove> <mention (for add/remove only)> <role name>',
     	aliases: ['role'],
 	execute(message, args) {
 		if(message.member.hasPermission("KICK_MEMBERS")) {
