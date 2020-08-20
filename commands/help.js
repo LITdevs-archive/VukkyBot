@@ -31,7 +31,7 @@ module.exports = {
 	    const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
 
 	    if (!command) {
-		return message.channel.send(embeds.errorEmbed(`I've been looking around for a while now, but I don't think **${commandName}** is a command.`))
+		return message.channel.send(embeds.errorEmbed(`I've been looking around for a while now, but I don't think **${name}** is a command.`))
 	    }
 
 	    data.push(`**Name:** ${command.name}`);
