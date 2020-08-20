@@ -13,16 +13,22 @@ module.exports = {
 			const user = message.mentions.members.first();
 			const roleName = args.slice(2).join(' ');
 			const role = message.guild.roles.cache.find(role => role.name === roleName);
-			if(!role.id) return message.channel.send(embeds.errorEmbed("Could not get role ID. Does that role exist?"))
-			user.roles.add(role.id);
-			message.react('👍')
+			try {
+				user.roles.add(role.id);
+				message.react('👍')
+			} catch {
+				message.channel.send(embeds.errorEmbed("Could not add role. Does that role exist?"))
+			}
 		    } else if (args[0] == 'remove') {
 			const user = message.mentions.members.first();
 			const roleName = args.slice(2).join(' ');
 			const role = message.guild.roles.cache.find(role => role.name === roleName);
-			if(!role.id) return message.channel.send(embeds.errorEmbed("Could not get role ID. Does that role exist?"))
-			user.roles.remove(role.id)
-			message.react('👍')
+			try {
+				user.roles.remove(role.id);
+				message.react('👍')
+			} catch {
+				message.channel.send(embeds.errorEmbed("Could not remove role. Does that role exist?"))
+			}			    
 		    } else {
 			message.channel.send(embeds.errorEmbed(`Invalid. The \`roles\` command only supports \`add/remove\`, not \`${args[0]}\`.`));
 		    }
