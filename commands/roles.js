@@ -15,7 +15,7 @@ module.exports = {
 			const role = message.guild.roles.cache.find(role => role.name === roleName);
 			try {
 				user.roles.add(role.id);
-				message.react('👍')
+				message.channel.send(embeds.successEmbed(`Added the \`${roleName}\` role to <@!${user.id}>.`))
 			} catch {
 				message.channel.send(embeds.errorEmbed("Could not add role. Does that role exist?"))
 			}
@@ -25,7 +25,7 @@ module.exports = {
 			const role = message.guild.roles.cache.find(role => role.name === roleName);
 			try {
 				user.roles.remove(role.id);
-				message.react('👍')
+				message.channel.send(embeds.successEmbed(`Removed the \`${roleName}\` role from <@!${user.id}>.`))
 			} catch {
 				message.channel.send(embeds.errorEmbed("Could not remove role. Does that role exist?"))
 			}			    
