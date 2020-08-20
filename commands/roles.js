@@ -11,16 +11,16 @@ module.exports = {
 	execute(message, args) {
 		if(message.member.hasPermission("KICK_MEMBERS")) {
 		    if(args[0] == 'add') {
-			const user = message.mentions.members.first();
-			const roleName = args.slice(2).join(' ');
-			const role = message.guild.roles.cache.find(role => role.name === roleName);
-			try {
-				if(user.roles.cache.has(role.id)) return message.channel.send(embeds.infoEmbed(`<@!${user.id}> has the \`${roleName}\` role already.`))
-				user.roles.add(role.id);
-				message.channel.send(embeds.successEmbed(`Added the \`${roleName}\` role to <@!${user.id}>.`))
-			} catch {
-				message.channel.send(embeds.errorEmbed(`Could not add role. Does \`${roleName}\` actually exist?`))
-			}
+                const user = message.mentions.members.first();
+                const roleName = args.slice(2).join(' ');
+                const role = message.guild.roles.cache.find(role => role.name === roleName);
+                try {
+                    if(user.roles.cache.has(role.id)) return message.channel.send(embeds.infoEmbed(`<@!${user.id}> has the \`${roleName}\` role already.`))
+                    user.roles.add(role.id);
+                    message.channel.send(embeds.successEmbed(`Added the \`${roleName}\` role to <@!${user.id}>.`))
+                } catch {
+                    message.channel.send(embeds.errorEmbed(`Could not add role. Does \`${roleName}\` actually exist?`))
+                }
 		    } else if (args[0] == 'remove') {
                 const user = message.mentions.members.first();
                 const roleName = args.slice(2).join(' ');
@@ -33,7 +33,7 @@ module.exports = {
                     message.channel.send(embeds.errorEmbed(`Could not remove role. Does \`${roleName}\` actually exist?`))
                 }			    
 		    } else {
-			message.channel.send(embeds.errorEmbed(`Invalid. The \`roles\` command only supports \`add/remove\`, not \`${args[0]}\`.`));
+			    message.channel.send(embeds.errorEmbed(`Invalid. The \`roles\` command only supports \`add/remove\`, not \`${args[0]}\`.`));
 		    }
 		} else {
 		    message.channel.send(embeds.infoEmbed("You don't have permission to do that."))
