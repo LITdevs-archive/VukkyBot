@@ -4,6 +4,7 @@ module.exports = {
 	name: 'roles',
 	description: 'Manage roles on your server',
    	dcPermissions: ['EMBED_LINKS', 'MANAGE_ROLES', 'ADD_REACTIONS'],
+	guildOnly: true,
     	args: true,
     	usage: '<add/remove> <mention> <role name>',
     	aliases: ['role'],
