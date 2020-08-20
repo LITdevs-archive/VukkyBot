@@ -22,16 +22,16 @@ module.exports = {
 				message.channel.send(embeds.errorEmbed(`Could not add role. Does \`${roleName}\` actually exist?`))
 			}
 		    } else if (args[0] == 'remove') {
-			const user = message.mentions.members.first();
-			const roleName = args.slice(2).join(' ');
-			const role = message.guild.roles.cache.find(role => role.name === roleName);
-			try {
-				if(!user.roles.cache.has(role.id)) return message.channel.send(embeds.infoEmbed(`<@!${user.id}> doesn't have the \`${roleName}\` role.`))
-				user.roles.remove(role.id);
-				message.channel.send(embeds.successEmbed(`Removed the \`${roleName}\` role from <@!${user.id}>.`))
-			} catch {
-				message.channel.send(embeds.errorEmbed(`Could not remove role. Does \`${roleName}\` actually exist?`))
-			}			    
+                const user = message.mentions.members.first();
+                const roleName = args.slice(2).join(' ');
+                const role = message.guild.roles.cache.find(role => role.name === roleName);
+                try {
+                    if(!user.roles.cache.has(role.id)) return message.channel.send(embeds.infoEmbed(`<@!${user.id}> doesn't have the \`${roleName}\` role.`))
+                    user.roles.remove(role.id);
+                    message.channel.send(embeds.successEmbed(`Removed the \`${roleName}\` role from <@!${user.id}>.`))
+                } catch {
+                    message.channel.send(embeds.errorEmbed(`Could not remove role. Does \`${roleName}\` actually exist?`))
+                }			    
 		    } else {
 			message.channel.send(embeds.errorEmbed(`Invalid. The \`roles\` command only supports \`add/remove\`, not \`${args[0]}\`.`));
 		    }
