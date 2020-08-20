@@ -13,6 +13,7 @@ module.exports = {
 			const user = message.mentions.members.first();
 			const roleName = args.slice(2).join(' ');
 			const role = message.guild.roles.cache.find(role => role.name === roleName);
+			if(user.roles.cache.has(role)) return message.channel.send(embeds.infoEmbed(`<@!${user.id}> has the \`${roleName}\` role already.`))
 			try {
 				user.roles.add(role.id);
 				message.channel.send(embeds.successEmbed(`Added the \`${roleName}\` role to <@!${user.id}>.`))
@@ -23,6 +24,7 @@ module.exports = {
 			const user = message.mentions.members.first();
 			const roleName = args.slice(2).join(' ');
 			const role = message.guild.roles.cache.find(role => role.name === roleName);
+			if(!user.roles.cache.has(role)) return message.channel.send(embeds.infoEmbed(`<@!${user.id}> doesn't have the \`${roleName}\` role.`))
 			try {
 				user.roles.remove(role.id);
 				message.channel.send(embeds.successEmbed(`Removed the \`${roleName}\` role from <@!${user.id}>.`))
