@@ -13,8 +13,8 @@ module.exports = {
 			const user = message.mentions.members.first();
 			const roleName = args.slice(2).join(' ');
 			const role = message.guild.roles.cache.find(role => role.name === roleName);
-			if(user.roles.cache.has(role.id)) return message.channel.send(embeds.infoEmbed(`<@!${user.id}> has the \`${roleName}\` role already.`))
 			try {
+				if(user.roles.cache.has(role.id)) return message.channel.send(embeds.infoEmbed(`<@!${user.id}> has the \`${roleName}\` role already.`))
 				user.roles.add(role.id);
 				message.channel.send(embeds.successEmbed(`Added the \`${roleName}\` role to <@!${user.id}>.`))
 			} catch {
@@ -24,8 +24,8 @@ module.exports = {
 			const user = message.mentions.members.first();
 			const roleName = args.slice(2).join(' ');
 			const role = message.guild.roles.cache.find(role => role.name === roleName);
-			if(!user.roles.cache.has(role.id)) return message.channel.send(embeds.infoEmbed(`<@!${user.id}> doesn't have the \`${roleName}\` role.`))
 			try {
+				if(!user.roles.cache.has(role.id)) return message.channel.send(embeds.infoEmbed(`<@!${user.id}> doesn't have the \`${roleName}\` role.`))
 				user.roles.remove(role.id);
 				message.channel.send(embeds.successEmbed(`Removed the \`${roleName}\` role from <@!${user.id}>.`))
 			} catch {
