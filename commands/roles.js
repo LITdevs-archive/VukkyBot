@@ -2,7 +2,7 @@ const embeds = require("../embeds.js");
 
 module.exports = {
 	name: 'roles',
-	description: 'roles',
+	description: 'Manage roles on your server',
    	dcPermissions: ['EMBED_LINKS', 'MANAGE_ROLES', 'ADD_REACTIONS'],
     	args: true,
     	usage: '<add/remove> <mention> <role name>',
