@@ -89,8 +89,7 @@ client.on('message', message => {
   	command.execute(message, args);
   } catch (error) {
 	console.log(`error while trying to execute command: ${error.message}`)
-  	message.reply('there was an error trying to execute that command!');
-    message.channel.send(embeds.errorEmbed(error.message))
+  	message.reply('there was an error trying to execute that command!', embeds.errorEmbed(error.message));
   }
 });
 
