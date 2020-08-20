@@ -19,7 +19,7 @@ module.exports = {
 				user.roles.add(role.id);
 				message.channel.send(embeds.successEmbed(`Added the \`${roleName}\` role to <@!${user.id}>.`))
 			} catch {
-				message.channel.send(embeds.errorEmbed("Could not add role. Does \`${roleName}\` actually exist?"))
+				message.channel.send(embeds.errorEmbed(`Could not add role. Does \`${roleName}\` actually exist?`))
 			}
 		    } else if (args[0] == 'remove') {
 			const user = message.mentions.members.first();
