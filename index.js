@@ -21,7 +21,8 @@ for (const file of commandFiles) {
 
 client.once('ready', () => {
 	console.log('Ready!');
-	client.user.setActivity('with code', { type: 'PLAYING' });
+	const pjson = require('./package.json')
+	client.user.setActivity(`with v${pjson.version}`, { type: 'PLAYING' });
 });
 
 client.on('message', message => {
