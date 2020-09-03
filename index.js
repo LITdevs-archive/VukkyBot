@@ -22,7 +22,7 @@ for (const file of commandFiles) {
 client.once('ready', () => {
 	console.log('Ready!');
 	const pjson = require('./package.json')
-	client.user.setActivity(`with a Fall Guy (andv${pjson.version})`, { type: 'PLAYING' });
+	client.user.setActivity(`with a Fall Guy (and v${pjson.version})`, { type: 'PLAYING' });
 });
 
 client.on('message', message => {
