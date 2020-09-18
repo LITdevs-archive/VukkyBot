@@ -1,6 +1,10 @@
 [
 	{
-		"question": "Is this a test question?",
-		"answers": ["yes"]
-	}
+		"question": "What colour is the sky?",
+		"answers": ["blue"]
+    },
+    {
+        "question": "Was this bot made by Vukky?",
+        "answers": ["yes"]
+    }
 ]
