@@ -6,5 +6,65 @@
     {
         "question": "Was this bot made by Vukky?",
         "answers": ["yes"]
+    },
+    {
+        "question": "What flavor are Froot Loops?",
+        "answers": ["froot"]
+    },
+    {
+        "question": "What was the first company that Elon Musk founded?",
+        "answers": ["zip2", "zip2 corporation"]
+    },
+    {
+        "question": "What's the 21st letter of the alphabet?",
+        "answers": ["u"]
+    },
+    {
+        "question": "What does “HTTP” stand for?",
+        "answers": ["hypertext transfer protocol"]
+    },
+    {
+        "question": "What year was the very first model of the iPhone released?",
+        "answers": ["2007"]
+    },
+    {
+        "question": "Who co-­founded Microsoft with Bill Gates?",
+        "answers": ["paul allen"]
+    },
+    {
+        "question": "What country are stroopwafels from?",
+        "answers": ["netherlands", "the netherlands"]
+    },
+    {
+        "question": "Which country invented tea?",
+        "answers": ["china"]
+    },
+    {
+        "question": "What is your body’s largest organ?",
+        "answers": ["skin", "the skin"]
+    },
+    {
+        "question": "Which planet is the hottest in the solar system?",
+        "answers": ["venus"]
+    },
+    {
+        "question": "Which planet has the most gravity?",
+        "answers": ["jupiter"]
+    },
+    {
+        "question": "Google Chrome, Safari, Firefox, and Internet Explorer are different types of what?",
+        "answers": ["web browsers"]
+    },
+    {
+        "question": "What is the name of the song that Queen Elsa sings as she builds her ice castle in the movie Frozen?",
+        "answers": ["let it go"]
+    },
+    {
+        "question": "What classic video game requires you to eat all the dots throughout a maze?",
+        "answers": ["pac-man", "pac man", "pacman"]
+    },
+    {
+        "question": "What's the 1st Pokémon in the National Pokédex?",
+        "answers": ["bulbasaur"]
     }
 ]

@@ -1,6 +1,9 @@
+const embeds = require("../embeds.js");
+
 module.exports = {
 	name: 'quiz',
-	description: 'Let\'s play a quiz!',
+    description: 'Let\'s play a quiz!',
+    dcPermissions: ['EMBED_LINKS', 'ADD_REACTIONS'],
 	execute(message, args) {
         console.log("Let's play a quiz!")
         const quiz = require('./quiz.json');
@@ -10,10 +13,10 @@ module.exports = {
         };
         console.log(`I'm picking "${item.question}" and the answers for it are ${item.answers}`)
         
-        message.channel.send(item.question).then(() => {
+        message.channel.send(embeds.quizStartEmbed(item.question)).then(() => {
             message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] })
                 .then(collected => {
-                    message.channel.send(`${collected.first().author} got the correct answer!`);
+                    message.channel.send(embeds.quizWinnerEmbed(collected.first()));
                     wannaPlayAgain(message, args)
                 })
                 .catch(collected => {
@@ -23,7 +26,7 @@ module.exports = {
         });
 
         function wannaPlayAgain(message, args) {
-            message.channel.send("Wanna play again?").then((confirmMessage) => {
+            message.channel.send(embeds.inputEmbed("Wanna play again?")).then((confirmMessage) => {
                 confirmMessage.react('👍').then(() => confirmMessage.react('👎'));
                 const filter = (reaction, user) => {
                     return ['👍', '👎'].includes(reaction.emoji.name) && user.bot === false
@@ -34,7 +37,7 @@ module.exports = {
                         if (reaction.emoji.name === '👍') {
                             message.client.commands.get("quiz").execute(message, args)
                         } else {
-                            confirmMessage.channel.send("Okay! There's always next time, I guess.");
+                            confirmMessage.channel.send(embeds.infoEmbed("Okay! There's always next time, I guess."));
                         }
                     })
                     .catch(collected => {

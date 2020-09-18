@@ -11,7 +11,9 @@ module.exports = {
     GiveawayDrop,
     GiveawayWinner,
     GiveawayInvalid,
-    inputEmbed
+    inputEmbed,
+    quizStartEmbed,
+    quizWinnerEmbed
 };
 
 function errorEmbed(errorMsg) {
@@ -98,4 +100,22 @@ function GiveawayInvalid(prize, dropped_by) {
         .setAuthor(`Started by ${dropped_by.tag}`)
         .setTimestamp()
         .setFooter(versionString, avatarURL);
+}
+
+function quizStartEmbed(question) {
+  return new Discord.MessageEmbed()
+    .setColor('#7289da')
+    .setTitle('❓ Are you ready? Here we go!')
+    .setDescription(question)
+    .setTimestamp()
+    .setFooter(versionString, avatarURL);
+}
+
+function quizWinnerEmbed(winner) {
+  return new Discord.MessageEmbed()
+    .setColor('#7289da')
+    .setTitle('👑 Ding ding ding!')
+    .setDescription(`${winner.author} got the correct answer!`)
+    .setTimestamp()
+    .setFooter(versionString, avatarURL);
 }
