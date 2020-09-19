@@ -9,11 +9,13 @@
     },
     {
         "question": "What flavor are Froot Loops?",
-        "answers": ["froot"]
+        "answers": ["froot"],
+        "hint": "It's not different depending on the colors. And sorry for ruining your thoughts of them tasting differently."
     },
     {
         "question": "What was the first company that Elon Musk founded?",
-        "answers": ["zip2", "zip2 corporation"]
+        "answers": ["zip2", "zip2 corporation"],
+        "hint": "It's not Tesla. Elon Musk had to *zip* this company *two* times."
     },
     {
         "question": "What's the 21st letter of the alphabet?",
@@ -24,8 +26,13 @@
         "answers": ["hypertext transfer protocol"]
     },
     {
+        "question": "What does “HTTPS” stand for?",
+        "answers": ["hypertext transfer protocol secure"]
+    },
+    {
         "question": "What year was the very first model of the iPhone released?",
-        "answers": ["2007"]
+        "answers": ["2007"],
+        "hint": "Like, THE iPhone. Not your fancy iPhone X or whatever. The first generation."
     },
     {
         "question": "Who co-­founded Microsoft with Bill Gates?",
@@ -41,7 +48,8 @@
     },
     {
         "question": "What is your body’s largest organ?",
-        "answers": ["skin", "the skin"]
+        "answers": ["skin", "the skin"],
+        "hint": "It doesn't have to be an internal organ."
     },
     {
         "question": "Which planet is the hottest in the solar system?",
@@ -66,5 +74,27 @@
     {
         "question": "What's the 1st Pokémon in the National Pokédex?",
         "answers": ["bulbasaur"]
+    },
+    {
+        "question": "What's the 151th Pokémon in the National Pokédex?",
+        "answers": ["mew"],
+        "hint": "It was not intended to be obtainable."
+    },
+    {
+        "question": "What's the 25th Pokémon in the National Pokédex?",
+        "answers": ["pikachu"]
+    },
+    {
+        "question": "What's the name of the (arguably) best known glitch Pokémon?",
+        "answers": ["missingno", "missingno."],
+        "hint": "Its number went missing somewhere."
+    },
+    {
+        "question": "In what year was Windows 7 discontinued?",
+        "answers": ["2020"]
+    },
+    {
+        "question": "In what year was Windows XP discontinued?",
+        "answers": ["2014"]
     }
 ]

@@ -17,14 +17,14 @@ module.exports = {
 
         console.log(`I'm picking "${item.question}" and the answers for it are ${item.answers}`)
         
-        message.channel.send(embeds.quizStartEmbed(item.question, quizTimeSeconds)).then(() => {
+        message.channel.send(embeds.quizStartEmbed(item.question, quizTimeSeconds, item.hint)).then(() => {
             message.channel.awaitMessages(filter, { max: 1, time: quizTimeSeconds * 1000, errors: ['time'] })
                 .then(collected => {
                     message.channel.send(embeds.quizWinnerEmbed(collected.first()));
                     wannaPlayAgain(message, args)
                 })
                 .catch(collected => {
-                    message.channel.send(embeds.quizLoseEmbed('Hm! That question might have been too hard.'));
+                    message.channel.send(embeds.quizLoseEmbed(`Hm! That question might have been too hard.\nThe answers for it were ||${item.answers.join(", ")}||.`));
                     wannaPlayAgain(message, args)
                 });
         });

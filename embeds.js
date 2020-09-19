@@ -103,11 +103,16 @@ function GiveawayInvalid(prize, dropped_by) {
         .setFooter(versionString, avatarURL);
 }
 
-function quizStartEmbed(question, time) {
+function quizStartEmbed(question, time, hint) {
+  if(hint) {
+    var description = `${question}\nYou have ${time} seconds to answer!\n\n💡 **Hint available.** ||${hint}||`
+  } else {
+    var description = `${question}\nYou have ${time} seconds to answer!`
+  }
   return new Discord.MessageEmbed()
     .setColor('#7289da')
     .setTitle('❓ Are you ready? Here we go!')
-    .setDescription(`${question}\nYou have ${time} seconds to answer!`)
+    .setDescription(description)
     .setTimestamp()
     .setFooter(versionString, avatarURL);
 }
