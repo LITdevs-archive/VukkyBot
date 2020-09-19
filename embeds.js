@@ -13,7 +13,8 @@ module.exports = {
     GiveawayInvalid,
     inputEmbed,
     quizStartEmbed,
-    quizWinnerEmbed
+    quizWinnerEmbed,
+    quizLoseEmbed 
 };
 
 function errorEmbed(errorMsg) {
@@ -102,20 +103,29 @@ function GiveawayInvalid(prize, dropped_by) {
         .setFooter(versionString, avatarURL);
 }
 
-function quizStartEmbed(question) {
+function quizStartEmbed(question, time) {
   return new Discord.MessageEmbed()
     .setColor('#7289da')
     .setTitle('❓ Are you ready? Here we go!')
-    .setDescription(question)
+    .setDescription(`${question}\nYou have ${time} seconds to answer!`)
     .setTimestamp()
     .setFooter(versionString, avatarURL);
 }
 
 function quizWinnerEmbed(winner) {
   return new Discord.MessageEmbed()
-    .setColor('#7289da')
+    .setColor('#ffc83d')
     .setTitle('👑 Ding ding ding!')
     .setDescription(`${winner.author} got the correct answer!`)
+    .setTimestamp()
+    .setFooter(versionString, avatarURL);
+}
+
+function quizLoseEmbed(message) {
+  return new Discord.MessageEmbed()
+    .setColor('#be1931')
+    .setTitle('😅 Game over! No one wins.')
+    .setDescription(message)
     .setTimestamp()
     .setFooter(versionString, avatarURL);
 }
