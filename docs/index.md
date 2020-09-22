@@ -17,12 +17,14 @@ Documentation for customizing your own VukkyBot is over [here](config.json).
 *Experimental feature. If you find a bug, please [report it!](https://github.com/Vukky123/VukkyBot/issues/new/choose)*
 
 Okay, what VukkyBot do you want?
+
 <details markdown="1">
-<summary>The official VukkyBot</summary>
+<summary>The official VukkyBot, with no customization</summary>
 
 You can invite it [here](https://discord.com/api/oauth2/authorize?client_id=738380754249318531&permissions=0&scope=bot). However, I'm not responsible if it shuts down or hits the 100 server cap.
 
 </details>
+
 <details markdown="1">
 <summary>A VukkyBot that I can host and customize myself</summary>
 What are you going to host it with?
