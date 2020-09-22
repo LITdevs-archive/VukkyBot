@@ -15,7 +15,7 @@ module.exports = {
         // customization
         const quizTimeSeconds = 30
 
-        console.log(`I'm picking "${item.question}" and the answers for it are ${item.answers}`)
+        console.log(`I'm picking "${item.question}" and the answers for it are ${item.answers}.\nThe hint for it is ${item.hint} and it was made by ${item.author}.`)
         
         message.channel.send(embeds.quizStartEmbed(item.question, quizTimeSeconds, item.hint, item.author)).then(() => {
             message.channel.awaitMessages(filter, { max: 1, time: quizTimeSeconds * 1000, errors: ['time'] })
