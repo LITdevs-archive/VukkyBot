@@ -106,12 +106,10 @@ function GiveawayInvalid(prize, dropped_by) {
 function quizStartEmbed(question, time, hint, author) {
   var description = `${question}\nYou have ${time} seconds to answer!`
   if(hint) {
-    description.concat(`\n\n💡 **Hint available.** ||${hint}||`)
-    console.log(description)
+    description = description.concat(`\n\n💡 **Hint available.** ||${hint}||`)
   }
   if(author) {
-    description.concat(`\n📝 This question was brought to you by ${author}!`)
-    console.log(description)
+    description = description.concat(`\n📝 This question was brought to you by ${author}!`)
   }
   return new Discord.MessageEmbed()
     .setColor('#7289da')
