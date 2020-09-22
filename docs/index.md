@@ -7,7 +7,7 @@ What do you need?
 
 Please note: you cannot customize the official VukkyBot.
 
-Documentation for customizing your own VukkyBot is over [here](config.json).
+Documentation for customizing your own VukkyBot is over [here](config.html).
 
 </details>
 
