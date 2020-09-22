@@ -1,8 +1,18 @@
 Welcome to the VukkyBot Documentation page!
 
-If you're looking for config.json documentation, that's over [here](config.json).
+What do you need?
 
-# I want a VukkyBot!
+<details>
+<summary>Help with customizing my own VukkyBot!</summary>
+
+Please note: you cannot customize the official VukkyBot.
+
+Documentation for customizing your own VukkyBot is over [here](config.json).
+</details>
+
+<details>
+<summary>A VukkyBot!</summary>
+
 *Experimental feature. If you find a bug, please [report it!](https://github.com/Vukky123/VukkyBot/issues/new/choose)*
 
 Okay, what VukkyBot do you want?
@@ -54,5 +64,6 @@ Now, run the following command:
 npm start
 ```
 Your VukkyBot should now start.
+</details>
 </details>
 </details>
