@@ -104,12 +104,12 @@ function GiveawayInvalid(prize, dropped_by) {
 }
 
 function quizStartEmbed(question, time, hint, author) {
-  var description = `${question}\nYou have ${time} seconds to answer!`
+  var description = `${question}\nYou have ${time} seconds to answer!\n`
   if(!author) {
-    author = 'someone'
+    author = 'someone! ¯\\_(ツ)\_/¯'
   }
   if(hint) {
-    description = description.concat(`\n\n💡 **Hint available.** ||${hint}||`)
+    description = description.concat(`\n💡 **Hint available.** ||${hint}||`)
   }
   description = description.concat(`\n📝 This question was brought to you by ${author}!`)
   return new Discord.MessageEmbed()
