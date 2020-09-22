@@ -14,7 +14,7 @@ module.exports = {
                     .then(res => res.json())
                     .then(json => {
                         var result = json['data']['Events'][Math.floor(Math.random() * json['data']['Events'].length)]['text']
-                        newMessage.edit(`${result}\nThank you to https://history.muffinlabs.com for providing the API, and of course Wikipedia for providing the data.`)
+                        newMessage.edit(`I am not responsible for any inappropiate content here.\n${result}\nThank you to https://history.muffinlabs.com for providing the API, and of course Wikipedia for providing the data.`)
                     })
             })
 	},
