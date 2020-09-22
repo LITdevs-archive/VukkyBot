@@ -14,8 +14,6 @@ Documentation for customizing your own VukkyBot is over [here](config.json).
 <details markdown="1">
 <summary>A VukkyBot!</summary>
 
-*Experimental feature. If you find a bug, please [report it!](https://github.com/Vukky123/VukkyBot/issues/new/choose)*
-
 Okay, what VukkyBot do you want?
 
 <details markdown="1">
@@ -27,6 +25,9 @@ You can invite it [here](https://discord.com/api/oauth2/authorize?client_id=7383
 
 <details markdown="1">
 <summary>A VukkyBot that I can host and customize myself</summary>
+
+*Experimental feature. If you find a bug, please [report it!](https://github.com/Vukky123/VukkyBot/issues/new/choose)*
+
 What are you going to host it with?
 
 <details markdown="1">
