@@ -2,15 +2,16 @@ Welcome to the VukkyBot Documentation page!
 
 What do you need?
 
-<details>
+<details markdown="1">
 <summary>Help with customizing my own VukkyBot!</summary>
 
 Please note: you cannot customize the official VukkyBot.
 
 Documentation for customizing your own VukkyBot is over [here](config.json).
+
 </details>
 
-<details>
+<details markdown="1">
 <summary>A VukkyBot!</summary>
 
 *Experimental feature. If you find a bug, please [report it!](https://github.com/Vukky123/VukkyBot/issues/new/choose)*
