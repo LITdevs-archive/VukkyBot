@@ -1,11 +1,13 @@
 [
 	{
 		"question": "What colour is the sky?",
-		"answers": ["blue"]
+        "answers": ["blue"],
+        "author": "discordjs.guide"
     },
     {
         "question": "Was this bot made by Vukky?",
-        "answers": ["yes"]
+        "answers": ["yes"],
+        "author": "Vukky"
     },
     {
         "question": "What flavor are Froot Loops?",
@@ -27,7 +29,8 @@
     },
     {
         "question": "What does “HTTPS” stand for?",
-        "answers": ["hypertext transfer protocol secure"]
+        "answers": ["hypertext transfer protocol secure"],
+        "author": "Vukky"
     },
     {
         "question": "What year was the very first model of the iPhone released?",
@@ -87,7 +90,8 @@
     {
         "question": "What's the name of the (arguably) best known glitch Pokémon?",
         "answers": ["missingno", "missingno."],
-        "hint": "Its number went missing somewhere."
+        "hint": "Its number went missing somewhere.",
+        "author": "Vukky"
     },
     {
         "question": "In what year was Windows 7 discontinued?",
@@ -95,7 +99,8 @@
     },
     {
         "question": "In what year was Windows XP discontinued?",
-        "answers": ["2014"]
+        "answers": ["2014"],
+        "author": "Vukky"
     },
     {
         "question": "Which country is Carl von Linné (eng. Carl Linnaeus) from?",
