@@ -13,8 +13,8 @@ module.exports = {
                 fetch('https://history.muffinlabs.com/date')
                     .then(res => res.json())
                     .then(json => {
-                        var result = json['data']['Events'][Math.floor(Math.random() * json['data']['Events'].length)]['text']
-                        newMessage.edit(`I am not responsible for any inappropiate content here.\n${result}\nThank you to https://history.muffinlabs.com for providing the API, and of course Wikipedia for providing the data.`)
+                        var result = json['data']['Events'][Math.floor(Math.random() * json['data']['Events'].length)]
+                        newMessage.edit(`I am not responsible for any inappropiate content here.\n**${result.year}**: ${result.text}\nThank you to https://history.muffinlabs.com for providing the API, and of course Wikipedia for providing the data.`)
                     })
             })
 	},
