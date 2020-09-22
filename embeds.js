@@ -103,11 +103,13 @@ function GiveawayInvalid(prize, dropped_by) {
         .setFooter(versionString, avatarURL);
 }
 
-function quizStartEmbed(question, time, hint) {
+function quizStartEmbed(question, time, hint, author) {
+  var description = `${question}\nYou have ${time} seconds to answer!`
   if(hint) {
-    var description = `${question}\nYou have ${time} seconds to answer!\n\n💡 **Hint available.** ||${hint}||`
-  } else {
-    var description = `${question}\nYou have ${time} seconds to answer!`
+    description.concat(`\n\n💡 **Hint available.** ||${hint}||`)
+  }
+  if(author) {
+    description.concat(`\n📝 This question was brought to you by ${author}!`)
   }
   return new Discord.MessageEmbed()
     .setColor('#7289da')

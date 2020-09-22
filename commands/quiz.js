@@ -17,7 +17,7 @@ module.exports = {
 
         console.log(`I'm picking "${item.question}" and the answers for it are ${item.answers}`)
         
-        message.channel.send(embeds.quizStartEmbed(item.question, quizTimeSeconds, item.hint)).then(() => {
+        message.channel.send(embeds.quizStartEmbed(item.question, quizTimeSeconds, item.hint, item.author)).then(() => {
             message.channel.awaitMessages(filter, { max: 1, time: quizTimeSeconds * 1000, errors: ['time'] })
                 .then(collected => {
                     message.channel.send(embeds.quizWinnerEmbed(collected.first()));
