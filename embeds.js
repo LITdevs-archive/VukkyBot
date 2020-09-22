@@ -15,7 +15,8 @@ module.exports = {
     inputEmbed,
     quizStartEmbed,
     quizWinnerEmbed,
-    quizLoseEmbed 
+    quizLoseEmbed,
+    cooldownEmbed
 };
 
 function errorEmbed(errorMsg) {
@@ -134,6 +135,15 @@ function quizLoseEmbed(message) {
   return new Discord.MessageEmbed()
     .setColor('#be1931')
     .setTitle('😅 Game over! No one wins.')
+    .setDescription(message)
+    .setTimestamp()
+    .setFooter(versionString, avatarURL);
+}
+
+function cooldownEmbed(message) {
+  return new Discord.MessageEmbed()
+    .setColor('#ffffff')
+    .setTitle('⏲ Slow down!')
     .setDescription(message)
     .setTimestamp()
     .setFooter(versionString, avatarURL);
