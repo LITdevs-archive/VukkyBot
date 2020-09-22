@@ -1,4 +1,5 @@
 const embeds = require("../embeds.js");
+const config = require('../config.json');
 var specialCode;
 var specialCodeContents;
 
@@ -79,52 +80,58 @@ module.exports = {
 	dcPermissions: ['EMBED_LINKS', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
   args: true,
   usage: '<#channel> <prize>',
-	guildOnly: true,
+  guildOnly: true,
+  aliases: ['drop', 'giveawaydrop'],
 	execute(message, args) {
     specialCodeContents = null;
     message.channel.send("Welcome to the giveaway drop creator!\n⚠ **Please note**: The prize name is logged for debugging purposes.")
     if (message.member.permissions.has('ADMINISTRATOR') || message.member.roles.cache.find(r => r.name === "Drop Permissions")) {
         if (message.mentions.channels.size !== 0) {
             if ((message.content.substring(message.content.search(' ') + 1).search(' ') + 1) !== 0) {
-                message.channel.send(embeds.inputEmbed('Does this drop have a special code?'))
-                  .then(checkmessage => {
-                    checkmessage.react('👍').then(() => checkmessage.react('👎'));
+                if(config.commands.giveawaydrop.codes == true) {
+                  message.channel.send(embeds.inputEmbed('Does ths drop have a special code?'))
+                    .then(checkmessage => {
+                      checkmessage.react('👍').then(() => checkmessage.react('👎'));
 
-                    const filter = (reaction, user) => {
-                      return user.id === message.author.id;
-                    };
+                      const filter = (reaction, user) => {
+                        return user.id === message.author.id;
+                      };
 
-                    checkmessage.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
-                      .then(collected => {
-                        const reaction = collected.first();
+                      checkmessage.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+                        .then(collected => {
+                          const reaction = collected.first();
 
-                        if (reaction.emoji.name === '👍') {
-                          specialCode = true;
-                          message.channel.send(embeds.inputEmbed('What\'s the code?'));
+                          if (reaction.emoji.name === '👍') {
+                            specialCode = true;
+                            message.channel.send(embeds.inputEmbed('What\'s the code?'));
 
-                          const filter2 = responsy => {
-                            return responsy.author.id === message.author.id;
-                          };
+                            const filter2 = responsy => {
+                              return responsy.author.id === message.author.id;
+                            };
 
-                          message.channel.awaitMessages(filter2, { max: 1, time: 30000, errors: ['time'] })
-                            .then(collected => {
-                              specialCodeContents = collected.first().content;
-                              confirmDroppy(message)
-                            })
-                            .catch(collected => {
-                              console.log("👨‍💻 Drop creation failed: " + collected.message)
-                              return message.channel.send('you didn\'t answer in time, or there was an error.');
-                            });
-                        } else {
-                          specialCode = false;
-                          confirmDroppy(message)
-                        }
-                      })
-                      .catch(collected => {
-                        console.log("👨‍💻 Drop creation failed: " + collected.message)
-                        return message.channel.send('you didn\'t answer in time, or there was an error.');
-                      });
-                  });
+                            message.channel.awaitMessages(filter2, { max: 1, time: 30000, errors: ['time'] })
+                              .then(collected => {
+                                specialCodeContents = collected.first().content;
+                                confirmDroppy(message)
+                              })
+                              .catch(collected => {
+                                console.log("👨‍💻 Drop creation failed: " + collected.message)
+                                return message.channel.send('you didn\'t answer in time, or there was an error.');
+                              });
+                          } else {
+                            specialCode = false;
+                            confirmDroppy(message)
+                          }
+                        })
+                        .catch(collected => {
+                          console.log("👨‍💻 Drop creation failed: " + collected.message)
+                          return message.channel.send('you didn\'t answer in time, or there was an error.');
+                        });
+                    });
+                } else {
+                  specialCode = false;
+                  confirmDroppy(message)
+                }
             } else {
               message.channel.send(embeds.errorEmbed('A prize is required! (<#channel> <prize>)'));
             }

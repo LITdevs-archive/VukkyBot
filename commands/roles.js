@@ -1,13 +1,13 @@
 const embeds = require("../embeds.js");
 
 module.exports = {
-	name: 'roles',
-	description: 'Manage roles on your server',
-   	dcPermissions: ['EMBED_LINKS', 'MANAGE_ROLES', 'ADD_REACTIONS'],
-	guildOnly: true,
-    	args: true,
-    	usage: '<add/remove> <mention (for add/remove only)> <role name>',
-    	aliases: ['role'],
+    name: 'roles',
+    description: 'Manage roles on your server',
+    dcPermissions: ['EMBED_LINKS', 'MANAGE_ROLES', 'ADD_REACTIONS'],
+    guildOnly: true,
+    args: true,
+    usage: '<add/remove> <mention (for add/remove only)> <role name>',
+    aliases: ['role'],
 	execute(message, args) {
 		if(message.member.hasPermission("KICK_MEMBERS")) {
 		    if(args[0] == 'add') {

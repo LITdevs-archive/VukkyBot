@@ -7,13 +7,14 @@ module.exports = {
 	execute(message, args) {
         console.log("Let's play a quiz!")
         const quiz = require('./quiz.json');
+        const config = require('../config.json');
         const item = quiz[Math.floor(Math.random() * quiz.length)];
         const filter = response => {
             return item.answers.some(answer => answer.toLowerCase() === response.content.toLowerCase());
         };
 
         // customization
-        const quizTimeSeconds = 30
+        const quizTimeSeconds = config.commands.quiz.timeSeconds
 
         console.log(`I'm picking "${item.question}" and the answers for it are ${item.answers}.\nThe hint for it is ${item.hint} and it was made by ${item.author}.`)
         

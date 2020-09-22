@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const pjson = require('./package.json')
+const config = require('./config.json');
 const avatarURL = 'https://i.imgur.com/H0sAkrl.png'
 const versionString = `This VukkyBot is using v${pjson.version} with discord.js ${pjson.dependencies['discord.js'].substring(1)}`
 
@@ -108,7 +109,7 @@ function quizStartEmbed(question, time, hint, author) {
   if(!author) {
     author = 'someone! ¯\\_(ツ)\_/¯'
   }
-  if(hint) {
+  if(hint && config.commands.quiz.hints == true) {
     description = description.concat(`\n💡 **Hint available.** ||${hint}||`)
   }
   description = description.concat(`\n📝 This question was brought to you by ${author}!`)

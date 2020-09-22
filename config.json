@@ -1,0 +1,11 @@
+{
+    "commands": {
+        "quiz": {
+            "timeSeconds": 30,
+            "hints": true
+        },
+        "giveawaydrop": {
+            "codes": true
+        }
+    }
+}
