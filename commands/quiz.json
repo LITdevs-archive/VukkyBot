@@ -96,5 +96,11 @@
     {
         "question": "In what year was Windows XP discontinued?",
         "answers": ["2014"]
+    },
+    {
+        "question": "Which country is Carl von Linné (eng. Carl Linnaeus) from?",
+        "answers": ["sweden"],
+        "hint": "blue and yellow",
+        "author": "Gustav"
     }
 ]
