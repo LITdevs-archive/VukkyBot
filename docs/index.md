@@ -51,7 +51,7 @@ Disable the *web* process and enable the *service* process to start up your Vukk
 <summary>My own machine</summary>
 
 This assumes you have:
-- [node.js](https://nodejs.org) (comes with npm)
+- [node.js](https://nodejs.org) (npm is installed when you install node.js)
 - [Git](https://git-scm.com/)
 
 To host a VukkyBot, you run the following commands:
