@@ -20,6 +20,7 @@ Okay, what VukkyBot do you want?
 <summary>The official VukkyBot</summary>
 
 You can invite it [here](https://discord.com/api/oauth2/authorize?client_id=738380754249318531&permissions=0&scope=bot). However, I'm not responsible if it shuts down or hits the 100 server cap.
+
 </details>
 <details>
 <summary>A VukkyBot that I can host and customize myself</summary>
@@ -38,6 +39,7 @@ When your VukkyBot has been deployed, check its Resources tab.
 Disable the *web* process and enable the *service* process to start up your VukkyBot.
 
 ![GIF showing how to disable the web process and enable the service process.](https://i.imgur.com/Bh39dW4.gif)
+
 </details>
 
 <details>
@@ -64,6 +66,7 @@ Now, run the following command:
 npm start
 ```
 Your VukkyBot should now start.
+
 </details>
 </details>
 </details>
