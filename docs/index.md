@@ -17,16 +17,17 @@ Documentation for customizing your own VukkyBot is over [here](config.json).
 *Experimental feature. If you find a bug, please [report it!](https://github.com/Vukky123/VukkyBot/issues/new/choose)*
 
 Okay, what VukkyBot do you want?
-<details>
+<details markdown="1">
 <summary>The official VukkyBot</summary>
 
 You can invite it [here](https://discord.com/api/oauth2/authorize?client_id=738380754249318531&permissions=0&scope=bot). However, I'm not responsible if it shuts down or hits the 100 server cap.
 
 </details>
-<details>
+<details markdown="1">
 <summary>A VukkyBot that I can host and customize myself</summary>
 What are you going to host it with?
-<details>
+
+<details markdown="1">
 <summary>Heroku</summary>
 
 *Your deployed VukkyBot will run 24/7. This will use up your free dyno hours before the end of the month. Link a credit card if you want to run your VukkyBot for the entire month.*
@@ -43,7 +44,7 @@ Disable the *web* process and enable the *service* process to start up your Vukk
 
 </details>
 
-<details>
+<details markdown="1">
 <summary>My own machine</summary>
 
 This assumes you have:
