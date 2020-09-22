@@ -33,19 +33,20 @@ This assumes you have:
 - node.js (comes with npm)
 - Git
 
-To host a VukkyBot, you run the following command:
+To host a VukkyBot, you run the following commands:
 ```
 git clone https://github.com/Vukky123/VukkyBot.git
+cd VukkyBot
+npm install
 ```
-Don't close your window yet!
-In your new clone, you will need an .env file containing the following:
+But don't close your window just yet!
+Before we start VukkyBot, you need to make an .env file:
 ```
 BOT_TOKEN=BOTTOKENHERE
 PREFIX=BOTPREFIXHERE
 ```
-Now, run the following commands:
+Now, run the following command:
 ```
-cd VukkyBot
 npm start
 ```
 Your VukkyBot should now start.
