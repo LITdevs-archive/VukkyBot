@@ -105,12 +105,13 @@ function GiveawayInvalid(prize, dropped_by) {
 
 function quizStartEmbed(question, time, hint, author) {
   var description = `${question}\nYou have ${time} seconds to answer!`
+  if(!author) {
+    author = 'someone'
+  }
   if(hint) {
     description = description.concat(`\n\n💡 **Hint available.** ||${hint}||`)
   }
-  if(author) {
-    description = description.concat(`\n📝 This question was brought to you by ${author}!`)
-  }
+  description = description.concat(`\n📝 This question was brought to you by ${author}!`)
   return new Discord.MessageEmbed()
     .setColor('#7289da')
     .setTitle('❓ Are you ready? Here we go!')
