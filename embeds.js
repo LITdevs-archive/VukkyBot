@@ -105,8 +105,8 @@ function GiveawayInvalid(prize, dropped_by) {
         .setFooter(versionString, avatarURL);
 }
 
-function quizStartEmbed(question, time, hint, author) {
-  var description = `${question}\nYou have ${time} seconds to answer!\n`
+function quizStartEmbed(question, time, hint, author, categories) {
+  var description = `**Categories:** ${categories.join(", ")}\n\n${question}\nYou have ${time} seconds to answer!\n`
   if(!author) {
     author = 'someone! ¯\\_(ツ)\_/¯'
   }

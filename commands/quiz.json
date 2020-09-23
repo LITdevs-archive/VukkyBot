@@ -2,110 +2,164 @@
 	{
 		"question": "What colour is the sky?",
         "answers": ["blue"],
-        "author": "discordjs.guide"
+        "author": "discordjs.guide",
+        "categories": ["Nature"]
     },
     {
         "question": "Was this bot made by Vukky?",
         "answers": ["yes"],
-        "author": "Vukky"
+        "author": "Vukky",
+        "categories": ["Fun"]
     },
     {
         "question": "What flavor are Froot Loops?",
         "answers": ["froot"],
-        "hint": "It's not different depending on the colors. And sorry for ruining your thoughts of them tasting differently."
+        "hint": "It's not different depending on the colors. And sorry for ruining your thoughts of them tasting differently.",
+        "categories": ["Food"]
     },
     {
         "question": "What was the first company that Elon Musk founded?",
         "answers": ["zip2", "zip2 corporation"],
-        "hint": "It's not Tesla. Elon Musk had to *zip* this company *two* times."
+        "hint": "It's not Tesla. Elon Musk had to *zip* this company *two* times.",
+        "categories": ["Technology"]
     },
     {
         "question": "What's the 21st letter of the alphabet?",
-        "answers": ["u"]
+        "answers": ["u"],
+        "categories": "Language"
     },
     {
         "question": "What does “HTTP” stand for?",
-        "answers": ["hypertext transfer protocol"]
+        "answers": ["hypertext transfer protocol"],
+        "categories": ["Technology"]
     },
     {
         "question": "What does “HTTPS” stand for?",
         "answers": ["hypertext transfer protocol secure"],
-        "author": "Vukky"
+        "author": "Vukky",
+        "categories": ["Technology"]
     },
     {
         "question": "What year was the very first model of the iPhone released?",
         "answers": ["2007"],
-        "hint": "Like, THE iPhone. Not your fancy iPhone X or whatever. The first generation."
+        "hint": "Like, THE iPhone. Not your fancy iPhone X or whatever. The first generation.",
+        "categories": ["Technology"]
     },
     {
         "question": "Who co-­founded Microsoft with Bill Gates?",
-        "answers": ["paul allen"]
+        "answers": ["paul allen"],
+        "categories": ["Technology"]
     },
     {
         "question": "What country are stroopwafels from?",
-        "answers": ["netherlands", "the netherlands"]
+        "answers": ["netherlands", "the netherlands"],
+        "categories": ["Food"]
     },
     {
         "question": "Which country invented tea?",
-        "answers": ["china"]
+        "answers": ["china"],
+        "categories": ["Food"]
     },
     {
         "question": "What is your body’s largest organ?",
         "answers": ["skin", "the skin"],
-        "hint": "It doesn't have to be an internal organ."
+        "hint": "It doesn't have to be an internal organ.",
+        "categories": ["Science"]
     },
     {
         "question": "Which planet is the hottest in the solar system?",
-        "answers": ["venus"]
+        "answers": ["venus"],
+        "categories": ["Science"]
     },
     {
         "question": "Which planet has the most gravity?",
-        "answers": ["jupiter"]
+        "answers": ["jupiter"],
+        "categories": ["Science"]
     },
     {
         "question": "Google Chrome, Safari, Firefox, and Internet Explorer are different types of what?",
-        "answers": ["web browsers"]
+        "answers": ["web browsers"],
+        "categories": ["Technology"]
     },
     {
         "question": "What is the name of the song that Queen Elsa sings as she builds her ice castle in the movie Frozen?",
-        "answers": ["let it go"]
+        "answers": ["let it go"],
+        "categories": ["Music"]
     },
     {
         "question": "What classic video game requires you to eat all the dots throughout a maze?",
-        "answers": ["pac-man", "pac man", "pacman"]
+        "answers": ["pac-man", "pac man", "pacman"],
+        "categories": ["Gaming"]
     },
     {
         "question": "What's the 1st Pokémon in the National Pokédex?",
-        "answers": ["bulbasaur"]
+        "answers": ["bulbasaur"],
+        "categories": ["Gaming"]
     },
     {
         "question": "What's the 151th Pokémon in the National Pokédex?",
         "answers": ["mew"],
-        "hint": "It was not intended to be obtainable."
+        "hint": "It was not intended to be obtainable.",
+        "categories": ["Gaming"]
     },
     {
         "question": "What's the 25th Pokémon in the National Pokédex?",
-        "answers": ["pikachu"]
+        "answers": ["pikachu"],
+        "categories": ["Gaming"]
     },
     {
         "question": "What's the name of the (arguably) best known glitch Pokémon?",
         "answers": ["missingno", "missingno."],
         "hint": "Its number went missing somewhere.",
-        "author": "Vukky"
+        "author": "Vukky",
+        "categories": ["Gaming"]
     },
     {
         "question": "In what year was Windows 7 discontinued?",
-        "answers": ["2020"]
+        "answers": ["2020"],
+        "categories": ["Technology"]
     },
     {
         "question": "In what year was Windows XP discontinued?",
         "answers": ["2014"],
-        "author": "Vukky"
+        "author": "Vukky",
+        "categories": ["Technology"]
     },
     {
         "question": "Which country is Carl von Linné (or Carl Linnaeus) from?",
         "answers": ["sweden"],
         "hint": "blue and yellow",
-        "author": "Gustav"
+        "author": "Gustav",
+        "categories": ["Science"]
+    },
+    {
+        "question": "In what year did Windows 7 come out?",
+        "answers": ["2009"],
+        "author": "Gustav and Vukky",
+        "categories": ["Technology"]
+    },
+    {
+        "question": "In what year was On the Origin of Species by Charles Darwin first published?",
+        "answers": ["1859"],
+        "author": "Gustav",
+        "categories": ["Science"]
+    },
+    {
+        "question": "How many billion years old is the sun?",
+        "answers": ["4.603", "4,603", "4.6", "4,6"],
+        "author": "Gustav",
+        "categories": ["Science"]
+    },
+    {
+        "question": "What is the powerful and luminous stellar explosion created when a star \"burns\" out called?",
+        "answers": ["supernova", "a supernova"],
+        "author": "Gustav and Wikipedia",
+        "categories": ["Science"]
+    },
+    {
+        "question": "What is the first element in the periodic table?",
+        "answers": ["hydrogen"],
+        "author": "Gustav",
+        "categories": ["Science"]
     }
 ]

@@ -16,9 +16,9 @@ module.exports = {
         // customization
         const quizTimeSeconds = config.commands.quiz.timeSeconds
 
-        console.log(`I'm picking "${item.question}" and the answers for it are ${item.answers}.\nThe hint for it is ${item.hint} and it was made by ${item.author}.`)
+        console.log(`I'm picking "${item.question}" and the answers for it are ${item.answers}.\nThe hint for it is ${item.hint} and it was made by ${item.author}.\nIts categories are ${item.categories}.`)
         
-        message.channel.send(embeds.quizStartEmbed(item.question, quizTimeSeconds, item.hint, item.author)).then(() => {
+        message.channel.send(embeds.quizStartEmbed(item.question, quizTimeSeconds, item.hint, item.author, item.categories)).then(() => {
             message.channel.awaitMessages(filter, { max: 1, time: quizTimeSeconds * 1000, errors: ['time'] })
                 .then(collected => {
                     message.channel.send(embeds.quizWinnerEmbed(collected.first()));
