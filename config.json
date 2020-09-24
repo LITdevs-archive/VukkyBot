@@ -1,5 +1,5 @@
 {
-    "docs": "https://vukky123.github.io/VukkyBot/config.html",
+    "docs": "https://vukkyltd.github.io/VukkyBot/config.html",
     "commands": {
         "quiz": {
             "timeSeconds": 30,
