@@ -26,7 +26,7 @@ You can invite it [here](https://discord.com/api/oauth2/authorize?client_id=7383
 <details markdown="1">
 <summary>A VukkyBot that I can host and customize myself</summary>
 
-*Experimental feature. If you find a bug, please [report it!](https://github.com/Vukky123/VukkyBot/issues/new/choose)*
+*Experimental feature. If you find a bug, please [report it!](https://github.com/VukkyLtd/VukkyBot/issues/new/choose)*
 
 What are you going to host it with?
 
