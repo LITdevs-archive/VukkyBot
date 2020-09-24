@@ -29,7 +29,15 @@ client.on('message', message => {
 
   if ((message.channel.type == "text" && !message.guild.me.hasPermission("EMBED_LINKS"))) embedPermissions = 0
 
+<<<<<<< Updated upstream
   if (!message.content.startsWith(prefix) || message.author.bot) return;
+=======
+  if (message.author.bot) return;
+
+  if (message.content.toLowerCase().includes(`<@!${client.user.id}>`) && config.prefixReminder == true && !message.content.startsWith(prefix)) message.reply(`my prefix is \`${process.env.PREFIX}\``)
+
+  if (!message.content.startsWith(prefix)) return;
+>>>>>>> Stashed changes
 
   const args = message.content.slice(prefix.length).split(/ +/);
   const commandName = args.shift().toLowerCase();
