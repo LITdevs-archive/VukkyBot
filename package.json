@@ -14,12 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Vukky123/VukkyBot.git"
+    "url": "git+https://github.com/VukkyLtd/VukkyBot.git"
   },
   "author": "Vukky",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Vukky123/VukkyBot/issues"
+    "url": "https://github.com/VukkyLtd/VukkyBot/issues"
   },
-  "homepage": "https://github.com/Vukky123/VukkyBot#readme"
+  "homepage": "https://github.com/VukkyLtd/VukkyBot#readme"
 }
