@@ -1,0 +1,13 @@
+{
+    "docs": "https://vukky123.github.io/VukkyBot/config.html",
+    "commands": {
+        "quiz": {
+            "timeSeconds": 30,
+            "hints": true
+        },
+        "giveawaydrop": {
+            "codes": true
+        }
+    },
+    "prefixReminder": true
+}
