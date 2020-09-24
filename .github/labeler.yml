@@ -1,0 +1,8 @@
+embeds:
+- embeds.js
+
+documentation:
+  - docs/**/*
+  
+commands:
+  - commands/**/*

@@ -1,7 +1,8 @@
 const Discord = require('discord.js');
 const pjson = require('./package.json')
-const avatarURL = 'https://i.imgur.com/oFvEuwb.jpg'
-const versionString = `Running version ${pjson.version} using discord.js 12.2.0`
+const config = require('./config.json');
+const avatarURL = 'https://i.imgur.com/H0sAkrl.png'
+const versionString = `This VukkyBot is using v${pjson.version} with discord.js ${pjson.dependencies['discord.js'].substring(1)}`
 
 module.exports = {
     errorEmbed,
@@ -11,13 +12,17 @@ module.exports = {
     GiveawayDrop,
     GiveawayWinner,
     GiveawayInvalid,
-    inputEmbed
+    inputEmbed,
+    quizStartEmbed,
+    quizWinnerEmbed,
+    quizLoseEmbed,
+    cooldownEmbed
 };
 
 function errorEmbed(errorMsg) {
   return new Discord.MessageEmbed()
     .setColor('#ff0000')
-    .setTitle('❌ ERROR!')
+    .setTitle('❌ There was an error.')
     .setDescription(errorMsg)
     .setTimestamp()
     .setFooter(versionString, avatarURL);
@@ -98,4 +103,48 @@ function GiveawayInvalid(prize, dropped_by) {
         .setAuthor(`Started by ${dropped_by.tag}`)
         .setTimestamp()
         .setFooter(versionString, avatarURL);
+}
+
+function quizStartEmbed(question, time, hint, author, categories) {
+  var description = `**Categories:** ${categories.join(", ")}\n\n${question}\nYou have ${time} seconds to answer!\n`
+  if(!author) {
+    author = 'someone! ¯\\_(ツ)\_/¯'
+  }
+  if(hint && config.commands.quiz.hints == true) {
+    description = description.concat(`\n💡 **Hint available.** ||${hint}||`)
+  }
+  description = description.concat(`\n📝 This question was brought to you by ${author}!`)
+  return new Discord.MessageEmbed()
+    .setColor('#7289da')
+    .setTitle('❓ Are you ready? Here we go!')
+    .setDescription(description)
+    .setTimestamp()
+    .setFooter(versionString, avatarURL);
+}
+
+function quizWinnerEmbed(winner) {
+  return new Discord.MessageEmbed()
+    .setColor('#ffc83d')
+    .setTitle('👑 Ding ding ding!')
+    .setDescription(`${winner.author} got the correct answer!`)
+    .setTimestamp()
+    .setFooter(versionString, avatarURL);
+}
+
+function quizLoseEmbed(message) {
+  return new Discord.MessageEmbed()
+    .setColor('#be1931')
+    .setTitle('😅 Game over! No one wins.')
+    .setDescription(message)
+    .setTimestamp()
+    .setFooter(versionString, avatarURL);
+}
+
+function cooldownEmbed(message) {
+  return new Discord.MessageEmbed()
+    .setColor('#ffffff')
+    .setTitle('⏲ Slow down!')
+    .setDescription(message)
+    .setTimestamp()
+    .setFooter(versionString, avatarURL);
 }

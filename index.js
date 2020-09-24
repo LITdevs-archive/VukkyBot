@@ -4,9 +4,9 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 const embeds = require("./embeds.js");
+const config = require("./config.json");
 const prefix = process.env.PREFIX;
 client.commands = new Discord.Collection();
-const newUsers = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 let embedPermissions = 1;
@@ -20,9 +20,12 @@ for (const file of commandFiles) {
 	console.log(`${file} loaded!`)
 }
 
+const cooldowns = new Discord.Collection();
+
 client.once('ready', () => {
 	console.log('Ready!');
-	client.user.setActivity('my Salad balance', { type: 'WATCHING' });
+	const pjson = require('./package.json')
+	client.user.setActivity(`with a Fall Guy (and v${pjson.version})`, { type: 'PLAYING' });
 });
 
 client.on('message', message => {
@@ -42,18 +45,18 @@ client.on('message', message => {
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
   if (!command) {
-			reply = `Uh ${message.author}... that command (**${commandName}**) isn't a thing, sorry!`
+			reply = `I've been looking around for a while now, but I don't think **${commandName}** is a command.`
 			if (embedPermissions == 0) return message.channel.send(reply)
       message.channel.send(embeds.errorEmbed(reply))
       return;
   }
 
   if (command.guildOnly && message.channel.type !== 'text') {
-	   return message.channel.send(embeds.errorEmbed(`Uh ${message.author}... I can't use that command inside a DM.`))
+	   return message.channel.send(embeds.errorEmbed(`**${commandName}** cannot be used inside DMs.`))
   }
 
   if (command.args && !args.length) {
-    let reply = `Uh ${message.author}... that command requires some arguments, but you didn't provide me any.`;
+    let reply = `I expected you to give me some arguments for **${commandName}**, but I didn't see any.`;
 
     if (command.usage) {
 			reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
@@ -86,13 +89,32 @@ client.on('message', message => {
 		console.log("---------------------------------------------")
 	}
 
-  try {
-  	command.execute(message, args);
-  } catch (error) {
-	console.log(`error while trying to execute command: ${error.message}`)
-  	message.reply('there was an error trying to execute that command!');
-    message.channel.send(embeds.errorEmbed(error.message))
-  }
+	if (!cooldowns.has(command.name)) {
+		cooldowns.set(command.name, new Discord.Collection());
+	}
+
+	const now = Date.now();
+	const timestamps = cooldowns.get(command.name);
+	const cooldownAmount = (command.cooldown || 3) * 1000;
+
+	if (timestamps.has(message.author.id)) {
+		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+
+		if (now < expirationTime) {
+			const timeLeft = (expirationTime - now) / 1000;
+			return message.channel.send(embeds.cooldownEmbed(`You need to wait ${timeLeft.toFixed(1)} more second(s) before you can use the \`${command.name}\` command again.`));
+		}
+	}
+
+	timestamps.set(message.author.id, now);
+	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+
+  	try {
+  		command.execute(message, args);
+  	} catch (error) {
+		console.log(`error while trying to execute command: ${error.message}`)
+		message.reply('there was an error trying to execute that command!', embeds.errorEmbed(error.message));
+	}
 });
 
 client.login(process.env.BOT_TOKEN);

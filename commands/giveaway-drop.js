@@ -1,11 +1,12 @@
 const embeds = require("../embeds.js");
+const config = require('../config.json');
 var specialCode;
 var specialCodeContents;
 
 function confirmDroppy(message) {
   const prize = message.content.substring(message.content.search(' ') + 1).substring(message.content.substring(message.content.search(' ') + 1).search(' ') + 1);
-  var stringy = `make a giveaway drop with the prize ${prize}?`
-  if(specialCode == true) { var stringy = `make a giveaway drop with the prize ${prize}, containing a code (**${specialCodeContents}**)?`}
+  var stringy = `Make a giveaway drop with the prize ${prize}?`
+  if(specialCode == true) { var stringy = `Make a giveaway drop with the prize ${prize}, containing a code (**${specialCodeContents}**)?`}
   message.channel.send(embeds.inputEmbed(stringy))
   .then(checkmessage => {
     checkmessage.react('👍').then(() => checkmessage.react('👎'));
@@ -21,7 +22,7 @@ function confirmDroppy(message) {
         if (reaction.emoji.name === '👍') {
           droppy(message, prize)
         } else {
-          message.channel.send(embeds.successEmbed('giveaway drop creation has been cancelled!'));
+          message.channel.send(embeds.successEmbed('Giveaway drop creation has been cancelled!'));
         }
       })
       .catch(collected => {
@@ -53,8 +54,10 @@ function droppy(message, prize) {
                           gmessage.edit(embeds.GiveawayWinner(prize, message.author, `<@!${winner.id}>`));
                           message.channel.send(embeds.infoEmbed(`<@!${winner.id}> got a drop (**${prize}**)`))
                           gmessage.channel.send(`Congratulations to <@!${winner.id}> for getting a giveaway drop! 🥳\nThe prize was ${prize} - better luck next time to everyone else!`);
-                          winner.send(`🎉 __**You got a giveaway drop!**__ 🎉\nYour prize is \`${prize}\`.\nContact <@!${message.member.id}> to collect your prize!`);
-                          if(specialCode) winner.send(`This drop comes with a special code. That code is **${specialCodeContents}**!\n\nYou may not have to contact <@!${message.member.id}>.`);
+                          var winnerBase = `🎉 __**You got a giveaway drop!**__ 🎉\nYour prize is \`${prize}\`.\n`
+                          if(!specialCode) { winnerMsg = `${winnerBase}Contact <@!${message.member.id}> to collect your prize!`; }
+                          if(specialCode) { winnerMsg = `${winnerBase}This drop comes with a special code. That code is **${specialCodeContents}**!\nYou may not have to contact <@!${message.member.id}>.`; }
+                          winner.send(winnerMsg);
                       }
                   }).catch(collected => {
                       gmessage.channel.stopTyping();
@@ -77,54 +80,58 @@ module.exports = {
 	dcPermissions: ['EMBED_LINKS', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
   args: true,
   usage: '<#channel> <prize>',
-	guildOnly: true,
+  guildOnly: true,
+  aliases: ['drop', 'giveawaydrop'],
 	execute(message, args) {
     specialCodeContents = null;
-    message.channel.send("Welcome to the giveaway drop creator!")
-    if (message.member.permissions.has('ADMINISTRATOR') || message.member.roles.cache.has('726555661286244382')) {
+    message.channel.send("Welcome to the giveaway drop creator!\n⚠ **Please note**: The prize name is logged for debugging purposes.")
+    if (message.member.permissions.has('ADMINISTRATOR') || message.member.roles.cache.find(r => r.name === "Drop Permissions")) {
         if (message.mentions.channels.size !== 0) {
             if ((message.content.substring(message.content.search(' ') + 1).search(' ') + 1) !== 0) {
-                message.channel.send(embeds.inputEmbed('does this drop have a special code?'))
-                  .then(checkmessage => {
-                    checkmessage.react('👍').then(() => checkmessage.react('👎'));
+                if(config.commands.giveawaydrop.codes == true) {
+                  message.channel.send(embeds.inputEmbed('Does ths drop have a special code?'))
+                    .then(checkmessage => {
+                      checkmessage.react('👍').then(() => checkmessage.react('👎'));
 
-                    const filter = (reaction, user) => {
-                      return user.id === message.author.id;
-                    };
+                      const filter = (reaction, user) => {
+                        return user.id === message.author.id;
+                      };
 
-                    checkmessage.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
-                      .then(collected => {
-                        const reaction = collected.first();
+                      checkmessage.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+                        .then(collected => {
+                          const reaction = collected.first();
 
-                        if (reaction.emoji.name === '👍') {
-                          specialCode = true;
-                          message.channel.send(embeds.inputEmbed('what\'s the code?'));
+                          if (reaction.emoji.name === '👍') {
+                            specialCode = true;
+                            message.channel.send(embeds.inputEmbed('What\'s the code?'));
 
-                          const filter2 = responsy => {
-                            return responsy.author.id === message.author.id;
-                          };
+                            const filter2 = responsy => {
+                              return responsy.author.id === message.author.id;
+                            };
 
-                          message.channel.awaitMessages(filter2, { max: 1, time: 30000, errors: ['time'] })
-                            .then(collected => {
-                              specialCodeContents = collected.first().content;
-                              message.channel.send(embeds.infoEmbed('the code has been set!'));
-                              confirmDroppy(message)
-                            })
-                            .catch(collected => {
-                              console.log("👨‍💻 Drop creation failed: " + collected.message)
-                              return message.channel.send('you didn\'t answer in time, or there was an error.');
-                            });
-                        } else {
-                          specialCode = false;
-                          message.channel.send(embeds.infoEmbed('skipped code setup.'));
-                          confirmDroppy(message)
-                        }
-                      })
-                      .catch(collected => {
-                        console.log("👨‍💻 Drop creation failed: " + collected.message)
-                        return message.channel.send('you didn\'t answer in time, or there was an error.');
-                      });
-                  });
+                            message.channel.awaitMessages(filter2, { max: 1, time: 30000, errors: ['time'] })
+                              .then(collected => {
+                                specialCodeContents = collected.first().content;
+                                confirmDroppy(message)
+                              })
+                              .catch(collected => {
+                                console.log("👨‍💻 Drop creation failed: " + collected.message)
+                                return message.channel.send('you didn\'t answer in time, or there was an error.');
+                              });
+                          } else {
+                            specialCode = false;
+                            confirmDroppy(message)
+                          }
+                        })
+                        .catch(collected => {
+                          console.log("👨‍💻 Drop creation failed: " + collected.message)
+                          return message.channel.send('you didn\'t answer in time, or there was an error.');
+                        });
+                    });
+                } else {
+                  specialCode = false;
+                  confirmDroppy(message)
+                }
             } else {
               message.channel.send(embeds.errorEmbed('A prize is required! (<#channel> <prize>)'));
             }

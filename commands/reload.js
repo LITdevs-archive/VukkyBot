@@ -23,6 +23,6 @@ module.exports = {
     	message.channel.send(embeds.errorEmbed(`There was an error while reloading a command (**${command.name}**):\n${error.message}`))
     }
 
-    message.channel.send(embeds.infoEmbed(`Command \`${command.name}\` was reloaded!`));
+    message.channel.send(embeds.successEmbed(`\`${command.name}\` has been reloaded!`));
 	},
 };
