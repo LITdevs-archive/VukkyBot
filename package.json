@@ -11,7 +11,9 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "pm2 start index.js --name VukkyBot --watch && pm2 log",
+    "stop": "pm2 del VukkyBot",
+    "restart": "pm2 restart VukkyBot"
   },
   "repository": {
     "type": "git",

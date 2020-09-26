@@ -72,6 +72,16 @@ npm start
 ```
 Your VukkyBot should now start.
 
+### Restarting VukkyBot
+```
+npm restart
+```
+
+### Stopping VukkyBot
+```
+npm stop
+```
+
 </details>
 </details>
 </details>
