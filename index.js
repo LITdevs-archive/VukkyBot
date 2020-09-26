@@ -34,7 +34,7 @@ client.on('message', message => {
 
   if (message.author.bot) return;
 
-  if (message.content.toLowerCase().includes(`<@!${client.user.id}>`) && config.prefixReminder == true && !message.content.startsWith(prefix)) message.reply(`my prefix is \`${process.env.PREFIX}\``)
+  if (message.content.toLowerCase().includes(`<@!${client.user.id}>`) && config.misc.prefixReminder == true && !message.content.startsWith(prefix)) message.reply(`my prefix is \`${process.env.PREFIX}\``)
 
   if (!message.content.startsWith(prefix)) return;
 
