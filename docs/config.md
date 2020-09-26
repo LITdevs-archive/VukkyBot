@@ -2,11 +2,17 @@ If you came here, you probably want to customize your VukkyBot.
 
 Well, here we go!
 
-# prefixReminder
+# misc
+
+## prefixReminder
 
 Toggles if the bot reminds you about its prefix when pinged. (default: `true`)
 
 ![Demo](https://i.imgur.com/1W9TFG3.png)
+
+## owner
+
+The ID of the VukkyBot hoster.
 
 # commands
 
