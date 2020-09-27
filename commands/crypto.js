@@ -9,12 +9,14 @@ module.exports = {
     args: true,
     usage: '<coin>',
 	execute(message, args) {
+        var checkStatus
         function checkStatus(res, newMessage) {
+            checkStatus = 1
             if(res.status == 400) {
                 return newMessage.edit(`<:error:759701620777943062> You messed up your input. Are you sure ${args[0].toUpperCase()} is a valid coin? The server returned 400.`)
             } else if (res.status == 502) {
                 return newMessage.edit("<:error:759701620777943062> The server appears to be unavailable. Come back later. The server returned 502.")
-            } else if (res.status = 429) {
+            } else if (res.status == 429) {
                 return newMessage.edit("<:error:759701620777943062> VukkyBot has been ratelimited from accessing the API. Come back later. The server returned 429.")
             } else {
                 return newMessage.edit("<:error:759701620777943062> Something is broken!")
@@ -24,11 +26,19 @@ module.exports = {
             .then(newMessage => {
                 fetch(`http://api.shruc.ml/saladlog/price?coin=${args[0].toLowerCase()}`)
                     .then(res => {
-                        if(!res.ok) { checkStatus(res, newMessage) }
+                        if(!res.ok) { 
+                            checkStatus(res, newMessage) 
+                        }
                         return res.json()
                     })
                     .then(json => {
-                        newMessage.edit(`${json.RAW.FROMSYMBOL} is currently at $${json.RAW.PRICE}! This data was updated ${json.DISPLAY.LASTUPDATE.toLowerCase()}.\nThis API was brought to you by SharkOfGod!`)
+                        try {
+                            newMessage.edit(`${json.RAW.FROMSYMBOL} is currently at $${json.RAW.PRICE}! This data was updated ${json.DISPLAY.LASTUPDATE.toLowerCase()}.\nThis API was brought to you by SharkOfGod!`)
+                        } catch (error) {
+                            console.log(error.message)
+                            if(!checkStatus == 1) newMessage.edit(`<:error:759701620777943062> Some funny stuff happened while attempting to display the data. Try again later. \`${error.message}\``)
+                            return;
+                        }
                     })
             })
 	},
