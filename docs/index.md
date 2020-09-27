@@ -35,9 +35,9 @@ What are you going to host it with?
 
 *Your deployed VukkyBot will run 24/7. This will use up your free dyno hours before the end of the month. Link a credit card if you want to run your VukkyBot for the entire month.*
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/VukkyLtd/VukkyBot)
 
-*If the above button doesn't work, try [this link](https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FVukky123%2FVukkyBot&template=https%3A%2F%2Fgithub.com%2FVukky123%2FVukkyBot%2Fapp.json).*
+*If the above button doesn't work, try [this link](https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2fVukkyLtd%2FVukkyBot&template=https%3A%2F%2Fgithub.com%2FVukkyLtd%2FVukkyBot%2Fapp.json).*
 
 When your VukkyBot has been deployed, check its Resources tab.
 
