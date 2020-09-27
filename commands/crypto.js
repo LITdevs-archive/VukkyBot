@@ -15,6 +15,8 @@ module.exports = {
                 return newMessage.edit(`<:error:759701620777943062> You messed up your input. Are you sure ${args[0].toUpperCase()} is a valid coin? The server returned 400.`)
             } else if (res.status == 502) {
                 return newMessage.edit("<:error:759701620777943062> The server appears to be unavailable. Come back later. The server returned 502.")
+            } else if (res.status = 429) {
+                return newMessage.edit("<:error:759701620777943062> VukkyBot has been ratelimited from accessing the API. Come back later. The server returned 429.")
             } else {
                 return newMessage.edit("<:error:759701620777943062> Something is broken!")
             }
