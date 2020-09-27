@@ -154,7 +154,7 @@ function cryptoEmbed(coin, value, lastupdated) {
   return new Discord.MessageEmbed()
     .setColor('#a7d28b')
     .setTitle(`💰 ${coin} value`)
-    .setDescription(`Here's your requested data! Thanks to SharkOfGod for the API.`)
+    .setDescription(`Here's your requested data!`)
     .addField("Value in USD", `$${value}`, true)
     .addField("Last updated", lastupdated, true)
     .addField("Coin", coin, true)
