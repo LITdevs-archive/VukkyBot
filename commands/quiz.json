@@ -26,7 +26,7 @@
     {
         "question": "What's the 21st letter of the alphabet?",
         "answers": ["u"],
-        "categories": "Language"
+        "categories": ["Language"]
     },
     {
         "question": "What does “HTTP” stand for?",

@@ -4,6 +4,7 @@ module.exports = {
 	name: 'quiz',
     description: 'Let\'s play a quiz!',
     dcPermissions: ['EMBED_LINKS', 'ADD_REACTIONS'],
+    aliases: ['trivia'],
 	execute(message, args) {
         console.log("Let's play a quiz!")
         const quiz = require('./quiz.json');

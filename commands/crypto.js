@@ -33,7 +33,7 @@ module.exports = {
                     })
                     .then(json => {
                         try {
-                            newMessage.edit(`${json.RAW.FROMSYMBOL} is currently at $${json.RAW.PRICE}! This data was updated ${json.DISPLAY.LASTUPDATE.toLowerCase()}.\nThis API was brought to you by SharkOfGod!`)
+                            newMessage.edit(embeds.cryptoEmbed(json.RAW.FROMSYMBOL, json.RAW.PRICE, json.DISPLAY.LASTUPDATE.toLowerCase()))
                         } catch (error) {
                             console.log(error.message)
                             if(!checkStatus == 1) newMessage.edit(`<:error:759701620777943062> Some funny stuff happened while attempting to display the data. Try again later. \`${error.message}\``)

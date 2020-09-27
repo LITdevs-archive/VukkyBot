@@ -16,7 +16,8 @@ module.exports = {
     quizStartEmbed,
     quizWinnerEmbed,
     quizLoseEmbed,
-    cooldownEmbed
+    cooldownEmbed,
+    cryptoEmbed
 };
 
 function errorEmbed(errorMsg) {
@@ -145,6 +146,18 @@ function cooldownEmbed(message) {
     .setColor('#ffffff')
     .setTitle('⏲ Slow down!')
     .setDescription(message)
+    .setTimestamp()
+    .setFooter(versionString, avatarURL);
+}
+
+function cryptoEmbed(coin, value, lastupdated) {
+  return new Discord.MessageEmbed()
+    .setColor('#a7d28b')
+    .setTitle(`💰 ${coin} value`)
+    .setDescription(`Here's your requested data! Thanks to SharkOfGod for the API.`)
+    .addField("Value in USD", `$${value}`, true)
+    .addField("Last updated", lastupdated, true)
+    .addField("Coin", coin, true)
     .setTimestamp()
     .setFooter(versionString, avatarURL);
 }
