@@ -60,11 +60,9 @@ git clone https://github.com/Vukky123/VukkyBot.git
 cd VukkyBot
 npm install
 ```
-But don't close your window just yet!
-Before we start VukkyBot, you need to make an .env file:
+Now, start the interactive VukkyBot Setup tool:
 ```
-BOT_TOKEN=BOTTOKENHERE
-PREFIX=BOTPREFIXHERE
+npm run setup
 ```
 Now, run the following command:
 ```

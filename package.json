@@ -6,6 +6,7 @@
   "dependencies": {
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
+    "inquirer": "^7.3.3",
     "pm2": "^4.4.1"
   },
   "devDependencies": {},
@@ -13,7 +14,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "pm2 start index.js --name VukkyBot --watch && pm2 log",
     "stop": "pm2 del VukkyBot",
-    "restart": "pm2 restart VukkyBot"
+    "restart": "pm2 restart VukkyBot",
+    "setup": "node setup.js"
   },
   "repository": {
     "type": "git",
