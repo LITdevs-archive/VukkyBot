@@ -1,6 +1,8 @@
 var inquirer = require('inquirer');
 var fs = require('fs');
-console.log("Welcome to the interactive VukkyBot Setup tool.")
+var chalk = require('chalk');
+
+console.log(chalk.blueBright("Welcome to the interactive VukkyBot Setup tool."))
 
 var questions = [
     {
@@ -17,8 +19,6 @@ var questions = [
 ];
   
 inquirer.prompt(questions).then((answers) => {
-    console.log('This is the information you have given:');
-    console.log(JSON.stringify(answers, null, '  '));
     fs.writeFile('.env', `BOT_TOKEN=${answers.token}\nPREFIX=${answers.prefix}`, function (err) {
         if (err) return console.log(err);
     });
