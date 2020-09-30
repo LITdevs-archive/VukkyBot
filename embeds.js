@@ -150,14 +150,14 @@ function cooldownEmbed(message) {
     .setFooter(versionString, avatarURL);
 }
 
-function cryptoEmbed(coin, value, lastupdated) {
+function cryptoEmbed(coin, value, lastupdated, change24) {
   return new Discord.MessageEmbed()
     .setColor('#a7d28b')
     .setTitle(`💰 ${coin} value`)
     .setDescription(`Here's your requested data!`)
     .addField("Value in USD", `$${value}`, true)
+    .addField("Value change (from 24h ago)", `$${change24}`, true)  
     .addField("Last updated", lastupdated, true)
-    .addField("Coin", coin, true)
     .setTimestamp()
     .setFooter(versionString, avatarURL);
 }

@@ -33,7 +33,7 @@ module.exports = {
                     })
                     .then(json => {
                         try {
-                            newMessage.edit("Thanks to SharkOfGod for the API!", embeds.cryptoEmbed(json.RAW.FROMSYMBOL, json.RAW.PRICE, json.DISPLAY.LASTUPDATE.toLowerCase()))
+                            newMessage.edit("Thanks to SharkOfGod for the API!", embeds.cryptoEmbed(json.RAW.FROMSYMBOL, json.RAW.PRICE, json.DISPLAY.LASTUPDATE.toLowerCase(), json.RAW.CHANGE24HOUR.toFixed(2)))
                         } catch (error) {
                             console.log(error.message)
                             if(!checkStatus == 1) newMessage.edit(`<:error:759701620777943062> Some funny stuff happened while attempting to display the data. Try again later. \`${error.message}\``)
