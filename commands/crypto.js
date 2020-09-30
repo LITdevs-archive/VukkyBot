@@ -5,7 +5,7 @@ module.exports = {
 	name: 'crypto',
 	description: 'Get crypto prices!',
     dcPermissions: ['EMBED_LINKS'],
-    cooldown: 120,
+    cooldown: 15,
     args: true,
     usage: '<coin>',
 	execute(message, args) {
