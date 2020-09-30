@@ -1,6 +1,6 @@
 {
   "name": "vukkybot",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "description": "VukkyBot",
   "main": "index.js",
   "dependencies": {

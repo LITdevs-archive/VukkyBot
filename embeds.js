@@ -17,7 +17,8 @@ module.exports = {
     quizWinnerEmbed,
     quizLoseEmbed,
     cooldownEmbed,
-    cryptoEmbed
+    cryptoEmbed,
+    todayInHistoryEmbed
 };
 
 function errorEmbed(errorMsg) {
@@ -158,6 +159,17 @@ function cryptoEmbed(coin, value, lastupdated, change24) {
     .addField("Value in USD", `$${value}`, true)
     .addField("Value change (from 24h ago)", `$${change24}`, true)  
     .addField("Last updated", lastupdated, true)
+    .setTimestamp()
+    .setFooter(versionString, avatarURL);
+}
+
+function todayInHistoryEmbed(event, year, date) {
+  return new Discord.MessageEmbed()
+    .setColor('#aab8c2')
+    .setTitle(`Today in History...`)
+    .setDescription(event)
+    .addField("Year", year, true)
+    .addField("Date", date, true)
     .setTimestamp()
     .setFooter(versionString, avatarURL);
 }
