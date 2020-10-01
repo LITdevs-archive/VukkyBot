@@ -5,7 +5,7 @@ module.exports = {
 	name: 'today-in-history',
 	description: 'Find out what happened today in history!',
     dcPermissions: ['EMBED_LINKS'],
-    cooldown: 120,
+    cooldown: 60,
     aliases: ['today'],
 	execute(message, args) {
         message.channel.send("<a:offlinegif:757979855924101220> Hold on! I'm getting the data...")
