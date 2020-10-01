@@ -163,13 +163,24 @@ function cryptoEmbed(coin, value, lastupdated, change24) {
     .setFooter(versionString, avatarURL);
 }
 
-function todayInHistoryEmbed(event, year, date) {
+function todayInHistoryEmbed(event, year, date, links) {
+  var linkies = [];
+  if (links) {
+    for (var singlelink in links) {
+      if (links.hasOwnProperty(singlelink)) {
+        linkies.push(`[${links[singlelink].title}](${links[singlelink].link})`)
+      }
+    }
+  } else {
+    linkies.push("None")
+  }
   return new Discord.MessageEmbed()
     .setColor('#aab8c2')
     .setTitle(`Today in History...`)
     .setDescription(event)
     .addField("Year", year, true)
     .addField("Date", date, true)
+    .addField("Links", linkies.join(", "), true)
     .setTimestamp()
     .setFooter(versionString, avatarURL);
 }

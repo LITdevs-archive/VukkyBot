@@ -14,7 +14,7 @@ module.exports = {
                     .then(res => res.json())
                     .then(json => {
                         var result = json['data']['Events'][Math.floor(Math.random() * json['data']['Events'].length)]
-                        newMessage.edit(`I am not responsible for any inappropiate content here. This information is pulled from Wikipedia, via https://history.muffinlabs.com.`, embeds.todayInHistoryEmbed(result.text, result.year, json.date))
+                        newMessage.edit(`I am not responsible for any inappropiate content here. This information is pulled from Wikipedia, via https://history.muffinlabs.com.`, embeds.todayInHistoryEmbed(result.text, result.year, json.date, result.links))
                     })
             })
 	},
