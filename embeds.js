@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const pjson = require('./package.json')
 const config = require('./config.json');
 const avatarURL = 'https://i.imgur.com/H0sAkrl.png'
-const versionString = `This VukkyBot is using v${pjson.version} with discord.js ${pjson.dependencies['discord.js'].substring(1)}`
+const versionString = `This VukkyBot is on v${pjson.version} using discord.js ${pjson.dependencies['discord.js'].substring(1)}`
 
 module.exports = {
     errorEmbed,
@@ -18,7 +18,8 @@ module.exports = {
     quizLoseEmbed,
     cooldownEmbed,
     cryptoEmbed,
-    todayInHistoryEmbed
+    todayInHistoryEmbed,
+    funFactEmbed
 };
 
 function errorEmbed(errorMsg) {
@@ -182,5 +183,16 @@ function todayInHistoryEmbed(event, year, date, links) {
     .addField("Date", date, true)
     .addField("Links", linkies.join(", "), true)
     .setTimestamp()
+    .setFooter(versionString, avatarURL);
+}
+
+function funFactEmbed(fact, category, image, source) {
+  return new Discord.MessageEmbed()
+    .setColor('#ffc83d')
+    .setTitle(`🧠 Did You Know: ${category}`)
+    .setDescription(fact)
+    .setTimestamp()
+    .setImage(image)
+    .setAuthor(`Source: ${source}`)
     .setFooter(versionString, avatarURL);
 }
