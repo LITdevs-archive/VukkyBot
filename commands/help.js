@@ -39,7 +39,7 @@ module.exports = {
 	    if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`);
 	    if (command.description) data.push(`**Description:** ${command.description}`);
 		if (command.usage) data.push(`**Usage:** ${prefix}${command.name} ${command.usage}`);
-		if (command.cooldown) data.push(`**Cooldown:** ${command.cooldown} second(s)`);
+		data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
 		if (command.dcPermissions) data.push(`**Permissions required:** ${command.dcPermissions.join(', ')}`);
 
 	    message.channel.send(data, { split: true });
