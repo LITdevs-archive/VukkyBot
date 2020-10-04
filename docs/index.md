@@ -64,11 +64,10 @@ Now, start the interactive VukkyBot Setup tool:
 ```
 npm run setup
 ```
-Now, run the following command:
+The setup tool provides an option to automatically start VukkyBot after setup. However, if you said no to that, you can run this command to start VukkyBot:
 ```
 npm start
 ```
-Your VukkyBot should now start.
 
 ### Restarting VukkyBot
 ```
