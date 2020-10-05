@@ -78,7 +78,7 @@
     },
     {
         "question": "Google Chrome, Safari, Firefox, and Internet Explorer are different types of what?",
-        "answers": ["web browsers"],
+        "answers": ["web browsers", "browsers"],
         "categories": ["Technology"]
     },
     {
