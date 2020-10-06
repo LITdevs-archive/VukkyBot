@@ -80,7 +80,6 @@ module.exports = {
 	dcPermissions: ['EMBED_LINKS', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
   args: true,
   usage: '<#channel> <prize>',
-  guildOnly: true,
   aliases: ['drop', 'giveawaydrop'],
 	execute(message, args) {
     specialCodeContents = null;
