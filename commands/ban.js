@@ -14,6 +14,7 @@ module.exports = {
         if (!mentionedUser) return message.channel.send("You need to provide a valid user.")
         if(mentionedUser.id === message.author.id) return message.channel.send('You can\'t ban yourself! That would be silly.');
         if(mentionedUser.id === message.client.user.id) return message.channel.send(':(');
+        if(mentionedUser.user.bot === true) message.channel.send('Nooo! I don\'t want to ban my friends, but I guess I have to...')
 
         var authorHighestRole = message.member.roles.highest.position;
         var mentionHighestRole = mentionedUser.roles.highest.position;
