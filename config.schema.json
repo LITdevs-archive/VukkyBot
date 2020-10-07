@@ -1,0 +1,52 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "title": "Configuration",
+    "description": "The configuration for VukkyBot",
+    "type": "object",
+    "properties": {
+        "misc": {
+            "description": "Miscellaneous options",
+            "type": "object",
+            "properties": {
+                "prefixReminder": {
+                    "description": "Toggles if the bot should remind you of its prefix when pinged",
+                    "type": "boolean"
+                },
+                "owner": {
+                    "description": "The Discord ID of the owner of this VukkyBot",
+                    "type": "integer"
+                }
+            }
+        },
+        "commands": {
+            "description": "Options for VukkyBot's commands",
+            "type": "object",
+            "properties": {
+                "quiz": {
+                    "description": "Options for the quiz command",
+                    "type": "object",
+                    "properties": {
+                        "timeSeconds": {
+                            "description": "How many seconds you have to answer a quiz question",
+                            "type": "integer"
+                        },
+                        "hints": {
+                            "description": "Toggles if hints should be enabled",
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "giveawaydrop": {
+                    "description": "Options for the giveaway drop command",
+                    "type": "object",
+                    "properties": {
+                        "codes": {
+                            "description": "Toggles if Giveaway Drop Codes should be enabled",
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
