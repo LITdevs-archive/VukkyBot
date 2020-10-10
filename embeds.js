@@ -19,7 +19,9 @@ module.exports = {
     cooldownEmbed,
     cryptoEmbed,
     todayInHistoryEmbed,
-    funFactEmbed
+    funFactEmbed,
+    duckEmbed,
+    aboutEmbed
 };
 
 function errorEmbed(errorMsg) {
@@ -194,5 +196,27 @@ function funFactEmbed(fact, category, image, source) {
     .setTimestamp()
     .setImage(image)
     .setAuthor(`Source: ${source}`)
+    .setFooter(versionString, avatarURL);
+}
+
+function duckEmbed(image) {
+  var message = 'A wild duck appears! 🦆'
+  if(image.toLowerCase().includes('gif')) message = 'A wild (animated) duck appears! 🦆'
+  return new Discord.MessageEmbed()
+    .setColor('#8e562e')
+    .setTitle(message)
+    .setImage(image)
+    .setTimestamp()
+    .setFooter(versionString, avatarURL);
+}
+
+function aboutEmbed(botversion, discordjsversion, osinfo) {
+  return new Discord.MessageEmbed()
+    .setColor('#4289c1')
+    .setTitle('💁‍♂️ About this VukkyBot')
+    .addField("Bot version", botversion, true)
+    .addField("discord.js version", discordjsversion, true)
+    .addField("OS information", osinfo, true)
+    .setTimestamp()
     .setFooter(versionString, avatarURL);
 }

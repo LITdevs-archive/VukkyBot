@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "viluzi",
+      "name": "viluzi",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/47392011?v=4",
+      "profile": "https://github.com/viluzi",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "VukkyBot",
+  "projectOwner": "VukkyLtd",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
