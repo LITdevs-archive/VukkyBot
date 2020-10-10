@@ -7,6 +7,7 @@ module.exports = {
     dcPermissions: ['EMBED_LINKS'],
     aliases: ['ducks', 'random-duck'],
 	execute(message, args) {
+        if(args[0]) message.channel.send(`FYI: Getting a specific duck is not currently supported.\nHowever, you may want to try <https://random-d.uk/api/v2/${args[0]}.jpg> or <https://random-d.uk/api/v2/${args[0]}.gif>.`)
         message.channel.send("<a:offlinegif:757979855924101220> Hold on! I'm getting a duck for you... 🦆🦆🦆")
             .then(newMessage => {
                 fetch('https://random-d.uk/api/v2/random')
