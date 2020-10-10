@@ -23,10 +23,11 @@ var questions = [
     },
     {
         type: 'input',
-<<<<<<< Updated upstream
         name: 'discordid',
         message: 'What\'s your Discord ID?'
-=======
+    },
+    {
+        type: 'input',
         name: 'sqlhost',
         message: 'What\'s your SQL hostname?'
     },
@@ -49,7 +50,6 @@ var questions = [
         type: 'confirm',
         name: 'launch',
         message: 'Start VukkyBot after setup is complete?'
->>>>>>> Stashed changes
     },
     {
         type: 'confirm',
@@ -66,9 +66,10 @@ inquirer.prompt(questions).then((answers) => {
             if (err) {
                 spinner1.fail("Saving to .env failed")
                 console.log(err)
+            } else {
+                spinner1.succeed("Saved to .env")
             }
         });
-        spinner1.succeed("Saved to .env")
     } catch (err) {
         spinner1.fail("Saving to .env failed")
         console.log(err)
@@ -83,9 +84,8 @@ inquirer.prompt(questions).then((answers) => {
                 spinner2.fail("Saving to config.json failed")
                 console.log(err)
             } else {
-                spinner.succeed("Saved to .env")
+                spinner2.succeed("Saved to config.json")
             }
-            else spinner2.succeed("Saved to config.json")
         });
     } catch (err) {
         spinner2.fail("Saving to config.json failed")
