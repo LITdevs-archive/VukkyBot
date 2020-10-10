@@ -17,6 +17,11 @@ var questions = [
         message: 'What\'s your bot token?'
     },
     {
+        type: 'input',
+        name: 'discordid',
+        message: 'What\'s your Discord ID?'
+    },
+    {
         type: 'confirm',
         name: 'launch',
         message: 'Start VukkyBot after setup is complete?'
@@ -25,29 +30,44 @@ var questions = [
   
 inquirer.prompt(questions).then((answers) => {
     const ora = require('ora');
-    const spinner = ora('Saving to .env').start();
+    const spinner1 = ora('Saving to .env').start();
     try {
         fs.writeFile('.env', `BOT_TOKEN=${answers.token}\nPREFIX=${answers.prefix}`, function (err) {
             if (err) {
-                spinner.fail("Saving failed")
+                spinner1.fail("Saving to .env failed")
                 console.log(err)
             }
         });
-        spinner.succeed("Saved to .env")
+        spinner1.succeed("Saved to .env")
     } catch (err) {
-        spinner.fail("Saving to .env failed")
+        spinner1.fail("Saving to .env failed")
+        console.log(err)
+    }
+    const spinner2 = ora('Saving to config.json').start();
+    try {
+        const config = require("./config.json")
+        config.misc.owner = answers.discordid
+        fs.writeFile('config.json', JSON.stringify(config, null, 4), function (err) {
+            if (err) {
+                spinner2.fail("Saving to config.json failed")
+                console.log(err)
+            }
+            else spinner2.succeed("Saved to config.json")
+        });
+    } catch (err) {
+        spinner2.fail("Saving to config.json failed")
         console.log(err)
     }
     if (answers.launch == true) {
-        const spinner = ora('Starting VukkyBot').start();
+        const spinner3 = ora('Starting VukkyBot').start();
         try {
             const npm = require('npm');
             npm.load(() => {
                 npm.run('start');
             });
-            spinner.succeed("VukkyBot should start now")
+            spinner3.succeed("VukkyBot should start now")
         } catch (err) {
-            spinner.fail("Couldn't start VukkyBot")
+            spinner3.fail("Couldn't start VukkyBot")
             console.log(err)
         }
     }
