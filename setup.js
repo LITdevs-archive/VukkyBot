@@ -23,8 +23,33 @@ var questions = [
     },
     {
         type: 'input',
+<<<<<<< Updated upstream
         name: 'discordid',
         message: 'What\'s your Discord ID?'
+=======
+        name: 'sqlhost',
+        message: 'What\'s your SQL hostname?'
+    },
+    {
+        type: 'input',
+        name: 'sqlpass',
+        message: 'What\'s your SQL password?'
+    },
+    {
+        type: 'input',
+        name: 'sqluser',
+        message: 'What\'s your SQL username?'
+    },
+    {
+        type: 'input',
+        name: 'sqldb',
+        message: 'What\'s your SQL database name?'
+    },
+    {
+        type: 'confirm',
+        name: 'launch',
+        message: 'Start VukkyBot after setup is complete?'
+>>>>>>> Stashed changes
     },
     {
         type: 'confirm',
@@ -37,7 +62,7 @@ inquirer.prompt(questions).then((answers) => {
     const ora = require('ora');
     const spinner1 = ora('Saving to .env').start();
     try {
-        fs.writeFile('.env', `BOT_TOKEN=${answers.token}\nPREFIX=${answers.prefix}`, function (err) {
+        fs.writeFile('.env', `BOT_TOKEN=${answers.token}\nPREFIX=${answers.prefix}\nSQL_HOST=${answers.sqlhost}\nSQL_PASS=${answers.sqlpass}\nSQL_USER=${answers.sqluser}\nSQL_DB=${answers.sqldb}`, function (err) {
             if (err) {
                 spinner1.fail("Saving to .env failed")
                 console.log(err)
@@ -57,6 +82,8 @@ inquirer.prompt(questions).then((answers) => {
             if (err) {
                 spinner2.fail("Saving to config.json failed")
                 console.log(err)
+            } else {
+                spinner.succeed("Saved to .env")
             }
             else spinner2.succeed("Saved to config.json")
         });
@@ -64,6 +91,16 @@ inquirer.prompt(questions).then((answers) => {
         spinner2.fail("Saving to config.json failed")
         console.log(err)
     }
+    con.connect(function(err) {
+        if (err) throw err; 
+        console.log("Connected to the database to create table!");
+        let sql = "CREATE TABLE warnings (uid VARCHAR(255), reason VARCHAR(255), id INT AUTO_INCREMENT PRIMARY KEY)";
+        con.query(sql, function (err, result) {
+          if (err) throw err;
+          console.log("Table created");
+        });
+      
+      });
     if (answers.launch == true) {
         const spinner3 = ora('Starting VukkyBot').start();
         try {
