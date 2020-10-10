@@ -20,7 +20,8 @@ module.exports = {
     cryptoEmbed,
     todayInHistoryEmbed,
     funFactEmbed,
-    duckEmbed
+    duckEmbed,
+    aboutEmbed
 };
 
 function errorEmbed(errorMsg) {
@@ -205,6 +206,17 @@ function duckEmbed(image) {
     .setColor('#8e562e')
     .setTitle(message)
     .setImage(image)
+    .setTimestamp()
+    .setFooter(versionString, avatarURL);
+}
+
+function aboutEmbed(botversion, discordjsversion, osinfo) {
+  return new Discord.MessageEmbed()
+    .setColor('#4289c1')
+    .setTitle('💁‍♂️ About this VukkyBot')
+    .addField("Bot version", botversion, true)
+    .addField("discord.js version", discordjsversion, true)
+    .addField("OS information", osinfo, true)
     .setTimestamp()
     .setFooter(versionString, avatarURL);
 }
