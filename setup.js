@@ -6,6 +6,11 @@ console.log(chalk.blueBright("Welcome to the interactive VukkyBot Setup tool."))
 
 var questions = [
     {
+        type: 'confirm',
+        name: 'launch',
+        message: 'Start VukkyBot after setup is complete?'
+    },
+    {
         type: 'input',
         name: 'prefix',
         message: 'What\'s the prefix for your VukkyBot going to be?',
@@ -23,9 +28,9 @@ var questions = [
     },
     {
         type: 'confirm',
-        name: 'launch',
-        message: 'Start VukkyBot after setup is complete?'
-    },
+        name: 'prefixreminder',
+        message: 'Do you want your VukkyBot to remind you of its prefix when pinged?',
+    }
 ];
   
 inquirer.prompt(questions).then((answers) => {
@@ -47,6 +52,7 @@ inquirer.prompt(questions).then((answers) => {
     try {
         const config = require("./config.json")
         config.misc.owner = answers.discordid
+        config.misc.prefixReminder = answers.prefixreminder
         fs.writeFile('config.json', JSON.stringify(config, null, 4), function (err) {
             if (err) {
                 spinner2.fail("Saving to config.json failed")
