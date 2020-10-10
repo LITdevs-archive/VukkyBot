@@ -17,6 +17,11 @@ var questions = [
         default: 'v!',
     },
     {
+        type: 'confirm',
+        name: 'prefixreminder',
+        message: 'Do you want your VukkyBot to remind you of its prefix when pinged?',
+    },
+    {
         type: 'input',
         name: 'token',
         message: 'What\'s your bot token?'
@@ -45,16 +50,6 @@ var questions = [
         type: 'input',
         name: 'sqldb',
         message: 'What\'s your SQL database name?'
-    },
-    {
-        type: 'confirm',
-        name: 'launch',
-        message: 'Start VukkyBot after setup is complete?'
-    },
-    {
-        type: 'confirm',
-        name: 'prefixreminder',
-        message: 'Do you want your VukkyBot to remind you of its prefix when pinged?',
     }
 ];
   
