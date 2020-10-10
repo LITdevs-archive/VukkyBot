@@ -6,15 +6,25 @@ module.exports = {
 	description: 'Get a nice duck!',
     dcPermissions: ['EMBED_LINKS'],
     aliases: ['ducks', 'random-duck'],
+    usage: ['<optional: ducknumber.(jpg/gif)'],
 	execute(message, args) {
-        if(args[0] && !isNaN(args[0])) return message.channel.send(`FYI: Getting a specific duck is not currently supported.\nHowever, you may want to try <https://random-d.uk/api/v2/${args[0]}.jpg> or <https://random-d.uk/api/v2/${args[0]}.gif>.`)
+        let fileType;
+        let duckNumber;
+        if(args[0].includes('gif')) fileType = "gif"
+        if(args[0].includes('jpg') || !args[0].includes('gif') && !args[0].includes('jpg')) fileType = "jpg"
+        if(args[0] && !args[0].includes('gif') && !args[0].includes('jpg')) duckNumber = args[0]
+        if(args[0] && args[0].includes('gif') || args[0].includes('jpg')) duckNumber = args[0].slice(0, -4)
         message.channel.send("<a:offlinegif:757979855924101220> Hold on! I'm getting a duck for you... 🦆🦆🦆")
             .then(newMessage => {
-                fetch('https://random-d.uk/api/v2/random')
-                    .then(res => res.json())
-                    .then(json => {
-                        newMessage.edit(`${json.message}`, embeds.duckEmbed(json.url))
-                    })
+                if(!args[0]) {
+                    fetch('https://random-d.uk/api/v2/random')
+                        .then(res => res.json())
+                        .then(json => {
+                            newMessage.edit(`Powered by random-d.uk`, embeds.duckEmbed(json.url))
+                        })
+                } else {
+                    newMessage.edit(`Powered by random-d.uk`, embeds.duckEmbed(`https://random-d.uk/api/v2/${duckNumber}.${fileType}`))
+                }
             })
 	},
 };

@@ -19,11 +19,11 @@ module.exports = {
     name: 'warn',
     description: 'Make VukkyBot give people warnings!',
     dcPermissions: ['EMBED_LINKS', 'MANAGE_MESSAGES'],
-    args: true,
     usage: "<@user> <reason>",
     execute(message, args) {
+        console.log(config.commands.warn.mysql)
+        if (config.commands.warn.mysql) {
         let mentionedUser = message.guild.member(message.mentions.users.first())
-        console.log(mentionedUser)
         if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(errorEmbed("You need the Manage Messages permission to do that!"))
             if (args.slice(1).join(' ').length >= 1) {
             let sql = "INSERT INTO warnings (username, uid, reason) VALUES ('" + mentionedUser.user.username + "', " + mentionedUser.id + ", '" + args.slice(1).join(' ') + "')";
@@ -36,6 +36,11 @@ module.exports = {
                 console.log("1 warning added");
             }
             });
+        } else {
+            message.channel.send(errorEmbed(`I was expecting more arguments!\nUsage: \`${process.env.PREFIX}warn <@user> <reason>\``))
         }
+    } else {
+        message.channel.send(errorEmbed(`\`${process.env.PREFIX}warn\` is not enabled on this VukkyBot because MySQL is disabled!\nFor the hoster: See [here](https://vukkyltd.github.io/VukkyBot/troubleshooting/mysqldisabled.html) for instructions on how to enable it!`))
+    }
     },
 };
