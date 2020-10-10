@@ -3,7 +3,7 @@
     "$schema": "./config.schema.json",
     "misc": {
         "prefixReminder": true,
-        "owner": 708333380525228082
+        "owner": "708333380525228082"
     },
     "commands": {
         "quiz": {
