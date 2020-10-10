@@ -14,7 +14,7 @@
                 },
                 "owner": {
                     "description": "The Discord ID of the owner of this VukkyBot",
-                    "type": "integer"
+                    "type": "string"
                 }
             }
         },
