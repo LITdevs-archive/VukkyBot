@@ -14,7 +14,7 @@ module.exports = {
     execute(message, args) {
         if (config.commands.warn.mysql) {
             if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(errorEmbed("You need the Manage Messages permission to do that!"))
-            let warningId = args.slice(0).join(' ');
+            let warningId = args[0]
             if (isNaN(warningId)) return message.channel.send(errorEmbed("Please specify the **id** of the warning you wish to remove."))
             var con = mysql.createConnection({
                 host: process.env.SQL_HOST,
