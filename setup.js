@@ -86,7 +86,7 @@ inquirer.prompt(questions).then((answers) => {
                     const config = require("./config.json")
                     config.misc.owner = answers.discordid
                     config.misc.prefixReminder = answers.prefixreminder
-                    //config.commands.warn.mysql = answers.mysqlwarn
+                    config.commands.warn.mysql = answers.mysqlwarn
                     fs.writeFile('config.json', JSON.stringify(config, null, 4), function (err) {
                         if (err) {
                             spinner2.fail("Saving to config.json failed")
