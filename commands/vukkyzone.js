@@ -9,7 +9,7 @@ module.exports = {
         message.channel.send(`**Welcome to the Vukky Zone!** (started by <@${message.author.id}>)\nReact with ✨ to join the Vukky Zone, or 💥 to destroy it so no one can enter it anymore.`).then(vukkyzone => {
             vukkyzone.react('✨').then(() => vukkyzone.react('💥'));
             const filter = (reaction, user) => {
-                return ['💥', '✨'].includes(reaction.emoji.name) && user.bot == false
+                return ['💥'].includes(reaction.emoji.name) && user.bot == false
             };
             
             vukkyzone.awaitReactions(filter, { max: 1 })
