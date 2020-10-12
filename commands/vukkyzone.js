@@ -12,10 +12,10 @@ module.exports = {
                 return ['💥', '✨'].includes(reaction.emoji.name) && user.bot == false
             };
             
-            vukkyzone.awaitReactions(filter)
+            vukkyzone.awaitReactions(filter, { max: 1 })
                 .then(collected => {
                     const reaction = collected.first();
-                    vukkyzone.edit(`💥 The Vukky Zone was destroyed!\n${vukkyzone.reactions.cache.get('✨').count - 1} user(s) entered before the Vukky Zone was destroyed.`)
+                    vukkyzone.edit(`💥 **Boom!** The Vukky Zone was destroyed.\n${vukkyzone.reactions.cache.get('✨').count - 1} user(s) entered before the Vukky Zone was destroyed.`)
                     vukkyzone.reactions.removeAll()
                 })
         })
