@@ -23,6 +23,7 @@ module.exports = {
                         vukkyzone.edit("😮 The Vukky Zone suddenly started shaking...\nReact with ✨ to join.")
                     }, 8000);
                     setTimeout(() => { 
+                        userCount = vukkyzone.reactions.cache.get('✨').count - 1
                         vukkyzone.edit("😬 The entrance to the Vukky Zone was suddenly closed!")
                         vukkyzone.reactions.removeAll()
                     }, 12000);
