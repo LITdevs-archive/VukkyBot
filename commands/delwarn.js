@@ -11,6 +11,7 @@ module.exports = {
     dcPermissions: ['EMBED_LINKS', 'MANAGE_MESSAGES'],
     args: true,
     usage: "<warning id>",
+    aliases: ['delwarning', 'deletewarning', 'deletewarn'],
     execute(message, args) {
         if (config.commands.warn.mysql) {
             if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(errorEmbed("You need the Manage Messages permission to do that!"))
