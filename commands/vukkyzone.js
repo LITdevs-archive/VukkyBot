@@ -28,7 +28,7 @@ module.exports = {
                         vukkyzone.reactions.removeAll()
                     }, 12000);
                     setTimeout(() => {  
-                        vukkyzone.edit(`💥 **Boom!** The Vukky Zone was blown up!\n${userCount} user(s) entered the Vukky Zone before it was destroyed.`) 
+                        vukkyzone.edit(`💥 **Boom!** The Vukky Zone was blown up!\n${userCount} user(s) died inside it, because they decided to join.`) 
                         vukkyzone.reactions.removeAll()
                     }, 18000);
                 })
