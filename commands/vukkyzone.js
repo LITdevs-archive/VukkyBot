@@ -7,8 +7,9 @@ module.exports = {
     aliases: ['zone'],
     guildOnly: true,
 	execute(message, args) {
+        var randomEvent;
         message.delete()
-        message.channel.send(`**Welcome to the Vukky Zone!** (started by <@${message.author.id}>)\nReact with ✨ to join the Vukky Zone, or 💥 to close itpm so no one can enter it anymore.`).then(vukkyzone => {
+        message.channel.send(`**Welcome to the Vukky Zone!** (started by <@${message.author.id}>)\nReact with ✨ to join the Vukky Zone, or 💥 to close it so no one can enter it anymore.`).then(vukkyzone => {
             vukkyzone.react('✨').then(() => vukkyzone.react('💥'));
             const filter = (reaction, user) => {
                 return ['💥'].includes(reaction.emoji.name) && user.bot == false
@@ -19,6 +20,8 @@ module.exports = {
                     const reaction = collected.first();
                     var userCount = vukkyzone.reactions.cache.get('✨').count - 1
                     reaction.remove()
+                    randomEvent = Math.round(Math.random()) * 3
+                    console.log(`Random event ID: ${randomEvent}`)
                     vukkyzone.edit("🤔 Something very bad is happening to the Vukky Zone...\nReact with ✨ to join.")
                     setTimeout(() => { 
                         vukkyzone.edit("😮 The Vukky Zone suddenly started shaking...\nReact with ✨ to join.")
@@ -29,11 +32,14 @@ module.exports = {
                         vukkyzone.reactions.removeAll()
                     }, 12000);
                     setTimeout(() => {  
-                        var randomEvent = Math.round(Math.random())
-                        if(randomEvent == 1) {
+                        if(randomEvent == 0) {
                             vukkyzone.edit(`💥 **Boom!**\nThe Vukky Zone was blown up!\n${userCount} people died inside it, because they decided to join.`) 
-                        } else {
+                        } else if (randomEvent == 1) {
                             vukkyzone.edit(`🦠 **cough cough**\nThe Vukky Zone was closed due to COVID-19!\n${userCount} people got a severe case and died...`) 
+                        } else if (randomEvent == 2) {
+                            vukkyzone.edit(`🔨 **C R A S H**\nAn anvil suddenly fell down and killed ${userCount} people inside the Vukky Zone.`)
+                        } else {
+                            vukkyzone.edit(`🦆 **HONK**\nA wild goose appeared!\n${userCount} people were scared to death.`)
                         }
                         vukkyzone.reactions.removeAll()
                     }, 18000);
