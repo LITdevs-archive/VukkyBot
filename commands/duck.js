@@ -10,10 +10,12 @@ module.exports = {
 	execute(message, args) {
         let fileType;
         let duckNumber;
-        if(args[0].includes('gif')) fileType = "gif"
-        if(args[0].includes('jpg') || !args[0].includes('gif') && !args[0].includes('jpg')) fileType = "jpg"
-        if(args[0] && !args[0].includes('gif') && !args[0].includes('jpg')) duckNumber = args[0]
-        if(args[0] && args[0].includes('gif') || args[0].includes('jpg')) duckNumber = args[0].slice(0, -4)
+        if(args[0]) {
+            if(args[0].includes('gif')) fileType = "gif"
+            if(args[0].includes('jpg') || !args[0].includes('gif') && !args[0].includes('jpg')) fileType = "jpg"
+            if(args[0] && !args[0].includes('gif') && !args[0].includes('jpg')) duckNumber = args[0]
+            if(args[0] && args[0].includes('gif') || args[0].includes('jpg')) duckNumber = args[0].slice(0, -4)
+        }
         message.channel.send("<a:offlinegif:757979855924101220> Hold on! I'm getting a duck for you... 🦆🦆🦆")
             .then(newMessage => {
                 if(!args[0]) {
