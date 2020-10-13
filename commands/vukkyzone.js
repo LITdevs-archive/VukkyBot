@@ -8,7 +8,7 @@ module.exports = {
     guildOnly: true,
 	execute(message, args) {
         message.delete()
-        message.channel.send(`**Welcome to the Vukky Zone!** (started by <@${message.author.id}>)\nReact with ✨ to join the Vukky Zone, or 💥 to blow it up so no one can enter it anymore.`).then(vukkyzone => {
+        message.channel.send(`**Welcome to the Vukky Zone!** (started by <@${message.author.id}>)\nReact with ✨ to join the Vukky Zone, or 💥 to close itpm so no one can enter it anymore.`).then(vukkyzone => {
             vukkyzone.react('✨').then(() => vukkyzone.react('💥'));
             const filter = (reaction, user) => {
                 return ['💥'].includes(reaction.emoji.name) && user.bot == false
@@ -29,7 +29,12 @@ module.exports = {
                         vukkyzone.reactions.removeAll()
                     }, 12000);
                     setTimeout(() => {  
-                        vukkyzone.edit(`💥 **Boom!** The Vukky Zone was blown up!\n${userCount} user(s) died inside it, because they decided to join.`) 
+                        var randomEvent = Math.round(Math.random())
+                        if(randomEvent == 1) {
+                            vukkyzone.edit(`💥 **Boom!** The Vukky Zone was blown up!\n${userCount} people died inside it, because they decided to join.`) 
+                        } else {
+                            vukkyzone.edit(`🦠 **cough cough** The Vukky Zone was closed due to COVID-19!\n${userCount} people got a severe case and died...`) 
+                        }
                         vukkyzone.reactions.removeAll()
                     }, 18000);
                 })
