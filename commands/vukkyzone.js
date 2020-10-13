@@ -3,7 +3,8 @@ const embeds = require("../embeds.js");
 module.exports = {
 	name: 'vukkyzone',
 	description: 'Start a Vukky Zone.',
-	dcPermissions: ['EMBED_LINKS', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
+    dcPermissions: ['EMBED_LINKS', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
+    aliases: ['zone'],
 	execute(message, args) {
         message.delete()
         message.channel.send(`**Welcome to the Vukky Zone!** (started by <@${message.author.id}>)\nReact with ✨ to join the Vukky Zone, or 💥 to destroy it so no one can enter it anymore.`).then(vukkyzone => {
@@ -15,7 +16,7 @@ module.exports = {
             vukkyzone.awaitReactions(filter, { max: 1 })
                 .then(collected => {
                     const reaction = collected.first();
-                    vukkyzone.edit(`💥 **Boom!** The Vukky Zone was destroyed.\n${vukkyzone.reactions.cache.get('✨').count - 1} user(s) entered before the Vukky Zone was destroyed.`)
+                    vukkyzone.edit(`💥 **Boom!** The Vukky Zone was destroyed.\n${vukkyzone.reactions.cache.get('✨').count - 1} user(s) entered the Vukky Zone before it was destroyed.`)
                     vukkyzone.reactions.removeAll()
                 })
         })
