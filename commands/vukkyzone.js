@@ -5,6 +5,7 @@ module.exports = {
 	description: 'Start a Vukky Zone.',
     dcPermissions: ['EMBED_LINKS', 'ADD_REACTIONS', 'MANAGE_MESSAGES'],
     aliases: ['zone'],
+    guildOnly: true,
 	execute(message, args) {
         message.delete()
         message.channel.send(`**Welcome to the Vukky Zone!** (started by <@${message.author.id}>)\nReact with ✨ to join the Vukky Zone, or 💥 to blow it up so no one can enter it anymore.`).then(vukkyzone => {
