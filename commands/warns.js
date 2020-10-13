@@ -10,6 +10,7 @@ module.exports = {
     dcPermissions: ['EMBED_LINKS', 'MANAGE_MESSAGES'],
     args: true,
     usage: "<warning id>",
+    aliases: ['warnings'],
     execute(message, args) {
         let warnsId    
         if (isNaN(args.slice(0).join(' '))) {
@@ -40,7 +41,7 @@ module.exports = {
                 let finalMessage = `Warnings for ${result[0].username}: \n`;
                 
                 for (let i = 0; i < result.length; i++) {
-                    finalMessage = finalMessage.concat("reason: ", result[i].reason + " id: ", result[i].id + "\n")
+                    finalMessage = finalMessage.concat("**", result[i].reason, "** (ID: ", result[i].id + ")\n")
                 }
                 message.channel.send(successEmbed(finalMessage))
                 con.end()
