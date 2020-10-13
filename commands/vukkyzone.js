@@ -31,9 +31,9 @@ module.exports = {
                     setTimeout(() => {  
                         var randomEvent = Math.round(Math.random())
                         if(randomEvent == 1) {
-                            vukkyzone.edit(`💥 **Boom!** The Vukky Zone was blown up!\n${userCount} people died inside it, because they decided to join.`) 
+                            vukkyzone.edit(`💥 **Boom!**\nThe Vukky Zone was blown up!\n${userCount} people died inside it, because they decided to join.`) 
                         } else {
-                            vukkyzone.edit(`🦠 **cough cough** The Vukky Zone was closed due to COVID-19!\n${userCount} people got a severe case and died...`) 
+                            vukkyzone.edit(`🦠 **cough cough**\nThe Vukky Zone was closed due to COVID-19!\n${userCount} people got a severe case and died...`) 
                         }
                         vukkyzone.reactions.removeAll()
                     }, 18000);
