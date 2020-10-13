@@ -214,6 +214,7 @@ function aboutEmbed(botversion, discordjsversion, osinfo) {
   return new Discord.MessageEmbed()
     .setColor('#4289c1')
     .setTitle('💁‍♂️ About this VukkyBot')
+    .setDescription('Did you know? [VukkyBot is open source!](https://github.com/VukkyLtd/VukkyBot)')
     .addField("Bot version", botversion, true)
     .addField("discord.js version", discordjsversion, true)
     .addField("OS information", osinfo, true)
