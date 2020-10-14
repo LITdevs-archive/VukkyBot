@@ -12,7 +12,6 @@ module.exports = {
                     fetch(`https://games.roblox.com/v1/games/list?model.keyword=${args.slice(1).join(' ')}`)
                         .then(res => res.json())
                         .then(json => {
-                            console.log(json.filteredKeyword)
                             if(json.filteredKeyword) {
                                 newMessage.edit(`ROBLOX has filtered your search! Your search came out as \`${json.filteredKeyword}\`.\nAs such, VukkyBot cannot complete your search.`)
                             } else if (!json.games[0]) {

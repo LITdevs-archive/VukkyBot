@@ -3,3 +3,4 @@
 commands/warn.js @viluzi
 commands/warns.js @viluzi
 commands/delwarn.js @viluzi
+counting.js @viluzi
