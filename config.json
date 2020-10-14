@@ -5,6 +5,9 @@
         "prefixReminder": true,
         "owner": "125644326037487616"
     },
+    "counting": {
+        "enabled": true
+    },
     "commands": {
         "quiz": {
             "timeSeconds": 30,
