@@ -81,9 +81,7 @@ module.exports = {
             lastCounter = result[0].lastcounter;
             }
             con.end()
-            if (!isNaN(message.content.split(' ')[0])) {
-                
-                
+            if (message.content && !isNaN(message.content.split(' ')[0])) {
                 if (parseInt(message.content.split(' ')[0]) == parseInt(currentNumber) + 1) {
                     if (lastCounter != message.author.id) {
                     currentNumber++
@@ -111,7 +109,7 @@ module.exports = {
                     });
                     message.react("✅")
                 } else {
-                    message.channel.send(`<@${message.author.id}> screwed up! You cant count twice in a row!\nNext number is 1`)
+                    message.channel.send(`<@${message.author.id}> screwed up! You can't count twice in a row!\nThe next number is **1**.`)
                     let con = mysql.createConnection({
                         host: process.env.SQL_HOST,
                         user: process.env.SQL_USER,
@@ -137,7 +135,7 @@ module.exports = {
                     message.react("❌")
                 }
                 } else {
-                    message.channel.send(`<@${message.author.id}> screwed up! Correct number would have been: ` + eval(parseInt(currentNumber) + 1) + "\nNext number is 1")
+                    message.channel.send(`<@${message.author.id}> screwed up! The correct number would have been **${parseInt(currentNumber) + 1}**.\nThe next number is **1**.`)
                     let con = mysql.createConnection({
                         host: process.env.SQL_HOST,
                         user: process.env.SQL_USER,
