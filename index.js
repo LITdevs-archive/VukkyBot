@@ -1,5 +1,6 @@
 require('dotenv').config();
 const fs = require('fs');
+const counting = require("./counting")
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
@@ -26,6 +27,7 @@ client.once('ready', () => {
 	console.log('Ready!');
 	const pjson = require('./package.json')
 	client.user.setActivity(`with a Fall Guy (and v${pjson.version})`, { type: 'PLAYING' });
+	counting.start();
 });
 
 client.on('message', message => {
@@ -35,6 +37,8 @@ client.on('message', message => {
   if (message.author.bot) return;
 
   if (message.content.toLowerCase().includes(`<@!${client.user.id}>`) && config.misc.prefixReminder == true && !message.content.startsWith(prefix)) message.reply(`my prefix is \`${process.env.PREFIX}\``)
+
+  if (message.channel.name == "counting") counting.countCheck(message);
 
   if (!message.content.toLowerCase().startsWith(prefix)) return;
 
