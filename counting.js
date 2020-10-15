@@ -1,9 +1,10 @@
 var mysql = require("mysql")
+var config = require("./config.json")
 require('dotenv').config();
 let sql
 module.exports = {
     start: function() {
-
+        if(!config.misc.mysql) return;
         let con = mysql.createConnection({
             host: process.env.SQL_HOST,
             user: process.env.SQL_USER,
@@ -32,8 +33,7 @@ module.exports = {
 
     },
     countCheck: function (message) {
-    
-
+        if(!config.misc.mysql) return;
         let con = mysql.createConnection({
             host: process.env.SQL_HOST,
             user: process.env.SQL_USER,
