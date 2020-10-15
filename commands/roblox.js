@@ -13,9 +13,9 @@ module.exports = {
                         .then(res => res.json())
                         .then(json => {
                             if(json.filteredKeyword) {
-                                newMessage.edit(`ROBLOX has filtered your search! Your search came out as \`${json.filteredKeyword}\`.\nAs such, VukkyBot cannot complete your search.`)
+                                newMessage.edit(`ROBLOX has filtered your search! Your search was \`${args.slice(1).join(' ')}\`, but it came out as \`${json.filteredKeyword}\`.\nAs such, VukkyBot cannot complete your search.`)
                             } else if (!json.games[0]) {
-                                newMessage.edit(`Sorry, but ROBLOX returned no results for that search.\nIt may have been filtered.`)
+                                newMessage.edit(`Sorry, but ROBLOX returned no results for that search.`)
                             } else {
                                 let game = json.games[0]
                                 newMessage.edit(`*Is this result unexpected? VukkyBot currently only supports searching games.*\nI found **${game.name}**, made by ${game.creatorName}.\nIts ratings are 👍 ${game.totalUpVotes} and 👎 ${game.totalDownVotes}. Its player count right now is 👥 ${game.playerCount}.\nYou can play it at <https://roblox.com/games/${game.placeId}>.`)
