@@ -1,5 +1,6 @@
 const embeds = require("../embeds.js");
 const fetch = require('node-fetch');
+const commaNumber = require('comma-number');
 
 module.exports = {
 	name: 'roblox',
@@ -18,7 +19,7 @@ module.exports = {
                                 newMessage.edit(`Sorry, but ROBLOX returned no results for that search.`)
                             } else {
                                 let game = json.games[0]
-                                newMessage.edit(`*Is this result unexpected? VukkyBot currently only supports searching games.*\nI found **${game.name}**, made by ${game.creatorName}.\nIts ratings are 👍 ${game.totalUpVotes} and 👎 ${game.totalDownVotes}. Its player count right now is 👥 ${game.playerCount}.\nYou can play it at <https://roblox.com/games/${game.placeId}>.`)
+                                newMessage.edit(`*Is this result unexpected? VukkyBot currently only supports searching games.*\nI found **${game.name}**, made by ${game.creatorName}.\nIts ratings are 👍 ${commaNumber(game.totalUpVotes)} and 👎 ${commaNumber(game.totalDownVotes)}, thus it has a score of 😃 ${commaNumber(game.totalUpVotes - game.totalDownVotes)}.\nIts player count right now is 👥 ${commaNumber(game.playerCount)}.\nYou can play it at <https://roblox.com/games/${game.placeId}>.`)
                             }
                         })
                 } else {
