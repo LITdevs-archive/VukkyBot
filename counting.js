@@ -84,56 +84,56 @@ module.exports = {
             if (message.content && !isNaN(message.content.split(' ')[0])) {
                 if (parseInt(message.content.split(' ')[0]) == parseInt(currentNumber) + 1) {
                     if (lastCounter != message.author.id) {
-                    currentNumber++
-                    let con = mysql.createConnection({
-                        host: process.env.SQL_HOST,
-                        user: process.env.SQL_USER,
-                        password: process.env.SQL_PASS,
-                        database: process.env.SQL_DB
-                    });
-                    sql = `UPDATE counting set number = ${message.content.split(' ')[0]}, lastcounter = ${message.author.id} WHERE serverid = ${message.guild.id}`
-                    con.connect(function(err) {
-                        if (err) {
-                            console.log("[counting] Something went wrong")
-                            console.log(err)
-                        } else {
-                            con.query(sql, function (err, result) {
+                        currentNumber++
+                        let con = mysql.createConnection({
+                            host: process.env.SQL_HOST,
+                            user: process.env.SQL_USER,
+                            password: process.env.SQL_PASS,
+                            database: process.env.SQL_DB
+                        });
+                        sql = `UPDATE counting set number = ${message.content.split(' ')[0]}, lastcounter = ${message.author.id} WHERE serverid = ${message.guild.id}`
+                        con.connect(function(err) {
                             if (err) {
-                                console.log("[counting] something went wrong")
-                                con.end()
+                                console.log("[counting] Something went wrong")
+                                console.log(err)
                             } else {
-                                con.end()
+                                con.query(sql, function (err, result) {
+                                if (err) {
+                                    console.log("[counting] something went wrong")
+                                    con.end()
+                                } else {
+                                    con.end()
+                                }
+                                });
                             }
-                            });
-                        }
-                    });
-                    message.react("✅")
-                } else {
-                    message.channel.send(`<@${message.author.id}> screwed up! You can't count twice in a row!\nThe next number is **1**.`)
-                    let con = mysql.createConnection({
-                        host: process.env.SQL_HOST,
-                        user: process.env.SQL_USER,
-                        password: process.env.SQL_PASS,
-                        database: process.env.SQL_DB
-                    });
-                    sql = `UPDATE counting set number = 0, lastcounter = 0 WHERE serverid = ${message.guild.id}`
-                    con.connect(function(err) {
-                        if (err) {
-                            console.log("[counting] Something went wrong")
-                            console.log(err)
-                        } else {
-                            con.query(sql, function (err, result) {
+                        });
+                        message.react("✅")
+                    } else {
+                        message.channel.send(`<@${message.author.id}> screwed up! You can't count twice in a row!\nThe next number is **1**.`)
+                        let con = mysql.createConnection({
+                            host: process.env.SQL_HOST,
+                            user: process.env.SQL_USER,
+                            password: process.env.SQL_PASS,
+                            database: process.env.SQL_DB
+                        });
+                        sql = `UPDATE counting set number = 0, lastcounter = 0 WHERE serverid = ${message.guild.id}`
+                        con.connect(function(err) {
                             if (err) {
-                                console.log("[counting] something went wrong")
-                                con.end()
+                                console.log("[counting] Something went wrong")
+                                console.log(err)
                             } else {
-                                con.end()
+                                con.query(sql, function (err, result) {
+                                if (err) {
+                                    console.log("[counting] something went wrong")
+                                    con.end()
+                                } else {
+                                    con.end()
+                                }
+                                });
                             }
-                            });
-                        }
-                    });
-                    message.react("❌")
-                }
+                        });
+                        message.react("❌")
+                    }
                 } else {
                     message.channel.send(`<@${message.author.id}> screwed up! The correct number would have been **${parseInt(currentNumber) + 1}**.\nThe next number is **1**.`)
                     let con = mysql.createConnection({
