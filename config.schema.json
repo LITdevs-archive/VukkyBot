@@ -15,6 +15,20 @@
                 "owner": {
                     "description": "The Discord ID of the owner of this VukkyBot",
                     "type": "string"
+                },
+                "mysql": {
+                    "description": "Toggles if a MySQL database should be used",
+                    "type": "boolean"
+                }
+            }
+        },
+        "counting": {
+            "description": "Options for VukkyBot's counting feature",
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "description": "Toggles if counting is enabled",
+                    "type": "boolean"
                 }
             }
         },
@@ -52,16 +66,6 @@
                     "properties": {
                         "codes": {
                             "description": "Toggles if Giveaway Drop Codes should be enabled",
-                            "type": "boolean"
-                        }
-                    }
-                },
-                "warn": {
-                    "description": "Options for the warn command",
-                    "type": "object",
-                    "properties": {
-                        "mysql": {
-                            "description": "Toggles if a MySQL database should be used",
                             "type": "boolean"
                         }
                     }

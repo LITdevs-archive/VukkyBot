@@ -3,7 +3,8 @@
     "$schema": "./config.schema.json",
     "misc": {
         "prefixReminder": true,
-        "owner": "125644326037487616"
+        "owner": "125644326037487616",
+        "mysql": true
     },
     "counting": {
         "enabled": true
@@ -15,9 +16,6 @@
         },
         "giveawaydrop": {
             "codes": true
-        },
-        "warn": {
-            "mysql": true
         }
     }
 }
