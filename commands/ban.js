@@ -7,6 +7,7 @@ module.exports = {
     guildOnly: true,
     args: true,
     usage: "<@user>",
+    aliases: ['bean'],
 	execute(message, args) {
         var mentionedUser = message.guild.member(message.mentions.users.first())
         var banReason = args.slice(1).join(' ') || "no reason specified";
