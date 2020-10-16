@@ -23,7 +23,8 @@
     "stop": "pm2 del VukkyBot",
     "restart": "pm2 restart VukkyBot",
     "setup": "node setup.js",
-    "lint": "npx eslint **/*.js"
+    "lint": "npx eslint **/*.js",
+    "lintfix": "npx eslint **/*.js --fix"
   },
   "repository": {
     "type": "git",
