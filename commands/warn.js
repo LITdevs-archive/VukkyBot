@@ -25,7 +25,7 @@ module.exports = {
 					if (err) console.log(err);
 				});
                     
-				let sql = "INSERT INTO warnings (username, uid, reason) VALUES ('" + mentionedUser.user.username + "', " + mentionedUser.id + ", '" + args.slice(1).join(" ") + "')";
+				let sql = `INSERT INTO warnings (username, uid, reason) VALUES ('${mentionedUser.user.username}', ${mentionedUser.id}, '${args.slice(1).join(" ")}')`;
 				con.query(sql, function (err, result) {
 					if (err)  {
 						message.channel.send(errorEmbed("An error has occurred! See logs for more information."));

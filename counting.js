@@ -11,6 +11,7 @@ const info = chalk.blue;
 module.exports = {
 	start: function() {
 		if(!config.misc.mysql) return console.log(`[counting] ${error("MySQL is not enabled")}`);
+		if(!config.counting.enabled) return;
 		let con = mysql.createConnection({
 			host: process.env.SQL_HOST,
 			user: process.env.SQL_USER,
@@ -40,6 +41,7 @@ module.exports = {
 	},
 	countCheck: function (message) {
 		if(!config.misc.mysql) return console.log(`[counting] ${error("MySQL is not enabled")}`);
+		if(!config.counting.enabled) return;
 		let con = mysql.createConnection({
 			host: process.env.SQL_HOST,
 			user: process.env.SQL_USER,
@@ -47,7 +49,7 @@ module.exports = {
 			database: process.env.SQL_DB
 		});
 
-		sql = "SELECT * FROM counting WHERE serverid = " + message.guild.id;
+		sql = `SELECT * FROM counting WHERE serverid = ${  message.guild.id}`;
 		con.query(sql, function (err, result) {
 			if (err) {
 				console.log(`[counting] ${error("Something went wrong while fetching the current number. Maybe it doesn't exist?")}`);

@@ -33,15 +33,15 @@ module.exports = {
 		let sql = `SELECT * FROM warnings WHERE uid = ${warnsId}`;
 		con.query(sql, function (err, result) {
 			if (err)  {
-				message.channel.send(errorEmbed("An error has occurred! See logs for more information."));
+				message.channel.send(errorEmbed(`An error has occurred! ${err}`));
 				console.log(err);
 				con.end();
 			} else {
 				if (result.length == 0) { con.end(); return message.channel.send(successEmbed("This person has no warnings!")); }
 				let finalMessage = `Warnings for ${result[0].username}: \n`;
-                
+				
 				for (let i = 0; i < result.length; i++) {
-					finalMessage = finalMessage.concat("**", result[i].reason, "** (ID: ", result[i].id + ")\n");
+					finalMessage = finalMessage.concat(`**${result[i].reason}** (ID: ${result[i].id})\n`);
 				}
 				message.channel.send(successEmbed(finalMessage));
 				con.end();
