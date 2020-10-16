@@ -170,7 +170,7 @@
     },
     {
         "question": "Who painted the Mona Lisa?",
-        "answers": ["leonardo da vinci"],
+        "answers": ["leonardo da vinci", "da vinci"],
         "author": "ItsEvil",
         "categories": ["Art"]
     }
