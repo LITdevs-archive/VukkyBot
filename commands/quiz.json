@@ -161,5 +161,17 @@
         "answers": ["hydrogen"],
         "author": "Gustav",
         "categories": ["Science"]
+    },
+    {
+        "question": "What was the first company to make automobiles?",
+        "answers": ["mercedes-benz", "rheinische gasmotorenfabrik benz & cie", "benz & cie"],
+        "author": "Som",
+        "categories": ["Cars"]
+    },
+    {
+        "question": "Who painted the Mona Lisa?",
+        "answers": ["leonardo da vinci"],
+        "author": "ItsEvil",
+        "categories": ["Art"]
     }
 ]
