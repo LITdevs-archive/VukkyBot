@@ -21,7 +21,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "pm2 start index.js --name VukkyBot -- --color && pm2 log",
     "stop": "pm2 del VukkyBot",
-    "restart": "pm2 restart VukkyBot",
+    "restart": "pm2 restart VukkyBot && pm2 log",
     "setup": "node setup.js",
     "lint": "npx eslint **/*.js",
     "lintfix": "npx eslint **/*.js --fix"

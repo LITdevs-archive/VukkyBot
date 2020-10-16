@@ -25,8 +25,22 @@ const cooldowns = new Discord.Collection();
 
 client.once("ready", () => {
 	console.log("Ready!");
-	const pjson = require("./package.json");
-	client.user.setActivity(`with a Fall Guy (and v${pjson.version})`, { type: "PLAYING" });
+	const statuses = [
+		"with JavaScript",
+		"with a Fall Guy",
+		"with counting bots",
+		"with banning people",
+		"with the console",
+		"with pm2",
+		"with npm",
+		"with ESLint",
+		"with MySQL"
+	];
+	setInterval(() => {
+		const index = Math.floor(Math.random() * (statuses.length - 1) + 1);
+		const pjson = require("./package.json");
+		client.user.setActivity(`${statuses[index]} (${pjson.version})`);
+	}, 10000); // Runs this every 10 seconds.
 	counting.start();
 });
 
