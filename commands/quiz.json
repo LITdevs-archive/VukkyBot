@@ -164,7 +164,7 @@
     },
     {
         "question": "What was the first company to make automobiles?",
-        "answers": ["mercedes-benz", "rheinische gasmotorenfabrik benz & cie", "benz & cie"],
+        "answers": ["mercedes-benz", "rheinische gasmotorenfabrik benz & cie", "benz & cie", "benz"],
         "author": "Som",
         "categories": ["Cars"]
     },
