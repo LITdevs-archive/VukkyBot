@@ -5,6 +5,8 @@
 A bot made for **Vukky's Chat Place**.
 Giving VukkyBot permissions is not needed, it will notify you if it needs permissions.
 
+[![Banner for Vukky's Chat Place, the Discord server](https://discord.com/api/guilds/719496895449530439/widget.png?style=banner2)](https://vukky.ga/discord)
+
 ## Help VukkyBot
 [Submit feature requests or bug reports](https://github.com/VukkyLtd/VukkyBot/issues/new/choose)
 

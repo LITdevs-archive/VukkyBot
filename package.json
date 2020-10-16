@@ -4,20 +4,22 @@
   "description": "VukkyBot",
   "main": "index.js",
   "dependencies": {
+    "chalk": "^4.1.0",
+    "comma-number": "^2.0.1",
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
     "mysql": "^2.18.1",
     "pm2": "^4.5.0"
   },
   "devDependencies": {
-    "chalk": "^4.1.0",
+    "eslint": "^7.11.0",
     "inquirer": "^7.3.3",
     "npm": "^6.14.8",
     "ora": "^5.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pm2 start index.js --name VukkyBot && pm2 log",
+    "start": "pm2 start index.js --name VukkyBot -- --color && pm2 log",
     "stop": "pm2 del VukkyBot",
     "restart": "pm2 restart VukkyBot",
     "setup": "node setup.js"
