@@ -27,7 +27,7 @@ module.exports = {
 				sql = "CREATE TABLE counting (serverid VARCHAR(255), number VARCHAR(255), lastcounter VARCHAR(255), id INT AUTO_INCREMENT PRIMARY KEY)";
 				con.query(sql, function (err, result) {
 					if (err) {
-						console.log(`[counting] ${error("Table creation failed")} (Probably already exists)`);
+						console.log(`[counting] ${error("Table creation failed")} (probably already exists)`);
 						con.end();
 					} else {
 						console.log(`[counting] ${success("Table created")}`);
