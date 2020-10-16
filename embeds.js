@@ -112,9 +112,7 @@ function GiveawayInvalid(prize, dropped_by) {
 
 function quizStartEmbed(question, time, hint, author, categories) {
   var description = `**Categories:** ${categories.join(", ")}\n\n${question}\nYou have ${time} seconds to answer!\n`
-  if(!author) {
-    author = 'someone ¯\\_(ツ)\_/¯'
-  }
+  author = (!author) ? 'an unknown user' : author
   if(hint && config.commands.quiz.hints == true) {
     description = description.concat(`\n💡 **Hint available.** ||${hint}||`)
   }
