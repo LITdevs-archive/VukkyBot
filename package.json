@@ -22,7 +22,8 @@
     "start": "pm2 start index.js --name VukkyBot -- --color && pm2 log",
     "stop": "pm2 del VukkyBot",
     "restart": "pm2 restart VukkyBot",
-    "setup": "node setup.js"
+    "setup": "node setup.js",
+    "lint": "npx eslint **/*.js"
   },
   "repository": {
     "type": "git",

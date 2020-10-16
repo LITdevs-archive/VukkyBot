@@ -70,12 +70,14 @@ function inputEmbed(detailsMsg) {
 }
 
 function GiveawayDrop(prize, dropped_by, code) {
+	let howToString;
+	let titleString;
 	if(code == true) {
-		var howToString = "Be the first who reacts with :tada: to this message. More details in <#726070905750421545>\n\n**THIS GIVEAWAY DROP CONTAINS A SPECIAL CODE!**\nMake sure your DMs are open!!";
-		var titleString = "🎁⌨ Giveaway Drop (with special code)";
+		howToString = "Be the first who reacts with :tada: to this message. More details in <#726070905750421545>\n\n**THIS GIVEAWAY DROP CONTAINS A SPECIAL CODE!**\nMake sure your DMs are open!!";
+		titleString = "🎁⌨ Giveaway Drop (with special code)";
 	} else {
-		var howToString = "Be the first who reacts with :tada: to this message. More details in <#726070905750421545>";
-		var titleString = "🎁 Giveaway Drop";
+		howToString = "Be the first who reacts with :tada: to this message. More details in <#726070905750421545>";
+		titleString = "🎁 Giveaway Drop";
 	}
 	return new Discord.MessageEmbed()
 		.setColor("#D0A33E")
@@ -168,6 +170,7 @@ function todayInHistoryEmbed(event, year, date, links) {
 	var linkies = [];
 	if (links) {
 		for (var singlelink in links) {
+			// eslint-disable-next-line no-prototype-builtins
 			if (links.hasOwnProperty(singlelink)) {
 				linkies.push(`[${links[singlelink].title}](${links[singlelink].link})`);
 			}
