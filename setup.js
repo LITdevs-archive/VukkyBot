@@ -138,21 +138,27 @@ inquirer.prompt(questions).then((answers) => {
 											} else {
 												spinner5.succeed("Created table in the database");
 											}
+											launchyBotty();
 										});
 									}
 								});
+							} else {
+								launchyBotty();
 							}
-							if (answers.launch) {
-								const spinner3 = ora("Starting VukkyBot").start();
-								try {
-									const npm = require("npm");
-									npm.load(() => {
-										npm.run("start");
-									});
-									spinner3.succeed("VukkyBot should start now");
-								} catch (err) {
-									spinner3.fail("Couldn't start VukkyBot");
-									console.log(err);
+							// eslint-disable-next-line no-inner-declarations
+							function launchyBotty() {
+								if (answers.launch) {
+									const spinner3 = ora("Starting VukkyBot").start();
+									try {
+										const npm = require("npm");
+										npm.load(() => {
+											npm.run("start");
+										});
+										spinner3.succeed("VukkyBot should start now");
+									} catch (err) {
+										spinner3.fail("Couldn't start VukkyBot");
+										console.log(err);
+									}
 								}
 							}
 						}
