@@ -52,7 +52,7 @@ client.on("message", message => {
 
 	if (message.content.toLowerCase().includes(`<@!${client.user.id}>`) && config.misc.prefixReminder == true && !message.content.startsWith(prefix)) message.reply(`my prefix is \`${process.env.PREFIX}\``);
 
-	if (message.channel.name == "counting") counting.countCheck(message);
+	if (message.channel.name == config.counting.channelName) counting.countCheck(message);
 
 	if (!message.content.toLowerCase().startsWith(prefix)) return;
 
@@ -67,6 +67,11 @@ client.on("message", message => {
 		if (embedPermissions == 0) return message.channel.send(reply);
 		message.channel.send(embeds.errorEmbed(reply));
 		return;
+	}
+
+	if(command.mysql && !config.misc.mysql) {
+		if (embedPermissions == 0) return message.channel.send(`**${commandName}** is not enabled on this VukkyBot because MySQL is disabled!\nFor the hoster: See https://vukkyltd.github.io/VukkyBot/troubleshooting/mysqldisabled.html for instructions on how to enable it!`);
+		return message.channel.send(embeds.errorEmbed(`**${commandName}** is not enabled on this VukkyBot because MySQL is disabled!\nFor the hoster: See [here](https://vukkyltd.github.io/VukkyBot/troubleshooting/mysqldisabled.html) for instructions on how to enable it!`));
 	}
 
 	if (command.guildOnly && message.channel.type !== "text") {

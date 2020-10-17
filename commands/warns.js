@@ -9,6 +9,7 @@ module.exports = {
 	description: "Make VukkyBot remove warnings from people!",
 	dcPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
 	args: true,
+	mysql: true,
 	usage: "<warning id>",
 	aliases: ["warnings"],
 	execute(message, args) {

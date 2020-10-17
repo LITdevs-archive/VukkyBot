@@ -10,8 +10,8 @@ const info = chalk.blue;
 
 module.exports = {
 	start: function() {
-		if(!config.misc.mysql) return console.log(`[counting] ${error("MySQL is not enabled")}`);
-		if(!config.counting.enabled) return;
+		if(!config.counting.enabled) return console.log(`[counting] ${error("Counting is disabled!")}`);
+		if(!config.misc.mysql) return console.log(`[counting] ${error("MySQL is not enabled. MySQL is required for counting.")}`);
 		let con = mysql.createConnection({
 			host: process.env.SQL_HOST,
 			user: process.env.SQL_USER,
@@ -40,7 +40,7 @@ module.exports = {
 
 	},
 	countCheck: function (message) {
-		if(!config.misc.mysql) return console.log(`[counting] ${error("MySQL is not enabled")}`);
+		if(!config.misc.mysql) return;
 		if(!config.counting.enabled) return;
 		let con = mysql.createConnection({
 			host: process.env.SQL_HOST,

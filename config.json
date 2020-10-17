@@ -4,10 +4,11 @@
     "misc": {
         "prefixReminder": true,
         "owner": "125644326037487616",
-        "mysql": true
+        "mysql": false
     },
     "counting": {
-        "enabled": true
+        "enabled": false,
+        "channelName": "counting"
     },
     "commands": {
         "quiz": {
