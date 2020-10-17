@@ -26,7 +26,7 @@ function confirmDroppy(message) {
 					}
 				})
 				.catch(collected => {
-					console.log("👨‍💻 Drop creation failed: " + collected.message);
+					console.log(`👨‍💻 Drop creation failed: ${collected.message}`);
 					return message.channel.send("you didn't answer in time, or there was an error.");
 				});
 		});
@@ -116,7 +116,7 @@ module.exports = {
 													confirmDroppy(message);
 												})
 												.catch(collected => {
-													console.log("👨‍💻 Drop creation failed: " + collected.message);
+													console.log(`👨‍💻 Drop creation failed: ${collected.message}`);
 													return message.channel.send("you didn't answer in time, or there was an error.");
 												});
 										} else {
@@ -125,7 +125,7 @@ module.exports = {
 										}
 									})
 									.catch(collected => {
-										console.log("👨‍💻 Drop creation failed: " + collected.message);
+										console.log(`👨‍💻 Drop creation failed: ${collected.message}`);
 										return message.channel.send("you didn't answer in time, or there was an error.");
 									});
 							});

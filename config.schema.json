@@ -32,6 +32,16 @@
                 }
             }
         },
+        "counting": {
+            "description": "Options for VukkyBot's counting feature",
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "description": "Toggles if counting is enabled",
+                    "type": "boolean"
+                }
+            }
+        },
         "commands": {
             "description": "Options for VukkyBot's commands",
             "type": "object",
