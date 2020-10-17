@@ -98,6 +98,7 @@ inquirer.prompt(questions).then((answers) => {
 			if (err) {
 				spinner1.fail("Saving credentials to .env failed");
 				console.log(err);
+				process.exit(1);
 			} else {
 				spinner1.succeed("Saved credentials to .env");
 				const spinner2 = ora("Saving configuration to config.json").start();
@@ -112,6 +113,7 @@ inquirer.prompt(questions).then((answers) => {
 						if (err) {
 							spinner2.fail("Saving configuration to config.json failed");
 							console.log(err);
+							process.exit(1);
 						} else {
 							spinner2.succeed("Saved configuration to config.json");
 							if(answers.mysql) {
@@ -127,6 +129,7 @@ inquirer.prompt(questions).then((answers) => {
 									if (err) {
 										spinner4.fail("Failed to connect to the database");
 										console.log(err);
+										process.exit(1);
 									} else {
 										spinner4.succeed("Connected to the database");
 										const spinner5 = ora("Creating table in the database").start();
@@ -166,12 +169,13 @@ inquirer.prompt(questions).then((answers) => {
 				} catch (err) {
 					spinner2.fail("Saving configuration to config.json failed");
 					console.log(err);
+					process.exit(1);
 				} 
 			}
 		});
 	} catch (err) {
 		spinner1.fail("Saving credentials to .env failed");
 		console.log(err);
+		process.exit(1);
 	}
-    
 });
