@@ -31,23 +31,6 @@ You can invite it [here](https://discord.com/api/oauth2/authorize?client_id=7383
 What are you going to host it with?
 
 <details markdown="1">
-<summary>Heroku</summary>
-
-*Your deployed VukkyBot will run 24/7. This will use up your free dyno hours before the end of the month. Link a credit card if you want to run your VukkyBot for the entire month.*
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/VukkyLtd/VukkyBot)
-
-*If the above button doesn't work, try [this link](https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2fVukkyLtd%2FVukkyBot&template=https%3A%2F%2Fgithub.com%2FVukkyLtd%2FVukkyBot%2Fapp.json).*
-
-When your VukkyBot has been deployed, check its Resources tab.
-
-Disable the *web* process and enable the *service* process to start up your VukkyBot.
-
-![GIF showing how to disable the web process and enable the service process.](https://i.imgur.com/Bh39dW4.gif)
-
-</details>
-
-<details markdown="1">
 <summary>My own machine</summary>
 
 This assumes you have:
