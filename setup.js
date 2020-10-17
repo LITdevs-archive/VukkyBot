@@ -36,15 +36,32 @@ let questions = [
 	},
 	{
 		type: "confirm",
-		name: "mysqlwarn",
-		message: "Use MySQL database for warn command?"
+		name: "mysql",
+		message: "Use MySQL database for some commands that require it including counting and warn?"
+	},
+	{
+		type: "confirm",
+		name: "countingenabled",
+		message: "Would you like VukkyBot to count for you?",
+		when: function (answers) {
+			return answers.mysql !== false;
+		},
+	},
+	{
+		type: "input",
+		name: "countingchannel",
+		message: "What is the name of the channel you would like VukkyBot to count in?",
+		default: "counting",
+		when: function (answers) {
+			return answers.countingenabled !== false && answers.mysql !== false;
+		}
 	},
 	{
 		type: "input",
 		name: "sqlhost",
 		message: "What's your SQL hostname?",
 		when: function (answers) {
-			return answers.mysqlwarn !== false;
+			return answers.mysql !== false;
 		},
 	},
 	{
@@ -52,7 +69,7 @@ let questions = [
 		name: "sqlpass",
 		message: "What's your SQL password?",
 		when: function (answers) {
-			return answers.mysqlwarn !== false;
+			return answers.mysql !== false;
 		},
 	},
 	{
@@ -60,7 +77,7 @@ let questions = [
 		name: "sqluser",
 		message: "What's your SQL username?",
 		when: function (answers) {
-			return answers.mysqlwarn !== false;
+			return answers.mysql !== false;
 		},
 	},
 	{
@@ -68,34 +85,36 @@ let questions = [
 		name: "sqldb",
 		message: "What's your SQL database name?",
 		when: function (answers) {
-			return answers.mysqlwarn !== false;
+			return answers.mysql !== false;
 		},
 	}
 ];
   
 inquirer.prompt(questions).then((answers) => {
 	const ora = require("ora");
-	const spinner1 = ora("Saving to .env").start();
+	const spinner1 = ora("Saving credentials to .env").start();
 	try {
 		fs.writeFile(".env", `BOT_TOKEN=${answers.token}\nPREFIX=${answers.prefix}\nSQL_HOST=${answers.sqlhost}\nSQL_PASS=${answers.sqlpass}\nSQL_USER=${answers.sqluser}\nSQL_DB=${answers.sqldb}`, function (err) {
 			if (err) {
-				spinner1.fail("Saving to .env failed");
+				spinner1.fail("Saving credentials to .env failed");
 				console.log(err);
 			} else {
-				spinner1.succeed("Saved to .env");
-				const spinner2 = ora("Saving to config.json").start();
+				spinner1.succeed("Saved credentials to .env");
+				const spinner2 = ora("Saving configuration to config.json").start();
 				try {
 					const config = require("./config.json");
 					config.misc.owner = answers.discordid;
 					config.misc.prefixReminder = answers.prefixreminder;
-					config.misc.mysql = answers.mysqlwarn;
+					config.misc.mysql = answers.mysql;
+					if (answers.mysql) { config.counting.enabled = answers.countingenabled; } else { config.counting.enabled = false; }
+					if(answers.countingenabled) { config.counting.channelName = answers.countingchannel; }
 					fs.writeFile("config.json", JSON.stringify(config, null, 4), function (err) {
 						if (err) {
-							spinner2.fail("Saving to config.json failed");
+							spinner2.fail("Saving configuration to config.json failed");
 							console.log(err);
 						} else {
-							spinner2.succeed("Saved to config.json");
-							if(answers.mysqlwarn) {
+							spinner2.succeed("Saved configuration to config.json");
+							if(answers.mysql) {
 								const spinner4 = ora("Connecting to the database").start();
                             
 								let con = mysql.createConnection({
@@ -139,13 +158,13 @@ inquirer.prompt(questions).then((answers) => {
 						}
 					});
 				} catch (err) {
-					spinner2.fail("Saving to config.json failed");
+					spinner2.fail("Saving configuration to config.json failed");
 					console.log(err);
 				} 
 			}
 		});
 	} catch (err) {
-		spinner1.fail("Saving to .env failed");
+		spinner1.fail("Saving credentials to .env failed");
 		console.log(err);
 	}
     
