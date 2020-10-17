@@ -3,11 +3,11 @@
     "$schema": "./config.schema.json",
     "misc": {
         "prefixReminder": true,
-        "owner": "125644326037487616",
+        "owner": "708333380525228082",
         "mysql": false
     },
     "counting": {
-        "enabled": false,
+        "enabled": true,
         "channelName": "counting"
     },
     "commands": {
