@@ -4,7 +4,7 @@
     "misc": {
         "prefixReminder": true,
         "owner": "708333380525228082",
-        "mysql": false
+        "mysql": true
     },
     "counting": {
         "enabled": true,
