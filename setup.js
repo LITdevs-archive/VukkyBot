@@ -136,8 +136,12 @@ inquirer.prompt(questions).then((answers) => {
 										sql = "CREATE TABLE warnings (username VARCHAR(255), uid VARCHAR(255), reason VARCHAR(255), id INT AUTO_INCREMENT PRIMARY KEY)";
 										con.query(sql, function (err, result) {
 											if (err) {
-												spinner5.fail("Failed to create table in the database");
-												console.log(err);
+												if (err.code == "ER_TABLE_EXISTS_ERROR") {
+													spinner5.warn("Table already exists in the database");
+												} else {
+													spinner5.fail("Failed to create table in the database");
+													console.log(err);
+												}
 											} else {
 												spinner5.succeed("Created table in the database");
 											}
@@ -150,6 +154,7 @@ inquirer.prompt(questions).then((answers) => {
 							}
 							// eslint-disable-next-line no-inner-declarations
 							function launchyBotty() {
+								console.log(chalk.green.bold("Congratulations! Setup has now completed."));
 								if (answers.launch) {
 									const spinner3 = ora("Starting VukkyBot").start();
 									try {
@@ -162,6 +167,8 @@ inquirer.prompt(questions).then((answers) => {
 										spinner3.fail("Couldn't start VukkyBot");
 										console.log(err);
 									}
+								} else {
+									process.exit(0);
 								}
 							}
 						}
