@@ -7,7 +7,7 @@
         "mysql": true
     },
     "counting": {
-        "enabled": true,
+        "enabled": false,
         "channelName": "counting"
     },
     "commands": {
