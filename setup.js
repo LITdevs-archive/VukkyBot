@@ -98,6 +98,7 @@ inquirer.prompt(questions).then((answers) => {
 			if (err) {
 				spinner1.fail("Saving credentials to .env failed");
 				console.log(err);
+				process.exit(1);
 			} else {
 				spinner1.succeed("Saved credentials to .env");
 				const spinner2 = ora("Saving configuration to config.json").start();
@@ -112,6 +113,7 @@ inquirer.prompt(questions).then((answers) => {
 						if (err) {
 							spinner2.fail("Saving configuration to config.json failed");
 							console.log(err);
+							process.exit(1);
 						} else {
 							spinner2.succeed("Saved configuration to config.json");
 							if(answers.mysql) {
@@ -127,32 +129,46 @@ inquirer.prompt(questions).then((answers) => {
 									if (err) {
 										spinner4.fail("Failed to connect to the database");
 										console.log(err);
+										process.exit(1);
 									} else {
 										spinner4.succeed("Connected to the database");
 										const spinner5 = ora("Creating table in the database").start();
 										sql = "CREATE TABLE warnings (username VARCHAR(255), serverid VARCHAR(255), uid VARCHAR(255), reason VARCHAR(255), id INT AUTO_INCREMENT PRIMARY KEY)";
 										con.query(sql, function (err, result) {
 											if (err) {
-												spinner5.fail("Failed to create table in the database");
-												console.log(err);
+												if (err.code == "ER_TABLE_EXISTS_ERROR") {
+													spinner5.warn("Table already exists in the database");
+												} else {
+													spinner5.fail("Failed to create table in the database");
+													console.log(err);
+												}
 											} else {
 												spinner5.succeed("Created table in the database");
 											}
+											launchyBotty();
 										});
 									}
 								});
+							} else {
+								launchyBotty();
 							}
-							if (answers.launch) {
-								const spinner3 = ora("Starting VukkyBot").start();
-								try {
-									const npm = require("npm");
-									npm.load(() => {
-										npm.run("start");
-									});
-									spinner3.succeed("VukkyBot should start now");
-								} catch (err) {
-									spinner3.fail("Couldn't start VukkyBot");
-									console.log(err);
+							// eslint-disable-next-line no-inner-declarations
+							function launchyBotty() {
+								console.log(chalk.green.bold("Congratulations! Setup has now completed."));
+								if (answers.launch) {
+									const spinner3 = ora("Starting VukkyBot").start();
+									try {
+										const npm = require("npm");
+										npm.load(() => {
+											npm.run("start");
+										});
+										spinner3.succeed("VukkyBot should start now");
+									} catch (err) {
+										spinner3.fail("Couldn't start VukkyBot");
+										console.log(err);
+									}
+								} else {
+									process.exit(0);
 								}
 							}
 						}
@@ -160,12 +176,13 @@ inquirer.prompt(questions).then((answers) => {
 				} catch (err) {
 					spinner2.fail("Saving configuration to config.json failed");
 					console.log(err);
+					process.exit(1);
 				} 
 			}
 		});
 	} catch (err) {
 		spinner1.fail("Saving credentials to .env failed");
 		console.log(err);
+		process.exit(1);
 	}
-    
 });
