@@ -5,6 +5,7 @@ require("dotenv").config();
 let sql;
 
 const error = chalk.bold.red;
+const warn = chalk.yellow;
 const success = chalk.green;
 const info = chalk.blue;
 
@@ -28,7 +29,11 @@ module.exports = {
 				sql = "CREATE TABLE counting (serverid VARCHAR(255), number VARCHAR(255), lastcounter VARCHAR(255), id INT AUTO_INCREMENT PRIMARY KEY)";
 				con.query(sql, function (err, result) {
 					if (err) {
-						console.log(`[counting] ${error("Table creation failed")} (probably already exists)`);
+						if(err.code == "ER_TABLE_EXISTS_ERROR") {
+							console.log(`[counting] ${warn("Table already exists")}`);
+						} else {
+							console.log(`[counting] ${error("Table creation failed")} (probably already exists)`);
+						}
 						con.end();
 					} else {
 						console.log(`[counting] ${success("Table created")}`);
@@ -89,7 +94,9 @@ module.exports = {
 					lastCounter = result[0].lastcounter;
 				}
 				con.end();
-				if (message.content && !isNaN(message.content.split(" ")[0])) {
+				if (!message.content) return;
+				if (message.content.split(" ")[0].includes("+") || message.content.split(" ")[0].includes("-") || message.content.split(" ")[0].includes("*") || message.content.split(" ")[0].includes("/")) return message.channel.send("Sorry, but I don't know how to do math yet.");
+				if (!isNaN(message.content.split(" ")[0])) {
 					if (parseInt(message.content.split(" ")[0]) == parseInt(currentNumber) + 1) {
 						if (lastCounter != message.author.id) {
 							currentNumber++;

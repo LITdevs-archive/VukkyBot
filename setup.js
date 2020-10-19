@@ -133,7 +133,7 @@ inquirer.prompt(questions).then((answers) => {
 									} else {
 										spinner4.succeed("Connected to the database");
 										const spinner5 = ora("Creating table in the database").start();
-										sql = "CREATE TABLE warnings (username VARCHAR(255), uid VARCHAR(255), reason VARCHAR(255), id INT AUTO_INCREMENT PRIMARY KEY)";
+										sql = "CREATE TABLE warnings (username VARCHAR(255), serverid VARCHAR(255), uid VARCHAR(255), reason VARCHAR(255), id INT AUTO_INCREMENT PRIMARY KEY)";
 										con.query(sql, function (err, result) {
 											if (err) {
 												if (err.code == "ER_TABLE_EXISTS_ERROR") {

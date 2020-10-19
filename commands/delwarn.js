@@ -26,7 +26,7 @@ module.exports = {
 		con.connect(function(err) {
 			if (err) console.log(err);
 		});
-		let sql = `DELETE FROM warnings WHERE id = ${warningId}`;
+		let sql = `DELETE FROM warnings WHERE (id = ${warningId} AND serverid = ${message.guild.id})`;
 		con.query(sql, function (err, result) {
 			if (err)  {
 				message.channel.send(errorEmbed("An error has occurred! See logs for more information."));

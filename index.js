@@ -3,6 +3,8 @@ const fs = require("fs");
 const counting = require("./counting");
 const Discord = require("discord.js");
 const client = new Discord.Client();
+const chalk = require("chalk");
+const success = chalk.green;
 
 const embeds = require("./embeds.js");
 const config = require("./config.json");
@@ -18,13 +20,13 @@ for (const file of commandFiles) {
 	// set a new item in the Collection
 	// with the key as the command name and the value as the exported module
 	client.commands.set(command.name, command);
-	console.log(`${file} loaded!`);
+	console.log(`[startup] ${success(`${file} loaded!`)}`);
 }
 
 const cooldowns = new Discord.Collection();
 
 client.once("ready", () => {
-	console.log("Ready!");
+	console.log(`[startup] ${success("Ready!")}`);
 	const statuses = [
 		"with JavaScript",
 		"with a Fall Guy",
@@ -89,27 +91,23 @@ client.on("message", message => {
 	}
 
 	if (command.dcPermissions) {
-		console.log("-------------PERMISSION CHECKS---------------");
 		var breaker = 0;
 		for (let i = 0, len = command.dcPermissions.length; command.dcPermissions; i < len, i++) {
 			if (command.dcPermissions[i] == undefined) {
-				console.log(`That should be it for ${prefix}${commandName} - yay! Breaking the loop now...`);
+				console.log(`[permcheck] ${success(`That should be it for ${prefix}${commandName}.`)}`);
 				break;
 			}
 			if (breaker == 1) break;
-			console.log(`${prefix}${commandName} wants ${command.dcPermissions[i]} - checking for permission...`);
+			console.log(`[permcheck] ${prefix}${commandName} wants ${command.dcPermissions[i]} - checking for permission...`);
 			if ((message.channel.type == "text" && !message.guild.me.hasPermission(command.dcPermissions[i]))) {
-				console.log(`Crap, looks like someone forgot to give us ${command.dcPermissions[i]}. Breaking the loop now...`);
+				console.log(`[permcheck] Looks like someone forgot to give the bot ${command.dcPermissions[i]}.`);
 				breaker = 1;
-				console.log("---------------------------------------------");
 				let reply = `Sorry, but I need the \`${command.dcPermissions[i]}\` permission to use that command.`;
 				if (embedPermissions == 0) return message.channel.send(reply);
 				message.channel.send(embeds.errorEmbed(reply));
 				return;
 			}
-			console.log(`Looks like we have ${command.dcPermissions[i]}! Okay, moving on...`);
 		}
-		console.log("---------------------------------------------");
 	}
 
 	if (!cooldowns.has(command.name)) {
@@ -135,7 +133,7 @@ client.on("message", message => {
 	try {
 		command.execute(message, args);
 	} catch (error) {
-		console.log(`error while trying to execute command: ${error.message}`);
+		console.log(`[${command.name}] ${error.message}`);
 		message.reply("there was an error trying to execute that command!", embeds.errorEmbed(error.message));
 	}
 });
