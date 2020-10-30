@@ -122,7 +122,11 @@ module.exports = {
 									});
 								}
 							});
-							message.react("✅");
+							if (currentNumber == 100) {
+								message.react("💯");
+							} else {
+								message.react("✅");
+							}
 						} else {
 							message.channel.send(`<@${message.author.id}> screwed up! You can't count twice in a row!\nThe next number is **1**.`);
 							let con = mysql.createConnection({
