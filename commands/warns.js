@@ -31,7 +31,7 @@ module.exports = {
 			if (err) console.log(err);
 		});
           
-		let sql = `SELECT * FROM warnings WHERE uid = ${warnsId}`;
+		let sql = `SELECT * FROM warnings WHERE (uid = ${warnsId} AND serverid = ${message.guild.id})`;
 		con.query(sql, function (err, result) {
 			if (err)  {
 				message.channel.send(errorEmbed(`An error has occurred! ${err}`));

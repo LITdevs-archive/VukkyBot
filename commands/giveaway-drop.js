@@ -36,20 +36,18 @@ function droppy(message, prize) {
 		.then(gmessage => {
 			gmessage.react("🎉");
 			const filter = (reaction, user) => reaction.emoji.name === "🎉" && user.bot === false;
-			console.log(`The ${prize} giveaway drop begins NOW!`);
+			console.log(`[drops] The ${prize} giveaway drop begins NOW!`);
 			try {
-				console.log("Waiting for reactions...");
+				console.log("[drops] Waiting for reactions...");
 				gmessage.channel.startTyping();
 				message.channel.send(embeds.successEmbed(`alright, a giveaway drop for ${prize} has been started now in <#${gmessage.channel.id}>!`));
 				gmessage.awaitReactions(filter, { max: 1, time: 600000, errors: ["time"] })
 					.then(collected => {
-						console.log("Reaction found!");
 						const reaction = collected.first();
 						const winner = collected.first().users.cache.last();
 						if (reaction.emoji.name === "🎉") {
 							gmessage.channel.stopTyping();
-							console.log(`A winner for ${prize} has been found!`);
-							console.log("---------------------------------------------");
+							console.log(`[drops] A winner for ${prize} has been found!`);
 							gmessage.reactions.removeAll();
 							gmessage.edit(embeds.GiveawayWinner(prize, message.author, `<@!${winner.id}>`));
 							message.channel.send(embeds.infoEmbed(`<@!${winner.id}> got a drop (**${prize}**)`));
@@ -63,7 +61,6 @@ function droppy(message, prize) {
 					}).catch(collected => {
 						gmessage.channel.stopTyping();
 						console.log(`Nobody cared about ${prize}, that's kinda disappointing. :ragi:`);
-						console.log("---------------------------------------------");
 						gmessage.reactions.removeAll();
 						gmessage.edit(embeds.GiveawayInvalid(prize, message.author));
 						gmessage.channel.send(`No one got the ${prize} giveaway drop, so it has automatically expired.\n${prize} can no longer be claimed.`);

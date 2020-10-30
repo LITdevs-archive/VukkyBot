@@ -39,7 +39,7 @@ This assumes you have:
 
 To host a VukkyBot, you run the following commands:
 ```
-git clone https://github.com/Vukky123/VukkyBot.git
+git clone --single-branch --branch master https://github.com/Vukky123/VukkyBot.git
 cd VukkyBot
 npm install
 ```
