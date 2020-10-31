@@ -19,7 +19,7 @@ module.exports = {
 								.then(emoji => message.channel.send(successEmbed(`Created new emoji with name ${emoji.name}`)))
 								.catch(error => message.channel.send(errorEmbed(`Error: ${error.message}`)));
 						} else {
-							message.channel.send(errorEmbed("Invalid Symbols Detected"));
+							message.channel.send(errorEmbed("I found symbols that are not suitable for the name of the emoji!"));
 						}
 					} else {
 						message.channel.send(errorEmbed("The name of the emoji must be longer than 2 letters!"));
