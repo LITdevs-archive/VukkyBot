@@ -25,10 +25,10 @@ module.exports = {
 						message.channel.send(errorEmbed("The name of the emoji must be longer than 2 letters!"));
 					}
 				} else {
-					message.channel.send(errorEmbed("You didnt give me enough arguments!\nUsage:`emoji add <emojiName>` with an image as attachment."));
+					message.channel.send(errorEmbed("You didn't give me enough arguments!\nUsage:`emoji add <emojiName>` with an image as attachment."));
 				}
 			} else {
-				message.channel.send(errorEmbed("You didnt give me enough arguments!\nUsage:`emoji add <emojiName>` with an image as attachment."));
+				message.channel.send(errorEmbed("You didn't give me enough arguments!\nUsage:`emoji add <emojiName>` with an image as attachment."));
 			}
 		} else {
 			if (args[0] == "delete") {
