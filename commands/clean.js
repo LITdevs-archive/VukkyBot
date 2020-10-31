@@ -5,6 +5,7 @@ module.exports = {
 	description: "Clean up some messages! VukkyBot can eat them for you.",
 	dcPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
 	args: true,
+	guildOnly: true,
 	usage: "<messages to clear>",
 	aliases: ["clear", "wipe", "eat"],
 	execute(message, args) {
