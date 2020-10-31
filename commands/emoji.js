@@ -6,6 +6,7 @@ module.exports = {
 	description: "Add and remove emojis with the help of VukkyBot!",
 	dcPermissions: ["MANAGE_EMOJIS"],
 	args: true,
+	guildOnly: true,
 	execute(message, args) {
 		if (!message.member.permissions.has("MANAGE_EMOJIS")) return message.channel.send(embeds.errorEmbed("You need the Manage Emojis permission to run this command."));
 		

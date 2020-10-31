@@ -9,6 +9,7 @@ module.exports = {
 	dcPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
 	args: true,
 	cooldown: 0,
+	guildOnly: true,
 	mysql: true,
 	usage: "<warning id>",
 	aliases: ["delwarning", "deletewarning", "deletewarn"],
