@@ -33,7 +33,6 @@ module.exports = {
 			}
 		} else {
 			if (args[0] == "delete") {
-				
 				if(!message.guild.emojis.cache.get(args[1])) return message.channel.send(embeds.errorEmbed(`\`${args[1]}\` is not an emoji ID.`));
 				let emoji = message.guild.emojis.cache.get(args[1]);
 				emoji.delete({ reason: `Done by ${message.author.tag}` });
