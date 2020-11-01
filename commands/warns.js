@@ -11,7 +11,7 @@ module.exports = {
 	args: true,
 	mysql: true,
 	guildOnly: true,
-	usage: "<warning id>",
+	usage: "<@user | user id>",
 	aliases: ["warnings"],
 	execute(message, args) {
 		let warnsId;    
