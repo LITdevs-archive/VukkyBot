@@ -16,7 +16,7 @@ module.exports = {
 	
 		} else {
 			if(message.author.id != config.misc.owner) {
-				message.channel.send(embeds.errorEmbed("Sorry, but you're not the owner of this VukkyBot."));
+				message.channel.send(embeds.errorEmbed("Don't even try to make me say shit unless you're Fvn."));
 			} else {
 				let say = args.slice(0).join(" ");
 				message.delete();
