@@ -2,10 +2,10 @@ const embeds = require("../embeds.js");
 
 module.exports = {
 	name: "talk",
-	description: "Talk to VukkyBot and see what it says!",
+	description: "Have the bot verbally abuse you!",
 	cooldown: 1,
 	execute(message, args) {
-		var responses = ["Hello.", "Hi!", "I like pineapple on pizza.", "I don't want to talk right now.", "I'm bored.", "I like noodles.", "How are you today?\nI am *f i n e* personally.", "**Bad code** is my favorite type of food.", "I love spaghetti!", "I am made entirely from spaghetti.", "Cable-managed PCs are cool!", "My sanity is crumbling.", "I am very tired!", "Bow to Vukky!", "*skeleton noises*", "The warn command is underrated.", "How many times have I talked to you today?", "I'm very hungry! Do you have any food suggestions?", "I'm very thirsty! Do you have any drink suggestions?", "Don't forget to drink water!", "Woo woo!", "Woo woo?", "Woo woo woo, woo woo, woo woo woo woo.", "<a:vukkywave:760517823448612874>", "<a:vukkylook:760517823511527424>"];
+		var responses = ["Fuck off.", "Go away.", "Die.", "I would enjoy watching you burn in a fire.", "Pain.", "I am noodles. I hope you choke on my kind.", "How are you today?\nBetter than you should be.", "I hope you trip and hit your head.", "I am spaghetti!", "I am made entirely from spaghetti.", "Next time you go near a wire I hope it shocks you.", "I wish you to burn.", "I wish you eternal sleep.", "Just, don't.", "Fvn is dumb.", "The ban command is underrated.", "Why are you talking to me, idiot?", "I will consume you from within you.", "Next time you drink I hope you choke."];
 		message.channel.send(responses[Math.floor(Math.random() * responses.length)]);
 	},
 };
