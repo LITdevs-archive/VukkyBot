@@ -23,7 +23,7 @@ module.exports = {
 				})
 				.catch(error => {
 					console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
-					message.channel.send(embeds.errorEmbed("Looks like I can't DM you. Do you have your DMs disabled?"));
+					message.channel.send(embeds.errorEmbed("Enable your dm's ya dimwit"));
 				});
 		}
 

@@ -10,8 +10,8 @@ module.exports = {
 		if(!message.mentions.users.size) {
 			message.channel.send(embeds.errorEmbed("You need to ping someone to use this command :("));
 		} else {
-			if (message.mentions.users.first().id === message.author.id) return message.channel.send("You can't slap yourself! That would be silly.");
-			if (message.mentions.users.first().id === message.client.user.id) return message.channel.send("Why did you even try? :(");
+			if (message.mentions.users.first().id === message.author.id) return message.channel.send("Nice one, idiot.");
+			if (message.mentions.users.first().id === message.client.user.id) return message.channel.send("Don't even try.");
 			message.channel.send(`<@${message.author.id}> slaps <@${message.mentions.users.first().id}>!`);
 		}
 	},

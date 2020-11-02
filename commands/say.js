@@ -16,7 +16,7 @@ module.exports = {
 	
 		} else {
 			if(message.author.id != config.misc.owner) {
-				message.channel.send(embeds.errorEmbed("Sorry, but you're not the owner of this VukkyBot or this server."));
+				message.channel.send(embeds.errorEmbed("Sorry, but you're not the owner of this VukkyBot."));
 			} else {
 				let say = args.slice(0).join(" ");
 				message.delete();
