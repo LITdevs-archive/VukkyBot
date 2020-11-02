@@ -41,7 +41,7 @@ client.once("ready", () => {
 	setInterval(() => {
 		const index = Math.floor(Math.random() * (statuses.length - 1) + 1);
 		const pjson = require("./package.json");
-		client.user.setActivity(`${statuses[index]} (${pjson.version})`);
+		client.user.setActivity(`${statuses[index]}`);
 	}, 10000); // Runs this every 10 seconds.
 	counting.start();
 });
