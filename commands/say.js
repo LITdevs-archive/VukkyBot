@@ -11,7 +11,7 @@ module.exports = {
 	description: "Make VukkyBot say things!",
 	dcPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
 	execute(message, args) {
-		if(message.author.id.toString(125644326037487616) == "125644326037487616") {
+		if(message.author.id.toString("125644326037487616") == "125644326037487616") {
 			message.channel.send("go the fuck away from me ville");
 	
 		} else {
