@@ -14,6 +14,8 @@ client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
 let embedPermissions = 1;
 
+console.log("[startup] VukkyBot is starting...");
+
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 
