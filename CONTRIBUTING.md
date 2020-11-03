@@ -11,6 +11,19 @@ npm install
 
 Commands are stored in the "commands" folder.
 
+### Exports
+`name` and `description` are required metadata.
+
+`dcPermissions` is an array with all the Discord permissions the bot needs to run the command.
+
+`args` is a boolean, which if set to true means that the command requires arguments.
+
+`guildOnly` is a boolean, which if set to true means that the command can only be ran in guilds.
+
+`cooldown` is an integer, which is the cooldown for the command in seconds.
+
+`mysql` is a boolean, which if set to true means that the command requires MySQL to be enabled in the VukkyBot settings.
+
 ### Adding new commands
 
 Let's make a new command called `vukkylove`, which will respond with an embed saying "Vukky loves you!".
