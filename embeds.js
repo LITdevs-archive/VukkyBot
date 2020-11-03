@@ -21,7 +21,8 @@ module.exports = {
 	todayInHistoryEmbed,
 	funFactEmbed,
 	duckEmbed,
-	aboutEmbed
+	aboutEmbed,
+	covidEmbed
 };
 
 function errorEmbed(errorMsg) {
@@ -201,7 +202,7 @@ function funFactEmbed(fact, category, image, source) {
 }
 
 function duckEmbed(image) {
-	var message = "A wild duck appears! 🦆";
+	var message = image.toLowerCase().includes("gif") ? "A wild (animated) duck appears! 🦆" : "A wild duck appears! 🦆";
 	if(image.toLowerCase().includes("gif")) message = "A wild (animated) duck appears! 🦆";
 	return new Discord.MessageEmbed()
 		.setColor("#8e562e")
@@ -220,5 +221,23 @@ function aboutEmbed(botversion, discordjsversion, osinfo) {
 		.addField("discord.js version", discordjsversion, true)
 		.addField("OS information", osinfo, true)
 		.setTimestamp()
+		.setFooter(versionString, avatarURL);
+}
+
+function covidEmbed(flag, location, cases, casesToday, deaths, deathsToday, recovered, recoveredToday, active, critical, tests) {
+	return new Discord.MessageEmbed()
+		.setColor("#8e562e")
+		.setTitle(`COVID stats for ${location}`)
+		.addField("Cases 😥", cases, true)
+		.addField("Cases today 😰", casesToday, true)
+		.addField("Deaths 💀", deaths, true)
+		.addField("Deaths today 😭", deathsToday, true)		
+		.addField("Recovered 😃", recovered, true)
+		.addField("Recovered today 🥳", recoveredToday, true)
+		.addField("Active 🤮", active, true)
+		.addField("Critical 😱", critical, true)
+		.addField("Tests 💉", tests, true)
+		.setTimestamp()
+		.setThumbnail(flag)
 		.setFooter(versionString, avatarURL);
 }
