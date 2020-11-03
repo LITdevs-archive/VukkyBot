@@ -14,6 +14,7 @@ async function isTokenValid(token) {
 		const Discord = require("discord.js");
 		const client = new Discord.Client();
 		await client.login(token);
+		client.destroy();
 		spinner.succeed("Token is valid");
 		return true;
 	} catch {
@@ -183,7 +184,7 @@ inquirer.prompt(questions).then((answers) => {
 	} else {
 		launchyBotty();
 	}
-	
+
 	// eslint-disable-next-line no-inner-declarations
 	function launchyBotty() {
 		console.log(chalk.green.bold("Congratulations! Setup has now completed."));
