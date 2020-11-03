@@ -1,6 +1,7 @@
 const embeds = require("../embeds.js");
 const fetch = require("node-fetch");
 const commaNumber = require("comma-number");
+const { Util } = require("discord.js");
 
 module.exports = {
 	name: "covid19",
@@ -10,7 +11,7 @@ module.exports = {
 	execute(message, args) {
 		message.channel.send("<a:offlinegif:757979855924101220> Hold on! I'm getting the data...")
 			.then(newMessage => {
-				var country = args[0] ? args.slice(0).join(" ").toLowerCase() : null;
+				var country = args[0] ? Util.removeMentions(args.slice(0).join(" ").toLowerCase()) : null;
 				var diseaselink = args[0] ? `https://disease.sh/v3/covid-19/countries/${country}` : "https://disease.sh/v3/covid-19/all";
 				fetch(diseaselink)
 					.then(res => {
