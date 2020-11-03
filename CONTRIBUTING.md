@@ -24,6 +24,8 @@ Commands are stored in the "commands" folder.
 
 `mysql` is a boolean, which if set to true means that the command requires MySQL to be enabled in the VukkyBot settings.
 
+`execute` is a function, which has the code executed in the command.
+
 ### Adding new commands
 
 Let's make a new command called `vukkylove`, which will respond with an embed saying "Vukky loves you!".
