@@ -1,6 +1,6 @@
 # VukkyBot
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 A bot made for **Vukky's Chat Place**.
 Giving VukkyBot permissions is not needed, it will notify you if it needs permissions.
@@ -23,6 +23,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/viluzi"><img src="https://avatars0.githubusercontent.com/u/47392011?v=4" width="100px;" alt=""/><br /><sub><b>viluzi</b></sub></a><br /><a href="https://github.com/VukkyLtd/VukkyBot/commits?author=viluzi" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Fvn556"><img src="https://avatars1.githubusercontent.com/u/68157424?v=4" width="100px;" alt=""/><br /><sub><b>Fvn556</b></sub></a><br /><a href="https://github.com/VukkyLtd/VukkyBot/commits?author=Fvn556" title="Code">💻</a></td>
   </tr>
 </table>
 
