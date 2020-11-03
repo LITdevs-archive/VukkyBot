@@ -12,7 +12,7 @@
     },
     "commands": {
         "quiz": {
-            "timeSeconds": 30,
+            "timeSeconds": 31,
             "hints": true
         },
         "giveawaydrop": {
