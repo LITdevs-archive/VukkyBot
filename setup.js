@@ -1,11 +1,26 @@
 let inquirer = require("inquirer");
 let fs = require("fs");
 let chalk = require("chalk");
+const ora = require("ora");
 
 let mysql = require("mysql");
 console.log(chalk.blueBright("Welcome to the interactive VukkyBot Setup tool."));
 
 let sql;
+
+async function isTokenValid(token) {
+	const spinner = ora("Connecting using token").start();
+	try {
+		const Discord = require("discord.js");
+		const client = new Discord.Client();
+		await client.login(token);
+		spinner.succeed("Token is valid");
+		return true;
+	} catch {
+		spinner.fail("Token appears to be invalid");
+		return false;
+	}
+}
 
 let questions = [
 	{
@@ -27,7 +42,8 @@ let questions = [
 	{
 		type: "input",
 		name: "token",
-		message: "What's your bot token?"
+		message: "What's your bot token?",
+		validate: isTokenValid
 	},
 	{
 		type: "input",
@@ -91,7 +107,6 @@ let questions = [
 ];
   
 inquirer.prompt(questions).then((answers) => {
-	const ora = require("ora");
 	const spinner1 = ora("Saving credentials to .env").start();
 	try {
 		fs.writeFile(".env", `BOT_TOKEN=${answers.token}\nPREFIX=${answers.prefix}\nSQL_HOST=${answers.sqlhost}\nSQL_PASS=${answers.sqlpass}\nSQL_USER=${answers.sqluser}\nSQL_DB=${answers.sqldb}`, function (err) {
