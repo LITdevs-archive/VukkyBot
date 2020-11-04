@@ -1,6 +1,4 @@
 const embeds = require("../embeds.js");
-
-
 const config = require("../config.json");
 const { guildOnly } = require("./kick.js");
 const { Guild } = require("discord.js");
