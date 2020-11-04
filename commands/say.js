@@ -5,7 +5,7 @@ const { Guild } = require("discord.js");
 
 module.exports = {
 	name: "say",
-
+	cooldown: "0",
 	description: "Make VukkyBot say things!",
 	dcPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
 	execute(message, args) {
