@@ -4,7 +4,6 @@
     "misc": {
         "prefixReminder": true,
         "owner": "468242178880176129",
-        "children": ["661842352520036373", "661842352520036373"],
         "mysql": true
     },
     "counting": {
