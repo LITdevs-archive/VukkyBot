@@ -1,6 +1,6 @@
 {
   "name": "spaghetti",
-  "version": "1.0.0",
+  "version": "1.69.420",
   "description": "Grandma's Homemade Spaghetti",
   "main": "index.js",
   "dependencies": {
