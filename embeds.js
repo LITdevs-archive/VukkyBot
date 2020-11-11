@@ -4,6 +4,8 @@ const config = require("./config.json");
 const avatarURL = "https://i.imgur.com/H0sAkrl.png";
 const versionString = `This VukkyBot is on v${pjson.version} using discord.js ${pjson.dependencies["discord.js"].substring(1)}`;
 
+const strings = require("./strings.json");
+
 module.exports = {
 	errorEmbed,
 	warningEmbed,
@@ -28,7 +30,7 @@ module.exports = {
 function errorEmbed(errorMsg) {
 	return new Discord.MessageEmbed()
 		.setColor("#ff0000")
-		.setTitle("❌ There was an error.")
+		.setTitle(`❌ ${strings.ERROR_GENERIC}`)
 		.setDescription(errorMsg)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
