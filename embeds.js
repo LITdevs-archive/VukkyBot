@@ -30,7 +30,7 @@ module.exports = {
 function errorEmbed(errorMsg) {
 	return new Discord.MessageEmbed()
 		.setColor("#ff0000")
-		.setTitle(`❌ ${strings.ERROR_GENERIC}`)
+		.setTitle(`❌ ${strings[config.misc.language].ERROR_GENERIC}`)
 		.setDescription(errorMsg)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
