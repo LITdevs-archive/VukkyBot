@@ -19,6 +19,10 @@
                 "mysql": {
                     "description": "Toggles if a MySQL database should be used",
                     "type": "boolean"
+                },
+                "language": {
+                    "description": "The language VukkyBot will use",
+                    "type": "string"
                 }
             }
         },

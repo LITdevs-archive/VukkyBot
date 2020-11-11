@@ -20,9 +20,16 @@ module.exports = {
 			message.client.commands.set(newCommand.name, newCommand);
 		} catch (error) {
 			console.log(error);
-			message.channel.send(embeds.errorEmbed(`There was an error while reloading a command (**${command.name}**):\n${error.message}`));
+			const strings = require("../strings.json");
+			const format = require("util").format;
+			const config = require("../config.json");
+			message.channel.send(embeds.errorEmbed(format(strings[config.misc.language].ERROR_RELOAD, commandName, error.message)));
 		}
 
 		message.channel.send(embeds.successEmbed(`\`${command.name}\` has been reloaded!`));
+		const strings = require("../strings.json");
+		const format = require("util").format;
+		const config = require("../config.json");
+		message.channel.send(embeds.errorEmbed(format(strings[config.misc.language].ERROR_RELOAD, commandName, "TEST")));
 	},
 };
