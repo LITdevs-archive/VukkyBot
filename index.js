@@ -18,9 +18,6 @@ console.log("[startup] VukkyBot is starting...");
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
-
-	// set a new item in the Collection
-	// with the key as the command name and the value as the exported module
 	client.commands.set(command.name, command);
 	console.log(`[startup] ${success(`${file} loaded!`)}`);
 }
@@ -44,7 +41,7 @@ client.once("ready", () => {
 		const index = Math.floor(Math.random() * (statuses.length - 1) + 1);
 		const pjson = require("./package.json");
 		client.user.setActivity(`${statuses[index]} (${pjson.version})`);
-	}, 10000); // Runs this every 10 seconds.
+	}, 10000);
 	counting.start();
 });
 
@@ -75,7 +72,7 @@ client.on("message", message => {
 
 	if(command.mysql && !config.misc.mysql) {
 		if (embedPermissions == 0) return message.channel.send(`**${commandName}** is not enabled on this VukkyBot because MySQL is disabled!\nFor the hoster: See https://vukkyltd.github.io/VukkyBot/troubleshooting/mysqldisabled.html for instructions on how to enable it!`);
-		return message.channel.send(embeds.errorEmbed(`**${commandName}** is not enabled on this VukkyBot because MySQL is disabled!\nFor the hoster: See [here](https://vukkyltd.github.io/VukkyBot/troubleshooting/mysqldisabled.html) for instructions on how to enable it!`));
+		return message.channel.send(embeds.errorEmbed(`**${commandName}** is not enabled on this VukkyBot because MySQL is disabled!\nFor the hoster: See [the VukkyBot Documentation site](https://vukkyltd.github.io/VukkyBot/troubleshooting/mysqldisabled.html) for instructions on how to enable it!`));
 	}
 
 	if (command.guildOnly && message.channel.type !== "text") {
