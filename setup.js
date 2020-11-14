@@ -9,7 +9,8 @@ console.log(chalk.blueBright("Welcome to the interactive VukkyBot Setup tool."))
 let sql;
 
 async function isTokenValid(token) {
-	const spinner = ora("Connecting using token").start();
+	console.log(chalk.blueBright("\nValidating your token..."));
+	const spinner = ora("Connecting to the Discord API").start();
 	try {
 		const Discord = require("discord.js");
 		const client = new Discord.Client();
@@ -54,7 +55,7 @@ let questions = [
 	{
 		type: "confirm",
 		name: "mysql",
-		message: "Use MySQL database for some commands that require it including counting and warn?"
+		message: "Use MySQL database for features that require it, like counting and warn?"
 	},
 	{
 		type: "confirm",
