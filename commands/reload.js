@@ -27,9 +27,5 @@ module.exports = {
 		}
 
 		message.channel.send(embeds.successEmbed(`\`${command.name}\` has been reloaded!`));
-		const strings = require("../strings.json");
-		const format = require("util").format;
-		const config = require("../config.json");
-		message.channel.send(embeds.errorEmbed(format(strings[config.misc.language].ERROR_RELOAD, commandName, "TEST")));
 	},
 };
