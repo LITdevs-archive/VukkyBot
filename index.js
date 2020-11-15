@@ -5,6 +5,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const chalk = require("chalk");
 const success = chalk.green;
+const warn = chalk.yellow;
 
 const embeds = require("./embeds.js");
 const config = require("./config.json");
@@ -89,19 +90,40 @@ client.on("message", message => {
 		return message.channel.send(embeds.errorEmbed(reply));
 	}
 
+	function tempPermissionsBot(permissionsBot) {
+		for (let i = 0, len = permissionsBot.length; permissionsBot; i < len, i++) {
+			if (permissionsBot[i] == undefined) {
+				if(!command.userPermissions) console.log(`[permcheck] ${success(`That should be it for ${prefix}${commandName}.`)}`);
+				break;
+			}
+			console.log(`[permcheck] ${prefix}${commandName} wants bot to have ${permissionsBot[i]} - checking for permission...`);
+			if ((message.channel.type == "text" && !message.guild.me.hasPermission(permissionsBot[i]))) {
+				console.log(`[permcheck] Looks like someone forgot to give the bot ${permissionsBot[i]}.`);
+				let reply = `Sorry, but I need the \`${permissionsBot[i]}\` permission to use that command.`;
+				if (embedPermissions == 0) return message.channel.send(reply);
+				message.channel.send(embeds.errorEmbed(reply));
+				return;
+			}
+		}
+	}
+
 	if (command.dcPermissions) {
-		var breaker = 0;
-		for (let i = 0, len = command.dcPermissions.length; command.dcPermissions; i < len, i++) {
-			if (command.dcPermissions[i] == undefined) {
+		console.log(`[permcheck] ${warn(`${prefix}${commandName} - dcPermissions is deprecated. Use botPermissions instead.`)}`);
+		tempPermissionsBot(command.dcPermissions);
+	} else if (command.botPermissions) {
+		tempPermissionsBot(command.botPermissions);
+	}
+
+	if (command.userPermissions) {
+		for (let i = 0, len = command.userPermissions.length; command.userPermissions; i < len, i++) {
+			if (command.userPermissions[i] == undefined) {
 				console.log(`[permcheck] ${success(`That should be it for ${prefix}${commandName}.`)}`);
 				break;
 			}
-			if (breaker == 1) break;
-			console.log(`[permcheck] ${prefix}${commandName} wants ${command.dcPermissions[i]} - checking for permission...`);
-			if ((message.channel.type == "text" && !message.guild.me.hasPermission(command.dcPermissions[i]))) {
-				console.log(`[permcheck] Looks like someone forgot to give the bot ${command.dcPermissions[i]}.`);
-				breaker = 1;
-				let reply = `Sorry, but I need the \`${command.dcPermissions[i]}\` permission to use that command.`;
+			console.log(`[permcheck] ${prefix}${commandName} wants user to have ${command.userPermissions[i]} - checking for permission...`);
+			if ((message.channel.type == "text" && !message.member.hasPermission(command.userPermissions[i]))) {
+				console.log(`[permcheck] Looks like the user doesn't have ${command.userPermissions[i]}.`);
+				let reply = `Sorry, but you need the \`${command.userPermissions[i]}\` permission to use that command.`;
 				if (embedPermissions == 0) return message.channel.send(reply);
 				message.channel.send(embeds.errorEmbed(reply));
 				return;

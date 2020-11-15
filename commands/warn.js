@@ -32,7 +32,7 @@ function everythingIsFine(message, mentionedUser, args) {
 module.exports = {
 	name: "warn",
 	description: "Make VukkyBot give people warnings!",
-	dcPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
+	botPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
 	usage: "<@user> <reason>",
 	cooldown: 0,
 	mysql: true,

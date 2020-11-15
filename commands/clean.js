@@ -3,7 +3,7 @@ const embeds = require("../embeds.js");
 module.exports = {
 	name: "clean",
 	description: "Clean up some messages! VukkyBot can eat them for you.",
-	dcPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
+	botPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
 	args: true,
 	usage: "<messages to clear>",
 	aliases: ["clear", "wipe", "eat"],

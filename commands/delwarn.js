@@ -6,7 +6,7 @@ const { errorEmbed, successEmbed } = require("../embeds.js");
 module.exports = {
 	name: "delwarn",
 	description: "Make VukkyBot remove warnings from people!",
-	dcPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
+	botPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
 	args: true,
 	cooldown: 0,
 	guildOnly: true,

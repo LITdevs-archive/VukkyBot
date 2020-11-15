@@ -75,7 +75,7 @@ function droppy(message, prize) {
 module.exports = {
 	name: "giveaway-drop",
 	description: "Do some giveaway drops. Now that's cool.",
-	dcPermissions: ["EMBED_LINKS", "ADD_REACTIONS", "MANAGE_MESSAGES"],
+	botPermissions: ["EMBED_LINKS", "ADD_REACTIONS", "MANAGE_MESSAGES"],
 	args: true,
 	usage: "<#channel> <prize>",
 	guildOnly: true,

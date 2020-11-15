@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 module.exports = {
 	name: "duck",
 	description: "Get a nice duck!",
-	dcPermissions: ["EMBED_LINKS"],
+	botPermissions: ["EMBED_LINKS"],
 	aliases: ["ducks", "random-duck"],
 	usage: ["<optional: ducknumber.(jpg/gif)"],
 	execute(message, args) {

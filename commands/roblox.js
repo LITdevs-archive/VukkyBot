@@ -5,7 +5,7 @@ const commaNumber = require("comma-number");
 module.exports = {
 	name: "roblox",
 	description: "Interact with Roblox using VukkyBot!",
-	dcPermissions: ["EMBED_LINKS"],
+	botPermissions: ["EMBED_LINKS"],
 	execute(message, args) {
 		message.channel.send("<a:offlinegif:757979855924101220> Hold on! I'm getting the data...")
 			.then(newMessage => {

@@ -3,7 +3,7 @@ const embeds = require("../embeds.js");
 module.exports = {
 	name: "vukkyzone",
 	description: "Start a Vukky Zone.",
-	dcPermissions: ["EMBED_LINKS", "ADD_REACTIONS", "MANAGE_MESSAGES"],
+	botPermissions: ["EMBED_LINKS", "ADD_REACTIONS", "MANAGE_MESSAGES"],
 	aliases: ["zone"],
 	guildOnly: true,
 	execute(message, args) {

@@ -3,7 +3,7 @@ const embeds = require("../embeds.js");
 module.exports = {
 	name: "kick",
 	description: "Kick someone",
-	dcPermissions: ["EMBED_LINKS", "KICK_MEMBERS"],
+	botPermissions: ["EMBED_LINKS", "KICK_MEMBERS"],
 	guildOnly: true,
 	args: true,
 	usage: "<@user>",

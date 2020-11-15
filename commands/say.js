@@ -4,7 +4,7 @@ const config = require("../config.json");
 module.exports = {
 	name: "say",
 	description: "Make VukkyBot say things!",
-	dcPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
+	botPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
 	execute(message, args) {
     
 		if(message.author.id != config.misc.owner) {

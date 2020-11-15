@@ -6,7 +6,7 @@ const { Util } = require("discord.js");
 module.exports = {
 	name: "covid19",
 	description: "Get COVID stats!",
-	dcPermissions: ["EMBED_LINKS"],
+	botPermissions: ["EMBED_LINKS"],
 	aliases: ["covid", "covid-19"],
 	execute(message, args) {
 		message.channel.send("<a:offlinegif:757979855924101220> Hold on! I'm getting the data...")
