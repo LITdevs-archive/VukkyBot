@@ -16,6 +16,12 @@ Commands are stored in the "commands" folder.
 
 `dcPermissions` is an array with all the Discord permissions the bot needs to run the command.
 
+⚠ `dcPermissions` is **deprecated** and will be removed in the future. Use `botPermissions` instead.
+
+`botPermissions` is an array with all the Discord permissions the bot needs to run the command.
+
+`userPermissions` is an array with all the Discord permissions the bot needs to run the command.
+
 `args` is a boolean, which if set to true means that the command requires arguments.
 
 `guildOnly` is a boolean, which if set to true means that the command can only be ran in guilds.
