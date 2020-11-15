@@ -4,6 +4,7 @@ module.exports = {
 	name: "ban",
 	description: "Ban someone",
 	botPermissions: ["EMBED_LINKS", "BAN_MEMBERS"],
+	userPermissions: ["BAN_MEMBERS"],
 	guildOnly: true,
 	args: true,
 	usage: "<@user>",

@@ -7,6 +7,7 @@ module.exports = {
 	name: "delwarn",
 	description: "Make VukkyBot remove warnings from people!",
 	botPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
+	userPermissions: ["MANAGE_MESSAGES"],
 	args: true,
 	cooldown: 0,
 	guildOnly: true,
@@ -14,7 +15,6 @@ module.exports = {
 	usage: "<warning id>",
 	aliases: ["delwarning", "deletewarning", "deletewarn"],
 	execute(message, args) {
-		if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(errorEmbed("You need the Manage Messages permission to do that!"));
 		let warningId = args[0];
 		if (isNaN(warningId)) return message.channel.send(errorEmbed(`Please specify the **ID** of the warning you wish to remove.\n${warningId} is not a warning ID.`));
 		var con = mysql.createConnection({

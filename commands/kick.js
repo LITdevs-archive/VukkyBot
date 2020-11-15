@@ -4,13 +4,13 @@ module.exports = {
 	name: "kick",
 	description: "Kick someone",
 	botPermissions: ["EMBED_LINKS", "KICK_MEMBERS"],
+	userPermissions: ["KICK_MEMBERS"],
 	guildOnly: true,
 	args: true,
 	usage: "<@user>",
 	execute(message, args) {
 		var mentionedUser = message.guild.member(message.mentions.users.first());
 		var kickReason = args.slice(1).join(" ") || "no reason specified";
-		if (!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send("You need the Kick Members permission to do that!");
 		if (!mentionedUser) return message.channel.send("You need to provide a valid user.");
 		if(mentionedUser.id === message.author.id) return message.channel.send("You can't kick yourself! That would be silly.");
 		if(mentionedUser.id === message.client.user.id) return message.channel.send(":(");

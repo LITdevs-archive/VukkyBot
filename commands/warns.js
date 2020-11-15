@@ -8,6 +8,7 @@ module.exports = {
 	name: "warns",
 	description: "Make VukkyBot remove warnings from people!",
 	botPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
+	userPermissions: ["MANAGE_MESSAGES"],
 	args: true,
 	mysql: true,
 	guildOnly: true,

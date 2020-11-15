@@ -33,12 +33,12 @@ module.exports = {
 	name: "warn",
 	description: "Make VukkyBot give people warnings!",
 	botPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
+	userPermissions: ["MANAGE_MESSAGES"],
 	usage: "<@user> <reason>",
 	cooldown: 0,
 	mysql: true,
 	guildOnly: true,
 	execute(message, args) {
-		if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(errorEmbed("You need the Manage Messages permission to do that!"));
 		if (args.slice(1).join(" ").length < 1) return message.channel.send(errorEmbed(`I was expecting more arguments!\nUsage: \`${process.env.PREFIX}warn <@user> <reason>\``));
 		let mentionedUser;
 		if (message.guild.member(message.mentions.users.first())) {
