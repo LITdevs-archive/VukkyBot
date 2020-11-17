@@ -4,12 +4,11 @@ const embeds = require("../embeds.js");
 module.exports = {
 	name: "emoji",
 	description: "Add and remove emojis with the help of VukkyBot!",
-	dcPermissions: ["MANAGE_EMOJIS"],
+	botPermissions: ["MANAGE_EMOJIS"],
+	userPermissions: ["MANAGE_EMOJIS"],
 	args: true,
 	guildOnly: true,
 	execute(message, args) {
-		if (!message.member.permissions.has("MANAGE_EMOJIS")) return message.channel.send(embeds.errorEmbed("You need the Manage Emojis permission to run this command."));
-		
 		if (args[0] == "add") {
 			if (message.attachments.size > 0) {
 				if (args.length >= 2) {

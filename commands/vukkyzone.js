@@ -3,7 +3,7 @@ const embeds = require("../embeds.js");
 module.exports = {
 	name: "vukkyzone",
 	description: "Start a Vukky Zone.",
-	dcPermissions: ["EMBED_LINKS", "ADD_REACTIONS", "MANAGE_MESSAGES"],
+	botPermissions: ["EMBED_LINKS", "ADD_REACTIONS", "MANAGE_MESSAGES"],
 	aliases: ["zone"],
 	guildOnly: true,
 	execute(message, args) {
@@ -32,7 +32,9 @@ module.exports = {
 						vukkyzone.reactions.removeAll();
 					}, 12000);
 					setTimeout(() => {  
-						if(randomEvent == 0) {
+						if(userCount == 0) {
+							vukkyzone.edit("😶 Not much happened, because no one decided to join."); 
+						} else if(randomEvent == 0) {
 							vukkyzone.edit(`💥 **Boom!**\nThe Vukky Zone was blown up!\n${userCount} people died inside it, because they decided to join.`); 
 						} else if (randomEvent == 1) {
 							vukkyzone.edit(`🦠 **cough cough**\nThe Vukky Zone was closed due to COVID-19!\n${userCount} people got a severe case and died...`); 

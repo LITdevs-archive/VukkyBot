@@ -3,7 +3,8 @@ const embeds = require("../embeds.js");
 module.exports = {
 	name: "ban",
 	description: "Ban someone",
-	dcPermissions: ["EMBED_LINKS", "BAN_MEMBERS"],
+	botPermissions: ["EMBED_LINKS", "BAN_MEMBERS"],
+	userPermissions: ["BAN_MEMBERS"],
 	guildOnly: true,
 	args: true,
 	usage: "<@user>",
@@ -11,11 +12,10 @@ module.exports = {
 	execute(message, args) {
 		var mentionedUser = message.guild.member(message.mentions.users.first());
 		var banReason = args.slice(1).join(" ") || "no reason specified";
-		if (!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send("You need the Ban Members permission to do that!");
 		if (!mentionedUser) return message.channel.send("You need to provide a valid user.");
 		if(mentionedUser.id === message.author.id) return message.channel.send("You can't ban yourself! That would be silly.");
 		if(mentionedUser.id === message.client.user.id) return message.channel.send(":(");
-		if(mentionedUser.user.bot === true) message.channel.send("Nooo! I don't want to ban my friends, but I guess I have to...");
+		if(mentionedUser.user.bot === true && !mentionHighestRole >= authorHighestRole) message.channel.send("Nooo! I don't want to ban my friends, but I guess I have to...");
 
 		var authorHighestRole = message.member.roles.highest.position;
 		var mentionHighestRole = mentionedUser.roles.highest.position;

@@ -3,7 +3,7 @@ const embeds = require("../embeds.js");
 module.exports = {
 	name: "pong",
 	description: "Pong.",
-	dcPermissions: ["EMBED_LINKS"],
+	botPermissions: ["EMBED_LINKS"],
 	execute(message, args) {
 		message.channel.send(embeds.infoEmbed("Ping!"));
 	},

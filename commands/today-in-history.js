@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 module.exports = {
 	name: "today-in-history",
 	description: "Find out what happened today in history!",
-	dcPermissions: ["EMBED_LINKS"],
+	botPermissions: ["EMBED_LINKS"],
 	cooldown: 60,
 	aliases: ["today"],
 	execute(message, args) {

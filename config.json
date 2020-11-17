@@ -4,10 +4,12 @@
     "misc": {
         "prefixReminder": true,
         "owner": "708333380525228082",
-        "mysql": true
+        "mysql": true,
+        "language": "en",
+        "languageComment": "Currently, only English is supported."
     },
     "counting": {
-        "enabled": true,
+        "enabled": false,
         "channelName": "counting"
     },
     "commands": {

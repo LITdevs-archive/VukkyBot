@@ -1,0 +1,6 @@
+{
+	"en": {
+		"ERROR_GENERIC": "There was an error.",
+		"ERROR_RELOAD": "There was an error while reloading a command (**%s**):\n%s"
+	}
+}

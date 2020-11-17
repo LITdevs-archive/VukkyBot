@@ -5,6 +5,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const chalk = require("chalk");
 const success = chalk.green;
+const warn = chalk.yellow;
 
 const embeds = require("./embeds.js");
 const config = require("./config.json");
@@ -14,11 +15,10 @@ client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
 let embedPermissions = 1;
 
+console.log("[startup] VukkyBot is starting...");
+
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
-
-	// set a new item in the Collection
-	// with the key as the command name and the value as the exported module
 	client.commands.set(command.name, command);
 	console.log(`[startup] ${success(`${file} loaded!`)}`);
 }
@@ -42,7 +42,7 @@ client.once("ready", () => {
 		const index = Math.floor(Math.random() * (statuses.length - 1) + 1);
 		const pjson = require("./package.json");
 		client.user.setActivity(`${statuses[index]} (${pjson.version})`);
-	}, 10000); // Runs this every 10 seconds.
+	}, 10000);
 	counting.start();
 });
 
@@ -73,7 +73,7 @@ client.on("message", message => {
 
 	if(command.mysql && !config.misc.mysql) {
 		if (embedPermissions == 0) return message.channel.send(`**${commandName}** is not enabled on this VukkyBot because MySQL is disabled!\nFor the hoster: See https://vukkyltd.github.io/VukkyBot/troubleshooting/mysqldisabled.html for instructions on how to enable it!`);
-		return message.channel.send(embeds.errorEmbed(`**${commandName}** is not enabled on this VukkyBot because MySQL is disabled!\nFor the hoster: See [here](https://vukkyltd.github.io/VukkyBot/troubleshooting/mysqldisabled.html) for instructions on how to enable it!`));
+		return message.channel.send(embeds.errorEmbed(`**${commandName}** is not enabled on this VukkyBot because MySQL is disabled!\nFor the hoster: See [the VukkyBot Documentation site](https://vukkyltd.github.io/VukkyBot/troubleshooting/mysqldisabled.html) for instructions on how to enable it!`));
 	}
 
 	if (command.guildOnly && message.channel.type !== "text") {
@@ -90,19 +90,40 @@ client.on("message", message => {
 		return message.channel.send(embeds.errorEmbed(reply));
 	}
 
+	function tempPermissionsBot(permissionsBot) {
+		for (let i = 0, len = permissionsBot.length; permissionsBot; i < len, i++) {
+			if (permissionsBot[i] == undefined) {
+				if(!command.userPermissions) console.log(`[permcheck] ${success(`That should be it for ${prefix}${commandName}.`)}`);
+				break;
+			}
+			console.log(`[permcheck] ${prefix}${commandName} wants bot to have ${permissionsBot[i]} - checking for permission...`);
+			if ((message.channel.type == "text" && !message.guild.me.hasPermission(permissionsBot[i]))) {
+				console.log(`[permcheck] Looks like someone forgot to give the bot ${permissionsBot[i]}.`);
+				let reply = `Sorry, but I need the \`${permissionsBot[i]}\` permission to use that command.`;
+				if (embedPermissions == 0) return message.channel.send(reply);
+				message.channel.send(embeds.errorEmbed(reply));
+				return;
+			}
+		}
+	}
+
 	if (command.dcPermissions) {
-		var breaker = 0;
-		for (let i = 0, len = command.dcPermissions.length; command.dcPermissions; i < len, i++) {
-			if (command.dcPermissions[i] == undefined) {
+		console.log(`[permcheck] ${warn(`${prefix}${commandName} - dcPermissions is deprecated. Use botPermissions instead.`)}`);
+		tempPermissionsBot(command.dcPermissions);
+	} else if (command.botPermissions) {
+		tempPermissionsBot(command.botPermissions);
+	}
+
+	if (command.userPermissions) {
+		for (let i = 0, len = command.userPermissions.length; command.userPermissions; i < len, i++) {
+			if (command.userPermissions[i] == undefined) {
 				console.log(`[permcheck] ${success(`That should be it for ${prefix}${commandName}.`)}`);
 				break;
 			}
-			if (breaker == 1) break;
-			console.log(`[permcheck] ${prefix}${commandName} wants ${command.dcPermissions[i]} - checking for permission...`);
-			if ((message.channel.type == "text" && !message.guild.me.hasPermission(command.dcPermissions[i]))) {
-				console.log(`[permcheck] Looks like someone forgot to give the bot ${command.dcPermissions[i]}.`);
-				breaker = 1;
-				let reply = `Sorry, but I need the \`${command.dcPermissions[i]}\` permission to use that command.`;
+			console.log(`[permcheck] ${prefix}${commandName} wants user to have ${command.userPermissions[i]} - checking for permission...`);
+			if ((message.channel.type == "text" && !message.member.hasPermission(command.userPermissions[i]))) {
+				console.log(`[permcheck] Looks like the user doesn't have ${command.userPermissions[i]}.`);
+				let reply = `Sorry, but you need the \`${command.userPermissions[i]}\` permission to use that command.`;
 				if (embedPermissions == 0) return message.channel.send(reply);
 				message.channel.send(embeds.errorEmbed(reply));
 				return;

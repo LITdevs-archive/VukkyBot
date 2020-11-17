@@ -1,0 +1,16 @@
+name: Edited Config
+on:
+  pull_request:
+    paths:
+    - 'config.json'
+jobs:
+  edited-config:
+    name: Edited Config
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment on PR
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: "It seems like you have edited the config.json file. If you did this because of testing on your machine, please revert it."

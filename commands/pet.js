@@ -3,7 +3,7 @@ const embeds = require("../embeds.js");
 module.exports = {
 	name: "pet",
 	description: "Pet someone!",
-	dcPermissions: ["EMBED_LINKS"],
+	botPermissions: ["EMBED_LINKS"],
 	args: true,
 	usage: "<@user to pet>",
 	execute(message, args) {

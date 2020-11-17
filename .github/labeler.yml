@@ -3,6 +3,7 @@ embeds:
 
 documentation:
   - docs/**/*
-  
+  - CONTRIBUTING.md
+
 commands:
   - commands/**/*

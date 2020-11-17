@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 module.exports = {
 	name: "crypto",
 	description: "Get crypto prices!",
-	dcPermissions: ["EMBED_LINKS"],
+	botPermissions: ["EMBED_LINKS"],
 	cooldown: 15,
 	args: true,
 	usage: "<coin>",

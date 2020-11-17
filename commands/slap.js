@@ -3,7 +3,7 @@ const embeds = require("../embeds.js");
 module.exports = {
 	name: "slap",
 	description: "Slap someone!",
-	dcPermissions: ["EMBED_LINKS"],
+	botPermissions: ["EMBED_LINKS"],
 	args: true,
 	usage: "<@user to slap>",
 	execute(message, args) {

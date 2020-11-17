@@ -16,6 +16,6 @@ You can access setup.js by typing the following command in your VukkyBot folder:
 npm run setup
 ```
 
-Then, make sure you select Yes when the `Use MySQL database for warn command?` appears.
+Then, make sure you select Yes when the `Use MySQL database for features that require it, like counting and warn?` prompt appears.
 
 You will be asked for your MySQL server credentials.
