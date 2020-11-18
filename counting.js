@@ -1,6 +1,8 @@
 var chalk = require("chalk");
 var mysql = require("mysql");
 var config = require("./config.json");
+var strings = require("./strings.json");
+var localstrings = strings[config.misc.language];
 require("dotenv").config();
 let sql;
 
@@ -8,11 +10,12 @@ const error = chalk.bold.red;
 const warn = chalk.yellow;
 const success = chalk.green;
 const info = chalk.blue;
+let cheader = `[${localstrings.COUNTING}]`;
 
 module.exports = {
 	start: function() {
-		if(!config.counting.enabled) return console.log(`[counting] ${error("Counting is disabled!")}`);
-		if(!config.misc.mysql) return console.log(`[counting] ${error("MySQL is not enabled. MySQL is required for counting.")}`);
+		if(!config.counting.enabled) return console.log(`${cheader} ${error("Counting is disabled!")}`);
+		if(!config.misc.mysql) return console.log(`${cheader} ${error("MySQL is not enabled. MySQL is required for counting.")}`);
 		let con = mysql.createConnection({
 			host: process.env.SQL_HOST,
 			user: process.env.SQL_USER,
@@ -22,21 +25,21 @@ module.exports = {
 
 		con.connect(function(err) {
 			if (err) {
-				console.log(`[counting] ${error("Failed to connect to the database")}`);
+				console.log(`${cheader} ${error("Failed to connect to the database")}`);
 				console.log(err);
 			} else {
-				console.log(`[counting] ${success("Connected to the database")}`);
+				console.log(`${cheader} ${success("Connected to the database")}`);
 				sql = "CREATE TABLE counting (serverid VARCHAR(255), number VARCHAR(255), lastcounter VARCHAR(255), id INT AUTO_INCREMENT PRIMARY KEY)";
 				con.query(sql, function (err, result) {
 					if (err) {
 						if(err.code == "ER_TABLE_EXISTS_ERROR") {
-							console.log(`[counting] ${warn("Table already exists")}`);
+							console.log(`${cheader} ${warn("Table already exists")}`);
 						} else {
-							console.log(`[counting] ${error("Table creation failed")} (probably already exists)`);
+							console.log(`${cheader} ${error("Table creation failed")} (probably already exists)`);
 						}
 						con.end();
 					} else {
-						console.log(`[counting] ${success("Table created")}`);
+						console.log(`${cheader} ${success("Table created")}`);
 						con.end();
 					}
 				});
@@ -57,13 +60,13 @@ module.exports = {
 		sql = `SELECT * FROM counting WHERE serverid = ${  message.guild.id}`;
 		con.query(sql, function (err, result) {
 			if (err) {
-				console.log(`[counting] ${error("Something went wrong while fetching the current number. Maybe it doesn't exist?")}`);
+				console.log(`${cheader} ${error("Something went wrong while fetching the current number. Maybe it doesn't exist?")}`);
 				con.end();
 			} else {
 				let currentNumber;
 				let lastCounter;
 				if (result.length <= 0) {
-					console.log(`[counting] ${info("Creating row for server...")}`);
+					console.log(`${cheader} ${info("Creating row for server...")}`);
 					let con = mysql.createConnection({
 						host: process.env.SQL_HOST,
 						user: process.env.SQL_USER,
@@ -73,13 +76,13 @@ module.exports = {
 
 					con.connect(function(err) {
 						if (err) {
-							console.log(`[counting] ${error("Failed to connect to the database")}`);
+							console.log(`${cheader} ${error("Failed to connect to the database")}`);
 							console.log(err);
 						} else {
 							sql = `INSERT INTO counting(serverid, number) VALUES (${message.guild.id}, 0)`;
 							con.query(sql, function (err, result) {
 								if (err) {
-									console.log(`[counting] ${error("Failed to create row")}`);
+									console.log(`${cheader} ${error("Failed to create row")}`);
 									con.end();
 								} else {
 									con.end();
@@ -109,12 +112,12 @@ module.exports = {
 							sql = `UPDATE counting set number = ${message.content.split(" ")[0]}, lastcounter = ${message.author.id} WHERE serverid = ${message.guild.id}`;
 							con.connect(function(err) {
 								if (err) {
-									console.log(`[counting] ${error("Something went wrong")}`);
+									console.log(`${cheader} ${error("Something went wrong")}`);
 									console.log(err);
 								} else {
 									con.query(sql, function (err, result) {
 										if (err) {
-											console.log(`[counting] ${error("Something went wrong")}`);
+											console.log(`${cheader} ${error("Something went wrong")}`);
 											con.end();
 										} else {
 											con.end();
@@ -138,12 +141,12 @@ module.exports = {
 							sql = `UPDATE counting set number = 0, lastcounter = 0 WHERE serverid = ${message.guild.id}`;
 							con.connect(function(err) {
 								if (err) {
-									console.log(`[counting] ${error("Something went wrong")}`);
+									console.log(`${cheader} ${error("Something went wrong")}`);
 									console.log(err);
 								} else {
 									con.query(sql, function (err, result) {
 										if (err) {
-											console.log(`[counting] ${error("Something went wrong")}`);
+											console.log(`${cheader} ${error("Something went wrong")}`);
 											con.end();
 										} else {
 											con.end();
@@ -164,12 +167,12 @@ module.exports = {
 						sql = `UPDATE counting set number = 0, lastcounter = 0 WHERE serverid = ${message.guild.id}`;
 						con.connect(function(err) {
 							if (err) {
-								console.log(`[counting] ${error("Something went wrong")}`);
+								console.log(`${cheader} ${error("Something went wrong")}`);
 								console.log(err);
 							} else {
 								con.query(sql, function (err, result) {
 									if (err) {
-										console.log(`[counting] ${error("Something went wrong")}`);
+										console.log(`${cheader} ${error("Something went wrong")}`);
 										con.end();
 									} else {
 										con.end();

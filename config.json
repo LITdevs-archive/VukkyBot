@@ -7,7 +7,7 @@
         "owner": "708333380525228082",
         "mysql": true,
         "language": "en",
-        "languageComment": "Currently, only English is supported."
+        "languageComment": "Currently, only English (en) and Norwegian (no) is supported."
     },
     "counting": {
         "enabled": true,

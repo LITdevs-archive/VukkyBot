@@ -6,27 +6,31 @@ const client = new Discord.Client();
 const chalk = require("chalk");
 const success = chalk.green;
 const warn = chalk.yellow;
+const error = chalk.bold.red;
 
 const embeds = require("./embeds.js");
 const config = require("./config.json");
+const strings = require("./strings.json");
+let localstrings = strings[config.misc.language];
+const format = require("util").format;
 const prefix = process.env.PREFIX;
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
 let embedPermissions = 1;
 
-console.log("[startup] VukkyBot is starting...");
+console.log(`[${localstrings.STARTUP}] ${localstrings.STARTING}`);
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
-	console.log(`[startup] ${success(`${file} loaded!`)}`);
+	console.log(`[${localstrings.STARTUP}] ${success(format(localstrings.STARTUP_FILE_LOADED, file))}`);
 }
 
 const cooldowns = new Discord.Collection();
 
 client.once("ready", () => {
-	console.log(`[startup] ${success("Ready!")}`);
+	console.log(`[${localstrings.STARTUP}] ${success(localstrings.READY)}`);
 	const statuses = [
 		"with JavaScript",
 		"with a Fall Guy",
