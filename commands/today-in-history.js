@@ -6,7 +6,7 @@ module.exports = {
 	description: "Find out what happened today in history!",
 	botPermissions: ["EMBED_LINKS"],
 	cooldown: 60,
-	aliases: ["today"],
+	aliases: ["today", "history"],
 	execute(message, args) {
 		message.channel.send("<a:offlinegif:757979855924101220> Hold on! I'm getting the data...")
 			.then(newMessage => {
