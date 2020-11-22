@@ -25,9 +25,9 @@ module.exports = {
 			if (err) {
 				return console.log(`[counting] ${error("SQL connection failed. Maybe the credentials are invalid?")}`);
 			} else {
-				con.end()
+				con.end();
 			}
-		}
+		});
 		console.log(`[counting] ${success("Counting is enabled and SQL credentials are valid!")}`);
 	}
 };
