@@ -1,20 +1,24 @@
 {
 	"en": {
 		"ERROR_GENERIC": "There was an error.",
-		"ERROR_RELOAD": "There was an error while reloading a command (**%s**):\n%s",
+		"ERROR_RELOAD": "There was an error while reloading a command (**%s**):\n`%s`",
 		"COUNTING": "counting",
 		"STARTUP": "startup",
 		"STARTING": "VukkyBot is starting...",
 		"STARTUP_FILE_LOADED": "%s loaded!",
-		"READY": "Ready!"
+		"READY": "Ready!",
+		"USER_PERMISSION_NEEDED": "Sorry, but you need the `%s` permission to use that command.",
+		"BOT_PERMISSION_NEEDED": "Sorry, but I need the `%s` permission to use that command."
 	},
 	"no": {
 		"ERROR_GENERIC": "Det oppstod en feil.",
-		"ERROR_RELOAD": "Det oppstod en feil under innlasting an en kommando (**%s**):\n%s",
+		"ERROR_RELOAD": "Det oppstod en feil under innlasting an en kommando (**%s**):\n`%s`",
 		"COUNTING": "telling",
 		"STARTUP": "oppstart",
 		"STARTING": "VukkyBot starter...",
 		"STARTUP_FILE_LOADED": "%s lastet!",
-		"READY": "Klar!"
+		"READY": "Klar!",
+		"USER_PERMISSION_NEEDED": "Unnskyld, men du trenger `%s` for å bruke den kommandoen.",
+		"BOT_PERMISSION_NEEDED": "Unnskyld, men jeg trenger `%s` for å bruke den kommandoen."
 	}
 }

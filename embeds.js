@@ -4,7 +4,7 @@ const config = require("./config.json");
 const avatarURL = "https://i.imgur.com/H0sAkrl.png";
 const versionString = `This VukkyBot is on v${pjson.version} using discord.js ${pjson.dependencies["discord.js"].substring(1)}`;
 
-const strings = require("./strings.json");
+const vuktils = require("./vuktils.js");
 
 module.exports = {
 	errorEmbed,
@@ -30,7 +30,7 @@ module.exports = {
 function errorEmbed(errorMsg) {
 	return new Discord.MessageEmbed()
 		.setColor("#ff0000")
-		.setTitle(`❌ ${strings[config.misc.language].ERROR_GENERIC}`)
+		.setTitle(`❌ ${vuktils.getString("ERROR_GENERIC")}`)
 		.setDescription(errorMsg)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
