@@ -9,7 +9,8 @@
     "discord.js": "^12.4.1",
     "dotenv": "^8.2.0",
     "mysql": "^2.18.1",
-    "pm2": "^4.5.0"
+    "pm2": "^4.5.0",
+    "vukkytils": "^1.0.0"
   },
   "devDependencies": {
     "eslint": "^7.13.0",

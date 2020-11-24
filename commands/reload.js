@@ -20,9 +20,9 @@ module.exports = {
 			message.client.commands.set(newCommand.name, newCommand);
 		} catch (error) {
 			console.log(error);
-			const vuktils = require("../vuktils.js");
+			const vukkytils = require("../vukkytils.js");
 			const format = require("util").format;
-			message.channel.send(embeds.errorEmbed(format(vuktils.getString("ERROR_RELOAD"), commandName, error.message)));
+			message.channel.send(embeds.errorEmbed(format(vukkytils.getString("ERROR_RELOAD"), commandName, error.message)));
 		}
 
 		message.channel.send(embeds.successEmbed(`\`${command.name}\` has been reloaded!`));
