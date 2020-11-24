@@ -1,4 +1,4 @@
-const vukkytils = require("vukkytils");
+const vukkytils = require("vukkyutils");
 const config = require("./config.json");
 
 vukkytils.setUserLanguage(config.misc.language);

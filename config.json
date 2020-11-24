@@ -6,11 +6,11 @@
         "prefixReminder": true,
         "owner": "708333380525228082",
         "mysql": true,
-        "language": "no",
-        "languageComment": "Currently, only English (en) and Norwegian (no) is supported."
+        "language": "fi",
+        "languageComment": "Currently, only English (en), Norwegian (no), and Finnish (fi) is supported."
     },
     "counting": {
-        "enabled": true,
+        "enabled": false,
         "channelName": "counting"
     },
     "commands": {
