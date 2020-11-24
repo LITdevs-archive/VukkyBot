@@ -1,7 +1,7 @@
 var chalk = require("chalk");
 var mysql = require("mysql");
 var config = require("./config.json");
-const vuktils = require("./vuktils.js");
+const vukkytils = require("./vukkytils.js");
 require("dotenv").config();
 let sql;
 
@@ -9,7 +9,7 @@ const error = chalk.bold.red;
 const warn = chalk.yellow;
 const success = chalk.green;
 const info = chalk.blue;
-let cheader = `[${vuktils.getString("COUNTING")}]`;
+let cheader = `[${vukkytils.getString("COUNTING")}]`;
 
 module.exports = {
 	start: function() {
