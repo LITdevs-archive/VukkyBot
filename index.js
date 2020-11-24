@@ -10,8 +10,7 @@ const error = chalk.bold.red;
 
 const embeds = require("./embeds.js");
 const config = require("./config.json");
-const strings = require("./strings.json");
-let localstrings = strings[config.misc.language];
+const vuktils = require("./vuktils.js");
 const format = require("util").format;
 const prefix = process.env.PREFIX;
 client.commands = new Discord.Collection();
@@ -19,18 +18,18 @@ client.commands = new Discord.Collection();
 const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
 let embedPermissions = 1;
 
-console.log(`[${localstrings.STARTUP}] ${localstrings.STARTING}`);
+console.log(`[${vuktils.getString("STARTUP")}] ${vuktils.getString("STARTING")}`);
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
-	console.log(`[${localstrings.STARTUP}] ${success(format(localstrings.STARTUP_FILE_LOADED, file))}`);
+	console.log(`[${vuktils.getString("STARTUP")}] ${success(format(vuktils.getString("STARTUP_FILE_LOADED"), file))}`);
 }
 
 const cooldowns = new Discord.Collection();
 
 client.once("ready", () => {
-	console.log(`[${localstrings.STARTUP}] ${success(localstrings.READY)}`);
+	console.log(`[${vuktils.getString("STARTUP")}] ${vuktils.getString("READY")}`);
 	const statuses = [
 		"with JavaScript",
 		"with a Fall Guy",
@@ -103,7 +102,7 @@ client.on("message", message => {
 			console.log(`[permcheck] ${prefix}${commandName} wants bot to have ${permissionsBot[i]} - checking for permission...`);
 			if ((message.channel.type == "text" && !message.guild.me.hasPermission(permissionsBot[i]))) {
 				console.log(`[permcheck] Looks like someone forgot to give the bot ${permissionsBot[i]}.`);
-				let reply = `Sorry, but I need the \`${permissionsBot[i]}\` permission to use that command.`;
+				let reply = format(vuktils.getString("BOT_PERMISSION_NEEDED"), permissionsBot[i]);
 				if (embedPermissions == 0) return message.channel.send(reply);
 				message.channel.send(embeds.errorEmbed(reply));
 				return;
@@ -127,7 +126,7 @@ client.on("message", message => {
 			console.log(`[permcheck] ${prefix}${commandName} wants user to have ${command.userPermissions[i]} - checking for permission...`);
 			if ((message.channel.type == "text" && !message.member.hasPermission(command.userPermissions[i]))) {
 				console.log(`[permcheck] Looks like the user doesn't have ${command.userPermissions[i]}.`);
-				let reply = `Sorry, but you need the \`${command.userPermissions[i]}\` permission to use that command.`;
+				let reply = format(vuktils.getString("BOT_PERMISSION_NEEDED"), command.userPermissions[i]);
 				if (embedPermissions == 0) return message.channel.send(reply);
 				message.channel.send(embeds.errorEmbed(reply));
 				return;

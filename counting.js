@@ -1,8 +1,7 @@
 var chalk = require("chalk");
 var mysql = require("mysql");
 var config = require("./config.json");
-var strings = require("./strings.json");
-var localstrings = strings[config.misc.language];
+const vuktils = require("./vuktils.js");
 require("dotenv").config();
 let sql;
 
@@ -10,7 +9,7 @@ const error = chalk.bold.red;
 const warn = chalk.yellow;
 const success = chalk.green;
 const info = chalk.blue;
-let cheader = `[${localstrings.COUNTING}]`;
+let cheader = `[${vuktils.getString("COUNTING")}]`;
 
 module.exports = {
 	start: function() {
