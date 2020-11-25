@@ -54,7 +54,7 @@ let questions = [
 			{ name: "Counting", value: "counting" }
 		],
 		when: function (answers) {
-			return answers.extrafeatures.mysql !== null;
+			return answers.extrafeatures.mysql !== undefined;
 		},
 	},
 	{
@@ -75,7 +75,7 @@ let questions = [
 		message: "What is the name of the channel you would like VukkyBot to count in?",
 		default: "counting",
 		when: function (answers) {
-			return answers.mysqlfeatures.counting !== null;
+			return answers.mysqlfeatures.counting !== undefined;
 		}
 	},
 	{
@@ -83,7 +83,7 @@ let questions = [
 		name: "sqlhost",
 		message: "What's your SQL hostname?",
 		when: function (answers) {
-			return answers.extrafeatures.mysql !== null;
+			return answers.extrafeatures.mysql !== undefined;
 		},
 	},
 	{
@@ -91,7 +91,7 @@ let questions = [
 		name: "sqlpass",
 		message: "What's your SQL password?",
 		when: function (answers) {
-			return answers.extrafeatures.mysql !== null;
+			return answers.extrafeatures.mysql !== undefined;
 		},
 	},
 	{
@@ -99,7 +99,7 @@ let questions = [
 		name: "sqluser",
 		message: "What's your SQL username?",
 		when: function (answers) {
-			return answers.extrafeatures.mysql !== null;
+			return answers.extrafeatures.mysql !== undefined;
 		},
 	},
 	{
@@ -107,7 +107,7 @@ let questions = [
 		name: "sqldb",
 		message: "What's your SQL database name?",
 		when: function (answers) {
-			return answers.extrafeatures.mysql !== null;
+			return answers.extrafeatures.mysql !== undefined;
 		},
 	}
 ];
