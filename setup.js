@@ -54,7 +54,7 @@ let questions = [
 			{ name: "Counting", value: "counting" }
 		],
 		when: function (answers) {
-			return answers.extrafeatures.mysql !== undefined;
+			return answers.extrafeatures !== undefined && answers.extrafeatures.includes("mysql");
 		},
 	},
 	{
@@ -75,7 +75,7 @@ let questions = [
 		message: "What is the name of the channel you would like VukkyBot to count in?",
 		default: "counting",
 		when: function (answers) {
-			return answers.mysqlfeatures.counting !== undefined;
+			return answers.mysqlfeatures !== undefined && answers.mysqlfeatures.includes("counting");
 		}
 	},
 	{
@@ -83,7 +83,7 @@ let questions = [
 		name: "sqlhost",
 		message: "What's your SQL hostname?",
 		when: function (answers) {
-			return answers.extrafeatures.mysql !== undefined;
+			return answers.extrafeatures !== undefined && answers.extrafeatures.includes("mysql");
 		},
 	},
 	{
@@ -91,7 +91,7 @@ let questions = [
 		name: "sqlpass",
 		message: "What's your SQL password?",
 		when: function (answers) {
-			return answers.extrafeatures.mysql !== undefined;
+			return answers.extrafeatures !== undefined && answers.extrafeatures.includes("mysql");
 		},
 	},
 	{
@@ -99,7 +99,7 @@ let questions = [
 		name: "sqluser",
 		message: "What's your SQL username?",
 		when: function (answers) {
-			return answers.extrafeatures.mysql !== undefined;
+			return answers.extrafeatures !== undefined && answers.extrafeatures.includes("mysql");
 		},
 	},
 	{
@@ -107,7 +107,7 @@ let questions = [
 		name: "sqldb",
 		message: "What's your SQL database name?",
 		when: function (answers) {
-			return answers.extrafeatures.mysql !== undefined;
+			return answers.extrafeatures !== undefined && answers.extrafeatures.includes("mysql");
 		},
 	}
 ];
@@ -140,11 +140,11 @@ inquirer.prompt(questions).then((answers) => {
 		try {
 			const config = require("./config.json");
 			config.misc.owner = answers.discordid;
-			config.misc.invalidCmdReminder = answers.extrafeatures.prefixremind !== null;
-			config.misc.prefixReminder = answers.extrafeatures.mysql !== null;
-			config.misc.mysql = answers.extrafeatures.prefixremind !== null;
-			if (answers.extrafeatures.mysql !== null) { config.counting.enabled = answers.mysqlfeatures.counting !== null; } else { config.counting.enabled = false; }
-			if (answers.mysqlfeatures.counting !== null) { config.counting.channelName = answers.countingchannel; }
+			config.misc.invalidCmdReminder = answers.extrafeatures !== undefined && answers.extrafeatures.includes("invalidcmd");
+			config.misc.prefixReminder = answers.extrafeatures !== undefined && answers.extrafeatures.includes("prefixremind");
+			config.misc.mysql = answers.extrafeatures !== undefined && answers.extrafeatures.includes("mysql");
+			if (answers.mysqlfeatures !== undefined && answers.mysqlfeatures.includes("counting")) { config.counting.enabled = answers.mysqlfeatures.counting !== null; } else { config.counting.enabled = false; }
+			if (answers.mysqlfeatures !== undefined && answers.mysqlfeatures.counting !== undefined) { config.counting.channelName = answers.countingchannel; }
 			fs.writeFile("config.json", JSON.stringify(config, null, 4), function (err) {
 				if (err) {
 					spinner2.fail("Saving configuration to config.json failed");

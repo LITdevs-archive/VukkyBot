@@ -6,7 +6,7 @@
         "prefixReminder": true,
         "owner": "708333380525228082",
         "mysql": true,
-        "language": "fi",
+        "language": "en",
         "languageComment": "Currently, only English (en), Norwegian (no), and Finnish (fi) is supported."
     },
     "counting": {
