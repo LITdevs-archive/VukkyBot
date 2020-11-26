@@ -8,7 +8,12 @@
 		"STARTUP_FILE_LOADED": "%s loaded!",
 		"READY": "Ready!",
 		"USER_PERMISSION_NEEDED": "Sorry, but you need the `%s` permission to use that command.",
-		"BOT_PERMISSION_NEEDED": "Sorry, but I need the `%s` permission to use that command."
+		"BOT_PERMISSION_NEEDED": "Sorry, but I need the `%s` permission to use that command.",
+		"HUG_TYPES": ["a small hug.", "a nice hug.", "a BIG hug!"],
+		"HEADPAT_TYPES": ["an okay headpat.", "a great headpat.", "an AMAZING headpat!"],
+		"GIVE_USER": "%s gives %s %s",
+		"WARNINGS_TITLE": "Warnings for %s",
+		"NO_WARNINGS": "This person has no warnings."
 	},
 	"fi": {
 		"ERROR_GENERIC": "Sattui virhe",
@@ -19,17 +24,11 @@
 		"STARTUP_FILE_LOADED": "%s ladattu!",
 		"READY": "Valmis!",
 		"USER_PERMISSION_NEEDED": "Anteeksi, mutta tarvitset oikeuden `%s` voidaksesi käyttää tuota komentoa.",
-		"BOT_PERMISSION_NEEDED": "Anteeksi, mutta tarvitsen oikeuden `%s` voidakseni käyttää tuota komentoa."
-	},
-	"no": {
-		"ERROR_GENERIC": "Det oppstod en feil.",
-		"ERROR_RELOAD": "Det oppstod en feil under innlasting an en kommando (**%s**):\n`%s`",
-		"COUNTING": "telling",
-		"STARTUP": "oppstart",
-		"STARTING": "VukkyBot starter...",
-		"STARTUP_FILE_LOADED": "%s lastet!",
-		"READY": "Klar!",
-		"USER_PERMISSION_NEEDED": "Unnskyld, men du trenger `%s` for å bruke den kommandoen.",
-		"BOT_PERMISSION_NEEDED": "Unnskyld, men jeg trenger `%s` for å bruke den kommandoen."
+		"BOT_PERMISSION_NEEDED": "Anteeksi, mutta tarvitsen oikeuden `%s` voidakseni käyttää tuota komentoa.",
+		"HUG_TYPES": ["pienen halin.", "kivan halin.", "ISON halin!"],
+		"HEADPAT_TYPES": ["perus taputuksen päälle.", "mahtavan taputuksen päälle.", "USKOMATTOMAN taputuksen päälle!"],
+		"GIVE_USER": "%s antaa käyttäjälle %s %s",
+		"WARNINGS_TITLE": "Henkilön %s varoitukset",
+		"NO_WARNINGS": "Tällä henkilöllä ei ole varoituksia."
 	}
 }

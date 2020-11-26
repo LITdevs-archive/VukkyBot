@@ -1,18 +1,19 @@
 const config = require("../config.json");
 require("dotenv").config();
 var mysql = require("mysql");
-const { errorEmbed, successEmbed } = require("../embeds.js");
+const { errorEmbed, warnsUserEmbed } = require("../embeds.js");
+const vukkytils = require("../vukkytils");
 
 
 module.exports = {
 	name: "warns",
-	description: "Make VukkyBot remove warnings from people!",
+	description: "View warnings created using VukkyBot",
 	botPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
 	userPermissions: ["MANAGE_MESSAGES"],
 	args: true,
 	mysql: true,
 	guildOnly: true,
-	usage: "<warning id>",
+	usage: "<@user>",
 	aliases: ["warnings"],
 	execute(message, args) {
 		let warnsId;    
@@ -40,13 +41,13 @@ module.exports = {
 				console.log(err);
 				con.end();
 			} else {
-				if (result.length == 0) { con.end(); return message.channel.send(successEmbed("This person has no warnings!")); }
-				let finalMessage = `Warnings for ${result[0].username}: \n`;
+				if (result.length == 0) { con.end(); return message.channel.send(warnsUserEmbed(message.mentions.users.first().username, vukkytils.getString("NO_WARNINGS"))); }
+				let warnList = "";
 				
 				for (let i = 0; i < result.length; i++) {
-					finalMessage = finalMessage.concat(`**${result[i].reason}** (ID: ${result[i].id})\n`);
+					warnList = warnList.concat(`**${result[i].reason}** (ID: ${result[i].id})\n`);
 				}
-				message.channel.send(successEmbed(finalMessage));
+				message.channel.send(warnsUserEmbed(message.mentions.users.first().username, warnList));
 				con.end();
 			}
 		});
