@@ -96,12 +96,9 @@ client.on("message", message => {
 	function tempPermissionsBot(permissionsBot) {
 		for (let i = 0, len = permissionsBot.length; permissionsBot; i < len, i++) {
 			if (permissionsBot[i] == undefined) {
-				if(!command.userPermissions) console.log(`[permcheck] ${success(`That should be it for ${prefix}${commandName}.`)}`);
 				break;
 			}
-			console.log(`[permcheck] ${prefix}${commandName} wants bot to have ${permissionsBot[i]} - checking for permission...`);
 			if ((message.channel.type == "text" && !message.guild.me.hasPermission(permissionsBot[i]))) {
-				console.log(`[permcheck] Looks like someone forgot to give the bot ${permissionsBot[i]}.`);
 				let reply = format(vukkytils.getString("BOT_PERMISSION_NEEDED"), permissionsBot[i]);
 				if (embedPermissions == 0) return message.channel.send(reply);
 				message.channel.send(embeds.errorEmbed(reply));
@@ -120,12 +117,9 @@ client.on("message", message => {
 	if (command.userPermissions) {
 		for (let i = 0, len = command.userPermissions.length; command.userPermissions; i < len, i++) {
 			if (command.userPermissions[i] == undefined) {
-				console.log(`[permcheck] ${success(`That should be it for ${prefix}${commandName}.`)}`);
 				break;
 			}
-			console.log(`[permcheck] ${prefix}${commandName} wants user to have ${command.userPermissions[i]} - checking for permission...`);
 			if ((message.channel.type == "text" && !message.member.hasPermission(command.userPermissions[i]))) {
-				console.log(`[permcheck] Looks like the user doesn't have ${command.userPermissions[i]}.`);
 				let reply = format(vukkytils.getString("BOT_PERMISSION_NEEDED"), command.userPermissions[i]);
 				if (embedPermissions == 0) return message.channel.send(reply);
 				message.channel.send(embeds.errorEmbed(reply));
