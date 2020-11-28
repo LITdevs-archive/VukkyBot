@@ -163,7 +163,7 @@ inquirer.prompt(questions).then((answers) => {
 	}
 
 	function startMySQL() {
-		if(answers.extrafeatures.mysql) {
+		if(answers.extrafeatures !== undefined && answers.extrafeatures.includes("mysql")) {
 			const spinner4 = ora("Connecting to the database").start();
 		
 			let con = mysql.createConnection({
