@@ -36,6 +36,13 @@
 		"HEADPAT_TYPES": ["perus taputuksen päälle.", "mahtavan taputuksen päälle.", "USKOMATTOMAN taputuksen päälle!"],
 		"GIVE_USER": "%s antaa käyttäjälle %s %s",
 		"WARNINGS_TITLE": "Henkilön %s varoitukset",
-		"NO_WARNINGS": "Tällä henkilöllä ei ole varoituksia."
+		"NO_WARNINGS": "Tällä henkilöllä ei ole varoituksia.",
+		"BOT_LOVE": "Aww, Kiitos! ♥ :3",
+		"BOT_PAIN": "Miksi edes yritit? :(",
+		"CANT_USE_SELF": "Et voi %s itseäsi! Se olisi typerää.",
+		"PING_REQUIRED": "Sinun pitää mainita joku henkilö käyttääksesi tätä komentoa.",
+		"HUG": "halata",
+		"HEADPAT": "taputtaa",
+		"SLAP": "läpsäistä"
 	}
 }
