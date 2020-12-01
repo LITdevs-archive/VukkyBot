@@ -36,7 +36,8 @@ client.once("ready", () => {
 		"with pm2",
 		"with npm",
 		"with ESLint",
-		"with MySQL"
+		"with MySQL",
+		"SPAGHETTI"
 	];
 	setInterval(() => {
 		const index = Math.floor(Math.random() * (statuses.length - 1) + 1);
@@ -54,7 +55,7 @@ client.on("message", message => {
 
 	if (message.content.toLowerCase().includes(`<@!${client.user.id}>`) && config.misc.prefixReminder == true && !message.content.startsWith(prefix)) message.reply(`my prefix is \`${process.env.PREFIX}\``);
 
-	if (message.channel.name == config.counting.channelName) counting.countCheck(message);
+	if (message.channel.name == config.counting.channelName) counting.countCheck(message, client);
 
 	if (!message.content.toLowerCase().startsWith(prefix)) return;
 

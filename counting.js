@@ -12,8 +12,8 @@ const info = chalk.blue;
 var servers = {};
 module.exports = {
 	start: function(client) {
-		//if(client.user.username.includes("dev")) return console.log("[counting] DEVBOT DETECTED");
-		//if(client.user.username.includes("Dev")) return console.log("DEVBOT DETECTED");
+		if(client.user.username.includes("dev")) return console.log("[counting] DEVBOT DETECTED");
+		if(client.user.username.includes("Dev")) return console.log("DEVBOT DETECTED");
 		if(!config.counting.enabled) return console.log(`[counting] ${error("Counting is disabled!")}`);
 		if(!config.misc.mysql) return console.log(`[counting] ${error("MySQL is not enabled. MySQL is required for counting.")}`);
 		
@@ -73,8 +73,8 @@ module.exports = {
 							} else {
 								servers[serverid.toString()] = {};
 								servers[serverid.toString()].id = serverid;
-								servers[serverid.toString()].number = result.number;
-								servers[serverid.toString()].lastcounter = result.lastcounter;
+								servers[serverid.toString()].number = result[0].number;
+								servers[serverid.toString()].lastcounter = result[0].lastcounter;
 								console.log(servers);
 							}
 
@@ -86,4 +86,8 @@ module.exports = {
 			console.log(`[counting] ${success("Counting is enabled and SQL credentials are valid!")}`);
 		});
 	},
+	countCheck(message, client) {
+
+
+	}
 };
