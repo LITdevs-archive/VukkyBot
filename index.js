@@ -43,7 +43,7 @@ client.once("ready", () => {
 		const pjson = require("./package.json");
 		client.user.setActivity(`${statuses[index]} (${pjson.version})`);
 	}, 10000);
-	counting.start();
+	counting.start(client);
 });
 
 client.on("message", message => {

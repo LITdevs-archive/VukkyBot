@@ -9,7 +9,7 @@
         "languageComment": "Currently, only English is supported."
     },
     "counting": {
-        "enabled": false,
+        "enabled": true,
         "channelName": "counting"
     },
     "commands": {
