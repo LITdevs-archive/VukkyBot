@@ -55,7 +55,7 @@ client.on("message", message => {
 
 	if (message.content.toLowerCase().includes(`<@!${client.user.id}>`) && config.misc.prefixReminder == true && !message.content.startsWith(prefix)) message.reply(`my prefix is \`${process.env.PREFIX}\``);
 
-	if (message.channel.name == config.counting.channelName) counting.countCheck(message, client);
+	if (message.channel.name == config.counting.channelName) counting.check(message, client);
 
 	if (!message.content.toLowerCase().startsWith(prefix)) return;
 

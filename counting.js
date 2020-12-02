@@ -86,7 +86,7 @@ module.exports = {
 			console.log(`[counting] ${success("Counting is enabled and SQL credentials are valid!")}`);
 		});
 	},
-	countCheck(message, client) {
+	check(message, client) {
 		let con = mysql.createConnection({
 			host: process.env.SQL_HOST,
 			user: process.env.SQL_USER,
