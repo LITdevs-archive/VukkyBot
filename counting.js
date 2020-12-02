@@ -9,6 +9,12 @@ const warn = chalk.yellow;
 const success = chalk.green;
 const info = chalk.blue;
 var servers = {};
+
+function isInt(value) {
+	let x = parseFloat(value);
+	return !isNaN(value) && (x | 0) === x;
+}
+
 module.exports = {
 	start: function(client) {
 		if(client.user.username.includes("dev")) return console.log("[counting] DEVBOT DETECTED");
@@ -87,6 +93,9 @@ module.exports = {
 		});
 	},
 	check(message, client) {
+
+		// Make sure the server has a row. 
+
 		let con = mysql.createConnection({
 			host: process.env.SQL_HOST,
 			user: process.env.SQL_USER,
@@ -124,5 +133,22 @@ module.exports = {
 			}
 		});
 		con.end();
+
+
+		// Start checking if number is correct
+
+		con = mysql.createConnection({
+			host: process.env.SQL_HOST,
+			user: process.env.SQL_USER,
+			password: process.env.SQL_PASS,
+			database: process.env.SQL_DB
+		});
+
+		let checkString = message.split(" ")[0];
+
+		if (!isInt()) {
+			message.channel.send("Valid Number");
+		}
+		
 	},
 };
