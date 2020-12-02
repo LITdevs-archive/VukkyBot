@@ -65,9 +65,25 @@ let questions = [
 		mask: true
 	},
 	{
+		type: "confirm",
+		name: "multipleowners",
+		message: "Should your VukkyBot have multiple owners?"
+	},
+	{
 		type: "input",
 		name: "discordid",
-		message: "What's your Discord ID?"
+		message: "What's the Discord ID of the person who'll be owning this VukkyBot?",
+		when: function (answers) {
+			return answers.multipleowners !== true;
+		}
+	},
+	{
+		type: "input",
+		name: "discordidmulti",
+		message: "What's the Discord ID of the people who'll be owning this VukkyBot, split with commas (id1, id2, id3)?",
+		when: function (answers) {
+			return answers.multipleowners !== false;
+		}
 	},
 	{
 		type: "input",
@@ -139,7 +155,7 @@ inquirer.prompt(questions).then((answers) => {
 		const spinner2 = ora("Saving configuration to config.json").start();
 		try {
 			const config = require("./config.json");
-			config.misc.owner = answers.discordid;
+			if (answers.multipleowners !== true) { config.misc.owner = [answers.discordid]; } else { config.misc.owner = answers.discordidmulti.split(", "); }
 			config.misc.invalidCmdReminder = answers.extrafeatures !== undefined && answers.extrafeatures.includes("invalidcmd");
 			config.misc.prefixReminder = answers.extrafeatures !== undefined && answers.extrafeatures.includes("prefixremind");
 			config.misc.mysql = answers.extrafeatures !== undefined && answers.extrafeatures.includes("mysql");

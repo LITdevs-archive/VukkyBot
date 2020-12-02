@@ -4,8 +4,10 @@
     "misc": {
         "invalidCmdReminder": true,
         "prefixReminder": true,
-        "owner": "708333380525228082",
-        "mysql": true,
+        "owner": [
+            "708333380525228082"
+        ],
+        "mysql": false,
         "language": "en",
         "languageComment": "Currently, only English (en) and Finnish (fi) is supported."
     },

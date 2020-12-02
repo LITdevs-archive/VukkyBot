@@ -18,7 +18,7 @@
                 },
                 "owner": {
                     "description": "The Discord ID of the owner of this VukkyBot",
-                    "type": "string"
+                    "type": "array"
                 },
                 "mysql": {
                     "description": "Toggles if a MySQL database should be used",
