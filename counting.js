@@ -1,5 +1,4 @@
 var chalk = require("chalk");
-const BottomBar = require("inquirer/lib/ui/bottom-bar");
 var mysql = require("mysql");
 var config = require("./config.json");
 require("dotenv").config();
