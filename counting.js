@@ -17,8 +17,8 @@ function isInt(value) {
 
 module.exports = {
 	start: function(client) {
-		if(client.user.username.includes("dev")) return console.log("[counting] DEVBOT DETECTED");
-		if(client.user.username.includes("Dev")) return console.log("DEVBOT DETECTED");
+		//if(client.user.username.includes("dev")) return console.log("[counting] DEVBOT DETECTED");
+		//if(client.user.username.includes("Dev")) return console.log("DEVBOT DETECTED");
 		if(!config.counting.enabled) return console.log(`[counting] ${error("Counting is disabled!")}`);
 		if(!config.misc.mysql) return console.log(`[counting] ${error("MySQL is not enabled. MySQL is required for counting.")}`);
 		
@@ -85,9 +85,9 @@ module.exports = {
 
 						}
 					});
-					con.end();
 				});
 				
+				con.end();
 			}
 			console.log(`[counting] ${success("Counting is enabled and SQL credentials are valid!")}`);
 		});
@@ -144,10 +144,58 @@ module.exports = {
 			database: process.env.SQL_DB
 		});
 
-		let checkString = message.split(" ")[0];
+		let checkString = message.content.split(" ")[0];
 
-		if (!isInt()) {
-			message.channel.send("Valid Number");
+		if (isInt(checkString)) {
+			if (message.author.id.toString() == servers[message.guild.id].lastcounter.toString()) {
+				if (parseInt(checkString) == servers[message.guild.id].number + 1) {
+					servers[message.guild.id].number = parseInt(checkString);
+					servers[message.guild.id].lastcounter = message.author.id;
+					sql = `UPDATE counting set number = ${parseInt(checkString)}, lastcounter = ${message.author.id} WHERE serverid = ${message.guild.id}`;
+					con.query(sql, function (err, result) {
+						if (err) {
+							console.log(err);
+							message.channel.send("Sorry, I've encountered an issue with the database. Please contact server staff.")
+							con.end()
+						} else {
+							con.end()
+						}
+					})
+					message.react("✅");
+				} else {
+
+					message.react("❌");
+					message.channel.send(`<@${message.author.id}> screwed up! Wrong number!\nThe next number is **1**.`);
+					servers[message.guild.id].number = 0;
+					servers[message.guild.id].lastcounter = 0;
+					sql = `UPDATE counting set number = 0, lastcounter = 0 WHERE serverid = ${message.guild.id}`;
+					con.query(sql, function (err, result) {
+						if (err) {
+							console.log(err);
+							message.channel.send("Sorry, I've encountered an issue with the database. Please contact server staff.")
+							con.end()
+						} else {
+							con.end()
+						}
+					})
+				}
+			} else {
+				
+				message.react("❌");
+				message.channel.send(`<@${message.author.id}> screwed up! You can't count twice in a row!\nThe next number is **1**.`);
+				servers[message.guild.id].number = 0;
+					servers[message.guild.id].lastcounter = 0;
+				sql = `UPDATE counting set number = 0, lastcounter = 0 WHERE serverid = ${message.guild.id}`;
+				con.query(sql, function (err, result) {
+					if (err) {
+						console.log(err);
+						message.channel.send("Sorry, I've encountered an issue with the database. Please contact server staff.")
+						con.end()
+					} else {
+						con.end()
+					}
+				})
+			}
 		}
 		
 	},
