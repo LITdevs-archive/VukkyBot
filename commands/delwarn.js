@@ -36,7 +36,7 @@ module.exports = {
 				console.log(result);
 				if (result.length <= 0) {
 					con.end();
-					return message.channel.send(errorEmbed("There is no warning with this id!"));
+					return message.channel.send(errorEmbed("There is no warning with this ID!"));
 					
 				} else {
 					
