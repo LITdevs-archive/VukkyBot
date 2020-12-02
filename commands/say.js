@@ -5,6 +5,7 @@ module.exports = {
 	name: "say",
 	description: "Make VukkyBot say things!",
 	botPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
+	cooldown: 0,
 	execute(message, args) {
 		if(!config.misc.owner.includes(message.author.id)) {
 			message.channel.send(embeds.errorEmbed("Sorry, but you're not an owner of this VukkyBot."));
