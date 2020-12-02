@@ -80,6 +80,7 @@ module.exports = {
 
 						}
 					});
+					con.end();
 				});
 				
 			}
@@ -87,7 +88,42 @@ module.exports = {
 		});
 	},
 	countCheck(message, client) {
-
-
-	}
+		let con = mysql.createConnection({
+			host: process.env.SQL_HOST,
+			user: process.env.SQL_USER,
+			password: process.env.SQL_PASS,
+			database: process.env.SQL_DB
+		});
+		let server = message.guild;
+		let serverid = server.id.toString();
+		let servername = server.name;
+		sql = `SELECT * FROM counting WHERE serverid = ${server.id}`;
+		con.query(sql, function (err, result) {
+			if (err) {
+				console.log(`[counting] ${error("Something went wrong in the counting startup!")}`);
+				console.log(err);
+			} else {
+				if (result.length <= 0) {
+					con.connect(function(err) {
+						if (err) {
+							console.log(`[counting] ${error("Failed to connect to the database")}`);
+							console.log(err);
+						} else {
+							sql = `INSERT INTO counting(serverid, number) VALUES (${server.id}, 0)`;
+							con.query(sql, function (err, result) {
+								if (err) {
+									console.log(`[counting] ${error("Failed to create row for server with id:")} ${server.id}`);
+								}
+							});
+							servers[serverid].id = serverid;
+							servers[serverid].number = 0;
+							servers[serverid].lastcounter = 0;
+								
+						}
+					});
+				}
+			}
+		});
+		con.end();
+	},
 };
