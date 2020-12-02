@@ -80,7 +80,7 @@ module.exports = {
 								servers[serverid.toString()].id = serverid;
 								servers[serverid.toString()].number = result[0].number;
 								servers[serverid.toString()].lastcounter = result[0].lastcounter;
-								console.log(servers);
+								
 							}
 
 						}
@@ -147,7 +147,8 @@ module.exports = {
 		let checkString = message.content.split(" ")[0];
 
 		if (isInt(checkString)) {
-			if (message.author.id.toString() == servers[message.guild.id].lastcounter.toString()) {
+			console.log(message.author);
+			if (message.author.id.toString() != servers[message.guild.id].lastcounter.toString()) {
 				if (parseInt(checkString) == servers[message.guild.id].number + 1) {
 					servers[message.guild.id].number = parseInt(checkString);
 					servers[message.guild.id].lastcounter = message.author.id;
@@ -184,7 +185,7 @@ module.exports = {
 				message.react("❌");
 				message.channel.send(`<@${message.author.id}> screwed up! You can't count twice in a row!\nThe next number is **1**.`);
 				servers[message.guild.id].number = 0;
-					servers[message.guild.id].lastcounter = 0;
+				servers[message.guild.id].lastcounter = 0;
 				sql = `UPDATE counting set number = 0, lastcounter = 0 WHERE serverid = ${message.guild.id}`;
 				con.query(sql, function (err, result) {
 					if (err) {
