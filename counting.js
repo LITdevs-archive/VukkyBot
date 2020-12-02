@@ -56,7 +56,7 @@ module.exports = {
 			database: process.env.SQL_DB
 		});
 
-		sql = `SELECT * FROM counting WHERE serverid = ${  message.guild.id}`;
+		sql = `SELECT * FROM counting WHERE serverid = ${message.guild.id}`;
 		con.query(sql, function (err, result) {
 			if (err) {
 				console.log(`${cheader} ${error("Something went wrong while fetching the current number. Maybe it doesn't exist?")}`);

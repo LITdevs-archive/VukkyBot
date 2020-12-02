@@ -2,7 +2,7 @@ const config = require("../config.json");
 require("dotenv").config();
 var mysql = require("mysql");
 const { errorEmbed, successEmbed } = require("../embeds.js");
-
+var sql = "";
 module.exports = {
 	name: "delwarn",
 	description: "Make VukkyBot remove warnings from people!",
@@ -27,16 +27,32 @@ module.exports = {
 		con.connect(function(err) {
 			if (err) console.log(err);
 		});
-		let sql = `DELETE FROM warnings WHERE (id = ${warningId} AND serverid = ${message.guild.id})`;
+		
+		sql = `SELECT * FROM warnings WHERE (id = ${warningId} AND serverid = ${message.guild.id})`;
 		con.query(sql, function (err, result) {
-			if (err)  {
-				message.channel.send(errorEmbed("An error has occurred! See logs for more information."));
+			if (err) {
 				console.log(err);
-				con.end();
 			} else {
-				message.channel.send(successEmbed(`The warning with the ID of **${warningId}** has been removed.`));
-				console.log("1 warning removed");
-				con.end();
+				console.log(result);
+				if (result.length <= 0) {
+					con.end();
+					return message.channel.send(errorEmbed("There is no warning with this id!"));
+					
+				} else {
+					
+					sql = `DELETE FROM warnings WHERE (id = ${warningId} AND serverid = ${message.guild.id})`;
+					con.query(sql, function (err, result) {
+						if (err)  {
+							message.channel.send(errorEmbed("An error has occurred! See logs for more information."));
+							console.log(err);
+							con.end();
+						} else {
+							message.channel.send(successEmbed(`The warning with the ID of **${warningId}** has been removed.`));
+							console.log("1 warning removed");
+							con.end();
+						}
+					});
+				}
 			}
 		});
 	},
