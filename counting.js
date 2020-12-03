@@ -17,8 +17,8 @@ function isInt(value) {
 
 module.exports = {
 	start: function(client) {
-		//if(client.user.username.includes("dev")) return console.log("[counting] DEVBOT DETECTED");
-		//if(client.user.username.includes("Dev")) return console.log("DEVBOT DETECTED");
+		if(client.user.username.includes("dev")) return console.log("[counting] DEVBOT DETECTED");
+		if(client.user.username.includes("Dev")) return console.log("DEVBOT DETECTED");
 		if(!config.counting.enabled) return console.log(`[counting] ${error("Counting is disabled!")}`);
 		if(!config.misc.mysql) return console.log(`[counting] ${error("MySQL is not enabled. MySQL is required for counting.")}`);
 		
