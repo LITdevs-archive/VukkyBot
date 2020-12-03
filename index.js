@@ -158,12 +158,9 @@ client.on("message", message => {
 });
 
 client.on("messageDelete", message => {	
-	console.log("message deletion");
 	if (message.channel.name == config.counting.channelName) {
 		counting.deletion(message);
-		console.log("message deletion in counting");
 	}
-	console.log("message deletion");
 });
 
 
