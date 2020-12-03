@@ -35,7 +35,7 @@ module.exports = {
 			} else {
 				console.log(`[counting] ${info("Connected to the database")}`);
 
-				sql = "CREATE TABLE counting (serverid VARCHAR(255), number VARCHAR(255), lastcounter VARCHAR(255), id INT AUTO_INCREMENT PRIMARY KEY)";
+				sql = "CREATE TABLE counting (serverid VARCHAR(255), number VARCHAR(255), lastcounter VARCHAR(255), highscore VARCHAR(255), id INT AUTO_INCREMENT PRIMARY KEY)";
 				con.query(sql, function (err, result) {
 					if (err) {
 						if(err.code == "ER_TABLE_EXISTS_ERROR") {
@@ -49,6 +49,12 @@ module.exports = {
 				});
 
 				client.guilds.cache.forEach(server => {
+					let con = mysql.createConnection({
+						host: process.env.SQL_HOST,
+						user: process.env.SQL_USER,
+						password: process.env.SQL_PASS,
+						database: process.env.SQL_DB
+					});
 					let serverid = server.id.toString();
 					let servername = server.name;
 					sql = `SELECT * FROM counting WHERE serverid = ${server.id}`;
@@ -58,29 +64,25 @@ module.exports = {
 							console.log(err);
 						} else {
 							if (result.length <= 0) {
-								con.connect(function(err) {
+								sql = `INSERT INTO counting(serverid, number, lastcounter, highscore) VALUES (${server.id}, 0, 0, 0)`;
+								con.query(sql, function (err, result) {
 									if (err) {
-										console.log(`[counting] ${error("Failed to connect to the database")}`);
-										console.log(err);
-									} else {
-										sql = `INSERT INTO counting(serverid, number) VALUES (${server.id}, 0)`;
-										con.query(sql, function (err, result) {
-											if (err) {
-												console.log(`[counting] ${error("Failed to create row for server with id:")} ${server.id}`);
-											}
-										});
-										servers[serverid].id = serverid;
-										servers[serverid].number = 0;
-										servers[serverid].lastcounter = 0;
-								
+										console.log(`[counting] ${error("Failed to create row for server with id:")} ${server.id}`);
 									}
+										
+									servers[serverid.toString()] = {};
+									servers[serverid.toString()].id = serverid;
+									servers[serverid.toString()].number = 0;
+									servers[serverid.toString()].lastcounter = 0;
+									servers[serverid.toString()].highscore = 0;
+									
 								});
 							} else {
 								servers[serverid.toString()] = {};
 								servers[serverid.toString()].id = serverid;
 								servers[serverid.toString()].number = result[0].number;
 								servers[serverid.toString()].lastcounter = result[0].lastcounter;
-								
+								servers[serverid.toString()].highscore = result[0].highscore;
 							}
 
 						}
@@ -121,7 +123,7 @@ module.exports = {
 							console.log(`[counting] ${error("Failed to connect to the database")}`);
 							console.log(err);
 						} else {
-							sql = `INSERT INTO counting(serverid, number) VALUES (${server.id}, 0)`;
+							sql = `INSERT INTO counting(serverid, number, lastcounter, highscore) VALUES (${server.id}, 0, 0, 0)`;
 							con.query(sql, function (err, result) {
 								if (err) {
 									console.log(`[counting] ${error("Failed to create row for server with id:")} ${server.id}`);
@@ -130,7 +132,7 @@ module.exports = {
 							servers[serverid].id = serverid;
 							servers[serverid].number = 0;
 							servers[serverid].lastcounter = 0;
-								
+							servers[serverid].highscore = 0;
 						}
 					});
 				}
@@ -151,7 +153,6 @@ module.exports = {
 		let checkString = message.content.split(" ")[0];
 
 		if (isInt(checkString)) {
-			console.log(message.author);
 			if (message.author.id.toString() != servers[message.guild.id].lastcounter.toString()) {
 				if (parseInt(checkString) == servers[message.guild.id].number + 1) {
 					servers[message.guild.id].number = parseInt(checkString);
@@ -160,24 +161,55 @@ module.exports = {
 					con.query(sql, function (err, result) {
 						if (err) {
 							console.log(err);
-							message.channel.send("Sorry, I've encountered an issue with the database. Please contact server staff.");
+							message.channel.send("Sorry, I've encountered an issue with the database. Please contact server staff if this happens again.");
 							con.end();
 						} else {
 							con.end();
 						}
 					});
-					message.react("✅");
+					if (parseInt(checkString) > servers[serverid].highscore) {
+						message.react("☑️");
+
+						let con = mysql.createConnection({
+							host: process.env.SQL_HOST,
+							user: process.env.SQL_USER,
+							password: process.env.SQL_PASS,
+							database: process.env.SQL_DB
+						});
+
+						sql = `UPDATE counting set highscore = ${parseInt(checkString)} WHERE serverid = ${message.guild.id}`;
+						con.query(sql, function (err, result) {
+							if (err) {
+								console.log(err);
+								message.channel.send("Sorry, I've encountered an issue with the database. Please contact server staff if this happens again.");
+								con.end();
+							} else {
+								con.end();
+							}
+						});
+						servers[serverid].highscore = parseInt(checkString);
+					} else {	
+						message.react("✅");
+					}
 				} else {
 					if (servers[message.guild.id].number == 0) return message.channel.send("Did you even try...");
 					message.react("❌");
 					message.channel.send(`<@${message.author.id}> screwed up! Wrong number!\nThe next number is **1**. Correct number would have been **${parseInt(servers[message.guild.id].number) + 1}**`);
 					servers[message.guild.id].number = 0;
 					servers[message.guild.id].lastcounter = 0;
+
+					let con = mysql.createConnection({
+						host: process.env.SQL_HOST,
+						user: process.env.SQL_USER,
+						password: process.env.SQL_PASS,
+						database: process.env.SQL_DB
+					});
+
 					sql = `UPDATE counting set number = 0, lastcounter = 0 WHERE serverid = ${message.guild.id}`;
 					con.query(sql, function (err, result) {
 						if (err) {
 							console.log(err);
-							message.channel.send("Sorry, I've encountered an issue with the database. Please contact server staff.");
+							message.channel.send("Sorry, I've encountered an issue with the database. Please contact server staff if this happens again.");
 							con.end();
 						} else {
 							con.end();
