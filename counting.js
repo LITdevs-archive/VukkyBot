@@ -160,15 +160,15 @@ module.exports = {
 					con.query(sql, function (err, result) {
 						if (err) {
 							console.log(err);
-							message.channel.send("Sorry, I've encountered an issue with the database. Please contact server staff.")
-							con.end()
+							message.channel.send("Sorry, I've encountered an issue with the database. Please contact server staff.");
+							con.end();
 						} else {
-							con.end()
+							con.end();
 						}
-					})
+					});
 					message.react("✅");
 				} else {
-					if (servers[message.guild.id].number == 0) return message.channel.send("Did you even try...")
+					if (servers[message.guild.id].number == 0) return message.channel.send("Did you even try...");
 					message.react("❌");
 					message.channel.send(`<@${message.author.id}> screwed up! Wrong number!\nThe next number is **1**. Correct number would have been **${parseInt(servers[message.guild.id].number) + 1}**`);
 					servers[message.guild.id].number = 0;
@@ -177,12 +177,12 @@ module.exports = {
 					con.query(sql, function (err, result) {
 						if (err) {
 							console.log(err);
-							message.channel.send("Sorry, I've encountered an issue with the database. Please contact server staff.")
-							con.end()
+							message.channel.send("Sorry, I've encountered an issue with the database. Please contact server staff.");
+							con.end();
 						} else {
-							con.end()
+							con.end();
 						}
-					})
+					});
 				}
 			} else {
 				
@@ -194,12 +194,12 @@ module.exports = {
 				con.query(sql, function (err, result) {
 					if (err) {
 						console.log(err);
-						message.channel.send("Sorry, I've encountered an issue with the database. Please contact server staff.")
-						con.end()
+						message.channel.send("Sorry, I've encountered an issue with the database. Please contact server staff.");
+						con.end();
 					} else {
-						con.end()
+						con.end();
 					}
-				})
+				});
 			}
 		}
 		
