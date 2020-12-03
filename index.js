@@ -6,27 +6,30 @@ const client = new Discord.Client();
 const chalk = require("chalk");
 const success = chalk.green;
 const warn = chalk.yellow;
+const error = chalk.bold.red;
 
 const embeds = require("./embeds.js");
 const config = require("./config.json");
+const vukkytils = require("./vukkytils.js");
+const format = require("util").format;
 const prefix = process.env.PREFIX;
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
 let embedPermissions = 1;
 
-console.log("[startup] VukkyBot is starting...");
+console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("STARTING")}`);
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
-	console.log(`[startup] ${success(`${file} loaded!`)}`);
+	console.log(`[${vukkytils.getString("STARTUP")}] ${success(format(vukkytils.getString("STARTUP_FILE_LOADED"), file))}`);
 }
 
 const cooldowns = new Discord.Collection();
 
 client.once("ready", () => {
-	console.log(`[startup] ${success("Ready!")}`);
+	console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("READY")}`);
 	const statuses = [
 		"with JavaScript",
 		"with a Fall Guy",
@@ -65,7 +68,7 @@ client.on("message", message => {
 	const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-	if (!command) {
+	if (!command && config.misc.invalidCmdReminder) {
 		let reply = `I've been looking around for a while now, but I don't think **${commandName}** is a command.`;
 		if (embedPermissions == 0) return message.channel.send(reply);
 		message.channel.send(embeds.errorEmbed(reply));
@@ -94,13 +97,10 @@ client.on("message", message => {
 	function tempPermissionsBot(permissionsBot) {
 		for (let i = 0, len = permissionsBot.length; permissionsBot; i < len, i++) {
 			if (permissionsBot[i] == undefined) {
-				if(!command.userPermissions) console.log(`[permcheck] ${success(`That should be it for ${prefix}${commandName}.`)}`);
 				break;
 			}
-			console.log(`[permcheck] ${prefix}${commandName} wants bot to have ${permissionsBot[i]} - checking for permission...`);
 			if ((message.channel.type == "text" && !message.guild.me.hasPermission(permissionsBot[i]))) {
-				console.log(`[permcheck] Looks like someone forgot to give the bot ${permissionsBot[i]}.`);
-				let reply = `Sorry, but I need the \`${permissionsBot[i]}\` permission to use that command.`;
+				let reply = format(vukkytils.getString("BOT_PERMISSION_NEEDED"), permissionsBot[i]);
 				if (embedPermissions == 0) return message.channel.send(reply);
 				message.channel.send(embeds.errorEmbed(reply));
 				return;
@@ -118,13 +118,10 @@ client.on("message", message => {
 	if (command.userPermissions) {
 		for (let i = 0, len = command.userPermissions.length; command.userPermissions; i < len, i++) {
 			if (command.userPermissions[i] == undefined) {
-				console.log(`[permcheck] ${success(`That should be it for ${prefix}${commandName}.`)}`);
 				break;
 			}
-			console.log(`[permcheck] ${prefix}${commandName} wants user to have ${command.userPermissions[i]} - checking for permission...`);
 			if ((message.channel.type == "text" && !message.member.hasPermission(command.userPermissions[i]))) {
-				console.log(`[permcheck] Looks like the user doesn't have ${command.userPermissions[i]}.`);
-				let reply = `Sorry, but you need the \`${command.userPermissions[i]}\` permission to use that command.`;
+				let reply = format(vukkytils.getString("BOT_PERMISSION_NEEDED"), command.userPermissions[i]);
 				if (embedPermissions == 0) return message.channel.send(reply);
 				message.channel.send(embeds.errorEmbed(reply));
 				return;

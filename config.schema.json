@@ -8,13 +8,17 @@
             "description": "Miscellaneous options",
             "type": "object",
             "properties": {
+                "invalidCmdReminder": {
+                    "description": "Toggles if the bot should tell you if the command you tried using doesn't exist",
+                    "type": "boolean"
+                },
                 "prefixReminder": {
                     "description": "Toggles if the bot should remind you of its prefix when pinged",
                     "type": "boolean"
                 },
                 "owner": {
                     "description": "The Discord ID of the owner of this VukkyBot",
-                    "type": "string"
+                    "type": "array"
                 },
                 "mysql": {
                     "description": "Toggles if a MySQL database should be used",
