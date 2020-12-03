@@ -12,7 +12,7 @@
         "languageComment": "Currently, only English (en) and Finnish (fi) is supported."
     },
     "counting": {
-        "enabled": true,
+        "enabled": false,
         "channelName": "counting"
     },
     "commands": {
