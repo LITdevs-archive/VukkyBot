@@ -1,6 +1,7 @@
 var chalk = require("chalk");
 var mysql = require("mysql");
 var config = require("./config.json");
+var vukkytils = require("./vukkytils");
 require("dotenv").config();
 var sql;
 
@@ -9,6 +10,7 @@ const warn = chalk.yellow;
 const success = chalk.green;
 const info = chalk.blue;
 var servers = {};
+var cheader = `[${vukkytils.getString("COUNTING")}]`;
 
 function isInt(value) {
 	let x = parseFloat(value);
@@ -17,9 +19,9 @@ function isInt(value) {
 
 module.exports = {
 	start: function(client) {
-		if(client.user.username.toLowerCase().includes("dev")) return console.log("[counting] DEVBOT DETECTED");
-		if(!config.counting.enabled) return console.log(`[counting] ${error("Counting is disabled!")}`);
-		if(!config.misc.mysql) return console.log(`[counting] ${error("MySQL is not enabled. MySQL is required for counting.")}`);
+		if(client.user.username.toLowerCase().includes("dev")) return console.log(`${cheader} ${error("Counting is disabled because you're on a developer bot!")}`);
+		if(!config.counting.enabled) return console.log(`${cheader} ${error("Counting is disabled!")}`);
+		if(!config.misc.mysql) return console.log(`${cheader} ${error("MySQL is not enabled. MySQL is required for counting.")}`);
 		
 		let con = mysql.createConnection({
 			host: process.env.SQL_HOST,
@@ -30,20 +32,20 @@ module.exports = {
 
 		con.connect(function(err) {
 			if (err) {
-				return console.log(`[counting] ${error("SQL connection failed. Maybe the credentials are invalid?")}`);
+				return console.log(`${cheader} ${error("SQL connection failed. Maybe the credentials are invalid?")}`);
 			} else {
-				console.log(`[counting] ${info("Connected to the database")}`);
+				console.log(`${cheader} ${info("Connected to the database")}`);
 
 				sql = "CREATE TABLE counting (serverid VARCHAR(255), number VARCHAR(255), lastcounter VARCHAR(255), highscore VARCHAR(255), id INT AUTO_INCREMENT PRIMARY KEY)";
 				con.query(sql, function (err, result) {
 					if (err) {
 						if(err.code == "ER_TABLE_EXISTS_ERROR") {
-							console.log(`[counting] ${warn("Table already exists")}`);
+							console.log(`${cheader} ${warn("Table already exists")}`);
 						} else {
-							console.log(`[counting] ${error("Table creation failed")} (probably already exists)`);
+							console.log(`${cheader} ${error("Table creation failed")} (probably already exists)`);
 						}
 					} else {
-						console.log(`[counting] ${success("Table created")}`);
+						console.log(`${cheader} ${success("Table created")}`);
 					}
 				});
 
@@ -59,14 +61,14 @@ module.exports = {
 					sql = `SELECT * FROM counting WHERE serverid = ${server.id}`;
 					con.query(sql, function (err, result) {
 						if (err) {
-							console.log(`[counting] ${error("Something went wrong in the counting startup!")}`);
+							console.log(`${cheader} ${error("Something went wrong in the counting startup!")}`);
 							console.log(err);
 						} else {
 							if (result.length <= 0) {
 								sql = `INSERT INTO counting(serverid, number, lastcounter, highscore) VALUES (${server.id}, 0, 0, 0)`;
 								con.query(sql, function (err, result) {
 									if (err) {
-										console.log(`[counting] ${error("Failed to create row for server with id:")} ${server.id}`);
+										console.log(`${cheader} ${error("Failed to create row for server with ID:")} ${server.id}`);
 									}
 										
 									servers[serverid.toString()] = {};
@@ -90,17 +92,15 @@ module.exports = {
 				
 				con.end();
 			}
-			console.log(`[counting] ${success("Counting is enabled and SQL credentials are valid!")}`);
+			console.log(`${cheader} ${success("Counting is enabled and SQL credentials are valid!")}`);
 		});
 	},
 	deletion(message) {
+		if (!isInt(message.content)) return;
 		message.channel.send("A message was deleted in this channel! The message was:");
 		message.channel.send(message.content);
 	},
 	check(message, client) {
-
-		// Make sure the server has a row. 
-
 		let con = mysql.createConnection({
 			host: process.env.SQL_HOST,
 			user: process.env.SQL_USER,
@@ -113,19 +113,19 @@ module.exports = {
 		sql = `SELECT * FROM counting WHERE serverid = ${server.id}`;
 		con.query(sql, function (err, result) {
 			if (err) {
-				console.log(`[counting] ${error("Something went wrong in the counting startup!")}`);
+				console.log(`${cheader} ${error("Something went wrong in the counting startup!")}`);
 				console.log(err);
 			} else {
 				if (result.length <= 0) {
 					con.connect(function(err) {
 						if (err) {
-							console.log(`[counting] ${error("Failed to connect to the database")}`);
+							console.log(`${cheader} ${error("Failed to connect to the database")}`);
 							console.log(err);
 						} else {
 							sql = `INSERT INTO counting(serverid, number, lastcounter, highscore) VALUES (${server.id}, 0, 0, 0)`;
 							con.query(sql, function (err, result) {
 								if (err) {
-									console.log(`[counting] ${error("Failed to create row for server with id:")} ${server.id}`);
+									console.log(`${cheader} ${error("Failed to create row for server with ID:")} ${server.id}`);
 								}
 							});
 							servers[serverid].id = serverid;
@@ -160,7 +160,7 @@ module.exports = {
 					con.query(sql, function (err, result) {
 						if (err) {
 							console.log(err);
-							message.channel.send("Sorry, I've encountered an issue with the database. Please contact server staff if this happens again.");
+							message.channel.send("Sorry, I've encountered an issue with the database.");
 							con.end();
 						} else {
 							con.end();
@@ -193,7 +193,7 @@ module.exports = {
 				} else {
 					if (servers[message.guild.id].number == 0) return message.channel.send("Did you even try...");
 					message.react("❌");
-					message.channel.send(`<@${message.author.id}> screwed up! Wrong number!\nThe next number is **1**. Correct number would have been **${parseInt(servers[message.guild.id].number) + 1}**`);
+					message.channel.send(`<@${message.author.id}> screwed up! Wrong number!\nThe next number is **1**.\n The correct number number would have been **${parseInt(servers[message.guild.id].number) + 1}**.`);
 					servers[message.guild.id].number = 0;
 					servers[message.guild.id].lastcounter = 0;
 
