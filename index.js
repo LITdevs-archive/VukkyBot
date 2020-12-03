@@ -1,6 +1,6 @@
 require("dotenv").config();
 const fs = require("fs");
-const counting = require("./counting");
+const counting = require("./counting.js");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const chalk = require("chalk");
@@ -159,5 +159,15 @@ client.on("message", message => {
 		message.reply("there was an error trying to execute that command!", embeds.errorEmbed(error.message));
 	}
 });
+
+client.on("messageDelete", message => {	
+	console.log("message deletion");
+	if (message.channel.name == config.counting.channelName) {
+		counting.deletion(message);
+		console.log("message deletion in counting");
+	}
+	console.log("message deletion");
+});
+
 
 client.login(process.env.BOT_TOKEN);

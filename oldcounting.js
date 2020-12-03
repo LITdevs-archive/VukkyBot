@@ -44,6 +44,10 @@ module.exports = {
 		});
 
 	},
+	deletiom: function(message) {
+		message.channel.send("A message was deleted!");
+		message.channel.send(message.content);
+	},
 	countCheck: function (message) {
 		if(!config.misc.mysql) return;
 		if(!config.counting.enabled) return;

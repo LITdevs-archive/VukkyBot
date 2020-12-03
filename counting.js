@@ -92,6 +92,10 @@ module.exports = {
 			console.log(`[counting] ${success("Counting is enabled and SQL credentials are valid!")}`);
 		});
 	},
+	deletion(message) {
+		message.channel.send("A message was deleted in this channel! The message was:");
+		message.channel.send(message.content);
+	},
 	check(message, client) {
 
 		// Make sure the server has a row. 
@@ -164,9 +168,9 @@ module.exports = {
 					})
 					message.react("✅");
 				} else {
-
+					if (servers[message.guild.id].number == 0) return message.channel.send("Did you even try...")
 					message.react("❌");
-					message.channel.send(`<@${message.author.id}> screwed up! Wrong number!\nThe next number is **1**.`);
+					message.channel.send(`<@${message.author.id}> screwed up! Wrong number!\nThe next number is **1**. Correct number would have been **${parseInt(servers[message.guild.id].number) + 1}**`);
 					servers[message.guild.id].number = 0;
 					servers[message.guild.id].lastcounter = 0;
 					sql = `UPDATE counting set number = 0, lastcounter = 0 WHERE serverid = ${message.guild.id}`;
