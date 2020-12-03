@@ -1,6 +1,6 @@
 require("dotenv").config();
 const fs = require("fs");
-const counting = require("./counting");
+const counting = require("./counting.js");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const chalk = require("chalk");
@@ -39,14 +39,15 @@ client.once("ready", () => {
 		"with pm2",
 		"with npm",
 		"with ESLint",
-		"with MySQL"
+		"with MySQL",
+		"SPAGHETTI"
 	];
 	setInterval(() => {
 		const index = Math.floor(Math.random() * (statuses.length - 1) + 1);
 		const pjson = require("./package.json");
 		client.user.setActivity(`${statuses[index]} (${pjson.version})`);
 	}, 10000);
-	counting.start();
+	counting.start(client);
 });
 
 client.on("message", message => {
@@ -57,7 +58,7 @@ client.on("message", message => {
 
 	if (message.content.toLowerCase().includes(`<@!${client.user.id}>`) && config.misc.prefixReminder == true && !message.content.startsWith(prefix)) message.reply(`my prefix is \`${process.env.PREFIX}\``);
 
-	if (message.channel.name == config.counting.channelName) counting.countCheck(message);
+	if (message.channel.name == config.counting.channelName) counting.check(message, client);
 
 	if (!message.content.toLowerCase().startsWith(prefix)) return;
 
@@ -155,5 +156,12 @@ client.on("message", message => {
 		message.reply("there was an error trying to execute that command!", embeds.errorEmbed(error.message));
 	}
 });
+
+client.on("messageDelete", message => {	
+	if (message.channel.name == config.counting.channelName) {
+		counting.deletion(message);
+	}
+});
+
 
 client.login(process.env.BOT_TOKEN);
