@@ -191,7 +191,7 @@ module.exports = {
 						message.react("✅");
 					}
 				} else {
-					if (servers[message.guild.id].number == 0) return message.channel.send("Did you even try...");
+					if (servers[message.guild.id].number == 0) return message.channel.send("The correct number is **1**. Did you even try?");
 					message.react("❌");
 					message.channel.send(`<@${message.author.id}> screwed up! Wrong number!\nThe next number is **1**.\n The correct number number would have been **${parseInt(servers[message.guild.id].number) + 1}**.`);
 					servers[message.guild.id].number = 0;
