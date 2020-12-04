@@ -40,6 +40,20 @@
                 }
             }
         },
+        "update_checker": {
+            "description": "Options for VukkyBot's update checking feature",
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "description": "Toggles if update checking is enabled",
+                    "type": "boolean"
+                },
+                "dmOwner": {
+                    "description": "Toggles if the bot should DM the owner set in config about an available update",
+                    "type": "boolean"
+                }
+            }
+        },
         "commands": {
             "description": "Options for VukkyBot's commands",
             "type": "object",

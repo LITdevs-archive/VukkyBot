@@ -7,7 +7,8 @@ const chalk = require("chalk");
 const success = chalk.green;
 const warn = chalk.yellow;
 const error = chalk.bold.red;
-
+const fetch = require("node-fetch");
+const pjson = require("./package.json");
 const embeds = require("./embeds.js");
 const config = require("./config.json");
 const vukkytils = require("./vukkytils.js");
@@ -44,11 +45,38 @@ client.once("ready", () => {
 	];
 	setInterval(() => {
 		const index = Math.floor(Math.random() * (statuses.length - 1) + 1);
-		const pjson = require("./package.json");
 		client.user.setActivity(`${statuses[index]} (${pjson.version})`);
 	}, 10000);
 	counting.start(client);
+	if (config.update_checker.enabled) {
+		checkUpdates();
+		setInterval(() => {
+			checkUpdates();
+		}, 7200000);
+	}
+
 });
+
+function checkUpdates() {
+	fetch("https://raw.githubusercontent.com/VukkyLtd/VukkyBot/master/package.json")  
+		.then(res => res.json())
+		.then(json => {
+			if (json.version > pjson.version) {
+				console.log(`${warn("Update available! https://github.com/VukkyLtd/VukkyBot/releases")}`);
+				if (config.update_checker.dmOwner) {
+					for (let i = 0;i < config.misc.owner.length;i++) {
+						client.users.fetch(config.misc.owner[i].toString())
+							.then(owner => {
+								owner.send("Hello! I am out of date! Please update me! https://github.com/VukkyLtd/VukkyBot/releases :3 uwu");
+							});
+						
+						
+					}
+				}
+			}
+		});
+}
+
 
 client.on("message", message => {
 

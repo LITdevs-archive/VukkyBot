@@ -5,7 +5,8 @@
         "invalidCmdReminder": true,
         "prefixReminder": true,
         "owner": [
-            "708333380525228082"
+            "708333380525228082",
+            "125644326037487616"
         ],
         "mysql": true,
         "language": "en",
@@ -14,6 +15,10 @@
     "counting": {
         "enabled": true,
         "channelName": "counting"
+    },
+    "update_checker": {
+        "enabled": true,
+        "dmOwner": true
     },
     "commands": {
         "quiz": {
