@@ -18,9 +18,14 @@ async function isTokenValid(token) {
 		client.destroy();
 		spinner.succeed("Token is valid");
 		return true;
-	} catch {
-		spinner.fail("Token appears to be invalid");
-		return false;
+	} catch (e) {
+		if(e.message.endsWith("ENOTFOUND discord.com")) {
+			spinner.warn("Internet connection may be unavailable");
+			return true;
+		} else {
+			spinner.fail("Token appears to be invalid");
+			return false;
+		}
 	}
 }
 
