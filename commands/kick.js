@@ -21,7 +21,8 @@ module.exports = {
 		if(mentionHighestRole >= authorHighestRole) return message.channel.send("You can't kick members with an equal or higher position than you.");
 		if(!mentionedUser.kickable) return message.channel.send("I can't kick this user.");
 
-		mentionedUser.kick(`Done by ${message.author.tag} - ${kickReason}`)
-			.then(user => message.channel.send(embeds.successEmbed(`Kicked <@${user.id}> (${user.id}) from ${message.guild.name}, with the reason ${kickReason}.`)));
+		mentionedUser.send(`👢 You were kicked from **${message.guild.name}**${(kickReason !== "no reason specified") ? `, for ${kickReason}.` : "."}`)
+			.then(_h => mentionedUser.kick(`Done by ${message.author.tag} - ${kickReason}`))
+			.then(_h => message.channel.send(embeds.successEmbed(`Kicked <@${mentionedUser.id}> (${mentionedUser.id}) from **${message.guild.name}**${(kickReason !== "no reason specified") ? `, for ${kickReason}.` : "."}`)));
 	},
 };

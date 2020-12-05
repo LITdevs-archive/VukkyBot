@@ -4,7 +4,8 @@ const config = require("./config.json");
 const avatarURL = "https://i.imgur.com/H0sAkrl.png";
 const versionString = `This VukkyBot is on v${pjson.version} using discord.js ${pjson.dependencies["discord.js"].substring(1)}`;
 
-const strings = require("./strings.json");
+const vukkytils = require("./vukkytils.js");
+const format = require("util").format;
 
 module.exports = {
 	errorEmbed,
@@ -24,13 +25,14 @@ module.exports = {
 	funFactEmbed,
 	duckEmbed,
 	aboutEmbed,
-	covidEmbed
+	covidEmbed,
+	warnsUserEmbed
 };
 
 function errorEmbed(errorMsg) {
 	return new Discord.MessageEmbed()
 		.setColor("#ff0000")
-		.setTitle(`❌ ${strings[config.misc.language].ERROR_GENERIC}`)
+		.setTitle(`❌ ${vukkytils.getString("ERROR_GENERIC")}`)
 		.setDescription(errorMsg)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -241,5 +243,14 @@ function covidEmbed(flag, location, cases, casesToday, deaths, deathsToday, reco
 		.addField("Tests", tests, true)
 		.setTimestamp()
 		.setThumbnail(flag)
+		.setFooter(versionString, avatarURL);
+}
+
+function warnsUserEmbed(username, warns) {
+	return new Discord.MessageEmbed()
+		.setColor("#ffcc4d")
+		.setTitle(`⚠ ${format(vukkytils.getString("WARNINGS_TITLE"), username)}`)
+		.setDescription(warns)
+		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }

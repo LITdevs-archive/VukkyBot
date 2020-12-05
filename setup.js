@@ -4,7 +4,7 @@ let chalk = require("chalk");
 const ora = require("ora");
 
 let mysql = require("mysql");
-console.log(chalk.blueBright("Welcome to the interactive VukkyBot Setup tool."));
+console.log(chalk.blueBright("Thanks for picking VukkyBot! Let's get started..."));
 
 let sql;
 
@@ -37,33 +37,62 @@ let questions = [
 		default: "v!",
 	},
 	{
-		type: "confirm",
-		name: "prefixreminder",
-		message: "Do you want your VukkyBot to remind you of its prefix when pinged?",
+		type: "checkbox",
+		name: "extrafeatures",
+		message: "What extra features would you like?",
+		choices: [
+			{ name: "MySQL features (MySQL database required)", value: "mysql" },
+			{ name: "Invalid command reminders", value: "invalidcmd" },
+			{ name: "Prefix reminders", value: "prefixremind" },
+			{ name: "Update checks", value: "updates" },
+		]
 	},
 	{
-		type: "input",
+		type: "checkbox",
+		name: "mysqlfeatures",
+		message: "What MySQL features would you like? Warns are always on.",
+		choices: [
+			{ name: "Counting", value: "counting" }
+		],
+		when: function (answers) {
+			return answers.extrafeatures !== undefined && answers.extrafeatures.includes("mysql");
+		},
+	},
+	{
+		type: "password",
 		name: "token",
 		message: "What's your bot token?",
-		validate: isTokenValid
+		validate: isTokenValid,
+		mask: true
+	},
+	{
+		type: "confirm",
+		name: "multipleowners",
+		message: "Should your VukkyBot have multiple owners?"
 	},
 	{
 		type: "input",
 		name: "discordid",
-		message: "What's your Discord ID?"
-	},
-	{
-		type: "confirm",
-		name: "mysql",
-		message: "Use MySQL database for features that require it, like counting and warn?"
-	},
-	{
-		type: "confirm",
-		name: "countingenabled",
-		message: "Would you like VukkyBot to count for you?",
+		message: "What's the Discord ID of the person who'll be owning this VukkyBot?",
 		when: function (answers) {
-			return answers.mysql !== false;
-		},
+			return answers.multipleowners !== true;
+		}
+	},
+	{
+		type: "input",
+		name: "discordidmulti",
+		message: "What's the Discord ID of the people who'll be owning this VukkyBot, split with commas (id1, id2, id3)?",
+		when: function (answers) {
+			return answers.multipleowners !== false;
+		}
+	},
+	{
+		type: "confirm",
+		name: "updateDms",
+		message: "Should your VukkyBot DM the owners when an update is found?",
+		when: function (answers) {
+			return answers.extrafeatures !== undefined && answers.extrafeatures.includes("updates");
+		}
 	},
 	{
 		type: "input",
@@ -71,7 +100,7 @@ let questions = [
 		message: "What is the name of the channel you would like VukkyBot to count in?",
 		default: "counting",
 		when: function (answers) {
-			return answers.countingenabled !== false && answers.mysql !== false;
+			return answers.mysqlfeatures !== undefined && answers.mysqlfeatures.includes("counting");
 		}
 	},
 	{
@@ -79,15 +108,15 @@ let questions = [
 		name: "sqlhost",
 		message: "What's your SQL hostname?",
 		when: function (answers) {
-			return answers.mysql !== false;
+			return answers.extrafeatures !== undefined && answers.extrafeatures.includes("mysql");
 		},
 	},
 	{
-		type: "input",
+		type: "password",
 		name: "sqlpass",
 		message: "What's your SQL password?",
 		when: function (answers) {
-			return answers.mysql !== false;
+			return answers.extrafeatures !== undefined && answers.extrafeatures.includes("mysql");
 		},
 	},
 	{
@@ -95,7 +124,7 @@ let questions = [
 		name: "sqluser",
 		message: "What's your SQL username?",
 		when: function (answers) {
-			return answers.mysql !== false;
+			return answers.extrafeatures !== undefined && answers.extrafeatures.includes("mysql");
 		},
 	},
 	{
@@ -103,92 +132,106 @@ let questions = [
 		name: "sqldb",
 		message: "What's your SQL database name?",
 		when: function (answers) {
-			return answers.mysql !== false;
+			return answers.extrafeatures !== undefined && answers.extrafeatures.includes("mysql");
 		},
 	}
 ];
   
 inquirer.prompt(questions).then((answers) => {
-	const spinner1 = ora("Saving credentials to .env").start();
-	try {
-		fs.writeFile(".env", `BOT_TOKEN=${answers.token}\nPREFIX=${answers.prefix}\nSQL_HOST=${answers.sqlhost}\nSQL_PASS=${answers.sqlpass}\nSQL_USER=${answers.sqluser}\nSQL_DB=${answers.sqldb}`, function (err) {
-			if (err) {
-				spinner1.fail("Saving credentials to .env failed");
-				console.log(err);
-				process.exit(1);
-			} else {
-				spinner1.succeed("Saved credentials to .env"); 
-			}
-		});
-	} catch (err) {
-		spinner1.fail("Saving credentials to .env failed");
-		console.log(err);
-		process.exit(1);
+	saveToEnv();
+
+	function saveToEnv() {
+		const spinner1 = ora("Saving credentials to .env").start();
+		try {
+			fs.writeFile(".env", `BOT_TOKEN=${answers.token}\nPREFIX=${answers.prefix}\nSQL_HOST=${answers.sqlhost}\nSQL_PASS=${answers.sqlpass}\nSQL_USER=${answers.sqluser}\nSQL_DB=${answers.sqldb}`, function (err) {
+				if (err) {
+					spinner1.fail("Saving credentials to .env failed");
+					console.log(err);
+					process.exit(1);
+				} else {
+					spinner1.succeed("Saved credentials to .env"); 
+					saveToConfig();
+				}
+			});
+		} catch (err) {
+			spinner1.fail("Saving credentials to .env failed");
+			console.log(err);
+			process.exit(1);
+		}
 	}
 
-	const spinner2 = ora("Saving configuration to config.json").start();
-	try {
-		const config = require("./config.json");
-		config.misc.owner = answers.discordid;
-		config.misc.prefixReminder = answers.prefixreminder;
-		config.misc.mysql = answers.mysql;
-		if (answers.mysql) { config.counting.enabled = answers.countingenabled; } else { config.counting.enabled = false; }
-		if(answers.countingenabled) { config.counting.channelName = answers.countingchannel; }
-		fs.writeFile("config.json", JSON.stringify(config, null, 4), function (err) {
-			if (err) {
-				spinner2.fail("Saving configuration to config.json failed");
-				console.log(err);
-				process.exit(1);
-			} else {
-				spinner2.succeed("Saved configuration to config.json");
+	function saveToConfig() {
+		const spinner2 = ora("Saving configuration to config.json").start();
+		try {
+			const config = require("./config.json");
+			if (answers.multipleowners !== true) { config.misc.owner = [answers.discordid]; } else { config.misc.owner = answers.discordidmulti.split(", "); }
+			config.misc.invalidCmdReminder = answers.extrafeatures !== undefined && answers.extrafeatures.includes("invalidcmd");
+			config.misc.prefixReminder = answers.extrafeatures !== undefined && answers.extrafeatures.includes("prefixremind");
+			config.misc.mysql = answers.extrafeatures !== undefined && answers.extrafeatures.includes("mysql");
+			if (answers.mysqlfeatures !== undefined && answers.mysqlfeatures.includes("counting")) { config.counting.enabled = answers.mysqlfeatures.counting !== null; } else { config.counting.enabled = false; }
+			if (answers.mysqlfeatures !== undefined && answers.mysqlfeatures.includes("counting")) { config.counting.channelName = answers.countingchannel; }
+			if (answers.extrafeatures !== undefined && answers.extrafeatures.includes("updates")) {
+				config.updateChecker.enabled = true;
+				if (answers.updateDms == true) config.updateChecker.dmOwner = true;
 			}
-		});
-	} catch (err) {
-		spinner2.fail("Saving configuration to config.json failed");
-		console.log(err);
-		process.exit(1);
+			fs.writeFile("config.json", JSON.stringify(config, null, 4), function (err) {
+				if (err) {
+					spinner2.fail("Saving configuration to config.json failed");
+					console.log(err);
+					process.exit(1);
+				} else {
+					spinner2.succeed("Saved configuration to config.json");
+					startMySQL();
+				}
+			});
+		} catch (err) {
+			spinner2.fail("Saving configuration to config.json failed");
+			console.log(err);
+			process.exit(1);
+		}
 	}
 
-	if(answers.mysql) {
-		const spinner4 = ora("Connecting to the database").start();
-	
-		let con = mysql.createConnection({
-			host: answers.sqlhost,
-			user: answers.sqluser,
-			password: answers.sqlpass,
-			database: answers.sqldb
-		});
-		con.connect(function(err) {
-			if (err) {
-				spinner4.fail("Failed to connect to the database");
-				console.log(err);
-				process.exit(1);
-			} else {
-				spinner4.succeed("Connected to the database");
-				const spinner5 = ora("Creating table in the database").start();
-				sql = "CREATE TABLE warnings (username VARCHAR(255), serverid VARCHAR(255), uid VARCHAR(255), reason VARCHAR(255), id INT AUTO_INCREMENT PRIMARY KEY)";
-				con.query(sql, function (err, result) {
-					if (err) {
-						if (err.code == "ER_TABLE_EXISTS_ERROR") {
-							spinner5.warn("Table already exists in the database");
+	function startMySQL() {
+		if(answers.extrafeatures !== undefined && answers.extrafeatures.includes("mysql")) {
+			const spinner4 = ora("Connecting to the database").start();
+		
+			let con = mysql.createConnection({
+				host: answers.sqlhost,
+				user: answers.sqluser,
+				password: answers.sqlpass,
+				database: answers.sqldb
+			});
+			con.connect(function (err) {
+				if (err) {
+					spinner4.fail("Failed to connect to the database");
+					console.log(err);
+					process.exit(1);
+				} else {
+					spinner4.succeed("Connected to the database");
+					const spinner5 = ora("Creating table in the database").start();
+					sql = "CREATE TABLE warnings (username VARCHAR(255), serverid VARCHAR(255), uid VARCHAR(255), reason VARCHAR(255), id INT AUTO_INCREMENT PRIMARY KEY)";
+					con.query(sql, function (err, result) {
+						if (err) {
+							if (err.code == "ER_TABLE_EXISTS_ERROR") {
+								spinner5.warn("Table already exists in the database");
+							} else {
+								spinner5.fail("Failed to create table in the database");
+								console.log(err);
+							}
 						} else {
-							spinner5.fail("Failed to create table in the database");
-							console.log(err);
+							spinner5.succeed("Created table in the database");
 						}
-					} else {
-						spinner5.succeed("Created table in the database");
-					}
-					launchyBotty();
-				});
-			}
-		});
-	} else {
-		launchyBotty();
+						launchyBotty();
+					});
+				}
+			});
+		} else {
+			launchyBotty();
+		}
 	}
 
 	// eslint-disable-next-line no-inner-declarations
 	function launchyBotty() {
-		console.log(chalk.green.bold("Congratulations! Setup has now completed."));
 		if (answers.launch) {
 			const spinner3 = ora("Starting VukkyBot").start();
 			try {

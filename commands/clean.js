@@ -6,6 +6,7 @@ module.exports = {
 	botPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
 	userPermissions: ["MANAGE_MESSAGES"],
 	args: true,
+	guildOnly: true,
 	usage: "<messages to clear>",
 	aliases: ["clear", "wipe", "eat"],
 	execute(message, args) {
