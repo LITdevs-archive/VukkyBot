@@ -40,9 +40,9 @@ module.exports = {
 				con.query(sql, function (err, result) {
 					if (err) {
 						if(err.code == "ER_TABLE_EXISTS_ERROR") {
-							console.log(`[counting] ${warn("Table already exists")}`);
+							console.log(`${cheader} ${warn("Table already exists")}`);
 						} else {
-							console.log(`[counting] ${error("Table creation failed")} (probably already exists)`);
+							console.log(`${cheader} ${error("Table creation failed")} (probably already exists)`);
 						}
 					} else {
 						console.log(`${cheader} ${success("Table created")}`);
@@ -119,7 +119,7 @@ module.exports = {
 				if (result.length <= 0) {
 					con.connect(function(err) {
 						if (err) {
-							console.log(`[counting] ${error("Failed to connect to the database")}`);
+							console.log(`${cheader} ${error("Failed to connect to the database")}`);
 							console.log(err);
 						} else {
 							sql = `INSERT INTO counting(serverid, number, lastcounter, highscore) VALUES (${server.id}, 0, 0, 0)`;
