@@ -16,7 +16,7 @@
         "enabled": true,
         "channelName": "counting"
     },
-    "update_checker": {
+    "updateChecker": {
         "enabled": true,
         "dmOwner": true
     },

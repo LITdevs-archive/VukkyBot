@@ -40,7 +40,7 @@
                 }
             }
         },
-        "update_checker": {
+        "updateChecker": {
             "description": "Options for VukkyBot's update checking feature",
             "type": "object",
             "properties": {

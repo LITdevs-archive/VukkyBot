@@ -15,6 +15,7 @@ const vukkytils = require("./vukkytils.js");
 const format = require("util").format;
 const prefix = process.env.PREFIX;
 client.commands = new Discord.Collection();
+let updateRemindedOn = null;
 
 const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
 let embedPermissions = 1;
@@ -41,36 +42,60 @@ client.once("ready", () => {
 		"with npm",
 		"with ESLint",
 		"with MySQL",
-		"SPAGHETTI"
+		"with SPAGHETTI",
+		"with Vukkies",
+		"with node-fetch",
+		"with vukkyutils",
+		"with discord.js",
+		"Fall Guys",
+		"Among Us",
+		"Startup Panic",
+		"Fortnite",
+		"Cyberpunk 2077",
+		"Portal 3",
+		"GTA 6",
+		"GTA 7",
+		"Roblox 2",
+		"Minecraft 2",
+		"Roblox",
+		"Minecraft",
+		"osu!",
+		"osu! 2",
+		"Pixel Strike 3D",
+		"Among Guys",
+		"DropBlox",
+		"with the cats",
+		"Club Penguin",
+		"you",
+		"Baba is You",
+		"Among Them"
 	];
 	setInterval(() => {
 		const index = Math.floor(Math.random() * (statuses.length - 1) + 1);
 		client.user.setActivity(`${statuses[index]} (${pjson.version})`);
-	}, 10000);
+	}, 15000);
 	counting.start(client);
-	if (config.update_checker.enabled) {
+	if (config.updateChecker.enabled) {
 		checkUpdates();
 		setInterval(() => {
 			checkUpdates();
 		}, 7200000);
 	}
-
 });
 
 function checkUpdates() {
 	fetch("https://raw.githubusercontent.com/VukkyLtd/VukkyBot/master/package.json")  
 		.then(res => res.json())
 		.then(json => {
-			if (json.version > pjson.version) {
-				console.log(`${warn("Update available! https://github.com/VukkyLtd/VukkyBot/releases")}`);
-				if (config.update_checker.dmOwner) {
-					for (let i = 0;i < config.misc.owner.length;i++) {
+			if (json.version < pjson.version && updateRemindedOn !== json.version) {
+				console.log(`${warn("Update available!")}`);
+				updateRemindedOn = json.version;
+				if (config.updateChecker.dmOwner) {
+					for (let i = 0; i < config.misc.owner.length; i++) {
 						client.users.fetch(config.misc.owner[i].toString())
 							.then(owner => {
-								owner.send("Hello! I am out of date! Please update me! https://github.com/VukkyLtd/VukkyBot/releases :3 uwu");
+								owner.send(`Hello! I'm out of date. You're using VukkyBot **${pjson.version}**, but the latest version is VukkyBot **${json.version}**.\n*You have gotten this DM because you are an owner of this VukkyBot. DMing my owner(s) when an update is available is turned on.*`);
 							});
-						
-						
 					}
 				}
 			}
