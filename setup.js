@@ -208,6 +208,11 @@ inquirer.prompt(questions).then((answers) => {
 						} else {
 							spinner5.succeed("Created table in the database");
 						}
+						
+						
+					});
+					sql = "DROP TABLE counting";
+					con.query(sql, function (err, result) {
 						launchyBotty();
 					});
 				}
