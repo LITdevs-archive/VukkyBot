@@ -26,7 +26,8 @@ module.exports = {
 	duckEmbed,
 	aboutEmbed,
 	covidEmbed,
-	warnsUserEmbed
+	warnsUserEmbed,
+	innerEmbed
 };
 
 function errorEmbed(errorMsg) {
@@ -216,11 +217,10 @@ function duckEmbed(image) {
 		.setFooter(versionString, avatarURL);
 }
 
-function innerVukkyEmbed(image, user) {
-	var message = `${user}, Here is your inner Vukky!`;
+function innerEmbed(image) {
 	return new Discord.MessageEmbed()
 		.setColor("#8e562e")
-		.setTitle(message)
+		.setTitle("A wild inner Vukky appears!")
 		.setImage(image)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
