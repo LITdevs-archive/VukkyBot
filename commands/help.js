@@ -1,6 +1,6 @@
 require("dotenv").config();
 const prefix = process.env.PREFIX;
-const embeds = require("../embeds.js");
+const embeds = require("../utilities/embeds");
 
 module.exports = {
 	name: "help",

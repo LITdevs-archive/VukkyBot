@@ -1,4 +1,4 @@
-const embeds = require("../embeds.js");
+const embeds = require("../utilities/embeds");
 
 module.exports = {
 	name: "kick",

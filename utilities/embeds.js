@@ -1,10 +1,10 @@
 const Discord = require("discord.js");
-const pjson = require("./package.json");
-const config = require("./config.json");
+const pjson = require("../package.json");
+const config = require("../config.json");
 const avatarURL = "https://i.imgur.com/H0sAkrl.png";
 const versionString = `This VukkyBot is on v${pjson.version} using discord.js ${pjson.dependencies["discord.js"].substring(1)}`;
 
-const vukkytils = require("./vukkytils.js");
+const vukkytils = require("./vukkytils");
 const format = require("util").format;
 
 module.exports = {

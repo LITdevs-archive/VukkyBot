@@ -1,4 +1,4 @@
-const embeds = require("../embeds.js");
+const embeds = require("../utilities/embeds");
 const packagejson = require("../package.json");
 var os = require("os");
 

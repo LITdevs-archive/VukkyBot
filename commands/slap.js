@@ -1,5 +1,5 @@
-const embeds = require("../embeds.js");
-const vukkytils = require("../vukkytils.js");
+const embeds = require("../utilities/embeds");
+const vukkytils = require("../utilities/vukkytils");
 const format = require("util").format;
 
 module.exports = {
