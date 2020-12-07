@@ -11,7 +11,7 @@ module.exports = {
 		let vukkyid = vn.convert(message.author.id);
 		message.channel.send("<a:offlinegif:757979855924101220> Hold on! I'm discovering your inner Vukky!")
 			.then(newMessage => {	
-				newMessage.edit(`${message.author}, Here is your inner Vukky`, embeds.innerEmbed(`https://sivusto.tk/innervukky/${vukkyid}.png`));
+				newMessage.edit(`${message.author}, here is your inner Vukky!`, embeds.innerEmbed(`https://sivusto.tk/innervukky/${vukkyid}.png`));
 			});
 	},
 };
