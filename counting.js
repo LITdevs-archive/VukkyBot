@@ -1,7 +1,7 @@
 var chalk = require("chalk");
 var mysql = require("mysql");
 var config = require("./config.json");
-var vukkytils = require("./vukkytils");
+var vukkytils = require("./utilities/vukkytils");
 require("dotenv").config();
 var sql;
 

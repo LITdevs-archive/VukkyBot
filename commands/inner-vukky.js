@@ -1,6 +1,6 @@
-const embeds = require("../embeds.js");
+const embeds = require("../utilities/embeds.js");
 const fetch = require("node-fetch");
-const vn = require("../vukkynumber.js");
+const vn = require("../utilities/vukkynumber");
 module.exports = {
 	name: "inner-vukky",
 	description: "Discover your inner Vukky!",

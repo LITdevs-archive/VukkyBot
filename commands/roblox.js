@@ -1,4 +1,4 @@
-const embeds = require("../embeds.js");
+const embeds = require("../utilities/embeds");
 const fetch = require("node-fetch");
 const commaNumber = require("comma-number");
 

@@ -1,5 +1,5 @@
-const { successEmbed, errorEmbed } = require("../embeds.js");
-const embeds = require("../embeds.js");
+const { successEmbed, errorEmbed } = require("../utilities/embeds");
+const embeds = require("../utilities/embeds");
 
 module.exports = {
 	name: "emoji",

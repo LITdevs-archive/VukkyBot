@@ -1,4 +1,4 @@
-const embeds = require("../embeds.js");
+const embeds = require("../utilities/embeds");
 
 module.exports = {
 	name: "reload",
@@ -20,7 +20,7 @@ module.exports = {
 			message.client.commands.set(newCommand.name, newCommand);
 		} catch (error) {
 			console.log(error);
-			const vukkytils = require("../vukkytils.js");
+			const vukkytils = require("../utilities/vukkytils");
 			const format = require("util").format;
 			message.channel.send(embeds.errorEmbed(format(vukkytils.getString("ERROR_RELOAD"), commandName, error.message)));
 		}

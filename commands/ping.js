@@ -1,4 +1,4 @@
-const { infoEmbed } = require("../embeds.js");
+const { infoEmbed } = require("../utilities/embeds");
 
 module.exports = {
 	name: "ping",
