@@ -216,6 +216,16 @@ function duckEmbed(image) {
 		.setFooter(versionString, avatarURL);
 }
 
+function innerVukkyEmbed(image, user) {
+	var message = `${user}, Here is your inner Vukky!`;
+	return new Discord.MessageEmbed()
+		.setColor("#8e562e")
+		.setTitle(message)
+		.setImage(image)
+		.setTimestamp()
+		.setFooter(versionString, avatarURL);
+}
+
 function aboutEmbed(botversion, discordjsversion, osinfo) {
 	return new Discord.MessageEmbed()
 		.setColor("#4289c1")
