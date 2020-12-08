@@ -8,10 +8,18 @@ module.exports = {
 	cooldown: 5,
 	aliases: ["innervukky"],
 	execute(message, args) {
-		let vukkyid = vn.convert(message.author.id);
-		message.channel.send("<a:offlinegif:757979855924101220> Hold on! I'm discovering your inner Vukky!")
+		let vukkyid;
+		let otherVukky;
+		if(message.mentions.users.first() && message.mentions.users.first().id !== message.author.id) {
+			vukkyid = vn.convert(message.mentions.users.first().id);
+			otherVukky = true;
+		} else {
+			vukkyid = vn.convert(message.author.id);
+			otherVukky = false;
+		}
+		message.channel.send(`<a:offlinegif:757979855924101220> Hold on! I'm discovering ${(otherVukky) ? "their" : "your"} inner Vukky!`)
 			.then(newMessage => {	
-				newMessage.edit(`${message.author}, here is your inner Vukky!`, embeds.innerEmbed(`https://sivusto.tk/innervukky/${vukkyid}.png`));
+				newMessage.edit(`${message.author}, here is ${(otherVukky) ? "their" : "your"} inner Vukky!`, embeds.innerEmbed(`https://sivusto.tk/innervukky/${vukkyid}.png`));
 			});
 	},
 };
