@@ -161,6 +161,7 @@ client.on("message", message => {
 		}
 	}
 
+	// TODO: Remove dcPermissions
 	if (command.dcPermissions) {
 		console.log(`[permcheck] ${warn(`${prefix}${commandName} - dcPermissions is deprecated. Use botPermissions instead.`)}`);
 		tempPermissionsBot(command.dcPermissions);
