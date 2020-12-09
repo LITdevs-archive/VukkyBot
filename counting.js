@@ -81,9 +81,9 @@ module.exports = {
 							} else {
 								servers[serverid.toString()] = {};
 								servers[serverid.toString()].id = serverid;
-								servers[serverid.toString()].number = result[0].number;
+								servers[serverid.toString()].number = parseInt(result[0].number);
 								servers[serverid.toString()].lastcounter = result[0].lastcounter;
-								servers[serverid.toString()].highscore = result[0].highscore;
+								servers[serverid.toString()].highscore = parseInt(result[0].highscore);
 							}
 
 						}
@@ -149,11 +149,11 @@ module.exports = {
 			database: process.env.SQL_DB
 		});
 
-		let checkString = message.content.split(" ")[0];
+		let checkString = parseInt(message.content.split(" ")[0]);
 
 		if (isInt(checkString)) {
 			if (message.author.id.toString() != servers[message.guild.id].lastcounter.toString()) {
-				if (parseInt(checkString) == servers[message.guild.id].number + 1) {
+				if (parseInt(checkString) == parseInt(servers[message.guild.id].number) + 1) {
 					servers[message.guild.id].number = parseInt(checkString);
 					servers[message.guild.id].lastcounter = message.author.id;
 					sql = `UPDATE counting set number = ${parseInt(checkString)}, lastcounter = ${message.author.id} WHERE serverid = ${message.guild.id}`;
