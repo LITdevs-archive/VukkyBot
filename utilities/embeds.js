@@ -1,10 +1,10 @@
 const Discord = require("discord.js");
-const pjson = require("./package.json");
-const config = require("./config.json");
+const pjson = require("../package.json");
+const config = require("../config.json");
 const avatarURL = "https://i.imgur.com/H0sAkrl.png";
 const versionString = `This VukkyBot is on v${pjson.version} using discord.js ${pjson.dependencies["discord.js"].substring(1)}`;
 
-const vukkytils = require("./vukkytils.js");
+const vukkytils = require("./vukkytils");
 const format = require("util").format;
 
 module.exports = {
@@ -26,7 +26,8 @@ module.exports = {
 	duckEmbed,
 	aboutEmbed,
 	covidEmbed,
-	warnsUserEmbed
+	warnsUserEmbed,
+	innerEmbed
 };
 
 function errorEmbed(errorMsg) {
@@ -211,6 +212,15 @@ function duckEmbed(image) {
 	return new Discord.MessageEmbed()
 		.setColor("#8e562e")
 		.setTitle(message)
+		.setImage(image)
+		.setTimestamp()
+		.setFooter(versionString, avatarURL);
+}
+
+function innerEmbed(image) {
+	return new Discord.MessageEmbed()
+		.setColor("#8e562e")
+		.setTitle("A wild inner Vukky appears!")
 		.setImage(image)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);

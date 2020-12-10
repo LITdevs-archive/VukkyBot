@@ -40,7 +40,7 @@ This command will require the `EMBED_LINKS` permission. As an example, we'll use
 
 Make a new file in the "commands" folder called `vukkylove.js`, with the following contents:
 ```js
-const { infoEmbed } = require("../embeds.js");
+const { infoEmbed } = require("../utilities/embeds");
 
 module.exports = {
 	name: "ping",
@@ -73,7 +73,7 @@ It should look like this:
 ![Example of the command in Discord](https://i.imgur.com/YY90wa2.png)
 
 ```js
-const { infoEmbed } = require("../embeds.js");
+const { infoEmbed } = require("../utilities/embeds");
 
 module.exports = {
 	name: "vukkylove",
@@ -90,7 +90,7 @@ module.exports = {
 Editing existing commands is quite simple. Let's say we wanted to update the `ping` command:
 
 ```js
-const { infoEmbed } = require("../embeds.js");
+const { infoEmbed } = require("../utilities/embeds");
 
 module.exports = {
 	name: "ping",
@@ -116,7 +116,7 @@ It should look like this:
 ![Example of the command in Discord](https://i.imgur.com/oMDmv9h.png)
 
 ```js
-const { infoEmbed } = require("../embeds.js");
+const { infoEmbed } = require("../utilities/embeds");
 
 module.exports = {
 	name: "ping",

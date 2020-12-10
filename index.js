@@ -1,19 +1,21 @@
 require("dotenv").config();
 const fs = require("fs");
-const counting = require("./counting");
+const counting = require("./counting.js");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const chalk = require("chalk");
 const success = chalk.green;
 const warn = chalk.yellow;
 const error = chalk.bold.red;
-
-const embeds = require("./embeds.js");
+const fetch = require("node-fetch");
+const pjson = require("./package.json");
+const embeds = require("./utilities/embeds");
 const config = require("./config.json");
-const vukkytils = require("./vukkytils.js");
+const vukkytils = require("./utilities/vukkytils");
 const format = require("util").format;
 const prefix = process.env.PREFIX;
 client.commands = new Discord.Collection();
+let updateRemindedOn = null;
 
 const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
 let embedPermissions = 1;
@@ -39,15 +41,67 @@ client.once("ready", () => {
 		"with pm2",
 		"with npm",
 		"with ESLint",
-		"with MySQL"
+		"with MySQL",
+		"with SPAGHETTI",
+		"with Vukkies",
+		"with node-fetch",
+		"with vukkyutils",
+		"with discord.js",
+		"Fall Guys",
+		"Among Us",
+		"Startup Panic",
+		"Fortnite",
+		"Cyberpunk 2077",
+		"Portal 3",
+		"GTA 6",
+		"GTA 7",
+		"Roblox 2",
+		"Minecraft 2",
+		"Roblox",
+		"Minecraft",
+		"osu!",
+		"osu! 2",
+		"Pixel Strike 3D",
+		"Among Guys",
+		"DropBlox",
+		"with the cats",
+		"Club Penguin",
+		"you",
+		"Baba is You",
+		"Among Them"
 	];
 	setInterval(() => {
 		const index = Math.floor(Math.random() * (statuses.length - 1) + 1);
-		const pjson = require("./package.json");
 		client.user.setActivity(`${statuses[index]} (${pjson.version})`);
-	}, 10000);
-	counting.start();
+	}, 15000);
+	counting.start(client);
+	if (config.updateChecker.enabled) {
+		checkUpdates();
+		setInterval(() => {
+			checkUpdates();
+		}, 7200000);
+	}
 });
+
+function checkUpdates() {
+	fetch("https://raw.githubusercontent.com/VukkyLtd/VukkyBot/master/package.json")  
+		.then(res => res.json())
+		.then(json => {
+			if (json.version < pjson.version && updateRemindedOn !== json.version) {
+				console.log(`${warn("Update available!")}`);
+				updateRemindedOn = json.version;
+				if (config.updateChecker.dmOwner) {
+					for (let i = 0; i < config.misc.owner.length; i++) {
+						client.users.fetch(config.misc.owner[i].toString())
+							.then(owner => {
+								owner.send(`Hello! I'm out of date. You're using VukkyBot **${pjson.version}**, but the latest version is VukkyBot **${json.version}**.\n*You have gotten this DM because you are an owner of this VukkyBot. DMing my owner(s) when an update is available is turned on.*`);
+							});
+					}
+				}
+			}
+		});
+}
+
 
 client.on("message", message => {
 
@@ -57,7 +111,7 @@ client.on("message", message => {
 
 	if (message.content.toLowerCase().includes(`<@!${client.user.id}>`) && config.misc.prefixReminder == true && !message.content.startsWith(prefix)) message.reply(`my prefix is \`${process.env.PREFIX}\``);
 
-	if (message.channel.name == config.counting.channelName) counting.countCheck(message);
+	if (message.channel.name == config.counting.channelName) counting.check(message, client);
 
 	if (!message.content.toLowerCase().startsWith(prefix)) return;
 
@@ -107,6 +161,7 @@ client.on("message", message => {
 		}
 	}
 
+	// TODO: Remove dcPermissions
 	if (command.dcPermissions) {
 		console.log(`[permcheck] ${warn(`${prefix}${commandName} - dcPermissions is deprecated. Use botPermissions instead.`)}`);
 		tempPermissionsBot(command.dcPermissions);
@@ -155,5 +210,12 @@ client.on("message", message => {
 		message.reply("there was an error trying to execute that command!", embeds.errorEmbed(error.message));
 	}
 });
+
+client.on("messageDelete", message => {	
+	if (message.channel.name == config.counting.channelName) {
+		counting.deletion(message);
+	}
+});
+
 
 client.login(process.env.BOT_TOKEN);

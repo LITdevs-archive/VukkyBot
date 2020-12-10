@@ -5,15 +5,20 @@
         "invalidCmdReminder": true,
         "prefixReminder": true,
         "owner": [
-            "708333380525228082"
+            "708333380525228082",
+            "125644326037487616"
         ],
         "mysql": true,
         "language": "en",
         "languageComment": "Currently, only English (en) and Finnish (fi) is supported."
     },
     "counting": {
-        "enabled": false,
+        "enabled": true,
         "channelName": "counting"
+    },
+    "updateChecker": {
+        "enabled": true,
+        "dmOwner": true
     },
     "commands": {
         "quiz": {

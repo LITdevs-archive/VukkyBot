@@ -49,6 +49,7 @@ let questions = [
 			{ name: "MySQL features (MySQL database required)", value: "mysql" },
 			{ name: "Invalid command reminders", value: "invalidcmd" },
 			{ name: "Prefix reminders", value: "prefixremind" },
+			{ name: "Update checks", value: "updates" },
 		]
 	},
 	{
@@ -88,6 +89,14 @@ let questions = [
 		message: "What's the Discord ID of the people who'll be owning this VukkyBot, split with commas (id1, id2, id3)?",
 		when: function (answers) {
 			return answers.multipleowners !== false;
+		}
+	},
+	{
+		type: "confirm",
+		name: "updateDms",
+		message: "Should your VukkyBot DM the owners when an update is found?",
+		when: function (answers) {
+			return answers.extrafeatures !== undefined && answers.extrafeatures.includes("updates");
 		}
 	},
 	{
@@ -165,7 +174,11 @@ inquirer.prompt(questions).then((answers) => {
 			config.misc.prefixReminder = answers.extrafeatures !== undefined && answers.extrafeatures.includes("prefixremind");
 			config.misc.mysql = answers.extrafeatures !== undefined && answers.extrafeatures.includes("mysql");
 			if (answers.mysqlfeatures !== undefined && answers.mysqlfeatures.includes("counting")) { config.counting.enabled = answers.mysqlfeatures.counting !== null; } else { config.counting.enabled = false; }
-			if (answers.mysqlfeatures !== undefined && answers.mysqlfeatures.counting !== undefined) { config.counting.channelName = answers.countingchannel; }
+			if (answers.mysqlfeatures !== undefined && answers.mysqlfeatures.includes("counting")) { config.counting.channelName = answers.countingchannel; }
+			if (answers.extrafeatures !== undefined && answers.extrafeatures.includes("updates")) {
+				config.updateChecker.enabled = true;
+				if (answers.updateDms == true) config.updateChecker.dmOwner = true;
+			}
 			fs.writeFile("config.json", JSON.stringify(config, null, 4), function (err) {
 				if (err) {
 					spinner2.fail("Saving configuration to config.json failed");
@@ -213,6 +226,11 @@ inquirer.prompt(questions).then((answers) => {
 						} else {
 							spinner5.succeed("Created table in the database");
 						}
+						
+						
+					});
+					sql = "DROP TABLE counting";
+					con.query(sql, function (err, result) {
 						launchyBotty();
 					});
 				}

@@ -1,8 +1,8 @@
 const config = require("../config.json");
 require("dotenv").config();
 var mysql = require("mysql");
-const { errorEmbed, warnsUserEmbed } = require("../embeds.js");
-const vukkytils = require("../vukkytils");
+const { errorEmbed, warnsUserEmbed } = require("../utilities/embeds.js");
+const vukkytils = require("../utilities/vukkytils");
 
 
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
 	args: true,
 	mysql: true,
 	guildOnly: true,
-	usage: "<@user>",
+	usage: "<@user | user id>",
 	aliases: ["warnings"],
 	execute(message, args) {
 		let warnsId;    
