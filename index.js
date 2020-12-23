@@ -87,7 +87,7 @@ function checkUpdates() {
 	fetch("https://raw.githubusercontent.com/VukkyLtd/VukkyBot/master/package.json")  
 		.then(res => res.json())
 		.then(json => {
-			if (json.version < pjson.version && updateRemindedOn !== json.version) {
+			if (json.version > pjson.version && updateRemindedOn !== json.version) {
 				console.log(`${warn("Update available!")}`);
 				updateRemindedOn = json.version;
 				if (config.updateChecker.dmOwner) {
