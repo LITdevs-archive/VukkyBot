@@ -37,9 +37,7 @@ module.exports = {
 				if (result.length <= 0) {
 					con.end();
 					return message.channel.send(errorEmbed("There is no warning with this ID!"));
-					
 				} else {
-					
 					sql = `DELETE FROM warnings WHERE (id = ${warningId} AND serverid = ${message.guild.id})`;
 					con.query(sql, function (err, result) {
 						if (err)  {
