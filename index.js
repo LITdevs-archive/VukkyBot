@@ -177,7 +177,7 @@ client.on("message", message => {
 				break;
 			}
 			if ((message.channel.type == "text" && !message.member.hasPermission(command.userPermissions[i]))) {
-				let reply = format(vukkytils.getString("BOT_PERMISSION_NEEDED"), command.userPermissions[i]);
+				let reply = format(vukkytils.getString("USER_PERMISSION_NEEDED"), command.userPermissions[i]);
 				if (embedPermissions == 0) return message.channel.send(reply);
 				message.channel.send(embeds.errorEmbed(reply));
 				return;
