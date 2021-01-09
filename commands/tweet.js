@@ -7,7 +7,7 @@ module.exports = {
 	description: "Make VukkyBot say things on twitter!",
 	botPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
 	cooldown: 120,
-	execute(message, args) { //im remote desktopping with my phone from bed so its iinda weird lol
+	execute(message, args) {
 		message.react("⬆");
 		const filter = (reaction, user) => {
 			return ["⬆"].includes(reaction.emoji.name) && user.id != message.author.id && user.bot == false;
