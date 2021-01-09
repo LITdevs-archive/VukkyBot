@@ -13,7 +13,7 @@ Giving VukkyBot permissions is not needed, it will notify you if it needs permis
 You can also [contribute to VukkyBot](CONTRIBUTING.md).
 
 ## Get your own VukkyBot
-We've moved to the [documentation page](https://vukkyltd.github.io/VukkyBot)!
+We've moved to the [documentation page](https://docs.vukkyltd.xyz/vukkybot/setup/setup)!
 
 ## Contributors ✨
 
