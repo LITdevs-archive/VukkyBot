@@ -1,4 +1,5 @@
 const embeds = require("../utilities/embeds");
+const config = require("../config.json");
 const fetch = require("node-fetch");
 
 module.exports = {
@@ -16,7 +17,7 @@ module.exports = {
 			if(args[0] && !args[0].includes("gif") && !args[0].includes("jpg")) duckNumber = args[0];
 			if(args[0] && args[0].includes("gif") || args[0].includes("jpg")) duckNumber = args[0].slice(0, -4);
 		}
-		message.channel.send("<a:offlinegif:757979855924101220> Hold on! I'm getting a duck for you... 🦆🦆🦆")
+		message.channel.send(`${config.misc.emoji.loading} Hold on! I'm getting a duck for you... 🦆🦆🦆`)
 			.then(newMessage => {
 				if(!args[0]) {
 					fetch("https://random-d.uk/api/v2/random")

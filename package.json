@@ -1,6 +1,6 @@
 {
   "name": "vukkybot",
-  "version": "2.0.1",
+  "version": "2.2.0",
   "description": "VukkyBot",
   "main": "index.js",
   "dependencies": {
@@ -14,7 +14,7 @@
     "vukkyutils": "^2.1.0"
   },
   "devDependencies": {
-    "eslint": "^7.15.0",
+    "eslint": "^7.16.0",
     "inquirer": "^7.3.3",
     "npm": "^7.4.0",
     "ora": "^5.1.0"
