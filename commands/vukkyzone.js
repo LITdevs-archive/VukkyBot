@@ -17,6 +17,7 @@ module.exports = {
             
 			vukkyzone.awaitReactions(filter, { max: 1 })
 				.then(collected => {
+					// imo we should react to the user's message instead of making a new message hmm interesting... maybe smart idea
 					const reaction = collected.first();
 					var userCount = vukkyzone.reactions.cache.get("✨").count - 1;
 					reaction.remove();
