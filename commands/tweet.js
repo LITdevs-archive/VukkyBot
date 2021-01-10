@@ -9,27 +9,33 @@ module.exports = {
 	cooldown: 120,
 	execute(message, args) {
 		if(args.slice(0).join(" ").length > 280) return message.channel.send(embeds.errorEmbed("Sorry, but that tweet's too long."));
-		message.react("⬆");
+		message.react("⬆").then(() => message.react("⬇"));
 		const filter = (reaction, user) => {
-			return ["⬆"].includes(reaction.emoji.name) && user.id != message.author.id && user.bot == false;
+			return ["⬆", "⬇"].includes(reaction.emoji.name) && user.id != message.author.id && user.bot == false;
 		};
 		message.awaitReactions(filter, { max: 1 })
 			.then(collected => {
 				message.reactions.removeAll();
-				var client = new Twitter({
-					consumer_key: process.env.TWITTER_KEY,
-					consumer_secret: process.env.TWITTER_SECRET,
-					access_token_key: process.env.TWITTER_ACCESS,
-					access_token_secret: process.env.TWITTER_ACCESS_SECRET
-				});
-				client.post("statuses/update", {status: args.slice(0).join(" ")})
-					.then(function (tweet) {
-						message.react("✅");
-						message.reply(`your tweet was approved by a user! Here it is: https://twitter.com/i/status/${tweet.id_str}`);
-					})
-					.catch(function (error) {
-						throw error;
+				const reaction = collected.first();
+				if(reaction.emoji.name == "⬆") {
+					var client = new Twitter({
+						consumer_key: process.env.TWITTER_KEY,
+						consumer_secret: process.env.TWITTER_SECRET,
+						access_token_key: process.env.TWITTER_ACCESS,
+						access_token_secret: process.env.TWITTER_ACCESS_SECRET
 					});
+					client.post("statuses/update", {status: args.slice(0).join(" ")})
+						.then(function (tweet) {
+							message.react("✅");
+							message.reply(`your tweet was approved by a user! Here it is: https://twitter.com/i/status/${tweet.id_str}`);
+						})
+						.catch(function (error) {
+							throw error;
+						});
+				} else if (reaction.emoji.name == "⬇") {
+					message.react("❌");
+					message.reply("your tweet was denied by a user.");
+				}
 			});
 	},
 };
