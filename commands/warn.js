@@ -41,7 +41,7 @@ module.exports = {
 	mysql: true,
 	guildOnly: true,
 	execute(message, args) {
-		if (args.slice(1).join(" ").length < 1) return message.channel.send(errorEmbed(`I was expecting more arguments!\nUsage: \`${process.env.PREFIX}warn <@user> <reason>\``));
+		if (args.slice(1).join(" ").length < 1) return message.channel.send(errorEmbed(`I was expecting more arguments!\nUsage: \`${process.env.BOT_PREFIX}warn <@user> <reason>\``));
 		let mentionedUser;
 		if (message.guild.member(message.mentions.users.first())) {
 			mentionedUser = message.guild.member(message.mentions.users.first()).user;

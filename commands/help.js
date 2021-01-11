@@ -1,5 +1,5 @@
 require("dotenv").config();
-const prefix = process.env.PREFIX;
+const prefix = process.env.BOT_PREFIX;
 const embeds = require("../utilities/embeds");
 
 module.exports = {

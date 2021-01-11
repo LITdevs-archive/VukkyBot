@@ -13,7 +13,7 @@ const embeds = require("./utilities/embeds");
 const config = require("./config.json");
 const vukkytils = require("./utilities/vukkytils");
 const format = require("util").format;
-const prefix = process.env.PREFIX;
+const prefix = process.env.BOT_PREFIX;
 client.commands = new Discord.Collection();
 let updateRemindedOn = null;
 
@@ -109,7 +109,7 @@ client.on("message", message => {
 
 	if (message.author.bot) return;
 
-	if (message.content.toLowerCase().includes(`<@!${client.user.id}>`) && config.misc.prefixReminder == true && !message.content.startsWith(prefix)) message.reply(`my prefix is \`${process.env.PREFIX}\``);
+	if (message.content.toLowerCase().includes(`<@!${client.user.id}>`) && config.misc.prefixReminder == true && !message.content.startsWith(prefix)) message.reply(`my prefix is \`${process.env.BOT_PREFIX}\``);
 
 	if (message.channel.name == config.counting.channelName) counting.check(message, client);
 
