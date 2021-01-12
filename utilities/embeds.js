@@ -3,7 +3,7 @@ const pjson = require("../package.json");
 const config = require("../config.json");
 const avatarURL = "https://i.imgur.com/H0sAkrl.png";
 // please don't remove the copyright text, but of course it's up to you
-let versionString = `This VukkyBot is on v${pjson.version} using discord.js ${pjson.dependencies["discord.js"].substring(1)} • VukkyBot © Vukky Ltd 2020-2021`;
+let versionString = `v${pjson.version} (discord.js ${pjson.dependencies["discord.js"].substring(1)}) • VukkyBot © Vukky Ltd 2020-2021`;
 
 const vukkytils = require("./vukkytils");
 const format = require("util").format;
