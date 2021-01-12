@@ -30,6 +30,8 @@ module.exports = {
 							message.reply(`your tweet was approved by a user! Here it is: https://twitter.com/i/status/${tweet.id_str}`);
 						})
 						.catch(function (error) {
+							message.react("❌");
+							message.reply("there was an error!", embeds.errorEmbed(`${error.message ? error.message : "Unknown error."}`));
 							throw error;
 						});
 				} else if (reaction.emoji.name == "⬇") {
