@@ -2,9 +2,8 @@ const Discord = require("discord.js");
 const pjson = require("../package.json");
 const config = require("../config.json");
 const avatarURL = "https://i.imgur.com/H0sAkrl.png";
-let versionString = `This VukkyBot is on v${pjson.version} using discord.js ${pjson.dependencies["discord.js"].substring(1)}`;
-// please don't remove the copyright text below, but of course it's up to you
-versionString = (`${versionString} • VukkyBot © Vukky Ltd 2020-2021`);
+// please don't remove the copyright text, but of course it's up to you
+let versionString = `This VukkyBot is on v${pjson.version} using discord.js ${pjson.dependencies["discord.js"].substring(1)} • VukkyBot © Vukky Ltd 2020-2021`;
 
 const vukkytils = require("./vukkytils");
 const format = require("util").format;
@@ -29,7 +28,9 @@ module.exports = {
 	aboutEmbed,
 	covidEmbed,
 	warnsUserEmbed,
-	innerEmbed
+	innerEmbed,
+	versionString,
+	avatarURL
 };
 
 function errorEmbed(errorMsg) {

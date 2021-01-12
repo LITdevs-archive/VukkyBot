@@ -4,9 +4,10 @@ var Twitter = require("twitter");
 
 module.exports = {
 	name: "tweet",
-	description: "Make VukkyBot say things on twitter!",
+	description: "Make VukkyBot say things on Twitter!",
 	botPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
 	cooldown: 120,
+	usage: "<content>",
 	execute(message, args) {
 		if(args.slice(0).join(" ").length > 280) return message.channel.send(embeds.errorEmbed("Sorry, but that tweet's too long."));
 		message.react("⬆").then(() => message.react("⬇"));

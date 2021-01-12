@@ -5,10 +5,11 @@ const { Util } = require("discord.js");
 
 module.exports = {
 	name: "tweetreply",
-	description: "Make VukkyBot reply to things things on twitter!",
+	description: "Make VukkyBot reply to things on Twitter!",
 	botPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
 	cooldown: 120,
 	aliases: ["replytweet"],
+	usage: "<tweet ID> <content>",
 	execute(message, args) {
 		if(args.slice(1).join(" ").length > 280) return message.channel.send(embeds.errorEmbed("Sorry, but that tweet's too long."));
 		if(isNaN(args[0])) return message.channel.send(embeds.errorEmbed("Your Tweet ID isn't a number!"));

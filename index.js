@@ -149,26 +149,18 @@ client.on("message", message => {
 		return message.channel.send(embeds.errorEmbed(reply));
 	}
 
-	function tempPermissionsBot(permissionsBot) {
-		for (let i = 0, len = permissionsBot.length; permissionsBot; i < len, i++) {
-			if (permissionsBot[i] == undefined) {
+	if (command.botPermissions) {
+		for (let i = 0, len = command.botPermissions.length; command.botPermissions; i < len, i++) {
+			if (command.botPermissions[i] == undefined) {
 				break;
 			}
-			if ((message.channel.type == "text" && !message.guild.me.hasPermission(permissionsBot[i]))) {
-				let reply = format(vukkytils.getString("BOT_PERMISSION_NEEDED"), permissionsBot[i]);
+			if ((message.channel.type == "text" && !message.guild.me.hasPermission(command.botPermissions[i]))) {
+				let reply = format(vukkytils.getString("BOT_PERMISSION_NEEDED"), command.botPermissions[i]);
 				if (embedPermissions == 0) return message.channel.send(reply);
 				message.channel.send(embeds.errorEmbed(reply));
 				return;
 			}
 		}
-	}
-
-	// TODO: Remove dcPermissions
-	if (command.dcPermissions) {
-		console.log(`[permcheck] ${warn(`${prefix}${commandName} - dcPermissions is deprecated. Use botPermissions instead.`)}`);
-		tempPermissionsBot(command.dcPermissions);
-	} else if (command.botPermissions) {
-		tempPermissionsBot(command.botPermissions);
 	}
 
 	if (command.userPermissions) {

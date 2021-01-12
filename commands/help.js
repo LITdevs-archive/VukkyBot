@@ -1,6 +1,7 @@
 require("dotenv").config();
 const prefix = process.env.BOT_PREFIX;
 const embeds = require("../utilities/embeds");
+const Discord = require("discord.js");
 
 module.exports = {
 	name: "help",
@@ -34,14 +35,21 @@ module.exports = {
 			return message.channel.send(embeds.errorEmbed(`I've been looking around for a while now, but I don't think **${name}** is a command.`));
 		}
 
+		const helpEmbed = new Discord.MessageEmbed()
+			.setColor("#4b83c3")
+			.setTitle(`ℹ ${command.name}`)
+			.setDescription(command.description)
+			.setTimestamp()
+			.setFooter(embeds.versionString, embeds.avatarURL);
+
 		data.push(`**Name:** ${command.name}`);
 
-		if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(", ")}`);
-		if (command.description) data.push(`**Description:** ${command.description}`);
-		if (command.usage) data.push(`**Usage:** ${prefix}${command.name} ${command.usage}`);
-		data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
-		if (command.dcPermissions) data.push(`**Permissions required:** ${command.dcPermissions.join(", ")}`);
+		if (command.aliases) helpEmbed.addField("Aliases", `${command.aliases.join(", ")}`, true);
+		if (command.usage) helpEmbed.addField("Usage", `${prefix}${command.name} ${command.usage}`, true);
+		helpEmbed.addField("Cooldown", `${command.cooldown || 3} second(s)`, true);
+		if (command.userPermissions) helpEmbed.addField("User permissions required", `${command.userPermissions.join(", ")}`, true);
+		if (command.botPermissions) helpEmbed.addField("Bot permissions required", `${command.botPermissions.join(", ")}`, true);
 
-		message.channel.send(data, { split: true });
+		message.channel.send(helpEmbed);
 	},
 };
