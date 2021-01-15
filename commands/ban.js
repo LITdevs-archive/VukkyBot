@@ -22,7 +22,7 @@ module.exports = {
 		if(!mentionedUser.bannable) return message.channel.send("I can't ban this user.");
 
 		mentionedUser.send(`🔨 You were banned from **${message.guild.name}**${(banReason !== "no reason specified") ? `, for ${banReason}.` : "."}`)
-			.then(_h => mentionedUser.ban({reason: `Done by ${message.author.tag} - ${banReason}`}))
-			.then(_h => message.channel.send(embeds.successEmbed(`Banned <@${mentionedUser.id}> (${mentionedUser.id}) from **${message.guild.name}**${(banReason !== "no reason specified") ? `, for ${banReason}.` : "."}`)));
+			.finally(_h => mentionedUser.ban({reason: `Done by ${message.author.tag} - ${banReason}`}))
+			.finally(_h => message.channel.send(embeds.successEmbed(`Banned <@${mentionedUser.id}> (${mentionedUser.id}) from **${message.guild.name}**${(banReason !== "no reason specified") ? `, for ${banReason}.` : "."}`)));
 	},
 };
