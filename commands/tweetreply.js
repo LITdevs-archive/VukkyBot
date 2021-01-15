@@ -1,4 +1,5 @@
 const embeds = require("../utilities/embeds");
+const config = require("../config.json");
 require("dotenv").config();
 var Twitter = require("twitter");
 const { Util } = require("discord.js");
@@ -30,16 +31,20 @@ module.exports = {
 							access_token_key: process.env.TWITTER_ACCESS,
 							access_token_secret: process.env.TWITTER_ACCESS_SECRET
 						});
-						client.post("statuses/update", {status: args.slice(1).join(" "), in_reply_to_status_id: args[0], auto_populate_reply_metadata: true})
-							.then(function (tweet) {
-								message.react("✅");
-								message.reply(`your tweet was approved by a user! Here it is: https://twitter.com/i/status/${tweet.id_str}`);
-							})
-							.catch(function (error) {
-								message.react("❌");
-								message.reply("there was an error!", embeds.errorEmbed(`${error.message ? error.message : "Unknown error."}`));
-								throw error;
-							});
+						message.channel.send(`${config.misc.emoji.loading} Tweeting...`).then(tweeting => {
+							client.post("statuses/update", {status: args.slice(1).join(" "), in_reply_to_status_id: args[0], auto_populate_reply_metadata: true})
+								.then(function (tweet) {
+									tweeting.delete();
+									message.react("✅");
+									message.reply(`your tweet was approved by a user! Here it is: https://twitter.com/i/status/${tweet.id_str}`);
+								})
+								.catch(function (error) {
+									tweeting.delete();
+									message.react("❌");
+									message.reply("there was an error!", embeds.errorEmbed(`${error.message ? error.message : "Unknown error."}`));
+									throw error;
+								});
+						});
 					} else if (reaction.emoji.name == "⬇") {
 						message.react("❌");
 						message.reply("your tweet was denied by a user.");
