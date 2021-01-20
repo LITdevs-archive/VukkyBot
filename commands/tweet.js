@@ -2,6 +2,8 @@ const embeds = require("../utilities/embeds");
 const config = require("../config.json");
 require("dotenv").config();
 var Twitter = require("twitter");
+const vukkytils = require("../utilities/vukkytils");
+const format = require("util").format;
 
 module.exports = {
 	name: "tweet",
@@ -26,12 +28,12 @@ module.exports = {
 						access_token_key: process.env.TWITTER_ACCESS,
 						access_token_secret: process.env.TWITTER_ACCESS_SECRET
 					});
-					message.channel.send(`${config.misc.emoji.loading} Tweeting...`).then(tweeting => {
+					message.channel.send(`${config.misc.emoji.loading} ${vukkytils.getString("TWEETING")}`).then(tweeting => {
 						client.post("statuses/update", {status: args.slice(0).join(" ")})
 							.then(function (tweet) {
 								tweeting.delete();
 								message.react("✅");
-								message.reply(`your tweet was approved by a user! Here it is: https://twitter.com/i/status/${tweet.id_str}`);
+								message.reply(format(vukkytils.getString("TWEET_APPROVED"), `https://twitter.com/i/status/${tweet.id_str}`));
 							})
 							.catch(function (error) {
 								tweeting.delete();
@@ -42,7 +44,7 @@ module.exports = {
 					});
 				} else if (reaction.emoji.name == "⬇") {
 					message.react("❌");
-					message.reply("your tweet was denied by a user.");
+					message.reply(vukkytils.getString("TWEET_DENIED"));
 				}
 			});
 	},
