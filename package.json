@@ -11,7 +11,7 @@
     "mysql": "^2.18.1",
     "pm2": "^4.5.1",
     "twitter": "^1.7.1",
-    "vukkyutils": "^2.1.0"
+    "vukkyutils": "^2.2.0"
   },
   "devDependencies": {
     "eslint": "^7.17.0",
