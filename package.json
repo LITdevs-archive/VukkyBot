@@ -16,7 +16,7 @@
   "devDependencies": {
     "eslint": "^7.17.0",
     "inquirer": "^7.3.3",
-    "npm": "^7.4.1",
+    "npm": "^7.4.2",
     "ora": "^5.1.0"
   },
   "scripts": {
