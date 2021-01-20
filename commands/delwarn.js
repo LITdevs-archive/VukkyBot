@@ -3,6 +3,8 @@ require("dotenv").config();
 var mysql = require("mysql");
 const { errorEmbed, successEmbed } = require("../utilities/embeds");
 var sql = "";
+const vukkytils = require("../utilities/vukkytils");
+const format = require("util").format;
 module.exports = {
 	name: "delwarn",
 	description: "Make VukkyBot remove warnings from people!",
@@ -45,8 +47,7 @@ module.exports = {
 							console.log(err);
 							con.end();
 						} else {
-							message.channel.send(successEmbed(`The warning with the ID of **${warningId}** has been removed.`));
-							console.log("1 warning removed");
+							message.channel.send(successEmbed(format(vukkytils.getString("WARNING_REMOVED"), warningId)));
 							con.end();
 						}
 					});
