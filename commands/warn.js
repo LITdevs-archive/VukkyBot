@@ -2,6 +2,8 @@ const config = require("../config.json");
 require("dotenv").config();
 var mysql = require("mysql");
 const { errorEmbed, successEmbed } = require("../utilities/embeds.js");
+const vukkytils = require("../utilities/vukkytils");
+const format = require("util").format;
 
 function everythingIsFine(message, mentionedUser, args) {
 	let warnReason = args.slice(1).join(" ");
@@ -23,9 +25,8 @@ function everythingIsFine(message, mentionedUser, args) {
 			console.log(err);
 			con.end();
 		} else {
-			mentionedUser.send(`⚠ You were warned in **${message.guild.name}**, for ${warnReason}.`);
-			message.channel.send(successEmbed(`Warning added to ${mentionedUser}, for ${warnReason}.`));
-			console.log("1 warning added");
+			mentionedUser.send(format(vukkytils.getString("GOT_WARNED"), message.guild.name, warnReason));
+			message.channel.send(successEmbed(format(vukkytils.getString("WARNING_ADDED"), mentionedUser, warnReason)));
 			con.end();
 		}
 	});

@@ -19,5 +19,16 @@
 	"PING_REQUIRED": "You need to ping someone to use this command.",
 	"HUG": "hug",
 	"HEADPAT": "headpat",
-	"SLAP": "slap"
+	"SLAP": "slap",
+	"PET": "pet",
+	"TWEETING": "Tweeting...",
+	"TWEET_APPROVED": "your tweet was approved by a user! Here it is: %s",
+	"TWEET_DENIED": "your tweet was denied by a user.",
+	"TWEET_REPLYING_TO": "you are replying to %s",
+	"WARNING_ADDED": "Warning added to %s, for %s.",
+	"GOT_WARNED": "⚠ You were warned in **%s**, for %s.",
+	"DISCOVERING_OTHER_VUKKY": "Hold on! I'm discovering **%s**'s inner Vukky!",
+	"DISCOVERING_VUKKY": "Hold on! I'm discovering your inner Vukky!",
+	"DISCOVERED_OTHER_VUKKY": "%s, here is **%s**'s inner Vukky!",
+	"DISCOVERED_VUKKY": "%s, here is your inner Vukky!"
 }
