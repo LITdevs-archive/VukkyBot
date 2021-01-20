@@ -1,5 +1,5 @@
 {
-	"ERROR_GENERIC": "Sattui virhe",
+	"ERROR_GENERIC": "Sattui virhe.",
 	"ERROR_RELOAD": "Komentoa uudelleen ladatessa sattui virhe (**%s**):\n`%s`",
 	"COUNTING": "laskeminen",
 	"STARTUP": "käynnistys",
@@ -8,8 +8,16 @@
 	"READY": "Valmis!",
 	"USER_PERMISSION_NEEDED": "Anteeksi, mutta tarvitset oikeuden `%s` voidaksesi käyttää tuota komentoa.",
 	"BOT_PERMISSION_NEEDED": "Anteeksi, mutta tarvitsen oikeuden `%s` voidakseni käyttää tuota komentoa.",
-	"HUG_TYPES": ["pienen halin.", "kivan halin.", "ISON halin!"],
-	"HEADPAT_TYPES": ["perus taputuksen päälle.", "mahtavan taputuksen päälle.", "USKOMATTOMAN taputuksen päälle!"],
+	"HUG_TYPES": [
+		"pienen halin.",
+		"kivan halin.",
+		"ISON halin!"
+	],
+	"HEADPAT_TYPES": [
+		"perus taputuksen päälle.",
+		"mahtavan taputuksen päälle.",
+		"USKOMATTOMAN taputuksen päälle!"
+	],
 	"GIVE_USER": "%s antaa käyttäjälle %s %s",
 	"WARNINGS_TITLE": "Henkilön %s varoitukset",
 	"NO_WARNINGS": "Tällä henkilöllä ei ole varoituksia.",
