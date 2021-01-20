@@ -5,7 +5,7 @@
 	"STARTUP": "startup",
 	"STARTING": "VukkyBot is starting...",
 	"STARTUP_FILE_LOADED": "%s loaded!",
-	"READY": "Ready!",
+	"READY": "Klar!",
 	"USER_PERMISSION_NEEDED": "Sorry, but you need the `%s` permission to use that command.",
 	"BOT_PERMISSION_NEEDED": "Sorry, but I need the `%s` permission to use that command.",
 	"HUG_TYPES": [
@@ -39,5 +39,15 @@
 	"DISCOVERING_VUKKY": "Hold on! I'm discovering your inner Vukky!",
 	"DISCOVERED_OTHER_VUKKY": "%s, here is **%s**'s inner Vukky!",
 	"DISCOVERED_VUKKY": "%s, here is your inner Vukky!",
-	"WARNING_REMOVED": "The warning with the ID of **%s** has been removed."
+	"WARNING_REMOVED": "The warning with the ID of **%s** has been removed.",
+	"COVID_LOCATION": "COVID stats for %s",
+	"COVID_CASES": "Cases",
+	"COVID_CASES_TODAY": "Cases today",
+	"COVID_DEATHS": "Deaths",
+	"COVID_DEATHS_TODAY": "Deaths today",
+	"COVID_RECOVERED": "Recovered",
+	"COVID_RECOVERED_TODAY": "Recovered today",
+	"COVID_ACTIVE": "Active",
+	"COVID_CRITICAL": "Critical",
+	"COVID_TESTS": "Tests"
 }
