@@ -38,5 +38,6 @@
 	"DISCOVERING_OTHER_VUKKY": "Hold on! I'm discovering **%s**'s inner Vukky!",
 	"DISCOVERING_VUKKY": "Hold on! I'm discovering your inner Vukky!",
 	"DISCOVERED_OTHER_VUKKY": "%s, here is **%s**'s inner Vukky!",
-	"DISCOVERED_VUKKY": "%s, here is your inner Vukky!"
+	"DISCOVERED_VUKKY": "%s, here is your inner Vukky!",
+	"WARNING_REMOVED": "The warning with the ID of **%s** has been removed."
 }
