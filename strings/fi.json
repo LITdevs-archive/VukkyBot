@@ -49,5 +49,13 @@
 	"COVID_RECOVERED_TODAY": "Recovered today",
 	"COVID_ACTIVE": "Active",
 	"COVID_CRITICAL": "Critical",
-	"COVID_TESTS": "Tests"
+	"COVID_TESTS": "Tests",
+	"API_CREDIT": "Thank you to <%s>!",
+	"DUCK_FINDING": "Hold on! I'm finding a duck for you... 🦆🦆🦆",
+	"ENV_PREFIX_RENAMED": "PREFIX is now BOT_PREFIX. Please change your .env file.",
+	"WARNING": "Warning",
+	"SUCCESS": "Success!",
+	"INFORMATION": "Information",
+	"INPUT_REQUESTED": "Input requested",
+	"SLOW_DOWN": "Slow down!"
 }
