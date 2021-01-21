@@ -1,6 +1,8 @@
 const embeds = require("../utilities/embeds");
 const config = require("../config.json");
 const fetch = require("node-fetch");
+const vukkytils = require("../utilities/vukkytils");
+const format = require("util").format;
 
 module.exports = {
 	name: "today-in-history",
@@ -15,7 +17,7 @@ module.exports = {
 					.then(res => res.json())
 					.then(json => {
 						var result = json["data"]["Events"][Math.floor(Math.random() * json["data"]["Events"].length)];
-						newMessage.edit("I am not responsible for any inappropiate content here. This information is pulled from Wikipedia, via https://history.muffinlabs.com.", embeds.todayInHistoryEmbed(result.text, result.year, json.date, result.links));
+						newMessage.edit(format(vukkytils.getString("API_CREDIT"), "https://history.muffinlabs.com"), embeds.todayInHistoryEmbed(result.text, result.year, json.date, result.links));
 					});
 			});
 	},
