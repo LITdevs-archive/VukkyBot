@@ -3,6 +3,8 @@ const config = require("../config.json");
 const fetch = require("node-fetch");
 const commaNumber = require("comma-number");
 const { Util } = require("discord.js");
+const vukkytils = require("../utilities/vukkytils");
+const format = require("util").format;
 
 module.exports = {
 	name: "covid19",
@@ -22,7 +24,7 @@ module.exports = {
 						return res.json();
 					})
 					.then(json => {
-						newMessage.edit("Thank you to <https://disease.sh>!", embeds.covidEmbed(country ? json.countryInfo.flag : null, country ? json.country : "Global", commaNumber(json.cases), commaNumber(json.todayCases), commaNumber(json.deaths), commaNumber(json.todayDeaths), commaNumber(json.recovered), commaNumber(json.todayRecovered), commaNumber(json.active), commaNumber(json.critical), commaNumber(json.tests)));
+						newMessage.edit(format(vukkytils.getString("API_CREDIT"), "https://disease.sh"), embeds.covidEmbed(country ? json.countryInfo.flag : null, country ? json.country : "Global", commaNumber(json.cases), commaNumber(json.todayCases), commaNumber(json.deaths), commaNumber(json.todayDeaths), commaNumber(json.recovered), commaNumber(json.todayRecovered), commaNumber(json.active), commaNumber(json.critical), commaNumber(json.tests)));
 					});
 			});
 	},

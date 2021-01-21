@@ -45,7 +45,7 @@ function errorEmbed(errorMsg) {
 function warningEmbed(warningMsg) {
 	return new Discord.MessageEmbed()
 		.setColor("#ffc83d")
-		.setTitle("⚠ Warning:")
+		.setTitle(`⚠ ${vukkytils.getString("WARNING")}`)
 		.setDescription(warningMsg)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -54,7 +54,7 @@ function warningEmbed(warningMsg) {
 function infoEmbed(informationMsg) {
 	return new Discord.MessageEmbed()
 		.setColor("#4b83c3")
-		.setTitle("ℹ Information")
+		.setTitle(`ℹ ${vukkytils.getString("INFORMATION")}`)
 		.setDescription(informationMsg)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -63,7 +63,7 @@ function infoEmbed(informationMsg) {
 function successEmbed(successMsg) {
 	return new Discord.MessageEmbed()
 		.setColor("#16c60c")
-		.setTitle("✅ Success!")
+		.setTitle(`✅ ${vukkytils.getString("SUCCESS")}`)
 		.setDescription(successMsg)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -72,7 +72,7 @@ function successEmbed(successMsg) {
 function inputEmbed(detailsMsg) {
 	return new Discord.MessageEmbed()
 		.setColor("#99aab5")
-		.setTitle("⌨ Input requested!")
+		.setTitle(`⌨ ${vukkytils.getString("INPUT_REQUESTED")}`)
 		.setDescription(detailsMsg)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -157,7 +157,7 @@ function quizLoseEmbed(message) {
 function cooldownEmbed(message) {
 	return new Discord.MessageEmbed()
 		.setColor("#ffffff")
-		.setTitle("⏲ Slow down!")
+		.setTitle(`⏲ ${vukkytils.getString("SLOW_DOWN")}`)
 		.setDescription(message)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
