@@ -32,6 +32,7 @@ const cooldowns = new Discord.Collection();
 
 client.once("ready", () => {
 	console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("READY")}`);
+	if(!process.env.BOT_PREFIX && process.env.PREFIX) console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("ENV_PREFIX_RENAMED")}`);
 	const statuses = [
 		"with JavaScript",
 		"with a Fall Guy",
@@ -52,6 +53,7 @@ client.once("ready", () => {
 		"Startup Panic",
 		"Fortnite",
 		"Cyberpunk 2077",
+		"Cyberdelay 2077",
 		"Portal 3",
 		"GTA 6",
 		"GTA 7",
@@ -68,7 +70,12 @@ client.once("ready", () => {
 		"Club Penguin",
 		"you",
 		"Baba is You",
-		"Among Them"
+		"Among Them",
+		"Vukkyland",
+		"Super Vukky 64",
+		"Paper Vukky: The Origami King",
+		"Swift Playgrounds",
+		""
 	];
 	setInterval(() => {
 		const index = Math.floor(Math.random() * (statuses.length - 1) + 1);
