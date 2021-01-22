@@ -8,6 +8,7 @@ module.exports = {
 	userPermissions: ["MANAGE_EMOJIS"],
 	args: true,
 	guildOnly: true,
+	usage: "add <attach image to message> or emoji delete <image ID>",
 	execute(message, args) {
 		if (args[0] == "add") {
 			if (message.attachments.size > 0) {
