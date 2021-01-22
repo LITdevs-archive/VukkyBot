@@ -2,6 +2,7 @@ require("dotenv").config();
 const prefix = process.env.BOT_PREFIX;
 const embeds = require("../utilities/embeds");
 const Discord = require("discord.js");
+const vukkytils = require("../utilities/vukkytils");
 
 module.exports = {
 	name: "help",
@@ -42,13 +43,11 @@ module.exports = {
 			.setTimestamp()
 			.setFooter(embeds.versionString, embeds.avatarURL);
 
-		data.push(`**Name:** ${command.name}`);
-
-		if (command.aliases) helpEmbed.addField("Aliases", `${command.aliases.join(", ")}`, true);
-		if (command.usage) helpEmbed.addField("Usage", `${prefix}${command.name} ${command.usage}`, true);
-		helpEmbed.addField("Cooldown", `${command.cooldown || 3} second(s)`, true);
-		if (command.userPermissions) helpEmbed.addField("User permissions required", `${command.userPermissions.join(", ")}`, true);
-		if (command.botPermissions) helpEmbed.addField("Bot permissions required", `${command.botPermissions.join(", ")}`, true);
+		if (command.aliases) helpEmbed.addField(vukkytils.getString("HELP_ALIASES"), `${command.aliases.join(", ")}`, true);
+		if (command.usage) helpEmbed.addField(vukkytils.getString("HELP_USAGE"), `${prefix}${command.name} ${command.usage}`, true);
+		helpEmbed.addField(vukkytils.getString("HELP_COOLDOWN"), `${command.cooldown || 3} second(s)`, true);
+		if (command.userPermissions) helpEmbed.addField(vukkytils.getString("HELP_USER_PERMISSIONS_REQUIRED"), `${command.userPermissions.join(", ")}`, true);
+		if (command.botPermissions) helpEmbed.addField(vukkytils.getString("HELP_BOT_PERMISSIONS_REQUIRED"), `${command.botPermissions.join(", ")}`, true);
 
 		message.channel.send(helpEmbed);
 	},

@@ -92,8 +92,8 @@ function GiveawayDrop(prize, dropped_by, code) {
 		.setColor("#D0A33E")
 		.setTitle(titleString)
 		.addField("Prize", prize, false)
-		.addField("Winner", vukkytils.getString("GIVEAWAY_DROP_NO_WINNER_YET"), false)
-		.addField("How do I win?", howToString, false)
+		.addField(vukkytils.getString("GIVEAWAY_DROP_WINNER"), vukkytils.getString("GIVEAWAY_DROP_NO_WINNER_YET"), false)
+		.addField(vukkytils.getString("GIVEAWAY_DROP_HOWDOIWIN"), howToString, false)
 		.setAuthor(format(vukkytils.getString("GIVEAWAY_DROP_STARTED_BY"), dropped_by.tag))
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -104,7 +104,7 @@ function GiveawayWinner(prize, dropped_by, winner) {
 		.setColor("#D000BC")
 		.setTitle("👑 Giveaway Drop winner!")
 		.addField("Prize", prize, false)
-		.addField("Winner", winner, false)
+		.addField(vukkytils.getString("WINNER"), winner, false)
 		.setAuthor(format(vukkytils.getString("GIVEAWAY_DROP_STARTED_BY"), dropped_by.tag))
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -115,7 +115,7 @@ function GiveawayInvalid(prize, dropped_by) {
 		.setColor("#8EA5D0")
 		.setTitle("💸 Giveaway Drop expired...")
 		.addField("Prize", prize, false)
-		.addField("Winner", "This prize is unfortunately no longer valid. Maybe next time?", false)
+		.setDescription("This prize is unfortunately no longer valid. Maybe next time?")
 		.setAuthor(format(vukkytils.getString("GIVEAWAY_DROP_STARTED_BY"), dropped_by.tag))
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -123,7 +123,7 @@ function GiveawayInvalid(prize, dropped_by) {
 
 function quizStartEmbed(question, time, hint, author, categories) {
 	var description = `**Categories:** ${categories.join(", ")}\n\n${question}\nYou have ${time} seconds to answer!\n`;
-	author = (!author) ? "an unknown user" : author;
+	author = (!author) ? vukkytils.getString("QUIZ_UNKNOWN_USER") : author;
 	if(hint && config.commands.quiz.hints == true) {
 		description = description.concat(`\n💡 **${vukkytils.getString("QUIZ_HINT_AVAILABLE")}** ||${hint}||`);
 	}
@@ -148,7 +148,7 @@ function quizWinnerEmbed(winner) {
 function quizLoseEmbed(message) {
 	return new Discord.MessageEmbed()
 		.setColor("#be1931")
-		.setTitle("😅 Game over! No one wins.")
+		.setTitle(`😅 ${vukkytils.getString("QUIZ_GAME_OVER")}`)
 		.setDescription(message)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -170,7 +170,7 @@ function cryptoEmbed(coin, value, lastupdated, change24) {
 		.setDescription("Here's your requested data!")
 		.addField("Value in USD", `$${value}`, true)
 		.addField("Value change (from 24h ago)", `$${change24}`, true)  
-		.addField("Last updated", lastupdated, true)
+		.addField(vukkytils.getString("CRYPTO_LAST_UPDATED"), lastupdated, true)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
@@ -189,11 +189,11 @@ function todayInHistoryEmbed(event, year, date, links) {
 	}
 	return new Discord.MessageEmbed()
 		.setColor("#aab8c2")
-		.setTitle("Today in History...")
+		.setTitle(vukkytils.getString("TIH"))
 		.setDescription(event)
-		.addField("Year", year, true)
-		.addField("Date", date, true)
-		.addField("Links", linkies.join(", "), true)
+		.addField(vukkytils.getString("TIH_YEAR"), year, true)
+		.addField(vukkytils.getString("TIH_DATE"), date, true)
+		.addField(vukkytils.getString("TIH_LINKS"), linkies.join(", "), true)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }

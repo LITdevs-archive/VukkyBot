@@ -1,9 +1,9 @@
 const embeds = require("../utilities/embeds.js");
 const config = require("../config.json");
-const fetch = require("node-fetch");
 const vn = require("../utilities/vukkynumber");
 const vukkytils = require("../utilities/vukkytils");
 const format = require("util").format;
+
 module.exports = {
 	name: "inner-vukky",
 	description: "Discover your inner Vukky!",
