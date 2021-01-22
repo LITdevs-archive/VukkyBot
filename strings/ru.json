@@ -1,6 +1,6 @@
 {
 	"ERROR_GENERIC": "There was an error.",
-	"ERROR_RELOAD": "There was an error while reloading a command (**%s**):\n`%s`",
+	"ERROR_RELOAD": "There was an error while reloading **%s**:\n`%s`",
 	"COUNTING": "counting",
 	"STARTUP": "startup",
 	"STARTING": "VukkyBot is starting...",
@@ -18,17 +18,16 @@
 		"a great headpat.",
 		"an AMAZING headpat!"
 	],
+	"SLAP_TYPES": "a big slap in the face!",
 	"GIVE_USER": "%s gives %s %s",
 	"WARNINGS_TITLE": "Warnings for %s",
 	"NO_WARNINGS": "This person has no warnings.",
 	"BOT_LOVE": "Aww, thanks! ♥",
 	"BOT_PAIN": "Why did you even try? :(",
-	"CANT_USE_SELF": "You can't %s yourself! That would be silly.",
+	"CANT_HUG_SELF": "You can't hug yourself! That would be silly.",
+	"CANT_SLAP_SELF": "You can't slap yourself! That would be silly.",
+	"CANT_HEADPAT_SELF": "You can't headpat yourself! That would be silly.",
 	"PING_REQUIRED": "You need to ping someone to use this command.",
-	"HUG": "hug",
-	"HEADPAT": "headpat",
-	"SLAP": "slap",
-	"PET": "pet",
 	"TWEETING": "Tweeting...",
 	"TWEET_APPROVED": "your tweet was approved by a user! Here it is: %s",
 	"TWEET_DENIED": "your tweet was denied by a user.",
@@ -57,5 +56,11 @@
 	"SUCCESS": "Success!",
 	"INFORMATION": "Information",
 	"INPUT_REQUESTED": "Input requested",
-	"SLOW_DOWN": "Slow down!"
+	"SLOW_DOWN": "Slow down!",
+	"QUIZ_START": "Are you ready? Here we go!",
+	"QUIZ_WINNER_TITLE": "We have a winner!",
+	"QUIZ_WINNER_DESCRIPTION": "%s got the correct answer.",
+	"QUIZ_HINT_AVAILABLE": "Hint available.",
+	"GIVEAWAY_DROP_NO_WINNER_YET": "No winner yet!",
+	"GIVEAWAY_DROP_STARTED_BY": "Started by %s"
 }
