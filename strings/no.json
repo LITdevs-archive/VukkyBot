@@ -54,13 +54,13 @@
 	"ENV_PREFIX_RENAMED": "PREFIX er nå BOT_PREFIX. Vennligst rediger .env-filen din.",
 	"WARNING": "Advarsel",
 	"SUCCESS": "Suksess!",
-	"INFORMATION": "Information",
-	"INPUT_REQUESTED": "Input requested",
-	"SLOW_DOWN": "Slow down!",
-	"QUIZ_START": "Are you ready? Here we go!",
-	"QUIZ_WINNER_TITLE": "We have a winner!",
-	"QUIZ_WINNER_DESCRIPTION": "%s got the correct answer.",
-	"QUIZ_HINT_AVAILABLE": "Hint available.",
-	"GIVEAWAY_DROP_NO_WINNER_YET": "No winner yet!",
-	"GIVEAWAY_DROP_STARTED_BY": "Started by %s"
+	"INFORMATION": "Informasjon",
+	"INPUT_REQUESTED": "Inndata forespurt",
+	"SLOW_DOWN": "Ro ned!",
+	"QUIZ_START": "Er du klar? Vi setter i gang!",
+	"QUIZ_WINNER_TITLE": "Vi har en vinner!",
+	"QUIZ_WINNER_DESCRIPTION": "%s svarte riktig.",
+	"QUIZ_HINT_AVAILABLE": "Hint tilgjengelig.",
+	"GIVEAWAY_DROP_NO_WINNER_YET": "Ingen vinner ennå!",
+	"GIVEAWAY_DROP_STARTED_BY": "Startet av %s"
 }
