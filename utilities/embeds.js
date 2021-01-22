@@ -92,9 +92,9 @@ function GiveawayDrop(prize, dropped_by, code) {
 		.setColor("#D0A33E")
 		.setTitle(titleString)
 		.addField("Prize", prize, false)
-		.addField("Winner", "No winner yet!", false)
+		.addField("Winner", vukkytils.getString("GIVEAWAY_DROP_NO_WINNER_YET"), false)
 		.addField("How do I win?", howToString, false)
-		.setAuthor(`Started by ${dropped_by.tag}`)
+		.setAuthor(format(vukkytils.getString("GIVEAWAY_DROP_STARTED_BY"), dropped_by.tag))
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
@@ -105,7 +105,7 @@ function GiveawayWinner(prize, dropped_by, winner) {
 		.setTitle("👑 Giveaway Drop winner!")
 		.addField("Prize", prize, false)
 		.addField("Winner", winner, false)
-		.setAuthor(`Started by ${dropped_by.tag}`)
+		.setAuthor(format(vukkytils.getString("GIVEAWAY_DROP_STARTED_BY"), dropped_by.tag))
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
@@ -116,7 +116,7 @@ function GiveawayInvalid(prize, dropped_by) {
 		.setTitle("💸 Giveaway Drop expired...")
 		.addField("Prize", prize, false)
 		.addField("Winner", "This prize is unfortunately no longer valid. Maybe next time?", false)
-		.setAuthor(`Started by ${dropped_by.tag}`)
+		.setAuthor(format(vukkytils.getString("GIVEAWAY_DROP_STARTED_BY"), dropped_by.tag))
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
@@ -125,12 +125,12 @@ function quizStartEmbed(question, time, hint, author, categories) {
 	var description = `**Categories:** ${categories.join(", ")}\n\n${question}\nYou have ${time} seconds to answer!\n`;
 	author = (!author) ? "an unknown user" : author;
 	if(hint && config.commands.quiz.hints == true) {
-		description = description.concat(`\n💡 **Hint available.** ||${hint}||`);
+		description = description.concat(`\n💡 **${vukkytils.getString("QUIZ_HINT_AVAILABLE")}** ||${hint}||`);
 	}
 	description = description.concat(`\n📝 This question was brought to you by ${author} :)`);
 	return new Discord.MessageEmbed()
 		.setColor("#7289da")
-		.setTitle("❓ Are you ready? Here we go!")
+		.setTitle(`❓ ${vukkytils.getString("QUIZ_START")}`)
 		.setDescription(description)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -139,8 +139,8 @@ function quizStartEmbed(question, time, hint, author, categories) {
 function quizWinnerEmbed(winner) {
 	return new Discord.MessageEmbed()
 		.setColor("#ffc83d")
-		.setTitle("👑 Ding ding ding!")
-		.setDescription(`${winner.author} got the correct answer!`)
+		.setTitle(`👑 ${vukkytils.getString("QUIZ_WINNER_TITLE")}`)
+		.setDescription(format(vukkytils.getString("QUIZ_WINNER_DESCRIPTION"), winner.author))
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
