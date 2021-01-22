@@ -1,6 +1,6 @@
 {
 	"ERROR_GENERIC": "Sattui virhe.",
-	"ERROR_RELOAD": "Komentoa uudelleen ladatessa sattui virhe (**%s**):\n`%s`",
+	"ERROR_RELOAD": "There was an error while reloading **%s**:\n`%s`",
 	"COUNTING": "laskeminen",
 	"STARTUP": "käynnistys",
 	"STARTING": "VukkyBot käynnistyy...",
@@ -18,17 +18,16 @@
 		"mahtavan taputuksen päälle.",
 		"USKOMATTOMAN taputuksen päälle!"
 	],
+	"SLAP_TYPES": "a big slap in the face!",
 	"GIVE_USER": "%s antaa käyttäjälle %s %s",
 	"WARNINGS_TITLE": "Henkilön %s varoitukset",
 	"NO_WARNINGS": "Tällä henkilöllä ei ole varoituksia.",
 	"BOT_LOVE": "Aww, Kiitos! ♥ :3",
 	"BOT_PAIN": "Miksi edes yritit? :(",
-	"CANT_USE_SELF": "Et voi %s itseäsi! Se olisi typerää.",
+	"CANT_HUG_SELF": "You can't hug yourself! That would be silly.",
+	"CANT_SLAP_SELF": "You can't slap yourself! That would be silly.",
+	"CANT_HEADPAT_SELF": "You can't headpat yourself! That would be silly.",
 	"PING_REQUIRED": "Sinun pitää mainita joku henkilö käyttääksesi tätä komentoa.",
-	"HUG": "halata",
-	"HEADPAT": "taputtaa",
-	"SLAP": "läpsäistä",
-	"PET": "silittää",
 	"TWEETING": "Twiitataan...",
 	"TWEET_APPROVED": "joku hyväksyi twiittisi! Tässä se on: %s",
 	"TWEET_DENIED": "joku hylkäsi twiittisi.",
@@ -57,5 +56,11 @@
 	"SUCCESS": "Success!",
 	"INFORMATION": "Information",
 	"INPUT_REQUESTED": "Input requested",
-	"SLOW_DOWN": "Slow down!"
+	"SLOW_DOWN": "Slow down!",
+	"QUIZ_START": "Are you ready? Here we go!",
+	"QUIZ_WINNER_TITLE": "We have a winner!",
+	"QUIZ_WINNER_DESCRIPTION": "%s got the correct answer.",
+	"QUIZ_HINT_AVAILABLE": "Hint available.",
+	"GIVEAWAY_DROP_NO_WINNER_YET": "No winner yet!",
+	"GIVEAWAY_DROP_STARTED_BY": "Started by %s"
 }
