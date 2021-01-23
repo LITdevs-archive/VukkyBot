@@ -1,6 +1,7 @@
 var chalk = require("chalk");
 var mysql = require("mysql");
 var config = require("./config.json");
+const { todayInHistoryEmbed } = require("./utilities/embeds");
 var vukkytils = require("./utilities/vukkytils");
 require("dotenv").config();
 var sql;
@@ -17,12 +18,21 @@ function isInt(value) {
 	return !isNaN(value) && (x | 0) === x;
 }
 
+function shouldRun(logs) {
+	if(logs) {
+		if(!config.counting.enabled) return;
+		if(!config.misc.mysql) return console.log(`${cheader} ${error("MySQL is not enabled. MySQL is required for counting.")}`);
+	} else {
+		if(!config.counting.enabled) return;
+		if(!config.misc.mysql) return;
+	}
+	if(process.env.DEVELOPER_MODE == "1") return;
+	return true;
+}
+
 module.exports = {
 	start: function(client) {
-		if(client.user.username.toLowerCase().includes("dev")) return console.log(`${cheader} ${error("Counting is disabled because you're on a developer bot!")}`);
-		if(!config.counting.enabled) return console.log(`${cheader} ${error("Counting is disabled!")}`);
-		if(!config.misc.mysql) return console.log(`${cheader} ${error("MySQL is not enabled. MySQL is required for counting.")}`);
-		
+		if(shouldRun(true) != true) return;
 		let con = mysql.createConnection({
 			host: process.env.SQL_HOST,
 			user: process.env.SQL_USER,
@@ -34,18 +44,12 @@ module.exports = {
 			if (err) {
 				return console.log(`${cheader} ${error("SQL connection failed. Maybe the credentials are invalid?")}`);
 			} else {
-				console.log(`${cheader} ${info("Connected to the database")}`);
-
 				sql = "CREATE TABLE counting (serverid VARCHAR(255), number VARCHAR(255), lastcounter VARCHAR(255), highscore VARCHAR(255), id INT AUTO_INCREMENT PRIMARY KEY)";
 				con.query(sql, function (err, result) {
 					if (err) {
-						if(err.code == "ER_TABLE_EXISTS_ERROR") {
-							console.log(`${cheader} ${warn("Table already exists")}`);
-						} else {
-							console.log(`${cheader} ${error("Table creation failed")} (probably already exists)`);
+						if(!err.code == "ER_TABLE_EXISTS_ERROR") {
+							console.log(`${cheader} ${error("Table creation failed")}`);
 						}
-					} else {
-						console.log(`${cheader} ${success("Table created")}`);
 					}
 				});
 
@@ -92,15 +96,16 @@ module.exports = {
 				
 				con.end();
 			}
-			console.log(`${cheader} ${success("Counting is enabled and SQL credentials are valid!")}`);
+			console.log(`${cheader} ${success("Connected!")}`);
 		});
 	},
 	deletion(message) {
-		if (!isInt(message.content)) return;
+		if (!isInt(message.content) || servers[message.guild.server.id].number != parseInt(message.content)) return;
 		message.channel.send("A message was deleted in this channel! The message was:");
 		message.channel.send(message.content);
 	},
 	check(message, client) {
+		if(shouldRun(false) != true) return;
 		let con = mysql.createConnection({
 			host: process.env.SQL_HOST,
 			user: process.env.SQL_USER,
