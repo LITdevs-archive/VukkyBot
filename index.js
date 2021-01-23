@@ -7,6 +7,7 @@ const chalk = require("chalk");
 const success = chalk.green;
 const warn = chalk.yellow;
 const error = chalk.bold.red;
+const info = chalk.blue;
 const fetch = require("node-fetch");
 const pjson = require("./package.json");
 const embeds = require("./utilities/embeds");
@@ -25,14 +26,15 @@ console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("STARTING
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
-	console.log(`[${vukkytils.getString("STARTUP")}] ${success(format(vukkytils.getString("STARTUP_FILE_LOADED"), file))}`);
+	if(process.env.DEVELOPER_MODE == "1") console.log(`[${vukkytils.getString("DEBUG")}] ${success(format(vukkytils.getString("STARTUP_FILE_LOADED"), file))}`);
 }
 
 const cooldowns = new Discord.Collection();
 
 client.once("ready", () => {
-	console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("READY")}`);
+	console.log(`[${vukkytils.getString("STARTUP")}] ${success(vukkytils.getString("READY"))}`);
 	if(!process.env.BOT_PREFIX && process.env.PREFIX) console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("ENV_PREFIX_RENAMED")}`);
+	if(process.env.DEVELOPER_MODE == "1") console.log(`[${vukkytils.getString("DEBUG")}] ${info(vukkytils.getString("DEBUG_DEV_MODE"))}`);
 	const statuses = [
 		"with JavaScript",
 		"with a Fall Guy",
