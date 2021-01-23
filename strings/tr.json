@@ -79,5 +79,7 @@
 	"TIH": "Today in History...",
 	"TIH_YEAR": "Year",
 	"TIH_DATE": "Date",
-	"TIH_LINKS": "Links"
+	"TIH_LINKS": "Links",
+	"DEBUG": "debug",
+	"DEBUG_DEV_MODE": "Developer mode is enabled."
 }
