@@ -55,7 +55,7 @@
 	"DUCK_FINDING": "Hold on! I'm finding a duck for you... 🦆🦆🦆",
 	"ENV_PREFIX_RENAMED": "PREFIX is now BOT_PREFIX. Please change your .env file.",
 	"WARNING": "Warning",
-	"SUCCESS": "Success!",
+	"SUCCESS": "Başarılı!",
 	"INFORMATION": "Information",
 	"INPUT_REQUESTED": "Input requested",
 	"SLOW_DOWN": "Slow down!",
