@@ -201,7 +201,7 @@ function todayInHistoryEmbed(event, year, date, links) {
 function funFactEmbed(fact, category, image, source) {
 	return new Discord.MessageEmbed()
 		.setColor("#ffc83d")
-		.setTitle(`🧠 Did You Know: ${category}`)
+		.setTitle(`🧠 ${vukkytils.getString("DID_YOU_KNOW")} ${category}`)
 		.setDescription(fact)
 		.setTimestamp()
 		.setImage(image)
@@ -210,8 +210,7 @@ function funFactEmbed(fact, category, image, source) {
 }
 
 function duckEmbed(image) {
-	var message = image.toLowerCase().includes("gif") ? "A wild (animated) duck appears! 🦆" : "A wild duck appears! 🦆";
-	if(image.toLowerCase().includes("gif")) message = "A wild (animated) duck appears! 🦆";
+	var message = image.toLowerCase().includes("gif") ? vukkytils.getString("DUCK_ANIMATED") : vukkytils.getString("DUCK_NORMAL");
 	return new Discord.MessageEmbed()
 		.setColor("#8e562e")
 		.setTitle(message)
@@ -223,7 +222,7 @@ function duckEmbed(image) {
 function innerEmbed(image) {
 	return new Discord.MessageEmbed()
 		.setColor("#8e562e")
-		.setTitle("A wild inner Vukky appears!")
+		.setTitle(vukkytils.getString("HELLO_INNER_VUKKY"))
 		.setImage(image)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -232,7 +231,7 @@ function innerEmbed(image) {
 function aboutEmbed(botversion, discordjsversion, osinfo) {
 	return new Discord.MessageEmbed()
 		.setColor("#4289c1")
-		.setTitle("💁‍♂️ About this VukkyBot")
+		.setTitle(`💁‍♂️ ${vukkytils.getString("ABOUT_VUKKYBOT_TITLE")}`)
 		.setDescription("Did you know? [VukkyBot is open source!](https://github.com/VukkyLtd/VukkyBot)")
 		.addField("Bot version", botversion, true)
 		.addField("discord.js version", discordjsversion, true)

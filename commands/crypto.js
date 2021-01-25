@@ -1,7 +1,7 @@
 const embeds = require("../utilities/embeds");
 const fetch = require("node-fetch");
 const config = require("../config.json");
-
+const vukkytils = require("../utilities/vukkytils");
 
 module.exports = {
 	name: "crypto",
@@ -24,7 +24,7 @@ module.exports = {
 				return newMessage.edit(`${config.misc.emoji.error} Something is broken!`);
 			}
 		}
-		message.channel.send(`${config.misc.emoji.loading} Hold on! I'm getting the data...`)
+		message.channel.send(`${config.misc.emoji.loading} ${vukkytils.getString("GETTING_DATA")}`)
 			.then(newMessage => {
 				fetch(`http://api.shruc.ml/saladlog/price?coin=${args[0].toLowerCase()}`)
 					.then(res => {

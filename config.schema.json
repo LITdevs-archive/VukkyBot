@@ -81,6 +81,16 @@
                             "type": "boolean"
                         }
                     }
+                },
+                "wikipedia": {
+                    "description": "Options for the wikipedia command",
+                    "type": "object",
+                    "properties": {
+                        "site": {
+                            "description": "Sets the Wikipedia to load from.",
+                            "type": "string"
+                        }
+                    }
                 }
             }
         }
