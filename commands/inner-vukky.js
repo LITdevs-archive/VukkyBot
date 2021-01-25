@@ -19,7 +19,7 @@ module.exports = {
 			// message.mentions.users.first().username
 			message.channel.send(`${config.misc.emoji.loading} ${format(vukkytils.getString("DISCOVERING_OTHER_VUKKY"), message.mentions.users.first().username)}`)
 				.then(newMessage => {	
-					newMessage.edit(format(vukkytils.getString("DISCOVERED_OTHER_VUKKY"), message.mentions.users.first().username), embeds.innerEmbed(`https://sivusto.tk/innervukky/${vukkyid}.png`));
+					newMessage.edit(format(vukkytils.getString("DISCOVERED_OTHER_VUKKY"), message.author, message.mentions.users.first().username), embeds.innerEmbed(`https://sivusto.tk/innervukky/${vukkyid}.png`));
 				});
 		} else if (args[0]) { 
 			message.client.users.fetch(args[0]).then(function (res) {
@@ -27,7 +27,7 @@ module.exports = {
 				otherVukky = true;
 				message.channel.send(`${config.misc.emoji.loading} ${format(vukkytils.getString("DISCOVERING_OTHER_VUKKY"), res.username)}`)
 					.then(newMessage => {	
-						newMessage.edit(format(vukkytils.getString("DISCOVERED_OTHER_VUKKY"), res.username), embeds.innerEmbed(`https://sivusto.tk/innervukky/${vukkyid}.png`));
+						newMessage.edit(format(vukkytils.getString("DISCOVERED_OTHER_VUKKY"), message.author, res.username), embeds.innerEmbed(`https://sivusto.tk/innervukky/${vukkyid}.png`));
 					});
 			});
 		} else {
