@@ -79,19 +79,16 @@ function inputEmbed(detailsMsg) {
 }
 
 function GiveawayDrop(prize, dropped_by, code) {
-	let howToString;
-	let titleString;
+	let howToString = vukkytils.getString("GIVEAWAY_DROP_HOWTO");
+	let titleString = `🎁 ${vukkytils.getString("GIVEAWAY_DROP")}`;
 	if(code == true) {
-		howToString = "Be the first who reacts with :tada: to this message. More details in <#726070905750421545>\n\n**THIS GIVEAWAY DROP CONTAINS A SPECIAL CODE!**\nMake sure your DMs are open!!";
-		titleString = "🎁⌨ Giveaway Drop (with special code)";
-	} else {
-		howToString = "Be the first who reacts with :tada: to this message. More details in <#726070905750421545>";
-		titleString = "🎁 Giveaway Drop";
+		howToString = howToString.concat(vukkytils.getString("GIVEAWAY_DROP_HOWTO_CODE"));
+		titleString = `🎁⌨ ${vukkytils.getString("GIVEAWAY_DROP_CODE")})`;
 	}
 	return new Discord.MessageEmbed()
 		.setColor("#D0A33E")
 		.setTitle(titleString)
-		.addField("Prize", prize, false)
+		.addField(vukkytils.getString("GIVEAWAY_PRIZE"), prize, false)
 		.addField(vukkytils.getString("GIVEAWAY_DROP_WINNER"), vukkytils.getString("GIVEAWAY_DROP_NO_WINNER_YET"), false)
 		.addField(vukkytils.getString("GIVEAWAY_DROP_HOWDOIWIN"), howToString, false)
 		.setAuthor(format(vukkytils.getString("GIVEAWAY_DROP_STARTED_BY"), dropped_by.tag))
@@ -102,8 +99,8 @@ function GiveawayDrop(prize, dropped_by, code) {
 function GiveawayWinner(prize, dropped_by, winner) {
 	return new Discord.MessageEmbed()
 		.setColor("#D000BC")
-		.setTitle("👑 Giveaway Drop winner!")
-		.addField("Prize", prize, false)
+		.setTitle(`👑 ${vukkytils.getString("GIVEAWAY_DROP_WINNER")}`)
+		.addField(vukkytils.getString("GIVEAWAY_PRIZE"), prize, false)
 		.addField(vukkytils.getString("WINNER"), winner, false)
 		.setAuthor(format(vukkytils.getString("GIVEAWAY_DROP_STARTED_BY"), dropped_by.tag))
 		.setTimestamp()
@@ -113,9 +110,9 @@ function GiveawayWinner(prize, dropped_by, winner) {
 function GiveawayInvalid(prize, dropped_by) {
 	return new Discord.MessageEmbed()
 		.setColor("#8EA5D0")
-		.setTitle("💸 Giveaway Drop expired...")
-		.addField("Prize", prize, false)
-		.setDescription("This prize is unfortunately no longer valid. Maybe next time?")
+		.setTitle(`💸 ${vukkytils.getString("GIVEAWAY_DROP_EXPIRED")}`)
+		.addField(vukkytils.getString("GIVEAWAY_PRIZE"), prize, false)
+		.setDescription(vukkytils.getString("GIVEAWAY_PRIZE_INVALID"))
 		.setAuthor(format(vukkytils.getString("GIVEAWAY_DROP_STARTED_BY"), dropped_by.tag))
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -167,9 +164,9 @@ function cryptoEmbed(coin, value, lastupdated, change24) {
 	return new Discord.MessageEmbed()
 		.setColor("#a7d28b")
 		.setTitle(`💰 ${coin} value`)
-		.setDescription("Here's your requested data!")
-		.addField("Value in USD", `$${value}`, true)
-		.addField("Value change (from 24h ago)", `$${change24}`, true)  
+		.setDescription(vukkytils.getString("DATA_GOTTEN"))
+		.addField(vukkytils.getString("CRYPTO_VALUE"), `$${value}`, true)
+		.addField(vukkytils.getString("CRYPTO_VALUE_CHANGE"), `$${change24}`, true)  
 		.addField(vukkytils.getString("CRYPTO_LAST_UPDATED"), lastupdated, true)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -233,9 +230,9 @@ function aboutEmbed(botversion, discordjsversion, osinfo) {
 		.setColor("#4289c1")
 		.setTitle(`💁‍♂️ ${vukkytils.getString("ABOUT_VUKKYBOT_TITLE")}`)
 		.setDescription("Did you know? [VukkyBot is open source!](https://github.com/VukkyLtd/VukkyBot)")
-		.addField("Bot version", botversion, true)
-		.addField("discord.js version", discordjsversion, true)
-		.addField("OS information", osinfo, true)
+		.addField(vukkytils.getStringString("ABOUT_VUKKYBOT_BOT_VER"), botversion, true)
+		.addField(vukkytils.getString("ABOUT_VUKKYBOT_DJS_VER"), discordjsversion, true)
+		.addField(vukkytils.getString("ABOUT_VUKKYBOT_OS_INFO"), osinfo, true)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
