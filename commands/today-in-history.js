@@ -11,7 +11,7 @@ module.exports = {
 	cooldown: 60,
 	aliases: ["today", "history"],
 	execute(message, args) {
-		message.channel.send(`${config.misc.emoji.loading} Hold on! I'm getting the data...`)
+		message.channel.send(`${config.misc.emoji.loading} ${vukkytils.getString("GETTING_DATA")}`)
 			.then(newMessage => {
 				fetch("https://history.muffinlabs.com/date")
 					.then(res => res.json())
