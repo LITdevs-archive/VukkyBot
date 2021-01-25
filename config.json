@@ -30,6 +30,9 @@
         },
         "giveawaydrop": {
             "codes": true
+        },
+        "wikipedia": {
+            "site": "en.wikipedia.org"
         }
     }
 }

@@ -2,13 +2,14 @@ const embeds = require("../utilities/embeds");
 const config = require("../config.json");
 const fetch = require("node-fetch");
 const commaNumber = require("comma-number");
+const vukkytils = require("../utilities/vukkytils");
 
 module.exports = {
 	name: "roblox",
 	description: "Interact with Roblox using VukkyBot!",
 	botPermissions: ["EMBED_LINKS"],
 	execute(message, args) {
-		message.channel.send(`${config.misc.emoji.loading} Hold on! I'm getting the data...`)
+		message.channel.send(`${config.misc.emoji.loading} ${vukkytils.getString("GETTING_DATA")}`)
 			.then(newMessage => {
 				fetch(`https://games.roblox.com/v1/games/list?model.keyword=${args.slice(0).join(" ")}`)
 					.then(res => res.json())

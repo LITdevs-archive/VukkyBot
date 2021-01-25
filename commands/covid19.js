@@ -12,7 +12,7 @@ module.exports = {
 	botPermissions: ["EMBED_LINKS"],
 	aliases: ["covid", "covid-19"],
 	execute(message, args) {
-		message.channel.send(`${config.misc.emoji.loading} Hold on! I'm getting the data...`)
+		message.channel.send(`${config.misc.emoji.loading} ${vukkytils.getString("GETTING_DATA")}`)
 			.then(newMessage => {
 				var country = args[0] ? Util.removeMentions(args.slice(0).join(" ").toLowerCase()) : null;
 				var diseaselink = args[0] ? `https://disease.sh/v3/covid-19/countries/${country}` : "https://disease.sh/v3/covid-19/all";
