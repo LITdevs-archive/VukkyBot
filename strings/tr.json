@@ -81,5 +81,14 @@
 	"TIH_DATE": "Tarih",
 	"TIH_LINKS": "Bağlantılar",
 	"DEBUG": "ayıklama",
-	"DEBUG_DEV_MODE": "Geliştirici modu açıldı."
+	"DEBUG_DEV_MODE": "Geliştirici modu açıldı.",
+	"GETTING_DATA": "Hold on! I'm getting the data...",
+	"WIKIPEDIA_DOESNT_EXIST": "`%s` doesn't exist.",
+	"WIKIPEDIA_INVALID_CHARS": "`%s` contains invalid characters.",
+	"WIKIPEDIA_NO_SHORT_DESC": "No short description availabile",
+	"DID_YOU_KNOW": "Did You Know:",
+	"DUCK_ANIMATED": "A wild (animated) duck appears! 🦆",
+	"DUCK_NORMAL": "A wild duck appears! 🦆",
+	"HELLO_INNER_VUKKY": "The inner Vukky says hello!",
+	"ABOUT_VUKKYBOT_TITLE": "About this VukkyBot"
 }
