@@ -20,7 +20,7 @@ module.exports = {
 						} else if (json.type === "https://mediawiki.org/wiki/HyperSwitch/errors/bad_request" && json.detail === "title-invalid-characters") {
 							newMessage.edit(format(vukkytils.getString("WIKIPEDIA_INVALID_CHARS"), search));
 						} else {
-							newMessage.edit("👌", embeds.wikipediaEmbed(json.titles.normalized, json.description || vukkytils.getString("WIKIPEDIA_NO_SHORT_DESC"), json.extract, json.originalimage ? json.originalimage.source : undefined, json.content_urls.desktop.page));
+							newMessage.edit(vukkytils.getString("DATA_GOTTEN"), embeds.wikipediaEmbed(json.titles.normalized, json.description || vukkytils.getString("WIKIPEDIA_NO_SHORT_DESC"), json.extract, json.originalimage ? json.originalimage.source : undefined, json.content_urls.desktop.page));
 						}
 					});
 			});
