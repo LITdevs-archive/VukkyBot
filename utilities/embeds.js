@@ -83,7 +83,7 @@ function GiveawayDrop(prize, dropped_by, code) {
 	let titleString = `🎁 ${vukkytils.getString("GIVEAWAY_DROP")}`;
 	if(code == true) {
 		howToString = howToString.concat(vukkytils.getString("GIVEAWAY_DROP_HOWTO_CODE"));
-		titleString = `🎁⌨ ${vukkytils.getString("GIVEAWAY_DROP_CODE")})`;
+		titleString = `🎁⌨ ${vukkytils.getString("GIVEAWAY_DROP_CODE")}`;
 	}
 	return new Discord.MessageEmbed()
 		.setColor("#D0A33E")
