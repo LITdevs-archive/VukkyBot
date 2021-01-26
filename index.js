@@ -232,7 +232,7 @@ client.on("messageReactionAdd", async function(reaction, user){
 	if(reaction.emoji.name == "❗" && config.reports.enabled) {
 		reaction.remove();
 		let channel = reaction.message.guild.channels.cache.find(channel => channel.name === config.reports.channelName);
-		channel.send(`<@&${config.reports.staffRoleID}>`, embeds.reportEmbed(reaction.message.url, reaction.message.author, user, reaction.message.content))
+		channel.send(`<@&${reaction.message.guild.roles.cache.find(r => r.name === "Staff").id}>`, embeds.reportEmbed(reaction.message.url, reaction.message.author, user, reaction.message.content))
 			.then(reportMessage => {
 				reportMessage.react("🗑");
 				const filter = (reaction, user) => {
