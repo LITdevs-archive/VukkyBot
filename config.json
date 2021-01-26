@@ -26,7 +26,7 @@
     "reports": {
         "enabled": true,
         "channelName": "reports",
-        "staffRoleID": "767431230769332226"
+        "staffRoleName": "Staff"
     },
     "commands": {
         "quiz": {
