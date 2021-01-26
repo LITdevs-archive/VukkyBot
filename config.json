@@ -23,6 +23,11 @@
         "enabled": true,
         "dmOwner": true
     },
+    "reports": {
+        "enabled": true,
+        "channelName": "reports",
+        "staffRoleID": "767431230769332226"
+    },
     "commands": {
         "quiz": {
             "timeSeconds": 30,

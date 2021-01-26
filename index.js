@@ -2,7 +2,7 @@ require("dotenv").config();
 const fs = require("fs");
 const counting = require("./counting.js");
 const Discord = require("discord.js");
-const client = new Discord.Client();
+const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION", "USER"]});
 const chalk = require("chalk");
 const success = chalk.green;
 const warn = chalk.yellow;
@@ -217,6 +217,41 @@ client.on("message", message => {
 client.on("messageDelete", message => {	
 	if (message.channel.name == config.counting.channelName) {
 		counting.deletion(message);
+	}
+});
+
+client.on("messageReactionAdd", async function(reaction, user){
+	if (reaction.partial) {
+		try {
+			await reaction.fetch();
+		} catch (error) {
+			console.error("Something went wrong when fetching the message: ", error);
+			return;
+		}
+	}
+	if(reaction.emoji.name == "❗" && config.reports.enabled) {
+		reaction.remove();
+		let channel = reaction.message.guild.channels.cache.find(channel => channel.name === config.reports.channelName);
+		channel.send(`<@&${config.reports.staffRoleID}>`, embeds.reportEmbed(reaction.message.url, reaction.message.author, user, reaction.message.content))
+			.then(reportMessage => {
+				reportMessage.react("🗑");
+				const filter = (reaction, user) => {
+					return reaction.emoji.name == "🗑" && user.bot == false;
+				};
+
+				reportMessage.awaitReactions(filter, { max: 1 })
+					.then(collected => {
+						const actionReaction = collected.first();
+						reportMessage.reactions.removeAll();
+						if(actionReaction.emoji.name == "🗑") {
+							reaction.message.delete();
+							reportMessage.edit(embeds.reportActionEmbed("The reported message was deleted.", reaction.message.content, actionReaction.users.cache.last()));
+						}
+					})
+					.catch(collected => {
+						return reportMessage.channel.send("There was an error.");
+					});
+			});
 	}
 });
 
