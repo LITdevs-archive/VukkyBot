@@ -45,6 +45,7 @@ let questions = [
 			{ name: "Invalid command reminders", value: "invalidcmd" },
 			{ name: "Prefix reminders", value: "prefixremind" },
 			{ name: "Update checks", value: "updates" },
+			{ name: "Message reporting", value: "msgreporting" },
 		]
 	},
 	{
@@ -101,6 +102,22 @@ let questions = [
 		default: "counting",
 		when: function (answers) {
 			return answers.mysqlfeatures !== undefined && answers.mysqlfeatures.includes("counting");
+		}
+	},
+	{
+		type: "confirm",
+		name: "msgReportingPosting",
+		message: "What's the name of the channel reports should be posted in?",
+		when: function (answers) {
+			return answers.extrafeatures !== undefined && answers.extrafeatures.includes("msgReporting");
+		}
+	},
+	{
+		type: "confirm",
+		name: "msgReportingRole",
+		message: "What's the role ID that should be pinged when a message is reported?",
+		when: function (answers) {
+			return answers.extrafeatures !== undefined && answers.extrafeatures.includes("msgReporting");
 		}
 	},
 	{
@@ -173,6 +190,15 @@ inquirer.prompt(questions).then((answers) => {
 			if (answers.extrafeatures !== undefined && answers.extrafeatures.includes("updates")) {
 				config.updateChecker.enabled = true;
 				if (answers.updateDms == true) config.updateChecker.dmOwner = true;
+			} else {
+				config.updateChecker.enabled = false;
+			}
+			if (answers.extrafeatures !== undefined && answers.extrafeatures.includes("msgreporting")) {
+				config.reports.enabled = true;
+				config.reports.channelName = answers.msgReportingPosting;
+				config.reports.staffRoleID = answers.msgReportingRole;
+			} else {
+				config.reports.enabled = false;
 			}
 			fs.writeFile("config.json", JSON.stringify(config, null, 4), function (err) {
 				if (err) {

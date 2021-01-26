@@ -29,6 +29,8 @@ module.exports = {
 	covidEmbed,
 	warnsUserEmbed,
 	innerEmbed,
+	reportEmbed,
+	reportActionEmbed,
 	versionString,
 	avatarURL
 };
@@ -260,6 +262,28 @@ function warnsUserEmbed(username, warns) {
 		.setColor("#ffcc4d")
 		.setTitle(`⚠ ${format(vukkytils.getString("WARNINGS_TITLE"), username)}`)
 		.setDescription(warns)
+		.setTimestamp()
+		.setFooter(versionString, avatarURL);
+}
+
+function reportEmbed(messageURL, reportedUser, reporter, messageContent) {
+	return new Discord.MessageEmbed()
+		.setColor("#ffcc4d")
+		.setTitle("A message was reported!")
+		.setDescription(messageContent)
+		.addField("Reported user", reportedUser, true)
+		.addField("Reporter", reporter, true)
+		.addField("Message link", messageURL, true)
+		.setTimestamp()
+		.setFooter(versionString, avatarURL);
+}
+
+function reportActionEmbed(title, messageContent, actionTakenBy) {
+	return new Discord.MessageEmbed()
+		.setColor("#ffcc4d")
+		.setTitle(title)
+		.setDescription(messageContent)
+		.addField("Action taken by", actionTakenBy, true)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
