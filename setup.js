@@ -115,7 +115,7 @@ let questions = [
 	{
 		type: "confirm",
 		name: "msgReportingRole",
-		message: "What's the role ID that should be pinged when a message is reported?",
+		message: "What's the name of the role that should be pinged when a message is reported?",
 		when: function (answers) {
 			return answers.extrafeatures !== undefined && answers.extrafeatures.includes("msgReporting");
 		}
@@ -196,7 +196,7 @@ inquirer.prompt(questions).then((answers) => {
 			if (answers.extrafeatures !== undefined && answers.extrafeatures.includes("msgreporting")) {
 				config.reports.enabled = true;
 				config.reports.channelName = answers.msgReportingPosting;
-				config.reports.staffRoleID = answers.msgReportingRole;
+				config.reports.staffRoleName = answers.msgReportingRole;
 			} else {
 				config.reports.enabled = false;
 			}
