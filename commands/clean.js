@@ -1,3 +1,5 @@
+// Copyright (C) 2020-2021 Vukky
+
 const embeds = require("../utilities/embeds");
 const vukkytils = require("../utilities/vukkytils");
 const format = require("util").format;
