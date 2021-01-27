@@ -1,3 +1,5 @@
+// Copyright (C) 2020-2021 Vukky, Gravity Assist
+
 const embeds = require("../utilities/embeds");
 const config = require("../config.json");
 var specialCode;

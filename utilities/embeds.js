@@ -1,3 +1,5 @@
+// Copyright (C) 2020-2021 Vukky, Gravity Assist
+
 const Discord = require("discord.js");
 const pjson = require("../package.json");
 const config = require("../config.json");

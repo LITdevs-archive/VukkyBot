@@ -1,3 +1,5 @@
+// Copyright (C) 2020-2021 Vukky
+
 const vukkytils = require("vukkyutils");
 const config = require("../config.json");
 
