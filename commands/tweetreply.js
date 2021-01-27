@@ -1,3 +1,5 @@
+// Copyright (C) 2021 Vukky, vtheskeleton
+
 const embeds = require("../utilities/embeds");
 const config = require("../config.json");
 require("dotenv").config();
