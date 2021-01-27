@@ -16,7 +16,7 @@ function everythingIsFine(message, mentionedUser, args) {
 		if (err) console.log(err);
 	});
 			
-	let sql = `INSERT INTO warnings (username, serverid, uid, reason) VALUES ('${mentionedUser.username}', ${message.guild.id} , ${mentionedUser.id}, '${warnReason}')`;
+	let sql = `INSERT INTO warnings (username, serverid, uid, reason) VALUES ('DEPRECATED', ${message.guild.id} , ${mentionedUser.id}, '${warnReason}')`;
 	con.query(sql, function (err, result) {
 		if (err)  {
 			message.channel.send(errorEmbed("An error has occurred! See logs for more information."));
