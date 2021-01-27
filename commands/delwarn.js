@@ -5,6 +5,7 @@ const { errorEmbed, successEmbed } = require("../utilities/embeds");
 var sql = "";
 const vukkytils = require("../utilities/vukkytils");
 const format = require("util").format;
+
 module.exports = {
 	name: "delwarn",
 	description: "Make VukkyBot remove warnings from people!",
