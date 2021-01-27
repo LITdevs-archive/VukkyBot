@@ -82,7 +82,7 @@ let questions = [
 	{
 		type: "input",
 		name: "discordidmulti",
-		message: "What's the Discord ID of the people who'll be owning this VukkyBot, split with commas (id1, id2, id3)?",
+		message: "What are the Discord IDs of the people who'll be owning this VukkyBot, split with commas (id1, id2, id3)?",
 		when: function (answers) {
 			return answers.multipleowners !== false;
 		}

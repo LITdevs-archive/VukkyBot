@@ -1,3 +1,5 @@
+// Copyright (C) 2020 vtheskeleton
+
 const modifier = 2.857142;
 module.exports = {
 	convert: function(original) {
