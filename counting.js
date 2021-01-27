@@ -26,7 +26,6 @@ function shouldRun(logs) {
 		if(!config.counting.enabled) return;
 		if(!config.misc.mysql) return;
 	}
-	if(process.env.DEVELOPER_MODE == "1") return;
 	return true;
 }
 
