@@ -1,3 +1,5 @@
+// Copyright (C) 2020 Vukky
+
 const embeds = require("../utilities/embeds");
 const fetch = require("node-fetch");
 const config = require("../config.json");

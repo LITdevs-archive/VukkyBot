@@ -1,3 +1,5 @@
+// Copyright (C) 2020-2021 Vukky
+
 const embeds = require("../utilities/embeds");
 
 module.exports = {
