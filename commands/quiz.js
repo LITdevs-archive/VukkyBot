@@ -1,6 +1,7 @@
 // Copyright (C) 2020-2021 Vukky
 
 const embeds = require("../utilities/embeds");
+const vukkytils = require("../utilities/vukkytils");
 
 module.exports = {
 	name: "quiz",
@@ -9,7 +10,7 @@ module.exports = {
 	aliases: ["trivia"],
 	execute(message, args) {
 		console.log("Let's play a quiz!");
-		const quiz = require("./quiz.json");
+		const quiz = vukkytils.getStrings(`../strings/quiz/${vukkytils.language}`);
 		const config = require("../config.json");
 		const item = quiz[Math.floor(Math.random() * quiz.length)];
 		const filter = response => {
@@ -18,8 +19,6 @@ module.exports = {
 
 		// customization
 		const quizTimeSeconds = config.commands.quiz.timeSeconds;
-
-		console.log(`I'm picking "${item.question}" and the answers for it are ${item.answers}.\nThe hint for it is ${item.hint} and it was made by ${item.author}.\nIts categories are ${item.categories}.`);
         
 		message.channel.send(embeds.quizStartEmbed(item.question, quizTimeSeconds, item.hint, item.author, item.categories)).then(() => {
 			message.channel.awaitMessages(filter, { max: 1, time: quizTimeSeconds * 1000, errors: ["time"] })
