@@ -1,3 +1,7 @@
 files:
   - source: /strings/en.json
     translation: /strings/%two_letters_code%.json
+  - source: /strings/funfact/en.json
+    translation: /strings/funfact/%two_letters_code%.json
+  - source: /strings/quiz/en.json
+    translation: /strings/quiz/%two_letters_code%.json
