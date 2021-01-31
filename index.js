@@ -76,8 +76,7 @@ client.once("ready", () => {
 		"Vukkyland",
 		"Super Vukky 64",
 		"Paper Vukky: The Origami King",
-		"Swift Playgrounds",
-		""
+		"Swift Playgrounds"
 	];
 	setInterval(() => {
 		const index = Math.floor(Math.random() * (statuses.length - 1) + 1);
@@ -166,8 +165,7 @@ client.on("message", message => {
 			if ((message.channel.type == "text" && !message.guild.me.hasPermission(command.botPermissions[i]))) {
 				let reply = format(vukkytils.getString("BOT_PERMISSION_NEEDED"), command.botPermissions[i]);
 				if (embedPermissions == 0) return message.channel.send(reply);
-				message.channel.send(embeds.errorEmbed(reply));
-				return;
+				return message.channel.send(embeds.errorEmbed(reply));
 			}
 		}
 	}
@@ -180,8 +178,7 @@ client.on("message", message => {
 			if ((message.channel.type == "text" && !message.member.hasPermission(command.userPermissions[i]))) {
 				let reply = format(vukkytils.getString("USER_PERMISSION_NEEDED"), command.userPermissions[i]);
 				if (embedPermissions == 0) return message.channel.send(reply);
-				message.channel.send(embeds.errorEmbed(reply));
-				return;
+				return message.channel.send(embeds.errorEmbed(reply));
 			}
 		}
 	}
