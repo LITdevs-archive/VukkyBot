@@ -2,6 +2,7 @@ require("dotenv").config();
 const fs = require("fs");
 const counting = require("./counting.js");
 const Discord = require("discord.js");
+const ora = require("ora");
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION", "USER"]});
 const chalk = require("chalk");
 const success = chalk.green;
@@ -23,18 +24,27 @@ let embedPermissions = 1;
 
 console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("STARTING")}`);
 
+const commandSpinner = ora().start();
+commandSpinner.prefixText = `[${vukkytils.getString("STARTUP")}]`;
+commandSpinner.spinner = "bouncingBar";
+commandSpinner.text = "Loading commands...\n";
+let commandsToLoad = commandFiles.length;
 for (const file of commandFiles) {
+	commandsToLoad--;
+	commandSpinner.text = `Loading ${file}... (loaded ${commandFiles.indexOf(file) + 1}/${commandFiles.length})`;
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
-	if(process.env.DEVELOPER_MODE == "1") console.log(`[${vukkytils.getString("DEBUG")}] ${success(format(vukkytils.getString("STARTUP_FILE_LOADED"), file))}`);
+	if(commandsToLoad == 0) {
+		commandSpinner.succeed("Commands loaded!");
+		login();
+	}
 }
 
 const cooldowns = new Discord.Collection();
 
 client.once("ready", () => {
-	console.log(`[${vukkytils.getString("STARTUP")}] ${success(vukkytils.getString("READY"))}`);
+	console.log(`\n[${vukkytils.getString("STARTUP")}] Welcome to VukkyBot.\n[${vukkytils.getString("STARTUP")}] Running v${pjson.version}\n`);
 	if(!process.env.BOT_PREFIX && process.env.PREFIX) console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("ENV_PREFIX_RENAMED")}`);
-	if(process.env.DEVELOPER_MODE == "1") console.log(`[${vukkytils.getString("DEBUG")}] ${info(vukkytils.getString("DEBUG_DEV_MODE"))}`);
 	const statuses = [
 		"with JavaScript",
 		"with a Fall Guy",
@@ -92,11 +102,14 @@ client.once("ready", () => {
 });
 
 function checkUpdates() {
+	const updateChecker = ora("Checking for updates...").start();
+	updateChecker.prefixText = "[updatechecker]";
+	updateChecker.spinner = "bouncingBar";
 	fetch("https://raw.githubusercontent.com/VukkyLtd/VukkyBot/master/package.json")  
 		.then(res => res.json())
 		.then(json => {
 			if (json.version > pjson.version && updateRemindedOn !== json.version) {
-				console.log(`${warn("Update available!")}`);
+				updateChecker.warn(`${json.version} is now available!`);
 				updateRemindedOn = json.version;
 				if (config.updateChecker.dmOwner) {
 					for (let i = 0; i < config.misc.owner.length; i++) {
@@ -106,6 +119,8 @@ function checkUpdates() {
 							});
 					}
 				}
+			} else {
+				updateChecker.info("No update available.");
 			}
 		});
 }
@@ -252,5 +267,15 @@ client.on("messageReactionAdd", async function(reaction, user){
 	}
 });
 
-
-client.login(process.env.BOT_TOKEN);
+async function login() {
+	const loginSpinner = ora().start();
+	loginSpinner.prefixText = `[${vukkytils.getString("STARTUP")}]`;
+	loginSpinner.spinner = "bouncingBar";
+	loginSpinner.text = "Logging in...\n";
+	try {
+		await client.login(process.env.BOT_TOKEN);
+		loginSpinner.succeed(`Logged in as ${client.user.tag}!`);
+	} catch {
+		loginSpinner.fail("Login failed.");
+	}
+}
