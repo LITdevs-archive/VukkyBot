@@ -1,18 +1,18 @@
 [
 		{
-				"question": "What colour is the sky?",
+				"question": "Hvilken farge er det på himmelen?",
 				"answers": [
-						"blue"
+						"blå"
 				],
 				"author": "discordjs.guide",
 				"categories": [
-						"Nature"
+						"Natur"
 				]
 		},
 		{
-				"question": "Was this bot made by Vukky?",
+				"question": "Ble denne botten laget av Vukky?",
 				"answers": [
-						"yes"
+						"ja"
 				],
 				"author": "Vukky",
 				"categories": [
