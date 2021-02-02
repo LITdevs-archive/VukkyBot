@@ -99,7 +99,7 @@ module.exports = {
 		});
 	},
 	deletion(message) {
-		if (!isInt(message.content) || servers[message.guild.server.id].number != parseInt(message.content)) return;
+		if (shouldRun(true) != true || !isInt(message.content) || servers[message.guild.server.id].number != parseInt(message.content)) return;
 		message.channel.send("A message was deleted in this channel! The message was:");
 		message.channel.send(message.content);
 	},
