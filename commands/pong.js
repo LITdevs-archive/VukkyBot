@@ -1,10 +1,11 @@
-const embeds = require("../utilities/embeds");
+const { infoEmbed } = require("../utilities/embeds");
 
 module.exports = {
 	name: "pong",
 	description: "Pong.",
 	botPermissions: ["EMBED_LINKS"],
-	execute(message, args) {
-		message.channel.send(embeds.infoEmbed("Ping!"));
+	async execute(message, args) {
+		const ping = await message.channel.send(infoEmbed("Ping!"));
+		ping.edit(infoEmbed(`Ping! **${ping.createdTimestamp - message.createdTimestamp}ms**`));
 	},
 };
