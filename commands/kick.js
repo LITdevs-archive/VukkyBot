@@ -23,7 +23,12 @@ module.exports = {
 		if(!mentionedUser.kickable) return message.channel.send("I can't kick this user.");
 
 		mentionedUser.send(`👢 You were kicked from **${message.guild.name}**${(kickReason !== "no reason specified") ? `, for ${kickReason}.` : "."}`)
-			.finally(_h => mentionedUser.kick(`Done by ${message.author.tag} - ${kickReason}`))
-			.finally(_h => message.channel.send(embeds.successEmbed(`Kicked <@${mentionedUser.id}> (${mentionedUser.id}) from **${message.guild.name}**${(kickReason !== "no reason specified") ? `, for ${kickReason}.` : "."}`)));
+			.then(() => iHateThis())
+			.catch(() => iHateThis());
+		
+		function iHateThis() {
+			mentionedUser.kick(`Done by ${message.author.tag} - ${kickReason}`)
+				.then(message.channel.send(embeds.successEmbed(`Kicked <@${mentionedUser.id}> (${mentionedUser.id}) from **${message.guild.name}**${(kickReason !== "no reason specified") ? `, for ${kickReason}.` : "."}`)));
+		}
 	},
 };
