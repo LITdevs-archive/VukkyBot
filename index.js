@@ -146,10 +146,12 @@ client.on("message", message => {
 	const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-	if (!command && config.misc.invalidCmdReminder) {
-		let reply = `I've been looking around for a while now, but I don't think **${commandName}** is a command.`;
-		if (embedPermissions == 0) return message.channel.send(reply);
-		message.channel.send(embeds.errorEmbed(reply));
+	if (!command) {
+		if(config.misc.invalidCmdReminder) {
+			let reply = `I've been looking around for a while now, but I don't think **${commandName}** is a command.`;
+			if (embedPermissions == 0) return message.channel.send(reply);
+			message.channel.send(embeds.errorEmbed(reply));
+		}
 		return;
 	}
 
