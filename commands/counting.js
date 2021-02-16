@@ -25,8 +25,8 @@ module.exports = {
 		
 		if(args[0] == "highscore") {
 			sql = `SELECT highscore FROM counting WHERE (serverid = ${message.guild.id})`;
-				con.query(sql, function (err, result) {
-				message.channel.send(`Highscore: ${result[0].highscore}`)
+			con.query(sql, function (err, result) {
+				message.channel.send(`Highscore: ${result[0].highscore}`);
 				con.end();
 			});
 		} else {
@@ -39,10 +39,10 @@ module.exports = {
 			} else {
 				sql = `SELECT highscore FROM counting WHERE (serverid = ${message.guild.id})`;
 				con.query(sql, function (err, result) {
-				message.channel.send(`Highscore: ${result[0].highscore}`)
-				con.end();
-			});
-		}
+					message.channel.send(`Highscore: ${result[0].highscore}`);
+					con.end();
+				});
+			}
 		}
 
 	},
