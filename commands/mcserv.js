@@ -16,10 +16,19 @@ module.exports = {
 
 				util.status(args.slice(0).join(" "))
 					.then((response) => {
-						newMessage.edit(`**${response.host}** - ${response.version}\n**${response.onlinePlayers}/${response.maxPlayers}** online players`);
+						newMessage.edit(`**${response.host}** - ${response.version}\n**${response.onlinePlayers}/${response.maxPlayers}** online players\n\`\`\`${response.description.descriptionText}\`\`\``);
 					})
 					.catch((error) => {
-						newMessage.edit(`${config.misc.emoji.error} ${error.message}`);
+						if(error) {
+							if(error.message) {
+								newMessage.edit(`${config.misc.emoji.error} ${error.message}`);
+							} else {
+								newMessage.edit(`${config.misc.emoji.error} Unknown error.`);
+								console.log(error);
+							}
+						} else {
+							newMessage.edit(`${config.misc.emoji.error} Unknown error.`);
+						}
 					});
 			});
 	},
