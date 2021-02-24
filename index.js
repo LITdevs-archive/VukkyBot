@@ -22,16 +22,18 @@ let updateRemindedOn = null;
 const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
 let embedPermissions = 1;
 
+console.clear();
 console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("STARTING")}`);
 
-const commandSpinner = ora().start();
+const commandSpinner = ora("Loading commands...\n").start();
 commandSpinner.prefixText = `[${vukkytils.getString("STARTUP")}]`;
-commandSpinner.spinner = "bouncingBar";
-commandSpinner.text = "Loading commands...\n";
+commandSpinner.spinner = "point";	
+commandSpinner.render();
 let commandsToLoad = commandFiles.length;
 for (const file of commandFiles) {
 	commandsToLoad--;
-	commandSpinner.text = `Loading ${file}... (loaded ${commandFiles.indexOf(file) + 1}/${commandFiles.length})`;
+	commandSpinner.text = `Loading ${file}... (loaded ${commandFiles.indexOf(file) + 1}/${commandFiles.length})\n`;
+	commandSpinner.render();
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
 	if(commandsToLoad == 0) {
@@ -43,7 +45,7 @@ for (const file of commandFiles) {
 const cooldowns = new Discord.Collection();
 
 client.once("ready", () => {
-	console.log(`\n[${vukkytils.getString("STARTUP")}] Welcome to VukkyBot.\n[${vukkytils.getString("STARTUP")}] Running v${pjson.version}\n`);
+	console.log(`\n[${vukkytils.getString("STARTUP")}] VukkyBot v${pjson.version} is now running!`);
 	if(!process.env.BOT_PREFIX && process.env.PREFIX) console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("ENV_PREFIX_RENAMED")}`);
 	const statuses = [
 		"with JavaScript",
@@ -103,24 +105,26 @@ client.once("ready", () => {
 
 function checkUpdates() {
 	const updateChecker = ora("Checking for updates...").start();
-	updateChecker.prefixText = "[updatechecker]";
-	updateChecker.spinner = "bouncingBar";
+	updateChecker.prefixText = "[updater]";
+	updateChecker.spinner = "point";
+	updateChecker.render();
 	fetch("https://raw.githubusercontent.com/VukkyLtd/VukkyBot/master/package.json")  
 		.then(res => res.json())
 		.then(json => {
 			if (json.version > pjson.version && updateRemindedOn !== json.version) {
 				updateChecker.warn(`${json.version} is now available!`);
+				console.log(`[updater] https://github.com/VukkyLtd/VukkyBot/releases/tag/${json.version}`);
 				updateRemindedOn = json.version;
 				if (config.updateChecker.dmOwner) {
 					for (let i = 0; i < config.misc.owner.length; i++) {
 						client.users.fetch(config.misc.owner[i].toString())
 							.then(owner => {
-								owner.send(`Hello! I'm out of date. You're using VukkyBot **${pjson.version}**, but the latest version is VukkyBot **${json.version}**.\n*You have gotten this DM because you are an owner of this VukkyBot. DMing my owner(s) when an update is available is turned on.*`);
+								owner.send(`Hello! I'm out of date. You're using VukkyBot **${pjson.version}**, but the latest version is VukkyBot **${json.version}**.\nhttps://github.com/VukkyLtd/VukkyBot/releases/tag/${json.version}\n*You have gotten this DM because you are an owner of this VukkyBot. DMing my owner(s) when an update is available is turned on.*`);
 							});
 					}
 				}
 			} else {
-				updateChecker.info("No update available.");
+				updateChecker.info("No new updates available.");
 			}
 		});
 }
@@ -272,12 +276,17 @@ client.on("messageReactionAdd", async function(reaction, user){
 async function login() {
 	const loginSpinner = ora().start();
 	loginSpinner.prefixText = `[${vukkytils.getString("STARTUP")}]`;
-	loginSpinner.spinner = "bouncingBar";
+	loginSpinner.spinner = "point";
 	loginSpinner.text = "Logging in...\n";
 	try {
 		await client.login(process.env.BOT_TOKEN);
 		loginSpinner.succeed(`Logged in as ${client.user.tag}!`);
-	} catch {
-		loginSpinner.fail("Login failed.");
+	} catch (e) {
+		if(e && e.message && e.message.endsWith("ENOTFOUND discord.com")) { 
+			loginSpinner.fail("Login failed - internet unavailable?");
+		} else {
+			loginSpinner.fail("Login failed.");
+		}
+		throw e;
 	}
 }
