@@ -5,7 +5,6 @@
 	"STARTUP": "käynnistys",
 	"STARTING": "VukkyBot käynnistyy...",
 	"STARTUP_FILE_LOADED": "%s ladattu!",
-	"READY": "Valmis!",
 	"USER_PERMISSION_NEEDED": "Anteeksi, mutta tarvitset oikeuden `%s` voidaksesi käyttää tuota komentoa.",
 	"BOT_PERMISSION_NEEDED": "Anteeksi, mutta tarvitsen oikeuden `%s` voidakseni käyttää tuota komentoa.",
 	"HUG_TYPES": [
@@ -104,5 +103,13 @@
 	"GIVEAWAY_DROP_HOWTO": "Ole ensimmäinen joka reagoi :tada: tähän viestiin. Lisätietoja <#726070905750421545>",
 	"GIVEAWAY_DROP": "Lahja pudotus",
 	"GIVEAWAY_DROP_HOWTO_CODE": "\n\n**TÄMÄ LAHJA PUDOTUS SISÄLTÄÄ ERITYISEN KOODIN!**\nVarmista että yksityisviestisi ovat auki!!",
-	"GIVEAWAY_DROP_CODE": "Lahja pudotus (erityis koodilla)"
+	"GIVEAWAY_DROP_CODE": "Lahja pudotus (erityis koodilla)",
+	"STARTUP_LOADING_COMMANDS": "Loading commands...",
+	"STARTUP_LOADING_SPECIFIC_COMMAND": "Loading %s... (loaded %s/%s)",
+	"STARTUP_COMMANDS_LOADED": "Commands loaded!",
+	"READY": "VukkyBot v%s is now running!",
+	"STARTUP_LOGGING_IN": "Logging in...",
+	"STARTUP_LOGGED_IN": "Logged in as %s!",
+	"STARTUP_LOGIN_FAILED": "Login failed.",
+	"STARTUP_LOGIN_FAILED_INTERNET_UNAVAILABLE": "Login failed - your internet connection may be unavailable."
 }
