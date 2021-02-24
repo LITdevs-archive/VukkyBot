@@ -25,19 +25,19 @@ let embedPermissions = 1;
 console.clear();
 console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("STARTING")}`);
 
-const commandSpinner = ora("Loading commands...\n").start();
+const commandSpinner = ora(`${vukkytils.getString("STARTUP_LOADING_COMMANDS")}\n`).start();
 commandSpinner.prefixText = `[${vukkytils.getString("STARTUP")}]`;
 commandSpinner.spinner = "point";	
 commandSpinner.render();
 let commandsToLoad = commandFiles.length;
 for (const file of commandFiles) {
 	commandsToLoad--;
-	commandSpinner.text = `Loading ${file}... (loaded ${commandFiles.indexOf(file) + 1}/${commandFiles.length})\n`;
+	commandSpinner.text = `${format(vukkytils.getString("STARTUP_LOADING_SPECIFIC_COMMAND"), file, commandFiles.indexOf(file), commandFiles.length)}\n`;
 	commandSpinner.render();
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
 	if(commandsToLoad == 0) {
-		commandSpinner.succeed("Commands loaded!");
+		commandSpinner.succeed(vukkytils.getString("STARTUP_COMMANDS_LOADED"));
 		login();
 	}
 }
@@ -45,7 +45,7 @@ for (const file of commandFiles) {
 const cooldowns = new Discord.Collection();
 
 client.once("ready", () => {
-	console.log(`\n[${vukkytils.getString("STARTUP")}] VukkyBot v${pjson.version} is now running!`);
+	console.log(`\n[${vukkytils.getString("STARTUP")}] ${format(vukkytils.getString("READY"), pjson.version)}`);
 	if(!process.env.BOT_PREFIX && process.env.PREFIX) console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("ENV_PREFIX_RENAMED")}`);
 	const statuses = [
 		"with JavaScript",
@@ -277,15 +277,15 @@ async function login() {
 	const loginSpinner = ora().start();
 	loginSpinner.prefixText = `[${vukkytils.getString("STARTUP")}]`;
 	loginSpinner.spinner = "point";
-	loginSpinner.text = "Logging in...\n";
+	loginSpinner.text = `${vukkytils.getString("STARTUP_LOGGING_IN")}\n`;
 	try {
 		await client.login(process.env.BOT_TOKEN);
-		loginSpinner.succeed(`Logged in as ${client.user.tag}!`);
+		loginSpinner.succeed(format(vukkytils.getString("STARTUP_LOGGED_IN"), client.user.tag));
 	} catch (e) {
 		if(e && e.message && e.message.endsWith("ENOTFOUND discord.com")) { 
-			loginSpinner.fail("Login failed - internet unavailable?");
+			loginSpinner.fail(vukkytils.getString("STARTUP_LOGIN_FAILED_INTERNET_UNAVAILABLE"));
 		} else {
-			loginSpinner.fail("Login failed.");
+			loginSpinner.fail(vukkytils.getString("STARTUP_LOGIN_FAILED"));
 		}
 		throw e;
 	}
