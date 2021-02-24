@@ -5,7 +5,6 @@
 	"STARTUP": "oppstart",
 	"STARTING": "VukkyBot starter opp...",
 	"STARTUP_FILE_LOADED": "%s lastet inn!",
-	"READY": "Klar!",
 	"USER_PERMISSION_NEEDED": "Beklager, men du trenger `%s` tillatelsen til å bruke den kommandoen.",
 	"BOT_PERMISSION_NEEDED": "Beklager, men jeg trenger `%s` tillatelsen til å bruke den kommandoen.",
 	"HUG_TYPES": [
@@ -104,5 +103,13 @@
 	"GIVEAWAY_DROP_HOWTO": "Vær den første som reagerer med :tada: på denne meldingen. Se flere detaljer i <#726070905750421545>",
 	"GIVEAWAY_DROP": "Gavedryss",
 	"GIVEAWAY_DROP_HOWTO_CODE": "\n\n**DETTE GAVEDRYSSET INNEHOLDER EN SPESIALKODE**\nPass på at du har direktemeldinger åpne!!",
-	"GIVEAWAY_DROP_CODE": "Gavedryss (med spesialkode)"
+	"GIVEAWAY_DROP_CODE": "Gavedryss (med spesialkode)",
+	"STARTUP_LOADING_COMMANDS": "Loading commands...",
+	"STARTUP_LOADING_SPECIFIC_COMMAND": "Loading %s... (loaded %s/%s)",
+	"STARTUP_COMMANDS_LOADED": "Commands loaded!",
+	"READY": "VukkyBot v%s is now running!",
+	"STARTUP_LOGGING_IN": "Logging in...",
+	"STARTUP_LOGGED_IN": "Logged in as %s!",
+	"STARTUP_LOGIN_FAILED": "Login failed.",
+	"STARTUP_LOGIN_FAILED_INTERNET_UNAVAILABLE": "Login failed - your internet connection may be unavailable."
 }
