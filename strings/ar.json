@@ -5,7 +5,6 @@
 	"STARTUP": "التشغيل",
 	"STARTING": "هوتسبوت فاككي يبدأ العمل ...",
 	"STARTUP_FILE_LOADED": "%s تم تحميله!",
-	"READY": "جاهز!",
 	"USER_PERMISSION_NEEDED": "عذراً، لكنك تحتاج إلى إذن `%s` لاستخدام هذا الأمر.",
 	"BOT_PERMISSION_NEEDED": "عذراً، لكنني أحتاج إلى إذن `%s` لاستخدام هذا الأمر.",
 	"HUG_TYPES": [
@@ -104,5 +103,13 @@
 	"GIVEAWAY_DROP_HOWTO": "Be the first who reacts with :tada: to this message. More details in <#726070905750421545>",
 	"GIVEAWAY_DROP": "Giveaway Drop",
 	"GIVEAWAY_DROP_HOWTO_CODE": "\n\n**THIS GIVEAWAY DROP CONTAINS A SPECIAL CODE!**\nMake sure your DMs are open!!",
-	"GIVEAWAY_DROP_CODE": "Giveaway Drop (with special code)"
+	"GIVEAWAY_DROP_CODE": "Giveaway Drop (with special code)",
+	"STARTUP_LOADING_COMMANDS": "Loading commands...",
+	"STARTUP_LOADING_SPECIFIC_COMMAND": "Loading %s... (loaded %s/%s)",
+	"STARTUP_COMMANDS_LOADED": "Commands loaded!",
+	"READY": "VukkyBot v%s is now running!",
+	"STARTUP_LOGGING_IN": "Logging in...",
+	"STARTUP_LOGGED_IN": "Logged in as %s!",
+	"STARTUP_LOGIN_FAILED": "Login failed.",
+	"STARTUP_LOGIN_FAILED_INTERNET_UNAVAILABLE": "Login failed - your internet connection may be unavailable."
 }
