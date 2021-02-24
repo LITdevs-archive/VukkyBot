@@ -5,7 +5,6 @@
 	"STARTUP": "Startup",
 	"STARTING": "VukkyBot wird gestartet...",
 	"STARTUP_FILE_LOADED": "%s loaded!",
-	"READY": "Bereit!",
 	"USER_PERMISSION_NEEDED": "Sorry, aber du brauchst die `%s` Berechtigung um diesen Befehl zu verwenden.",
 	"BOT_PERMISSION_NEEDED": "Sorry, aber ich brauche die `%s` Berechtigung um diesen Befehl nutzen zu können.",
 	"HUG_TYPES": [
@@ -104,5 +103,13 @@
 	"GIVEAWAY_DROP_HOWTO": "Sei der erste der mit :tada: regiert! Mehr Details in <#726070905750421545>",
 	"GIVEAWAY_DROP": "Überraschungsgewinnspiel",
 	"GIVEAWAY_DROP_HOWTO_CODE": "\n\n**DIESES ÜBERRASCHUNGSGEWINNSPIEL ENTHÄLT EINEN SPEZIELLEN CODE!**\nStelle sicher, dass deine DMs geöffnet sind!!",
-	"GIVEAWAY_DROP_CODE": "Überrschungsgewinnspiel (mit speziellem Code)"
+	"GIVEAWAY_DROP_CODE": "Überrschungsgewinnspiel (mit speziellem Code)",
+	"STARTUP_LOADING_COMMANDS": "Loading commands...",
+	"STARTUP_LOADING_SPECIFIC_COMMAND": "Loading %s... (loaded %s/%s)",
+	"STARTUP_COMMANDS_LOADED": "Commands loaded!",
+	"READY": "VukkyBot v%s is now running!",
+	"STARTUP_LOGGING_IN": "Logging in...",
+	"STARTUP_LOGGED_IN": "Logged in as %s!",
+	"STARTUP_LOGIN_FAILED": "Login failed.",
+	"STARTUP_LOGIN_FAILED_INTERNET_UNAVAILABLE": "Login failed - your internet connection may be unavailable."
 }
