@@ -1,5 +1,5 @@
 {
-	"ERROR_GENERIC": "There was an error.",
+	"ERROR_GENERIC": "Došlo je do pogreške.",
 	"ERROR_RELOAD": "There was an error while reloading **%s**:\n`%s`",
 	"COUNTING": "counting",
 	"STARTUP": "startup",
