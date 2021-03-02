@@ -105,11 +105,11 @@
 	"GIVEAWAY_DROP_HOWTO_CODE": "\n\n**DETTE GAVEDRYSSET INNEHOLDER EN SPESIALKODE**\nPass på at du har direktemeldinger åpne!!",
 	"GIVEAWAY_DROP_CODE": "Gavedryss (med spesialkode)",
 	"STARTUP_LOADING_COMMANDS": "Loading commands...",
-	"STARTUP_LOADING_SPECIFIC_COMMAND": "Loading %s... (loaded %s/%s)",
-	"STARTUP_COMMANDS_LOADED": "Commands loaded!",
+	"STARTUP_LOADING_SPECIFIC_COMMAND": "Laster %s... (lastet %s/%s)",
+	"STARTUP_COMMANDS_LOADED": "Kommandoer lastet!",
 	"READY": "VukkyBot v%s is now running!",
-	"STARTUP_LOGGING_IN": "Logging in...",
-	"STARTUP_LOGGED_IN": "Logged in as %s!",
+	"STARTUP_LOGGING_IN": "Logger inn...",
+	"STARTUP_LOGGED_IN": "Logget inn som %s!",
 	"STARTUP_LOGIN_FAILED": "Login failed.",
 	"STARTUP_LOGIN_FAILED_INTERNET_UNAVAILABLE": "Login failed - your internet connection may be unavailable."
 }
