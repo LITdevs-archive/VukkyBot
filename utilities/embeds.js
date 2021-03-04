@@ -4,8 +4,7 @@ const Discord = require("discord.js");
 const pjson = require("../package.json");
 const config = require("../config.json");
 const avatarURL = "https://i.imgur.com/H0sAkrl.png";
-// please don't remove the copyright text, but of course it's up to you
-let versionString = `v${pjson.version} (discord.js ${pjson.dependencies["discord.js"].substring(1)}) • VukkyBot © Vukky Ltd 2020-2021`;
+let versionString = `v${pjson.version} (discord.js ${pjson.dependencies["discord.js"].substring(1)})`;
 
 const vukkytils = require("./vukkytils");
 const format = require("util").format;
@@ -234,7 +233,7 @@ function aboutEmbed(botversion, discordjsversion, osinfo) {
 		.setColor("#4289c1")
 		.setTitle(`💁‍♂️ ${vukkytils.getString("ABOUT_VUKKYBOT_TITLE")}`)
 		.setDescription("Did you know? [VukkyBot is open source!](https://github.com/VukkyLtd/VukkyBot)")
-		.addField(vukkytils.getStringString("ABOUT_VUKKYBOT_BOT_VER"), botversion, true)
+		.addField(vukkytils.getString("ABOUT_VUKKYBOT_BOT_VER"), botversion, true)
 		.addField(vukkytils.getString("ABOUT_VUKKYBOT_DJS_VER"), discordjsversion, true)
 		.addField(vukkytils.getString("ABOUT_VUKKYBOT_OS_INFO"), osinfo, true)
 		.setTimestamp()
