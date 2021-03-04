@@ -88,7 +88,11 @@ client.once("ready", () => {
 		"Vukkyland",
 		"Super Vukky 64",
 		"Paper Vukky: The Origami King",
-		"Swift Playgrounds"
+		"Swift Playgrounds",
+		"Elemental on Discord",
+		"Genshin Impact",
+		"VALORANT",
+		"Terraria"
 	];
 	setInterval(() => {
 		const index = Math.floor(Math.random() * (statuses.length - 1) + 1);
