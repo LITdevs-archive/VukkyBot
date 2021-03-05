@@ -30,6 +30,22 @@
                 }
             }
         },
+        "moderation": {
+            "description": "Options for VukkyBot's moderation features",
+            "type": "object",
+            "properties": {
+                "automod": {
+                    "description": "Options for VukkyBot's automod feature",
+                    "type": "object",
+                    "properties": {
+                        "allowInviteLinks": {
+                            "description": "Toggles if invite links are allowed",
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        },
         "counting": {
             "description": "Options for VukkyBot's counting feature",
             "type": "object",

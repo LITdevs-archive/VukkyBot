@@ -1,15 +1,12 @@
 var chalk = require("chalk");
 var mysql = require("mysql");
 var config = require("./config.json");
-const { todayInHistoryEmbed } = require("./utilities/embeds");
 var vukkytils = require("./utilities/vukkytils");
 require("dotenv").config();
 var sql;
 
 const error = chalk.bold.red;
-const warn = chalk.yellow;
 const success = chalk.green;
-const info = chalk.blue;
 var servers = {};
 var cheader = `[${vukkytils.getString("COUNTING")}]`;
 
@@ -46,7 +43,7 @@ module.exports = {
 				sql = "CREATE TABLE counting (serverid VARCHAR(255), number VARCHAR(255), lastcounter VARCHAR(255), highscore VARCHAR(255), id INT AUTO_INCREMENT PRIMARY KEY)";
 				con.query(sql, function (err, result) {
 					if (err) {
-						if(!err.code == "ER_TABLE_EXISTS_ERROR") {
+						if(err.code == "ER_TABLE_EXISTS_ERROR") {
 							console.log(`${cheader} ${error("Table creation failed")}`);
 						}
 					}
@@ -60,7 +57,6 @@ module.exports = {
 						database: process.env.SQL_DB
 					});
 					let serverid = server.id.toString();
-					let servername = server.name;
 					sql = `SELECT * FROM counting WHERE serverid = ${server.id}`;
 					con.query(sql, function (err, result) {
 						if (err) {
@@ -112,7 +108,6 @@ module.exports = {
 		});
 		let server = message.guild;
 		let serverid = server.id.toString();
-		let servername = server.name;
 		sql = `SELECT * FROM counting WHERE serverid = ${server.id}`;
 		con.query(sql, function (err, result) {
 			if (err) {

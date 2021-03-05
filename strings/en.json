@@ -103,5 +103,6 @@
 	"STARTUP_LOGGING_IN": "Logging in...",
 	"STARTUP_LOGGED_IN": "Logged in as %s!",
 	"STARTUP_LOGIN_FAILED": "Login failed.",
-	"STARTUP_LOGIN_FAILED_INTERNET_UNAVAILABLE": "Login failed - your internet connection may be unavailable."
+	"STARTUP_LOGIN_FAILED_INTERNET_UNAVAILABLE": "Login failed - your internet connection may be unavailable.",
+	"DISCORD_INVITES_DISABLED_AUTOMOD": "%s, **sending Discord invites** is disabled in this server."
 }
