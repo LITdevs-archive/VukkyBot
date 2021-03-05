@@ -15,6 +15,11 @@
             "loading": "<a:offlinegif:757979855924101220>"
         }
     },
+    "moderation": {
+        "automod": {
+            "allowInviteLinks": false
+        }
+    },
     "counting": {
         "enabled": true,
         "channelName": "counting"

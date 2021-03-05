@@ -134,14 +134,13 @@ function checkUpdates() {
 		});
 }
 
-
+const inviteSites = ["discord.gg/", "discord.com/invite/", "discordapp.com/invite/", "discord.co/invite", "watchanimeattheoffice.com/invite/", "discord.media/invite/"];
 client.on("message", message => {
 	if (message.author.bot) return;
 	if ((message.channel.type == "text" && !message.guild.me.hasPermission("EMBED_LINKS"))) embedPermissions = 0;
 	if (message.content.toLowerCase().includes(`<@!${client.user.id}>`) && config.misc.prefixReminder == true && !message.content.startsWith(prefix)) message.reply(`my prefix is \`${process.env.BOT_PREFIX}\``);
 	if (message.channel.name == config.counting.channelName) counting.check(message, client);
 
-	const inviteSites = ["discord.gg/", "discord.com/invite/", "discordapp.com/invite/", "discord.co/invite", "watchanimeattheoffice.com/invite/", "discord.media/invite/"];
 	if (inviteSites.some(site => message.content.includes(site)) && config.moderation.automod.allowInviteLinks == false) {
 		message.delete();
 		message.channel.send(format(vukkytils.getString("DISCORD_INVITES_DISABLED_AUTOMOD"), message.author)).then(msg => setTimeout(() => msg.delete(), 7000));
@@ -236,6 +235,13 @@ client.on("message", message => {
 	} catch (error) {
 		console.log(`[${command.name}] ${error.message}`);
 		message.reply("there was an error trying to execute that command!", embeds.errorEmbed(error.message));
+	}
+});
+
+client.on("messageUpdate", (oldMessage, newMessage) => {
+	if (inviteSites.some(site => newMessage.content.includes(site)) && config.moderation.automod.allowInviteLinks == false) {
+		newMessage.delete();
+		newMessage.channel.send(format(vukkytils.getString("DISCORD_INVITES_DISABLED_AUTOMOD"), newMessage.author)).then(msg => setTimeout(() => msg.delete(), 7000));
 	}
 });
 
