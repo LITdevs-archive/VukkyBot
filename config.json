@@ -11,8 +11,8 @@
         "mysql": true,
         "language": "en",
         "emoji": {
-            "error": "<:error:759701620777943062>",
-            "loading": "<a:offlinegif:757979855924101220>"
+            "error": "<:error:820962692474470432>",
+            "loading": "<a:loading:820962693056823347>"
         }
     },
     "moderation": {

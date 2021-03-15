@@ -45,7 +45,7 @@ for (const file of commandFiles) {
 const cooldowns = new Discord.Collection();
 
 client.once("ready", () => {
-	console.log(`\n[${vukkytils.getString("STARTUP")}] ${format(vukkytils.getString("READY"), pjson.version)}`);
+	console.log(`\n[${vukkytils.getString("STARTUP")}] ${format(vukkytils.getString("READY"), pjson.version)}\n`);
 	if(!process.env.BOT_PREFIX && process.env.PREFIX) console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("ENV_PREFIX_RENAMED")}`);
 	const statuses = [
 		"with JavaScript",
