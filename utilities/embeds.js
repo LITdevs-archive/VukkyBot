@@ -39,7 +39,7 @@ module.exports = {
 function errorEmbed(errorMsg) {
 	return new Discord.MessageEmbed()
 		.setColor("#ff0000")
-		.setTitle(`❌ ${vukkytils.getString("ERROR_GENERIC")}`)
+		.setTitle(`${config.misc.emoji.error} ${vukkytils.getString("ERROR_GENERIC")}`)
 		.setDescription(errorMsg)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
