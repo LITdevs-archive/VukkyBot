@@ -238,7 +238,13 @@ client.on("message", message => {
 	}
 });
 
-client.on("messageUpdate", (oldMessage, newMessage) => {
+client.on("messageUpdate", async (oldMessage, newMessage) => {
+	if (newMessage.partial) {
+		await newMessage.fetch()
+			.catch(error => {
+				console.log("Something went wrong when fetching the message: ", error);
+			});
+	}
 	if (inviteSites.some(site => newMessage.content.includes(site)) && config.moderation.automod.allowInviteLinks == false) {
 		newMessage.delete();
 		newMessage.channel.send(format(vukkytils.getString("DISCORD_INVITES_DISABLED_AUTOMOD"), newMessage.author)).then(msg => setTimeout(() => msg.delete(), 7000));
