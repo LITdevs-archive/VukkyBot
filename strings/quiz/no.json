@@ -26,46 +26,46 @@
 				],
 				"hint": "It's not different depending on the colors. And sorry for ruining your thoughts of them tasting differently.",
 				"categories": [
-						"Food"
+						"Mat"
 				]
 		},
 		{
-				"question": "What was the first company that Elon Musk founded?",
+				"question": "Hva het det første selskapet Elon Musik grunnla?",
 				"answers": [
 						"zip2",
 						"zip2 corporation"
 				],
 				"hint": "It's not Tesla. Elon Musk had to *zip* this company *two* times.",
 				"categories": [
-						"Technology"
+						"Teknologi"
 				]
 		},
 		{
-				"question": "What's the 21st letter of the alphabet?",
+				"question": "Hvilken bokstav kommer som nummer 21 i alfabetet?",
 				"answers": [
 						"u"
 				],
 				"categories": [
-						"Language"
+						"Språk"
 				]
 		},
 		{
-				"question": "What does “HTTP” stand for?",
+				"question": "Hva står \"HTTP\" for?",
 				"answers": [
 						"hypertext transfer protocol"
 				],
 				"categories": [
-						"Technology"
+						"Teknologi"
 				]
 		},
 		{
-				"question": "What does “HTTPS” stand for?",
+				"question": "Hva står \"HTTPS\" for?",
 				"answers": [
 						"hypertext transfer protocol secure"
 				],
 				"author": "Vukky",
 				"categories": [
-						"Technology"
+						"Teknologi"
 				]
 		},
 		{
@@ -75,7 +75,7 @@
 				],
 				"hint": "Like, THE iPhone. Not your fancy iPhone X or whatever. The first generation.",
 				"categories": [
-						"Technology"
+						"Teknologi"
 				]
 		},
 		{
@@ -84,7 +84,7 @@
 						"paul allen"
 				],
 				"categories": [
-						"Technology"
+						"Teknologi"
 				]
 		},
 		{
@@ -94,55 +94,55 @@
 						"the netherlands"
 				],
 				"categories": [
-						"Food"
+						"Mat"
 				]
 		},
 		{
-				"question": "Which country invented tea?",
+				"question": "Hvilket land oppfant teen?",
 				"answers": [
-						"china"
+						"kina"
 				],
 				"categories": [
-						"Food"
+						"Mat"
 				]
 		},
 		{
-				"question": "What is your body’s largest organ?",
+				"question": "Hvilket er kroppens største organ?",
 				"answers": [
-						"skin",
-						"the skin"
+						"hud",
+						"huden"
 				],
-				"hint": "It doesn't have to be an internal organ.",
+				"hint": "Det må ikke være et indre organ.",
 				"categories": [
-						"Science"
+						"Vitenskap"
 				]
 		},
 		{
-				"question": "Which planet is the hottest in the solar system?",
+				"question": "Hvilken planet er den varmeste i solsystemet?",
 				"answers": [
 						"venus"
 				],
 				"categories": [
-						"Science"
+						"Vitenskap"
 				]
 		},
 		{
-				"question": "Which planet has the most gravity?",
+				"question": "Hvilken planet har størst tyngdekraft?",
 				"answers": [
 						"jupiter"
 				],
 				"categories": [
-						"Science"
+						"Vitenskap"
 				]
 		},
 		{
-				"question": "Google Chrome, Safari, Firefox, and Internet Explorer are different types of what?",
+				"question": "Google Chrome, Safari, Firefox og Internet Explorer er forskjellige eksempler på hva?",
 				"answers": [
-						"web browsers",
-						"browsers"
+						"nettlesere",
+						"browsere"
 				],
 				"categories": [
-						"Technology"
+						"Teknologi"
 				]
 		},
 		{
@@ -211,7 +211,7 @@
 						"2020"
 				],
 				"categories": [
-						"Technology"
+						"Teknologi"
 				]
 		},
 		{
@@ -221,7 +221,7 @@
 				],
 				"author": "Vukky",
 				"categories": [
-						"Technology"
+						"Teknologi"
 				]
 		},
 		{
@@ -232,7 +232,7 @@
 				"hint": "blue and yellow",
 				"author": "Gustav",
 				"categories": [
-						"Science"
+						"Vitenskap"
 				]
 		},
 		{
@@ -242,7 +242,7 @@
 				],
 				"author": "Gustav and Vukky",
 				"categories": [
-						"Technology"
+						"Teknologi"
 				]
 		},
 		{
@@ -252,7 +252,7 @@
 				],
 				"author": "Gustav",
 				"categories": [
-						"Science"
+						"Vitenskap"
 				]
 		},
 		{
@@ -265,7 +265,7 @@
 				],
 				"author": "Gustav",
 				"categories": [
-						"Science"
+						"Vitenskap"
 				]
 		},
 		{
@@ -276,7 +276,7 @@
 				],
 				"author": "Gustav and Wikipedia",
 				"categories": [
-						"Science"
+						"Vitenskap"
 				]
 		},
 		{
@@ -286,7 +286,7 @@
 				],
 				"author": "Gustav",
 				"categories": [
-						"Science"
+						"Vitenskap"
 				]
 		},
 		{
