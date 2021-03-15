@@ -5,8 +5,8 @@
         "invalidCmdReminder": true,
         "prefixReminder": true,
         "owner": [
-            "708333380525228082",
-            "125644326037487616"
+            "372390836694155264",
+            "809301181679665162"
         ],
         "mysql": true,
         "language": "en",
@@ -29,9 +29,7 @@
         "dmOwner": true
     },
     "reports": {
-        "enabled": true,
-        "channelName": "reports",
-        "staffRoleName": "Staff"
+        "enabled": true
     },
     "commands": {
         "quiz": {

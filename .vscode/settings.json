@@ -1,4 +1,5 @@
 {
     "editor.renderWhitespace": "all",
-    "editor.insertSpaces": false
+    "editor.insertSpaces": false,
+    "VSCord.appName": "Visual Studio Code"
 }

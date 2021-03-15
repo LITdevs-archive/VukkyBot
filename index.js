@@ -5,10 +5,10 @@ const Discord = require("discord.js");
 const ora = require("ora");
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION", "USER"]});
 const chalk = require("chalk");
-const success = chalk.green;
-const warn = chalk.yellow;
-const error = chalk.bold.red;
-const info = chalk.blue;
+//const success = chalk.green;
+//const warn = chalk.yellow;    //all of thease seem to do nothing, why
+//const error = chalk.bold.red;
+//const info = chalk.blue;
 const fetch = require("node-fetch");
 const pjson = require("./package.json");
 const embeds = require("./utilities/embeds");
@@ -25,6 +25,7 @@ let embedPermissions = 1;
 console.clear();
 console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("STARTING")}`);
 
+//bot startup 
 const commandSpinner = ora(`${vukkytils.getString("STARTUP_LOADING_COMMANDS")}\n`).start();
 commandSpinner.prefixText = `[${vukkytils.getString("STARTUP")}]`;
 commandSpinner.spinner = "point";	
