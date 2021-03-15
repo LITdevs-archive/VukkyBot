@@ -109,6 +109,7 @@ client.once("ready", () => {
 	}
 });
 
+//checks for updates against vukkybot master
 function checkUpdates() {
 	const updateChecker = ora("Checking for updates...").start();
 	updateChecker.prefixText = "[updater]";
@@ -197,7 +198,7 @@ client.on("message", message => {
 			}
 		}
 	}
-
+	//checks user perms to see if user has admin perms
 	if (command.userPermissions) {
 		for (let i = 0, len = command.userPermissions.length; command.userPermissions; i < len, i++) {
 			if (command.userPermissions[i] == undefined) {
@@ -239,7 +240,8 @@ client.on("message", message => {
 	}
 });
 
-client.on("messageUpdate", (oldMessage, newMessage) => {
+// removed oldMessage, value was not declared 
+client.on("messageUpdate", (newMessage) => {
 	if (inviteSites.some(site => newMessage.content.includes(site)) && config.moderation.automod.allowInviteLinks == false) {
 		newMessage.delete();
 		newMessage.channel.send(format(vukkytils.getString("DISCORD_INVITES_DISABLED_AUTOMOD"), newMessage.author)).then(msg => setTimeout(() => msg.delete(), 7000));
