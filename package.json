@@ -19,7 +19,7 @@
   "devDependencies": {
     "eslint": "^7.22.0",
     "inquirer": "^8.0.0",
-    "npm": "^7.4.1"
+    "npm": "^7.6.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
