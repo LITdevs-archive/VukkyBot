@@ -10,15 +10,15 @@
     "comma-number": "^2.0.1",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
-    "minecraft-server-util": "^3.4.3",
+    "minecraft-server-util": "^3.4.2",
     "mysql": "^2.18.1",
     "ora": "^5.3.0",
     "twitter": "^1.7.1"
   },
   "devDependencies": {
-    "eslint": "^7.22.0",
+    "eslint": "^7.17.0",
     "inquirer": "^8.0.0",
-    "npm": "^7.6.3"
+    "npm": "^7.4.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
