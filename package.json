@@ -1,6 +1,8 @@
 {
   "name": "vukkybot",
   "version": "3.0.0",
+  "date": "19/03/2021",
+  "dateFormat": "DD/MM/YYYY",
   "description": "VukkyBot",
   "main": "index.js",
   "dependencies": {
