@@ -138,8 +138,8 @@ client.once("ready", () => {
 			commandSpinner.prefixText = "[autoreload]";
 			commandSpinner.spinner = "point";	
 			try {
-				const command = require(`./commands/${path}`);
 				delete require.cache[require.resolve(`./commands/${path}`)];
+				const command = require(`./commands/${path}`);
 				client.commands.set(command.name, command);
 				commandSpinner.succeed(`Reloaded ${path}`);
 			} catch (error) {
