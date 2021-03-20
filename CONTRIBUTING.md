@@ -2,7 +2,7 @@
 
 Before you start, make sure you use [Visual Studio Code](https://code.visualstudio.com/) and you have all the recommended extensions installed.
 
-Install all the required dependencies before testing. Make sure that your dependencies are updated before testing too.
+Install all the required dependencies before testing. If you're a returning contributor, make sure the package versions you have installed match the ones in the package.json file.
 ```
 npm install
 ```

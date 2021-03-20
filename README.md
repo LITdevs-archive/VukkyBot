@@ -2,12 +2,12 @@
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-A bot made for **Vukky's Chat Place**.
-Giving VukkyBot permissions is not needed, it will notify you if it needs permissions.
+A bot originally made for **Vukky's Chat Place**, available to everyone.
+Giving VukkyBot permissions is not needed, it will notify you if it needs permissions - although most of the commands rely on embeds.
 
-[![Banner for Vukky's Chat Place, the Discord server](https://discord.com/api/guilds/719496895449530439/widget.png?style=banner2)](https://vukky.ga/discord)
+**If you're having any issues with your VukkyBot**, please don't be afraid to ask for help in the [#vukkybot-support channel on our Discord server](https://discord.gg/8XAFJBGyQe)!
 
-## Help VukkyBot
+## Help improve VukkyBot!
 [Submit feature requests or bug reports](https://github.com/VukkyLtd/VukkyBot/issues/new/choose)!
 
 You can also [contribute to VukkyBot](CONTRIBUTING.md).
