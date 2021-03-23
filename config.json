@@ -22,7 +22,12 @@
     },
     "counting": {
         "enabled": true,
-        "channelName": "counting"
+        "channelName": "counting",
+        "customEmoji": {
+            "100": "💯",
+            "69": "👀",
+            "64": "🇳"
+        }
     },
     "updateChecker": {
         "enabled": true,
