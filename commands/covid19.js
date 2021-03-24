@@ -21,9 +21,10 @@ module.exports = {
 				fetch(diseaselink)
 					.then(res => {
 						if(!res.ok) {
-							return newMessage.edit(`${config.misc.emoji.error} ${res.status} - Either ${country} isn't a country, there are no cases there, or something bad happened.`);
+							newMessage.edit(`${config.misc.emoji.error} ${res.status} - Either ${country} isn't a country, there are no cases there, or something bad happened.`);
+						} else {
+							return res.json();
 						}
-						return res.json();
 					})
 					.then(json => {
 						newMessage.edit(format(vukkytils.getString("API_CREDIT"), "https://disease.sh"), embeds.covidEmbed(country ? json.countryInfo.flag : null, country ? json.country : "Global", commaNumber(json.cases), commaNumber(json.todayCases), commaNumber(json.deaths), commaNumber(json.todayDeaths), commaNumber(json.recovered), commaNumber(json.todayRecovered), commaNumber(json.active), commaNumber(json.critical), commaNumber(json.tests)));

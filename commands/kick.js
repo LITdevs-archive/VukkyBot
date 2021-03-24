@@ -9,6 +9,7 @@ module.exports = {
 	guildOnly: true,
 	args: true,
 	usage: "<@user>",
+	cooldown: 0,
 	execute(message, args) {
 		var mentionedUser = message.guild.member(message.mentions.users.first());
 		var kickReason = args.slice(1).join(" ") || "no reason specified";

@@ -7,8 +7,16 @@
 	"STARTUP_FILE_LOADED": "%s loaded!",
 	"USER_PERMISSION_NEEDED": "Sorry, but you need the `%s` permission to use that command.",
 	"BOT_PERMISSION_NEEDED": "Sorry, but I need the `%s` permission to use that command.",
-	"HUG_TYPES": ["a small hug.", "a nice hug.", "a BIG hug!"],
-	"HEADPAT_TYPES": ["an okay headpat.", "a great headpat.", "an AMAZING headpat!"],
+	"HUG_TYPES": [
+		"a small hug.",
+		"a nice hug.",
+		"a BIG hug!"
+	],
+	"HEADPAT_TYPES": [
+		"an okay headpat.",
+		"a great headpat.",
+		"an AMAZING headpat!"
+	],
 	"SLAP_TYPES": "a big slap in the face!",
 	"GIVE_USER": "%s gives %s %s",
 	"WARNINGS_TITLE": "Warnings for %s",
@@ -104,7 +112,5 @@
 	"STARTUP_LOGGED_IN": "Logged in as %s!",
 	"STARTUP_LOGIN_FAILED": "Login failed.",
 	"STARTUP_LOGIN_FAILED_INTERNET_UNAVAILABLE": "Login failed - your internet connection may be unavailable.",
-	"DISCORD_INVITES_DISABLED_AUTOMOD": "%s, **sending Discord invites** is disabled in this server.",
-	"INNER_VUKKY_ERROR": "The Vukky seems to be hiding...",
-	"INNER_VUKKY_USER_FETCH_ERROR": "The Vukky seems to be hiding... Are you sure that's a real person?"
+	"DISCORD_INVITES_DISABLED_AUTOMOD": "%s, **sending Discord invites** is disabled in this server."
 }

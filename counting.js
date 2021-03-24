@@ -188,6 +188,10 @@ module.exports = {
 					} else {	
 						message.react("✅");
 					}
+					let customEmoji = config.counting.customEmoji[servers[message.guild.id].number.toString()];
+					if (customEmoji != undefined) {
+						message.react(customEmoji);
+					}
 				} else {
 					if (servers[message.guild.id].number == 0) return message.channel.send("The correct number is **1**. Did you even try?");
 					message.react("❌");
