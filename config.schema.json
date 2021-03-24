@@ -53,6 +53,14 @@
                 "enabled": {
                     "description": "Toggles if counting is enabled",
                     "type": "boolean"
+                },
+                "channel": {
+                    "description": "The channel name messages have to be in in order to be considered counting",
+                    "type": "boolean"
+                },
+                "customEmoji": {
+                    "description": "Contains custom reactions that will be used when specific numbers are counted. The reaction can be a normal emoji (string) or the ID of a custom one (number).",
+                    "type": "object"
                 }
             }
         },

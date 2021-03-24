@@ -138,8 +138,8 @@ client.once("ready", () => {
 			commandSpinner.prefixText = "[autoreload]";
 			commandSpinner.spinner = "point";	
 			try {
-				const command = require(`./commands/${path}`);
 				delete require.cache[require.resolve(`./commands/${path}`)];
+				const command = require(`./commands/${path}`);
 				client.commands.set(command.name, command);
 				commandSpinner.succeed(`Reloaded ${path}`);
 			} catch (error) {
@@ -280,8 +280,14 @@ client.on("message", message => {
 	}
 });
 
-client.on("messageUpdate", (oldMessage, newMessage) => {
-	if (inviteSites.some(site => newMessage.content.includes(site)) && config.moderation.automod.allowInviteLinks == false) {
+client.on("messageUpdate", async (oldMessage, newMessage) => {
+	if (newMessage.partial) {
+		await newMessage.fetch()
+			.catch(error => {
+				console.log("Something went wrong when fetching the message: ", error);
+			});
+	}
+	if (newMessage && newMessage.content && inviteSites.some(site => newMessage.content.includes(site)) && config.moderation.automod.allowInviteLinks == false) {
 		newMessage.delete();
 		newMessage.channel.send(format(vukkytils.getString("DISCORD_INVITES_DISABLED_AUTOMOD"), newMessage.author)).then(msg => setTimeout(() => msg.delete(), 7000));
 	}

@@ -1,6 +1,8 @@
 {
   "name": "vukkybot",
   "version": "3.0.0",
+  "date": "23/03/2021",
+  "dateFormat": "DD/MM/YYYY",
   "description": "VukkyBot",
   "main": "index.js",
   "dependencies": {
@@ -11,7 +13,7 @@
     "comma-number": "^2.0.1",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
-    "minecraft-server-util": "^3.4.3",
+    "minecraft-server-util": "^3.4.4",
     "mysql": "^2.18.1",
     "ora": "^5.3.0",
     "twitter": "^1.7.1"
