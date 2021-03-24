@@ -4,7 +4,7 @@ module.exports = {
 	name: "pong",
 	description: "Pong.",
 	botPermissions: ["EMBED_LINKS"],
-	async execute(message, args) {
+	async execute(message) { //removed args for testing
 		const ping = await message.channel.send(infoEmbed("Ping!"));
 		ping.edit(infoEmbed(`Ping! **${ping.createdTimestamp - message.createdTimestamp}ms**`));
 	},
