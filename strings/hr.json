@@ -1,14 +1,22 @@
 {
-	"ERROR_GENERIC": "There was an error.",
+	"ERROR_GENERIC": "Došlo je do pogreške.",
 	"ERROR_RELOAD": "There was an error while reloading **%s**:\n`%s`",
-	"COUNTING": "counting",
-	"STARTUP": "startup",
-	"STARTING": "VukkyBot is starting...",
+	"COUNTING": "brojanje",
+	"STARTUP": "pokretanje",
+	"STARTING": "VukkyBot pokreta...",
 	"STARTUP_FILE_LOADED": "%s loaded!",
 	"USER_PERMISSION_NEEDED": "Sorry, but you need the `%s` permission to use that command.",
 	"BOT_PERMISSION_NEEDED": "Sorry, but I need the `%s` permission to use that command.",
-	"HUG_TYPES": ["a small hug.", "a nice hug.", "a BIG hug!"],
-	"HEADPAT_TYPES": ["an okay headpat.", "a great headpat.", "an AMAZING headpat!"],
+	"HUG_TYPES": [
+		"mali zagrljaj.",
+		"dobar zagrljaj.",
+		"veliki zagrljaj!"
+	],
+	"HEADPAT_TYPES": [
+		"an okay headpat.",
+		"a great headpat.",
+		"an AMAZING headpat!"
+	],
 	"SLAP_TYPES": "a big slap in the face!",
 	"GIVE_USER": "%s gives %s %s",
 	"WARNINGS_TITLE": "Warnings for %s",
@@ -39,14 +47,14 @@
 	"COVID_DEATHS_TODAY": "Deaths today",
 	"COVID_RECOVERED": "Recovered",
 	"COVID_RECOVERED_TODAY": "Recovered today",
-	"COVID_ACTIVE": "Active",
+	"COVID_ACTIVE": "Aktivan",
 	"COVID_CRITICAL": "Critical",
 	"COVID_TESTS": "Tests",
 	"API_CREDIT": "Thank you to <%s>!",
-	"DUCK_FINDING": "Hold on! I'm finding a duck for you... 🦆🦆🦆",
+	"DUCK_FINDING": "Drži se! Pronalazim ti patku...🦆🦆🦆",
 	"ENV_PREFIX_RENAMED": "PREFIX is now BOT_PREFIX. Please change your .env file.",
 	"WARNING": "Warning",
-	"SUCCESS": "Success!",
+	"SUCCESS": "Uspješno!",
 	"INFORMATION": "Information",
 	"INPUT_REQUESTED": "Input requested",
 	"SLOW_DOWN": "Slow down!",
@@ -104,7 +112,5 @@
 	"STARTUP_LOGGED_IN": "Logged in as %s!",
 	"STARTUP_LOGIN_FAILED": "Login failed.",
 	"STARTUP_LOGIN_FAILED_INTERNET_UNAVAILABLE": "Login failed - your internet connection may be unavailable.",
-	"DISCORD_INVITES_DISABLED_AUTOMOD": "%s, **sending Discord invites** is disabled in this server.",
-	"INNER_VUKKY_ERROR": "The Vukky seems to be hiding...",
-	"INNER_VUKKY_USER_FETCH_ERROR": "The Vukky seems to be hiding... Are you sure that's a real person?"
+	"DISCORD_INVITES_DISABLED_AUTOMOD": "%s, **sending Discord invites** is disabled in this server."
 }

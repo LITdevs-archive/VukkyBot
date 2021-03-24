@@ -18,6 +18,7 @@ const format = require("util").format;
 const prefix = process.env.BOT_PREFIX;
 client.commands = new Discord.Collection();
 let updateRemindedOn = null;
+const chokidar = require("chokidar");
 
 const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
 let embedPermissions = 1;
@@ -34,9 +35,21 @@ let commandsToLoad = commandFiles.length;
 for (const file of commandFiles) {
 	commandsToLoad--;
 	commandSpinner.text = `${format(vukkytils.getString("STARTUP_LOADING_SPECIFIC_COMMAND"), file, commandFiles.indexOf(file), commandFiles.length)}\n`;
-	commandSpinner.render();
-	const command = require(`./commands/${file}`);
-	client.commands.set(command.name, command);
+	try {
+		commandSpinner.render();
+		const command = require(`./commands/${file}`);
+		client.commands.set(command.name, command);
+		if (!command.name) {
+			commandSpinner.fail(`Couldn't load ${file}: No name`);
+			process.exit(1);
+		} else if (!command.execute) {
+			commandSpinner.fail(`Couldn't load ${file}: No execute function`);
+			process.exit(1);
+		}
+	} catch (error) {
+		commandSpinner.fail(`Couldn't load ${file}: ${error.message}`);
+		throw error;
+	}
 	if(commandsToLoad == 0) {
 		commandSpinner.succeed(vukkytils.getString("STARTUP_COMMANDS_LOADED"));
 		login();
@@ -46,7 +59,7 @@ for (const file of commandFiles) {
 const cooldowns = new Discord.Collection();
 
 client.once("ready", () => {
-	console.log(`\n[${vukkytils.getString("STARTUP")}] ${format(vukkytils.getString("READY"), pjson.version)}`);
+	console.log(`\n[${vukkytils.getString("STARTUP")}] ${format(vukkytils.getString("READY"), pjson.version)}\n`);
 	if(!process.env.BOT_PREFIX && process.env.PREFIX) console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("ENV_PREFIX_RENAMED")}`);
 	const statuses = [
 		"with JavaScript",
@@ -107,9 +120,37 @@ client.once("ready", () => {
 			checkUpdates();
 		}, 7200000);
 	}
+	chokidar.watch("commands/*.js", {ignoreInitial: true}).on("all", (event, path) => {
+		path = path.substr(path.lastIndexOf("\\") + 1);
+		if(event == "add") {
+			const commandSpinner = ora(`Loading ${path}\n`).start();
+			commandSpinner.prefixText = "[autoreload]";
+			commandSpinner.spinner = "point";
+			try {
+				const command = require(`./commands/${path}`);
+				client.commands.set(command.name, command);
+				commandSpinner.succeed(`Loaded ${path}`);
+			} catch (error) {
+				commandSpinner.fail(`Couldn't load ${path}: ${error.message}`);
+				throw error;
+			}
+		} else if (event == "change") {
+			const commandSpinner = ora(`Reloading ${path}\n`).start();
+			commandSpinner.prefixText = "[autoreload]";
+			commandSpinner.spinner = "point";	
+			try {
+				delete require.cache[require.resolve(`./commands/${path}`)];
+				const command = require(`./commands/${path}`);
+				client.commands.set(command.name, command);
+				commandSpinner.succeed(`Reloaded ${path}`);
+			} catch (error) {
+				commandSpinner.fail(`Couldn't reload ${path}: ${error.message}`);
+				throw error;
+			}
+		}
+	});
 });
 
-//checks for updates against vukkybot master
 function checkUpdates() {
 	const updateChecker = ora("Checking for updates...").start();
 	updateChecker.prefixText = "[updater]";
@@ -198,7 +239,7 @@ client.on("message", message => {
 			}
 		}
 	}
-	//checks user perms to see if user has admin perms
+
 	if (command.userPermissions) {
 		for (let i = 0, len = command.userPermissions.length; command.userPermissions; i < len, i++) {
 			if (command.userPermissions[i] == undefined) {
@@ -240,9 +281,14 @@ client.on("message", message => {
 	}
 });
 
-// removed oldMessage, value was not declared 
-client.on("messageUpdate", (newMessage) => {
-	if (inviteSites.some(site => newMessage.content.includes(site)) && config.moderation.automod.allowInviteLinks == false) {
+client.on("messageUpdate", async (oldMessage, newMessage) => {
+	if (newMessage.partial) {
+		await newMessage.fetch()
+			.catch(error => {
+				console.log("Something went wrong when fetching the message: ", error);
+			});
+	}
+	if (newMessage && newMessage.content && inviteSites.some(site => newMessage.content.includes(site)) && config.moderation.automod.allowInviteLinks == false) {
 		newMessage.delete();
 		newMessage.channel.send(format(vukkytils.getString("DISCORD_INVITES_DISABLED_AUTOMOD"), newMessage.author)).then(msg => setTimeout(() => msg.delete(), 7000));
 	}

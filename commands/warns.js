@@ -16,6 +16,7 @@ module.exports = {
 	guildOnly: true,
 	usage: "<@user | user id>",
 	aliases: ["warnings"],
+	cooldown: 0,
 	execute(message, args) {
 		let warnsId;    
 		let mentionedUser;
