@@ -1,9 +1,10 @@
+// Copyright (C) 2020-2021 vtheskeleton, Vukky
+
 const config = require("../config.json");
 require("dotenv").config();
 var mysql = require("mysql");
 const { errorEmbed, warnsUserEmbed } = require("../utilities/embeds.js");
 const vukkytils = require("../utilities/vukkytils");
-
 
 module.exports = {
 	name: "warns",
@@ -15,6 +16,7 @@ module.exports = {
 	guildOnly: true,
 	usage: "<@user | user id>",
 	aliases: ["warnings"],
+	cooldown: 0,
 	execute(message, args) {
 		let warnsId;    
 		let mentionedUser;

@@ -5,20 +5,42 @@
         "invalidCmdReminder": true,
         "prefixReminder": true,
         "owner": [
-            "708333380525228082",
-            "125644326037487616"
+            "372390836694155264",
+            "809301181679665162"
         ],
         "mysql": true,
         "language": "en",
-        "languageComment": "Currently, only English (en) and Finnish (fi) is supported."
+        "emoji": {
+            "error": "<:error:759701620777943062>",
+            "loading": "<a:offlinegif:757979855924101220>"
+        }
+    },
+    "moderation": {
+        "automod": {
+            "allowInviteLinks": false
+        }
     },
     "counting": {
         "enabled": true,
-        "channelName": "counting"
+        "channelName": "counting",
+        "customEmoji": {
+            "69420": "👀",
+            "10000": "🤯",
+            "2763": "✏️",
+            "1000": "🏆",
+            "420": "👀",
+            "100": "💯",
+            "69": "👀",
+            "42": "🧑‍🚀",
+            "21": "🧠"
+        }
     },
     "updateChecker": {
         "enabled": true,
         "dmOwner": true
+    },
+    "reports": {
+        "enabled": true
     },
     "commands": {
         "quiz": {
@@ -27,6 +49,9 @@
         },
         "giveawaydrop": {
             "codes": true
+        },
+        "wikipedia": {
+            "site": "en.wikipedia.org"
         }
     }
 }
