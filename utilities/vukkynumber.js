@@ -1,6 +1,6 @@
 // Copyright (C) 2020 vtheskeleton
 
-const modifier = 2.857142;
+const modifier = 2.5641025641025641025641025641026;
 module.exports = {
 	/**
 	 * Convert any number to a Vukky number.
