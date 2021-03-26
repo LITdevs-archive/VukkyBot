@@ -1,4 +1,4 @@
-const modifier = 2.857142;
+const modifier = 2.5641025641025641025641025641026;
 module.exports = {
 	convert: function(original) {
 		let string = original.toString();
