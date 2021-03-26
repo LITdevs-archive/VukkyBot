@@ -58,7 +58,7 @@ for (const file of commandFiles) {
 
 const cooldowns = new Discord.Collection();
 
-client.once("ready", () => {
+client.once("ready", async () => {
 	console.log(`\n[${vukkytils.getString("STARTUP")}] ${format(vukkytils.getString("READY"), pjson.version)}\n`);
 	if(!process.env.BOT_PREFIX && process.env.PREFIX) console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("ENV_PREFIX_RENAMED")}`);
 	const statuses = [
@@ -211,6 +211,16 @@ client.on("message", message => {
 	if(command.mysql && !config.misc.mysql) {
 		if (embedPermissions == 0) return message.channel.send(`**${commandName}** is not enabled on this VukkyBot because MySQL is disabled!\nFor the hoster: See https://vukkyltd.github.io/VukkyBot/troubleshooting/mysqldisabled.html for instructions on how to enable it!`);
 		return message.channel.send(embeds.errorEmbed(`**${commandName}** is not enabled on this VukkyBot because MySQL is disabled!\nFor the hoster: See [the VukkyBot Documentation site](https://vukkyltd.github.io/VukkyBot/troubleshooting/mysqldisabled.html) for instructions on how to enable it!`));
+	}
+
+	if(command.disabled) {
+		if (embedPermissions == 0) return message.channel.send(`**${commandName}** is disabled.`);
+		return message.channel.send(embeds.errorEmbed(`**${commandName}** is disabled.`));
+	}
+
+	if(command.botOwnerOnly && !config.misc.owner.includes(message.author.id)) {
+		if (embedPermissions == 0) return message.channel.send(`**${commandName}** requires you to be the owner of this VukkyBot to use it.`);
+		return message.channel.send(embeds.errorEmbed(`**${commandName}** requires you to be the owner of this VukkyBot to use it.`));
 	}
 
 	if (command.guildOnly && message.channel.type !== "text") {
