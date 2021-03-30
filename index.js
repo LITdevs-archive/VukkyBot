@@ -28,7 +28,7 @@ console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("STARTING
 
 async function checkUpdates(forStartup) {
 	const updateChecker = ora("Checking for updates...").start();
-	updateChecker.prefixText = "[updater]";
+	updateChecker.prefixText = forStartup == true ? `[${vukkytils.getString("STARTUP")}]` : "[updater]";
 	updateChecker.spinner = "point";
 	updateChecker.render();
 	fetch("https://raw.githubusercontent.com/VukkyLtd/VukkyBot/master/package.json")  
