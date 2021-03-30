@@ -26,33 +26,70 @@ let embedPermissions = 1;
 console.clear();
 console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("STARTING")}`);
 
-const commandSpinner = ora(`${vukkytils.getString("STARTUP_LOADING_COMMANDS")}\n`).start();
-commandSpinner.prefixText = `[${vukkytils.getString("STARTUP")}]`;
-commandSpinner.spinner = "point";	
-commandSpinner.render();
-let commandsToLoad = commandFiles.length;
-for (const file of commandFiles) {
-	commandsToLoad--;
-	commandSpinner.text = `${format(vukkytils.getString("STARTUP_LOADING_SPECIFIC_COMMAND"), file, commandFiles.indexOf(file), commandFiles.length)}\n`;
-	try {
-		commandSpinner.render();
-		const command = require(`./commands/${file}`);
-		client.commands.set(command.name, command);
-		if (!command.name) {
-			commandSpinner.fail(`Couldn't load ${file}: No name`);
-			process.exit(1);
-		} else if (!command.execute) {
-			commandSpinner.fail(`Couldn't load ${file}: No execute function`);
-			process.exit(1);
+async function checkUpdates(forStartup) {
+	const updateChecker = ora("Checking for updates...").start();
+	updateChecker.prefixText = "[updater]";
+	updateChecker.spinner = "point";
+	updateChecker.render();
+	fetch("https://raw.githubusercontent.com/VukkyLtd/VukkyBot/master/package.json")  
+		.then(res => res.json())
+		.then(json => {
+			if (json.version > pjson.version && updateRemindedOn !== json.version) {
+				updateChecker.warn(`${json.version} is now available!`);
+				console.log(`[updater] https://github.com/VukkyLtd/VukkyBot/releases/tag/${json.version}`);
+				updateRemindedOn = json.version;
+				if (config.updateChecker.dmOwner) {
+					for (let i = 0; i < config.misc.owner.length; i++) {
+						client.users.fetch(config.misc.owner[i].toString())
+							.then(owner => {
+								owner.send(`Hello! I'm out of date. You're using VukkyBot **${pjson.version}**, but the latest version is VukkyBot **${json.version}**.\nhttps://github.com/VukkyLtd/VukkyBot/releases/tag/${json.version}\n*You have gotten this DM because you are an owner of this VukkyBot. DMing my owner(s) when an update is available is turned on.*`);
+							});
+					}
+				}
+				return true;
+			} else {
+				updateChecker.info("No new updates available.");
+				if(forStartup == true) commandPrep(true);
+				return false;
+			}
+		});
+}
+
+function commandPrep(forStartup) {
+	const commandSpinner = ora(`${vukkytils.getString("STARTUP_LOADING_COMMANDS")}\n`).start();
+	commandSpinner.prefixText = `[${vukkytils.getString("STARTUP")}]`;
+	commandSpinner.spinner = "point";	
+	commandSpinner.render();
+	let commandsToLoad = commandFiles.length;
+	for (const file of commandFiles) {
+		commandsToLoad--;
+		commandSpinner.text = `${format(vukkytils.getString("STARTUP_LOADING_SPECIFIC_COMMAND"), file, commandFiles.indexOf(file), commandFiles.length)}\n`;
+		try {
+			commandSpinner.render();
+			const command = require(`./commands/${file}`);
+			client.commands.set(command.name, command);
+			if (!command.name) {
+				commandSpinner.fail(`Couldn't load ${file}: No name`);
+				process.exit(1);
+			} else if (!command.execute) {
+				commandSpinner.fail(`Couldn't load ${file}: No execute function`);
+				process.exit(1);
+			}
+		} catch (error) {
+			commandSpinner.fail(`Couldn't load ${file}: ${error.message}`);
+			throw error;
 		}
-	} catch (error) {
-		commandSpinner.fail(`Couldn't load ${file}: ${error.message}`);
-		throw error;
+		if(commandsToLoad == 0) {
+			commandSpinner.succeed(vukkytils.getString("STARTUP_COMMANDS_LOADED"));
+			if(forStartup == true) login();
+		}
 	}
-	if(commandsToLoad == 0) {
-		commandSpinner.succeed(vukkytils.getString("STARTUP_COMMANDS_LOADED"));
-		login();
-	}
+}
+
+if(config.updateChecker.enabled) {
+	checkUpdates(true);
+} else {
+	commandPrep(true);
 }
 
 const cooldowns = new Discord.Collection();
@@ -114,7 +151,6 @@ client.once("ready", async () => {
 	}, 15000);
 	counting.start(client);
 	if (config.updateChecker.enabled) {
-		checkUpdates();
 		setInterval(() => {
 			checkUpdates();
 		}, 7200000);
@@ -149,32 +185,6 @@ client.once("ready", async () => {
 		}
 	});
 });
-
-function checkUpdates() {
-	const updateChecker = ora("Checking for updates...").start();
-	updateChecker.prefixText = "[updater]";
-	updateChecker.spinner = "point";
-	updateChecker.render();
-	fetch("https://raw.githubusercontent.com/VukkyLtd/VukkyBot/master/package.json")  
-		.then(res => res.json())
-		.then(json => {
-			if (json.version > pjson.version && updateRemindedOn !== json.version) {
-				updateChecker.warn(`${json.version} is now available!`);
-				console.log(`[updater] https://github.com/VukkyLtd/VukkyBot/releases/tag/${json.version}`);
-				updateRemindedOn = json.version;
-				if (config.updateChecker.dmOwner) {
-					for (let i = 0; i < config.misc.owner.length; i++) {
-						client.users.fetch(config.misc.owner[i].toString())
-							.then(owner => {
-								owner.send(`Hello! I'm out of date. You're using VukkyBot **${pjson.version}**, but the latest version is VukkyBot **${json.version}**.\nhttps://github.com/VukkyLtd/VukkyBot/releases/tag/${json.version}\n*You have gotten this DM because you are an owner of this VukkyBot. DMing my owner(s) when an update is available is turned on.*`);
-							});
-					}
-				}
-			} else {
-				updateChecker.info("No new updates available.");
-			}
-		});
-}
 
 const inviteSites = ["discord.gg/", "discord.com/invite/", "discordapp.com/invite/", "discord.co/invite", "watchanimeattheoffice.com/invite/", "discord.media/invite/"];
 client.on("message", message => {
