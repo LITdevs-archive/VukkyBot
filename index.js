@@ -193,7 +193,7 @@ client.on("message", message => {
 	if (message.content.toLowerCase().includes(`<@!${client.user.id}>`) && config.misc.prefixReminder == true && !message.content.startsWith(prefix)) message.reply(`my prefix is \`${process.env.BOT_PREFIX}\``);
 	if (message.channel.name == config.counting.channelName) counting.check(message, client);
 
-	if (inviteSites.some(site => message.content.includes(site)) && config.moderation.automod.allowInviteLinks == false) {
+	if (inviteSites.some(site => message.content.includes(site)) && config.moderation.automod.allowInviteLinks == false && !message.member.roles.cache.some(r => config.moderation.automod.allowInviteLinksBypassRoles.includes(r.id))) {
 		message.delete();
 		message.channel.send(format(vukkytils.getString("DISCORD_INVITES_DISABLED_AUTOMOD"), message.author)).then(msg => setTimeout(() => msg.delete(), 7000));
 	}
@@ -301,13 +301,13 @@ client.on("message", message => {
 });
 
 client.on("messageUpdate", async (oldMessage, newMessage) => {
-	if (newMessage.partial) {
+	if (newMessage && newMessage.partial) {
 		await newMessage.fetch()
 			.catch(error => {
 				console.log("Something went wrong when fetching the message: ", error);
 			});
 	}
-	if (newMessage && newMessage.content && inviteSites.some(site => newMessage.content.includes(site)) && config.moderation.automod.allowInviteLinks == false) {
+	if (newMessage && newMessage.content && inviteSites.some(site => newMessage.content.includes(site)) && config.moderation.automod.allowInviteLinks == false && !newMessage.member.roles.cache.some(r => config.moderation.automod.allowInviteLinksBypassRoles.includes(r))) {
 		newMessage.delete();
 		newMessage.channel.send(format(vukkytils.getString("DISCORD_INVITES_DISABLED_AUTOMOD"), newMessage.author)).then(msg => setTimeout(() => msg.delete(), 7000));
 	}
