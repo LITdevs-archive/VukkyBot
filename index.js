@@ -198,6 +198,26 @@ client.on("message", message => {
 		message.channel.send(format(vukkytils.getString("DISCORD_INVITES_DISABLED_AUTOMOD"), message.author)).then(msg => setTimeout(() => msg.delete(), 7000));
 	}
 
+	if(config.moderation.automod.autoResponses.enabled && config.moderation.automod.autoResponses.responses[message.content.toLowerCase()]) {
+		let autoResponse = config.moderation.automod.autoResponses.responses[message.content.toLowerCase()];
+		if(autoResponse.text && !autoResponse.embed) {
+			message.channel.send(autoResponse.text);
+		} else if (autoResponse.embed && Object.keys(autoResponse.embed).length > 0) {
+			let embed = new Discord.MessageEmbed();
+			if(autoResponse.embed.title) embed.setTitle(autoResponse.embed.title);
+			if(autoResponse.embed.description) embed.setDescription(autoResponse.embed.description);
+			if(autoResponse.embed.url) embed.setURL(autoResponse.embed.url);
+			if(autoResponse.embed.footer) embed.setFooter(autoResponse.embed.footer);
+			if(autoResponse.text) {
+				message.channel.send(autoResponse.text, embed);
+			} else {
+				message.channel.send(embed);
+			}
+		} else {
+			message.channel.send("There's something wrong with this auto response! Contact the server administrator.");
+		}
+	}
+
 	if (!message.content.toLowerCase().startsWith(prefix)) return;
 
 	const args = message.content.slice(prefix.length).split(/ +/);

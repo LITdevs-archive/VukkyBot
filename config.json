@@ -17,7 +17,28 @@
     },
     "moderation": {
         "automod": {
-            "allowInviteLinks": false
+            "allowInviteLinks": false,
+            "allowInviteLinksBypassRoles": ["770972367227846667"],
+            "autoResponses": {
+                "enabled": true,
+                "responses": {
+                    "-installvukkybot": {
+                        "embed": {
+                            "title": "VukkyBot is available on GitHub!",
+                            "description": "You can also [read the documentation](https://docs.vukkyltd.xyz) if you need help.",
+                            "url": "https://github.com/vukkyltd/vukkybot",
+                            "footer": "VukkyBot runs on node.js with discord.js - VukkyBot requires Node 12 or above."
+                        }
+                    },
+                    "-addictionbot": {
+                        "embed": {
+                            "title": "What is #addiction-bot?",
+                            "description": "<#825832167556120597> is for Vukky's RuneScape addiction. When he levels up, a notification is sent there.",
+                            "footer": "If you're using this outside of Vukky's Chat Place, you can ignore it."
+                        }
+                    }
+                }
+            }
         }
     },
     "counting": {
