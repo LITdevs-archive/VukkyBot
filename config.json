@@ -30,12 +30,15 @@
                             "footer": "VukkyBot runs on node.js with discord.js - VukkyBot requires Node 12 or above."
                         }
                     },
-                    "-addictionbot": {
+                    "-runescapechannel": {
                         "embed": {
-                            "title": "What is #addiction-bot?",
-                            "description": "<#825832167556120597> is for Vukky's RuneScape addiction. When he levels up, a notification is sent there.",
+                            "title": "What is #runescape?",
+                            "description": "<#825832167556120597> is for discussion about Old School RuneScape and posts levelups of the Vukky Clan. When Vukky, Velocity, or Skelly levels up, a notification is sent there.",
                             "footer": "If you're using this outside of Vukky's Chat Place, you can ignore it."
                         }
+                    },
+                    "sus": {
+                        "text": "<:sus:826940247317151764>"
                     }
                 }
             }
