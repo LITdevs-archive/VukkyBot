@@ -19,8 +19,8 @@
 	],
 	"SLAP_TYPES": "صفعة على الوجه كبيرة!",
 	"GIVE_USER": "%s يعطي %s %s",
-	"WARNINGS_TITLE": "تحذير لـ %s",
-	"NO_WARNINGS": "هذا الشخص ليس لديه تحذيرات.",
+	"WARNINGS_TITLE": "%s's warnings",
+	"NO_WARNINGS": "This person doesn't have any warnings! ✨",
 	"BOT_LOVE": "أوه، شكراً! ♥",
 	"BOT_PAIN": "لماذا حاولت؟ :(",
 	"CANT_HUG_SELF": "لا يمكنك حضن نفسك! سيكون ذلك سخيفا.",
@@ -33,8 +33,8 @@
 	"TWEET_APPROVED": "تمت الموافقة على تغريدتك من قبل المستخدم! هنا هو: %s",
 	"TWEET_DENIED": "تم رفض تغريدتك من قبل المستخدم.",
 	"TWEET_REPLYING_TO": "أنت تردّ على %s",
-	"WARNING_ADDED": "تم إضافة التحذير إلى %sلـ %s.",
-	"GOT_WARNED": "⚠ تم تحذيرك في **%s**، على %s.",
+	"WARNING_ADDED": "%s now has a warning for %s.",
+	"GOT_WARNED": "⚠ Hi! You got warned in **%s** for %s.",
 	"DISCOVERING_OTHER_VUKKY": "انتظر! انا استكشف الvukky الداخلية ل**%s**!",
 	"DISCOVERING_VUKKY": "انتظر! انا استكشف الvukky الداخلية اللتي تخص لك!",
 	"DISCOVERED_OTHER_VUKKY": "%s، هنا الفوكي الداخلي الخاص ب**%s**!",
@@ -50,7 +50,7 @@
 	"COVID_ACTIVE": "نشطة",
 	"COVID_CRITICAL": "الحرجة",
 	"COVID_TESTS": "الاختبارات",
-	"API_CREDIT": "شكراً ل <%s>!",
+	"API_CREDIT": "🌐 This response is powered by the nice people at <%s>.",
 	"DUCK_FINDING": "انتظر! أنا أجد بطًا لك... 🦆🦆🦆",
 	"ENV_PREFIX_RENAMED": "PREFIX هو الآن BOT_PREFIX. الرجاء تغيير ملف .env الخاص بك.",
 	"WARNING": "تنبيه",
@@ -81,7 +81,7 @@
 	"TIH_LINKS": "Links",
 	"DEBUG": "debug",
 	"DEBUG_DEV_MODE": "Developer mode is enabled.",
-	"GETTING_DATA": "Hold on! I'm getting the data...",
+	"GETTING_DATA": "Connecting to an external server...",
 	"WIKIPEDIA_DOESNT_EXIST": "`%s` doesn't exist.",
 	"WIKIPEDIA_INVALID_CHARS": "`%s` contains invalid characters.",
 	"WIKIPEDIA_NO_SHORT_DESC": "No short description availabile",
