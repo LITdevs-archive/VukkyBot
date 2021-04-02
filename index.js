@@ -193,7 +193,7 @@ client.on("message", async message => {
 	if (message.content.toLowerCase().includes(`<@!${client.user.id}>`) && config.misc.prefixReminder == true && !message.content.startsWith(prefix)) message.reply(`my prefix is \`${process.env.BOT_PREFIX}\``);
 	if (message.channel.name == config.counting.channelName) counting.check(message, client);
 
-	if (inviteSites.some(site => message.content.includes(site)) && config.moderation.automod.allowInviteLinks == false && !message.author.roles.cache.some(r => config.moderation.automod.allowInviteLinksBypassRoles.includes(r.id))) {
+	if (inviteSites.some(site => message.content.includes(site)) && config.moderation.automod.allowInviteLinks == false && !message.member.roles.cache.some(r => config.moderation.automod.allowInviteLinksBypassRoles.includes(r.id))) {
 		message.delete();
 		message.channel.send(format(vukkytils.getString("DISCORD_INVITES_DISABLED_AUTOMOD"), message.author)).then(msg => setTimeout(() => msg.delete(), 7000));
 	}
