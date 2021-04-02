@@ -1,14 +1,11 @@
+// Copyright (C) 2019-2021 Vukky, Gravity Assist, Skelly
+
 require("dotenv").config();
 const fs = require("fs");
 const counting = require("./counting.js");
 const Discord = require("discord.js");
 const ora = require("ora");
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION", "USER"]});
-const chalk = require("chalk");
-const success = chalk.green;
-const warn = chalk.yellow;
-const error = chalk.bold.red;
-const info = chalk.blue;
 const fetch = require("node-fetch");
 const pjson = require("./package.json");
 const embeds = require("./utilities/embeds");
@@ -184,9 +181,10 @@ client.once("ready", async () => {
 			}
 		}
 	});
+	embeds.setAvatarURL(client.user.displayAvatarURL());
 });
 
-const inviteSites = ["discord.gg/", "discord.com/invite/", "discordapp.com/invite/", "discord.co/invite", "watchanimeattheoffice.com/invite/", "discord.media/invite/"];
+const inviteSites = ["discord.gg/", "discord.com/invite/", "discordapp.com/invite/", "discord.co/invite/", "watchanimeattheoffice.com/invite/", "discord.media/invite/"];
 client.on("message", async message => {
 	if (message.author.bot) return;
 	if ((message.channel.type == "text" && !message.guild.me.hasPermission("EMBED_LINKS"))) embedPermissions = 0;
@@ -198,6 +196,7 @@ client.on("message", async message => {
 		message.channel.send(format(vukkytils.getString("DISCORD_INVITES_DISABLED_AUTOMOD"), message.author)).then(msg => setTimeout(() => msg.delete(), 7000));
 	}
 
+	// Send auto responses configured in config.moderation.automod.autoResponses 
 	if(config.moderation.automod.autoResponses.enabled && config.moderation.automod.autoResponses.responses[message.content.toLowerCase()]) {
 		let autoResponse = config.moderation.automod.autoResponses.responses[message.content.toLowerCase()];
 		if(autoResponse.text && !autoResponse.embed) {
@@ -228,6 +227,7 @@ client.on("message", async message => {
 	const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
+	// Make sure the command exists
 	if (!command) {
 		if(config.misc.invalidCmdReminder) {
 			let reply = `I've been looking around for a while now, but I don't think **${commandName}** is a command.`;
@@ -237,6 +237,7 @@ client.on("message", async message => {
 		return;
 	}
 
+	// Handle various exports
 	if(command.mysql && !config.misc.mysql) {
 		if (embedPermissions == 0) return message.channel.send(`**${commandName}** is not enabled on this VukkyBot because MySQL is disabled!\nFor the hoster: See https://vukkyltd.github.io/VukkyBot/troubleshooting/mysqldisabled.html for instructions on how to enable it!`);
 		return message.channel.send(embeds.errorEmbed(`**${commandName}** is not enabled on this VukkyBot because MySQL is disabled!\nFor the hoster: See [the VukkyBot Documentation site](https://vukkyltd.github.io/VukkyBot/troubleshooting/mysqldisabled.html) for instructions on how to enable it!`));
@@ -312,6 +313,7 @@ client.on("message", async message => {
 	timestamps.set(message.author.id, now);
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
+	// Execute the command
 	try {
 		command.execute(message, args);
 	} catch (error) {
@@ -367,7 +369,7 @@ client.on("messageReactionAdd", async function(reaction, user){
 							reportMessage.edit(embeds.reportActionEmbed("The reported message was deleted.", reaction.message.content, actionReaction.users.cache.last()));
 						}
 					})
-					.catch(collected => {
+					.catch(() => {
 						return reportMessage.channel.send("There was an error.");
 					});
 			});

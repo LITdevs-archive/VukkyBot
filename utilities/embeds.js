@@ -3,13 +3,14 @@
 const Discord = require("discord.js");
 const pjson = require("../package.json");
 const config = require("../config.json");
-const avatarURL = "https://i.imgur.com/H0sAkrl.png";
+let avatarURL = "https://i.imgur.com/H0sAkrl.png";
 let versionString = `v${pjson.version} (discord.js ${pjson.dependencies["discord.js"].substring(1)})`;
 
 const vukkytils = require("./vukkytils");
 const format = require("util").format;
 
 module.exports = {
+	setAvatarURL,
 	errorEmbed,
 	warningEmbed,
 	infoEmbed,
@@ -31,10 +32,12 @@ module.exports = {
 	warnsUserEmbed,
 	innerEmbed,
 	reportEmbed,
-	reportActionEmbed,
-	versionString,
-	avatarURL
+	reportActionEmbed
 };
+
+function setAvatarURL(url) {
+	avatarURL = url;
+}
 
 function errorEmbed(errorMsg) {
 	return new Discord.MessageEmbed()
