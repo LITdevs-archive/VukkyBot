@@ -23,7 +23,7 @@ module.exports = {
 		if(mentionHighestRole >= authorHighestRole) return message.channel.send("You can't ban members with an equal or higher position than you.");
 		if(!mentionedUser.bannable) return message.channel.send("I can't ban this user.");
 
-		mentionedUser.send(`🔨 You were banned from **${message.guild.name}**${(banReason !== "no reason specified") ? `, for ${banReason}.` : "."}`)
+		mentionedUser.send(`🔨 Hi! You got banned from **${message.guild.name}**${(banReason !== "no reason specified") ? ` for ${banReason}.` : "."}`)
 			.then(() => iHateThis())
 			.catch(() => iHateThis());
 

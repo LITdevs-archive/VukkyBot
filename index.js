@@ -96,50 +96,40 @@ client.once("ready", async () => {
 	if(!process.env.BOT_PREFIX && process.env.PREFIX) console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("ENV_PREFIX_RENAMED")}`);
 	const statuses = [
 		"with JavaScript",
-		"with a Fall Guy",
+		"with a Vukky",
 		"with counting bots",
 		"with banning people",
 		"with the console",
-		"with pm2",
 		"with npm",
 		"with ESLint",
 		"with MySQL",
 		"with SPAGHETTI",
-		"with Vukkies",
+		"with the Vukkies",
 		"with node-fetch",
 		"with vukkyutils",
 		"with discord.js",
 		"Fall Guys",
 		"Among Us",
-		"Startup Panic",
 		"Fortnite",
-		"Cyberpunk 2077",
-		"Cyberdelay 2077",
-		"Portal 3",
-		"GTA 6",
-		"GTA 7",
-		"Roblox 2",
-		"Minecraft 2",
 		"Roblox",
 		"Minecraft",
 		"osu!",
-		"osu! 2",
 		"Pixel Strike 3D",
 		"Among Guys",
 		"DropBlox",
-		"with the cats",
 		"Club Penguin",
-		"you",
 		"Baba is You",
-		"Among Them",
 		"Vukkyland",
-		"Super Vukky 64",
-		"Paper Vukky: The Origami King",
-		"Swift Playgrounds",
 		"Elemental on Discord",
 		"Genshin Impact",
 		"VALORANT",
-		"Terraria"
+		"Terraria",
+		"The Game (i lost)",
+		"RuneLite",
+		"RuneScape",
+		"Old School Runescape",
+		"on Funorb",
+
 	];
 	client.user.setActivity(`with the world (${pjson.version})`);
 	setInterval(() => {
@@ -188,7 +178,7 @@ const inviteSites = ["discord.gg/", "discord.com/invite/", "discordapp.com/invit
 client.on("message", async message => {
 	if (message.author.bot) return;
 	if ((message.channel.type == "text" && !message.guild.me.hasPermission("EMBED_LINKS"))) embedPermissions = 0;
-	if (message.content.toLowerCase().includes(`<@!${client.user.id}>`) && config.misc.prefixReminder == true && !message.content.startsWith(prefix)) message.reply(`my prefix is \`${process.env.BOT_PREFIX}\``);
+	if (message.content.toLowerCase().includes(`<@!${client.user.id}>`) && config.misc.prefixReminder == true && !message.content.startsWith(prefix)) message.channel.send(`Hi ${message.author}! Do you need help? Just type \`${process.env.BOT_PREFIX}help\`, and I'll send you all my commands!\nYou have to put \`${process.env.BOT_PREFIX}\` before the name of a command in order to make it work.`);
 	if (message.channel.name == config.counting.channelName) counting.check(message, client);
 
 	if (inviteSites.some(site => message.content.includes(site)) && config.moderation.automod.allowInviteLinks == false && !message.member.roles.cache.some(r => config.moderation.automod.allowInviteLinksBypassRoles.includes(r.id))) {
