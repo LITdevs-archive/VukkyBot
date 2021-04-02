@@ -27,7 +27,7 @@ module.exports = {
 						}
 					})
 					.then(json => {
-						if(!json.country) return;
+						if(!json) return;
 						newMessage.edit(format(vukkytils.getString("API_CREDIT"), "https://disease.sh"), embeds.covidEmbed(country ? json.countryInfo.flag : null, country ? json.country : "Global", commaNumber(json.cases), commaNumber(json.todayCases), commaNumber(json.deaths), commaNumber(json.todayDeaths), commaNumber(json.recovered), commaNumber(json.todayRecovered), commaNumber(json.active), commaNumber(json.critical), commaNumber(json.tests)));
 					});
 			});
