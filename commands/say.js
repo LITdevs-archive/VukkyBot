@@ -12,7 +12,7 @@ module.exports = {
 		} else {
 			let say = args.slice(0).join(" ");
 			message.delete();
-			message.channel.send("not pissy");
+			message.channel.send(say);
 		}
 	},
 };
