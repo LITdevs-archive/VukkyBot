@@ -37,11 +37,11 @@ module.exports = {
 		};
 		message.reply(format(vukkytils.getString("TWEET_REPLYING_TO"), Util.removeMentions(`https://twitter.com/i/status/${args[0]}`))).then(tweetreplyDisclaimer => {
 			message.awaitReactions(filter, { max: 1 })
-				.then(collected => {
+				.then(async collected => {
 					tweetreplyDisclaimer.delete();
 					const reaction = collected.first();
 					if(reaction.emoji.name == "⬆") {
-						message.reactions.removeAll();
+						await message.reactions.removeAll();
 						if(reaction.users.cache) console.log(`[twttr] tweet reply (${args[0]}) approved by ${reaction.users.cache.last().tag}: ${tweet}`);
 						var client = new Twitter({
 							consumer_key: process.env.TWITTER_KEY,
@@ -49,23 +49,22 @@ module.exports = {
 							access_token_key: process.env.TWITTER_ACCESS,
 							access_token_secret: process.env.TWITTER_ACCESS_SECRET
 						});
-						message.channel.send(`${config.misc.emoji.loading} ${vukkytils.getString("TWEETING")}`).then(tweeting => {
-							client.post("statuses/update", {status: tweet, in_reply_to_status_id: args[0], auto_populate_reply_metadata: true})
-								.then(function (tweet) {
-									tweeting.delete();
-									message.react("✅");
-									message.reply(format(vukkytils.getString("TWEET_APPROVED"), `https://twitter.com/i/status/${tweet.id_str}`));
-								})
-								.catch(function (error) {
-									tweeting.delete();
-									message.react("❌");
-									message.reply("there was an error!", embeds.errorEmbed(`${error.message ? error.message : "Unknown error."}`));
-									throw error;
-								});
-						});
+						await message.react(config.misc.emoji.loading);
+						client.post("statuses/update", {status: tweet, in_reply_to_status_id: args[0], auto_populate_reply_metadata: true})
+							.then(async function (tweet) {
+								await message.reactions.removeAll();
+								await message.react("✅");
+								message.reply(format(vukkytils.getString("TWEET_APPROVED"), `https://twitter.com/i/status/${tweet.id_str}`));
+							})
+							.catch(async function (error) {
+								await message.reactions.removeAll();
+								await message.react("❌");
+								message.reply("there was an error!", embeds.errorEmbed(`${error.message ? error.message : "Unknown error."}`));
+								throw error;
+							});
 					} else if (reaction.emoji.name == "⬇") {
 						if(!selfdownvote) {
-							message.reactions.removeAll();
+							await message.reactions.removeAll();
 							if(reaction.users.cache) console.log(`[twttr] tweet reply (${args[0]}) denied by ${reaction.users.cache.last().tag}: ${tweet}`);
 							message.react("❌");
 							message.reply(vukkytils.getString("TWEET_DENIED"));
