@@ -21,7 +21,6 @@
 	"CANT_KICK_SELF": "You can't kick yourself! That would be silly.",
 	"CANT_BAN_SELF": "You can't ban yourself! That would be silly.",
 	"PING_REQUIRED": "You need to ping someone to use this command.",
-	"TWEETING": "Tweeting...",
 	"TWEET_APPROVED": "your tweet was approved by a user! Here it is: %s",
 	"TWEET_DENIED": "your tweet was denied by a user.",
 	"TWEET_REPLYING_TO": "you are replying to %s",
