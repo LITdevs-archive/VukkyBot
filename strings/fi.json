@@ -114,5 +114,6 @@
 	"STARTUP_LOGIN_FAILED_INTERNET_UNAVAILABLE": "Kirjautuminen epäonnistui - Internet-yhteytesi saattaa olla pois käytöstä.",
 	"DISCORD_INVITES_DISABLED_AUTOMOD": "%s, **Discord Kutsujen** lähettäminen on poistettu käytöstä tällä palvelimella.",
 	"INNER_VUKKY_ERROR": "Vukky näyttää olevan piilossa...",
-	"INNER_VUKKY_USER_FETCH_ERROR": "Vukky näyttää olevan piilossa... Oletko varma, että se on todellinen henkilö?"
+	"INNER_VUKKY_USER_FETCH_ERROR": "Vukky näyttää olevan piilossa... Oletko varma, että se on todellinen henkilö?",
+	"WARNING_CANT_SEE_OTHER": "Sorry, but you need the `MANAGE_MESSAGES` permission to see other people's warnings."
 }
