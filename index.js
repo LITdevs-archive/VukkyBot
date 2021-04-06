@@ -243,7 +243,7 @@ client.on("message", async message => {
 		return message.channel.send(embeds.errorEmbed(`**${commandName}** requires you to be the owner of this VukkyBot to use it.`));
 	}
 
-	if (command.guildOnly && message.channel.type !== "text") {
+	if (command.guildOnly && message.channel.type == "dm") {
 		return message.channel.send(embeds.errorEmbed(`**${commandName}** cannot be used inside DMs.`));
 	}
 
@@ -291,7 +291,7 @@ client.on("message", async message => {
 	const timestamps = cooldowns.get(command.name);
 	const cooldownAmount = (command.cooldown || 3) * 1000;
 
-	if (timestamps.has(message.author.id)) {
+	if (timestamps.has(message.author.id) && !config.misc.owner.includes(message.author.id)) {
 		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 
 		if (now < expirationTime) {

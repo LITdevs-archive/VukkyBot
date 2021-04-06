@@ -15,6 +15,7 @@ module.exports = {
 	cooldown: 120,
 	aliases: ["replytweet"],
 	usage: "<tweet ID> <content>",
+	guildOnly: true,
 	execute(message, args) {
 		if(args.slice(1).join(" ").length > 280) return message.channel.send(embeds.errorEmbed("Sorry, but that tweet's too long."));
 		if(isNaN(args[0])) return message.channel.send(embeds.errorEmbed("Your Tweet ID isn't a number!"));
@@ -29,6 +30,7 @@ module.exports = {
 					tweetreplyDisclaimer.delete();
 					const reaction = collected.first();
 					if(reaction.emoji.name == "⬆") {
+						if(reaction.users.cache) console.log(`[twttr] tweet reply (${args[0]}) approved by ${reaction.users.cache.last().tag}: ${args.slice(1).join(" ")}`);
 						var client = new Twitter({
 							consumer_key: process.env.TWITTER_KEY,
 							consumer_secret: process.env.TWITTER_SECRET,
@@ -50,6 +52,7 @@ module.exports = {
 								});
 						});
 					} else if (reaction.emoji.name == "⬇") {
+						if(reaction.users.cache) console.log(`[twttr] tweet reply (${args[0]}) denied by ${reaction.users.cache.last().tag}: ${args.slice(1).join(" ")}`);
 						message.react("❌");
 						message.reply(vukkytils.getString("TWEET_DENIED"));
 					}
