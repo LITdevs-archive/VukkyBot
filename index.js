@@ -308,6 +308,7 @@ client.on("message", async message => {
 		command.execute(message, args);
 	} catch (error) {
 		console.log(`[${command.name}] ${error.message}`);
+		console.error(error);
 		message.reply("there was an error trying to execute that command!", embeds.errorEmbed(error.message));
 	}
 });
