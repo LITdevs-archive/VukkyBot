@@ -29,7 +29,6 @@
 	"CANT_KICK_SELF": "Du kan ikke sparke ut deg selv! Det ville vært rart.",
 	"CANT_BAN_SELF": "Du kan ikke stenge deg selv ute! Det ville vært rart.",
 	"PING_REQUIRED": "Du må pinge noen for å bruke denne kommandoen.",
-	"TWEETING": "Tvitrer...",
 	"TWEET_APPROVED": "din tweet ble godkjent av en bruker! Her er den: %s",
 	"TWEET_DENIED": "din tweet ble avslått av en bruker.",
 	"TWEET_REPLYING_TO": "du svarer %s",
