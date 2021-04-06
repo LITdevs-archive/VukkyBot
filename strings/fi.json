@@ -29,7 +29,6 @@
 	"CANT_KICK_SELF": "Et voi potkia itsesäsi! Se oli hupsua.",
 	"CANT_BAN_SELF": "Et voi antaa itsellesi porttikieltoa! Se oli hupsua.",
 	"PING_REQUIRED": "Sinun pitää mainita joku henkilö käyttääksesi tätä komentoa.",
-	"TWEETING": "Twiitataan...",
 	"TWEET_APPROVED": "joku hyväksyi twiittisi! Tässä se on: %s",
 	"TWEET_DENIED": "joku hylkäsi twiittisi.",
 	"TWEET_REPLYING_TO": "olet vastaamassa: %s",
