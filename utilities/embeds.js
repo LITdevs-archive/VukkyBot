@@ -32,7 +32,8 @@ module.exports = {
 	warnsUserEmbed,
 	innerEmbed,
 	reportEmbed,
-	reportActionEmbed
+	reportActionEmbed,
+	tweetBlacklistEmbed
 };
 
 function setAvatarURL(url) {
@@ -288,6 +289,15 @@ function reportActionEmbed(title, messageContent, actionTakenBy) {
 		.setTitle(title)
 		.setDescription(messageContent)
 		.addField("Action taken by", actionTakenBy, true)
+		.setTimestamp()
+		.setFooter(versionString, avatarURL);
+}
+
+function tweetBlacklistEmbed(blacklistReason) {
+	return new Discord.MessageEmbed()
+		.setColor("#ff0000")
+		.setTitle("⛔ You are blacklisted from tweeting.")
+		.setDescription(`You were blacklisted for ${blacklistReason}.`)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
