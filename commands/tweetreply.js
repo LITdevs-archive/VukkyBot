@@ -16,23 +16,33 @@ module.exports = {
 	usage: "<tweet ID> <content>",
 	guildOnly: true,
 	execute(message, args) {
+		const tweet = args.slice(1).join(" ");
 		delete require.cache[require.resolve("../config.json")];
 		const config = require("../config.json");
+		let selfdownvote = false;
 		if(config.commands.tweet.blacklist[message.author.id]) return message.channel.send(embeds.tweetBlacklistEmbed(config.commands.tweet.blacklist[message.author.id]));
-		if(args.slice(1).join(" ").length > 280) return message.channel.send(embeds.errorEmbed("Sorry, but that tweet's too long."));
+		if(tweet.length == 0) return message.channel.send(embeds.errorEmbed("That tweet is pretty empty!"));
+		if(tweet.length > 280) return message.channel.send(embeds.errorEmbed("Sorry, but that tweet's too long."));
 		if(isNaN(args[0])) return message.channel.send(embeds.errorEmbed("Your Tweet ID isn't a number!"));
 		message.react("⬆").then(() => message.react("⬇"));
 		const filter = (reaction, user) => {
-			return ["⬆", "⬇"].includes(reaction.emoji.name) && user.id != message.author.id && user.bot == false;
+			if(user.bot) return false;
+			if(reaction.emoji.name == "⬆" && user.id == message.author.id) return false;
+			if(reaction.emoji.name == "⬆" && user.id != message.author.id) return true;
+			if(reaction.emoji.name == "⬇") {
+				if(user.id == message.author.id) selfdownvote = true;
+				return true;
+			}
+			return false;
 		};
 		message.reply(format(vukkytils.getString("TWEET_REPLYING_TO"), Util.removeMentions(`https://twitter.com/i/status/${args[0]}`))).then(tweetreplyDisclaimer => {
 			message.awaitReactions(filter, { max: 1 })
 				.then(collected => {
-					message.reactions.removeAll();
 					tweetreplyDisclaimer.delete();
 					const reaction = collected.first();
 					if(reaction.emoji.name == "⬆") {
-						if(reaction.users.cache) console.log(`[twttr] tweet reply (${args[0]}) approved by ${reaction.users.cache.last().tag}: ${args.slice(1).join(" ")}`);
+						message.reactions.removeAll();
+						if(reaction.users.cache) console.log(`[twttr] tweet reply (${args[0]}) approved by ${reaction.users.cache.last().tag}: ${tweet}`);
 						var client = new Twitter({
 							consumer_key: process.env.TWITTER_KEY,
 							consumer_secret: process.env.TWITTER_SECRET,
@@ -40,7 +50,7 @@ module.exports = {
 							access_token_secret: process.env.TWITTER_ACCESS_SECRET
 						});
 						message.channel.send(`${config.misc.emoji.loading} ${vukkytils.getString("TWEETING")}`).then(tweeting => {
-							client.post("statuses/update", {status: args.slice(1).join(" "), in_reply_to_status_id: args[0], auto_populate_reply_metadata: true})
+							client.post("statuses/update", {status: tweet, in_reply_to_status_id: args[0], auto_populate_reply_metadata: true})
 								.then(function (tweet) {
 									tweeting.delete();
 									message.react("✅");
@@ -54,9 +64,14 @@ module.exports = {
 								});
 						});
 					} else if (reaction.emoji.name == "⬇") {
-						if(reaction.users.cache) console.log(`[twttr] tweet reply (${args[0]}) denied by ${reaction.users.cache.last().tag}: ${args.slice(1).join(" ")}`);
-						message.react("❌");
-						message.reply(vukkytils.getString("TWEET_DENIED"));
+						if(!selfdownvote) {
+							message.reactions.removeAll();
+							if(reaction.users.cache) console.log(`[twttr] tweet reply (${args[0]}) denied by ${reaction.users.cache.last().tag}: ${tweet}`);
+							message.react("❌");
+							message.reply(vukkytils.getString("TWEET_DENIED"));
+						} else {
+							message.delete();
+						}
 					}
 				});
 		});

@@ -10,6 +10,8 @@ const vukkytils = require("./vukkytils");
 const format = require("util").format;
 
 module.exports = {
+	versionString,
+	getAvatarURL,
 	setAvatarURL,
 	errorEmbed,
 	warningEmbed,
@@ -38,6 +40,9 @@ module.exports = {
 
 function setAvatarURL(url) {
 	avatarURL = url;
+}
+function getAvatarURL() {
+	return avatarURL;
 }
 
 function errorEmbed(errorMsg) {
