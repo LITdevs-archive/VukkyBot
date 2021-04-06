@@ -10,29 +10,32 @@ module.exports = {
 	name: "warns",
 	description: "View warnings created using VukkyBot",
 	botPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
-	userPermissions: ["MANAGE_MESSAGES"],
-	args: true,
 	mysql: true,
 	guildOnly: true,
-	usage: "<@user | user id>",
+	usage: "<@user | user id> (if not specified, shows self)",
 	aliases: ["warnings"],
 	cooldown: 0,
 	execute(message, args) {
 		let warnsId;    
 		let mentionedUser;
-		if (isNaN(args[0])) {
+		if (isNaN(args[0]) && message.mentions.users.first()) {
 			mentionedUser = message.guild.member(message.mentions.users.first()).user;
 			warnsId = mentionedUser.id;
 			everythingIsFine();
-		} else {
+		} else if (args[0]) {
 			warnsId = args[0];
 			mentionedUser = message.client.users.fetch(warnsId).then(function (res) {
 				mentionedUser = res;
 				everythingIsFine();
 			});
+		} else {
+			mentionedUser = message.author;
+			warnsId = mentionedUser.id;
+			everythingIsFine();
 		}
 
 		function everythingIsFine() {
+			if(warnsId != message.author.id && !message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send(vukkytils.getString("WARNING_CANT_SEE_OTHER"));
 			var con = mysql.createConnection({
 				host: process.env.SQL_HOST,
 				user: process.env.SQL_USER,
