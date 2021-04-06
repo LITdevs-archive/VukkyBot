@@ -296,8 +296,8 @@ function reportActionEmbed(title, messageContent, actionTakenBy) {
 function tweetBlacklistEmbed(blacklistReason) {
 	return new Discord.MessageEmbed()
 		.setColor("#ff0000")
-		.setTitle("⛔ You are blacklisted from tweeting.")
-		.setDescription(`You were blacklisted for ${blacklistReason}.`)
+		.setTitle("⛔ You are not allowed to tweet.")
+		.setDescription(`You are blacklisted for ${blacklistReason}.`)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
