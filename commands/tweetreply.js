@@ -1,7 +1,6 @@
 // Copyright (C) 2021 Vukky, vtheskeleton
 
 const embeds = require("../utilities/embeds");
-const config = require("../config.json");
 require("dotenv").config();
 var Twitter = require("twitter");
 const { Util } = require("discord.js");
@@ -17,6 +16,9 @@ module.exports = {
 	usage: "<tweet ID> <content>",
 	guildOnly: true,
 	execute(message, args) {
+		delete require.cache[require.resolve("../config.json")];
+		const config = require("../config.json");
+		if(config.commands.tweet.blacklist[message.author.id]) return message.channel.send(embeds.tweetBlacklistEmbed(config.commands.tweet.blacklist[message.author.id]));
 		if(args.slice(1).join(" ").length > 280) return message.channel.send(embeds.errorEmbed("Sorry, but that tweet's too long."));
 		if(isNaN(args[0])) return message.channel.send(embeds.errorEmbed("Your Tweet ID isn't a number!"));
 		message.react("⬆").then(() => message.react("⬇"));
