@@ -13,6 +13,7 @@ module.exports = {
 	botPermissions: ["EMBED_LINKS", "MANAGE_MESSAGES"],
 	cooldown: 120,
 	usage: "<content>",
+	guildOnly: true,
 	execute(message, args) {
 		if(args.slice(0).join(" ").length > 280) return message.channel.send(embeds.errorEmbed("Sorry, but that tweet's too long."));
 		message.react("⬆").then(() => message.react("⬇"));
@@ -24,6 +25,7 @@ module.exports = {
 				message.reactions.removeAll();
 				const reaction = collected.first();
 				if(reaction.emoji.name == "⬆") {
+					if(reaction.users.cache) console.log(`[twttr] tweet approved by ${reaction.users.cache.last().tag}: ${args.slice(0).join(" ")}`);
 					var client = new Twitter({
 						consumer_key: process.env.TWITTER_KEY,
 						consumer_secret: process.env.TWITTER_SECRET,
@@ -45,6 +47,7 @@ module.exports = {
 							});
 					});
 				} else if (reaction.emoji.name == "⬇") {
+					if(reaction.users.cache) console.log(`[twttr] tweet denied by ${reaction.users.cache.last().tag}: ${args.slice(0).join(" ")}`);
 					message.react("❌");
 					message.reply(vukkytils.getString("TWEET_DENIED"));
 				}
