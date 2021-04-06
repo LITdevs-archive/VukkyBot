@@ -29,7 +29,6 @@
 	"CANT_KICK_SELF": "Du kannst dich nicht selbst kicken! Das wäre bescheuert.",
 	"CANT_BAN_SELF": "Du kannst dich nicht selbst bannen! Das wäre bescheuert.",
 	"PING_REQUIRED": "Du musst jemanden erwähnen (@) um diesen Befehl benutzen zu können.",
-	"TWEETING": "Tweeting...",
 	"TWEET_APPROVED": "Dein Tweet wurde von einem Benutzer genehmigt! Hier ist der link: %s",
 	"TWEET_DENIED": "Dein Tweet wurde verweigert von einem Benutzer",
 	"TWEET_REPLYING_TO": "Du antwortest auf %s",
