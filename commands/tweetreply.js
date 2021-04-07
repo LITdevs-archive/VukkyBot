@@ -40,6 +40,7 @@ module.exports = {
 				.then(async collected => {
 					tweetreplyDisclaimer.delete();
 					const reaction = collected.first();
+					if(!reaction || !reaction.emoji || !reaction.emoji.name) return message.channel.send("could not get result");
 					if(reaction.emoji.name == "⬆") {
 						await message.reactions.removeAll();
 						if(reaction.users.cache) console.log(`[twttr] tweet reply (${args[0]}) approved by ${reaction.users.cache.last().tag}: ${tweet}`);

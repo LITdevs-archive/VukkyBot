@@ -35,6 +35,7 @@ module.exports = {
 		message.awaitReactions(filter, { max: 1 })
 			.then(async collected => {
 				const reaction = collected.first();
+				if(!reaction || !reaction.emoji || !reaction.emoji.name) return message.channel.send("could not get result");
 				if(reaction.emoji.name == "⬆") {
 					await message.reactions.removeAll();
 					if(reaction.users.cache) console.log(`[twttr] tweet approved by ${reaction.users.cache.last().tag}: ${tweet}`);
