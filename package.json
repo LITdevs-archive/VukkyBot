@@ -1,7 +1,7 @@
 {
   "name": "vukkybot",
   "version": "3.0.0",
-  "date": "27/03/2021",
+  "date": "07/04/2021",
   "dateFormat": "DD/MM/YYYY",
   "description": "VukkyBot",
   "main": "index.js",

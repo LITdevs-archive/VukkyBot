@@ -57,9 +57,8 @@ function commandPrep(forStartup) {
 	commandSpinner.prefixText = `[${vukkytils.getString("STARTUP")}]`;
 	commandSpinner.spinner = "point";	
 	commandSpinner.render();
-	let commandsToLoad = commandFiles.length;
+	let commandsLoaded = 0;
 	for (const file of commandFiles) {
-		commandsToLoad--;
 		commandSpinner.text = `${format(vukkytils.getString("STARTUP_LOADING_SPECIFIC_COMMAND"), file, commandFiles.indexOf(file), commandFiles.length)}\n`;
 		try {
 			commandSpinner.render();
@@ -76,7 +75,8 @@ function commandPrep(forStartup) {
 			commandSpinner.fail(`Couldn't load ${file}: ${error.message}`);
 			throw error;
 		}
-		if(commandsToLoad == 0) {
+		commandsLoaded++;
+		if(commandsLoaded == commandFiles.length) {
 			commandSpinner.succeed(vukkytils.getString("STARTUP_COMMANDS_LOADED"));
 			if(forStartup == true) login();
 		}
@@ -296,6 +296,7 @@ client.on("message", async message => {
 
 		if (now < expirationTime) {
 			const timeLeft = (expirationTime - now) / 1000;
+			console.log(timeLeft.toFixed(0));
 			return message.channel.send(embeds.cooldownEmbed(`You need to wait ${timeLeft.toFixed(1)} more second(s) before you can use the \`${command.name}\` command again.`));
 		}
 	}
@@ -384,3 +385,7 @@ async function login() {
 		throw e;
 	}
 }
+
+process.on("uncaughtException", function (err) {
+	console.error(err);
+});
