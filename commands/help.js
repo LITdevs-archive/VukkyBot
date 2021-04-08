@@ -39,7 +39,7 @@ module.exports = {
 		const helpEmbed = new Discord.MessageEmbed()
 			.setColor("#4b83c3")
 			.setTitle(`ℹ ${command.name}`)
-			.setDescription(command.description)
+			.setDescription(command.description || vukkytils.getString("HELP_NO_DESCRIPTION"))
 			.setTimestamp()
 			.setFooter(embeds.versionString, embeds.getAvatarURL());
 
