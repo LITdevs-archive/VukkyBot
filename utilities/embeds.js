@@ -35,7 +35,8 @@ module.exports = {
 	innerEmbed,
 	reportEmbed,
 	reportActionEmbed,
-	tweetBlacklistEmbed
+	tweetBlacklistEmbed,
+	wikipediaEmbed
 };
 
 function setAvatarURL(url) {
@@ -303,6 +304,18 @@ function tweetBlacklistEmbed(blacklistReason) {
 		.setColor("#ff0000")
 		.setTitle("⛔ You are not allowed to tweet.")
 		.setDescription(`You are blacklisted for ${blacklistReason}.`)
+		.setTimestamp()
+		.setFooter(versionString, avatarURL);
+}
+
+function wikipediaEmbed(title, shortdesc, desc, image, url) {
+	return new Discord.MessageEmbed()
+		.setColor("#ffc83d")
+		.setTitle(title)
+		.setAuthor(shortdesc)
+		.setDescription(desc)
+		.setThumbnail(image)
+		.setURL(url)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
