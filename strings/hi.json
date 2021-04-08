@@ -114,5 +114,6 @@
 	"DISCORD_INVITES_DISABLED_AUTOMOD": "%s, **sending Discord invites** is disabled in this server.",
 	"INNER_VUKKY_ERROR": "The Vukky seems to be hiding...",
 	"INNER_VUKKY_USER_FETCH_ERROR": "The Vukky seems to be hiding... Are you sure that's a real person?",
-	"WARNING_CANT_SEE_OTHER": "Sorry, but you need the `MANAGE_MESSAGES` permission to see other people's warnings."
+	"WARNING_CANT_SEE_OTHER": "Sorry, but you need the `MANAGE_MESSAGES` permission to see other people's warnings.",
+	"HELP_NO_DESCRIPTION": "It looks like this command doesn't have any description."
 }
