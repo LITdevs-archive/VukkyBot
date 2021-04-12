@@ -3,13 +3,16 @@
 const Discord = require("discord.js");
 const pjson = require("../package.json");
 const config = require("../config.json");
-const avatarURL = "https://i.imgur.com/H0sAkrl.png";
+let avatarURL = "https://i.imgur.com/H0sAkrl.png";
 let versionString = `v${pjson.version} (discord.js ${pjson.dependencies["discord.js"].substring(1)})`;
 
 const vukkytils = require("./vukkytils");
 const format = require("util").format;
 
 module.exports = {
+	versionString,
+	getAvatarURL,
+	setAvatarURL,
 	errorEmbed,
 	warningEmbed,
 	infoEmbed,
@@ -32,9 +35,16 @@ module.exports = {
 	innerEmbed,
 	reportEmbed,
 	reportActionEmbed,
-	versionString,
-	avatarURL
+	tweetBlacklistEmbed,
+	wikipediaEmbed
 };
+
+function setAvatarURL(url) {
+	avatarURL = url;
+}
+function getAvatarURL() {
+	return avatarURL;
+}
 
 function errorEmbed(errorMsg) {
 	return new Discord.MessageEmbed()
@@ -285,6 +295,27 @@ function reportActionEmbed(title, messageContent, actionTakenBy) {
 		.setTitle(title)
 		.setDescription(messageContent)
 		.addField("Action taken by", actionTakenBy, true)
+		.setTimestamp()
+		.setFooter(versionString, avatarURL);
+}
+
+function tweetBlacklistEmbed(blacklistReason) {
+	return new Discord.MessageEmbed()
+		.setColor("#ff0000")
+		.setTitle("⛔ You are not allowed to tweet.")
+		.setDescription(`You are blacklisted for ${blacklistReason}.`)
+		.setTimestamp()
+		.setFooter(versionString, avatarURL);
+}
+
+function wikipediaEmbed(title, shortdesc, desc, image, url) {
+	return new Discord.MessageEmbed()
+		.setColor("#ffc83d")
+		.setTitle(title)
+		.setAuthor(shortdesc)
+		.setDescription(desc)
+		.setThumbnail(image)
+		.setURL(url)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }

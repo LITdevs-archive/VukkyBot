@@ -23,7 +23,7 @@ module.exports = {
 		if(mentionHighestRole >= authorHighestRole) return message.channel.send("You can't kick members with an equal or higher position than you.");
 		if(!mentionedUser.kickable) return message.channel.send("I can't kick this user.");
 
-		mentionedUser.send(`👢 You were kicked from **${message.guild.name}**${(kickReason !== "no reason specified") ? `, for ${kickReason}.` : "."}`)
+		mentionedUser.send(`👢 Hi! You got kicked from **${message.guild.name}**${(kickReason !== "no reason specified") ? ` for ${kickReason}.` : "."}`)
 			.then(() => iHateThis())
 			.catch(() => iHateThis());
 		
