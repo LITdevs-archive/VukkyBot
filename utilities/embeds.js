@@ -238,7 +238,7 @@ function innerEmbed(image) {
 		.setFooter(versionString, avatarURL);
 }
 
-function aboutEmbed(botversion, discordjsversion, osinfo) {
+function aboutEmbed(botversion, discordjsversion, osinfo, owners) {
 	return new Discord.MessageEmbed()
 		.setColor("#4289c1")
 		.setTitle(`💁‍♂️ ${vukkytils.getString("ABOUT_VUKKYBOT_TITLE")}`)
@@ -246,6 +246,7 @@ function aboutEmbed(botversion, discordjsversion, osinfo) {
 		.addField(vukkytils.getString("ABOUT_VUKKYBOT_BOT_VER"), botversion, true)
 		.addField(vukkytils.getString("ABOUT_VUKKYBOT_DJS_VER"), discordjsversion, true)
 		.addField(vukkytils.getString("ABOUT_VUKKYBOT_OS_INFO"), osinfo, true)
+		.addField(vukkytils.getString("ABOUT_VUKKYBOT_BOT_OWNERS"), owners, true)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }

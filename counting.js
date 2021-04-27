@@ -6,6 +6,7 @@ require("dotenv").config();
 var sql;
 
 const error = chalk.bold.red;
+const warn = chalk.yellowBright;
 const success = chalk.green;
 var servers = {};
 var cheader = `[${vukkytils.getString("COUNTING")}]`;
@@ -44,6 +45,8 @@ module.exports = {
 				con.query(sql, function (err, result) {
 					if (err) {
 						if(err.code == "ER_TABLE_EXISTS_ERROR") {
+							console.log(`${cheader} ${warn("Table already exists")}`);
+						} else {
 							console.log(`${cheader} ${error("Table creation failed")}`);
 						}
 					}

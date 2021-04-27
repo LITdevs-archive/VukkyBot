@@ -78,6 +78,11 @@
         },
         "wikipedia": {
             "site": "en.wikipedia.org"
+        },
+        "tweet": {
+            "blacklist": {
+                
+            }
         }
     }
 }
