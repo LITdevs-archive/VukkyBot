@@ -111,6 +111,6 @@
 	"HELP_NO_DESCRIPTION": "It looks like this command doesn't have any description.",
 	"MYSQL_MISSING_CREDENTIALS": "Some MySQL credentials are missing.",
 	"COMMAND_GUILD_ONLY": "%s can't be used in DMs.",
-	"COMMAND_BOT_OWNER_ONLY": "%s can't be used in DMs.",
+	"COMMAND_BOT_OWNER_ONLY": "%s can only be used by the owners of this VukkyBot.",
 	"COMMAND_INVALID": "I've been looking around for a while now, but I don't think **${commandName}** is a command."
 }
