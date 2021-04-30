@@ -5,7 +5,7 @@ const config = require("../config.json");
 module.exports = {
 	name: "opinion",
 	description: "father's son makes an opinion",
-	botPermissions: ["ATTACH_FILES"],
+	botPermissions: ["ATTACH_FILES", "MANAGE_MESSAGES"],
 	args: true,
 	usage: "[user] <text>",
 	async execute(message, args) {
