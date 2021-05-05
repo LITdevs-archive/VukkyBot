@@ -42,8 +42,21 @@ module.exports = {
 					message.channel.send(`Highscore: ${result[0].highscore}`);
 					con.end();
 				});
+			//the new lastcount fuckery starts here
+				if(args[0] == "current") {
+					sql = `SELECT number FROM counting WHERE (serverid = ${message.guild.id})`;
+					con.query(sql, function (err, result) {
+						message.channel.send(`Current Number: ${result[0].number}`);
+						con.end();
+					});
+				} else {
+					sql = `SELECT highscore FROM counting WHERE (serverid = ${message.guild.id})`;
+					con.query(sql, function (err, result) {
+						message.channel.send(`Highscore: ${result[0].highscore}`);
+						con.end();
+					});
 			}
 		}
 
-	},
-};
+	}
+}}
