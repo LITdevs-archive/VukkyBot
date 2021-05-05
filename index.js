@@ -6,14 +6,6 @@ const counting = require("./counting.js");
 const Discord = require("discord.js");
 const ora = require("ora");
 const client = new Discord.Client({partials: ["MESSAGE", "CHANNEL", "REACTION", "USER"]});
-<<<<<<< HEAD
-const chalk = require("chalk");
-//const success = chalk.green;
-//const warn = chalk.yellow;    //all of thease seem to do nothing, why
-//const error = chalk.bold.red;
-//const info = chalk.blue;
-=======
->>>>>>> d20eb45fc01b12ff3b16288cb3e398b6f61eefb1
 const fetch = require("node-fetch");
 const pjson = require("./package.json");
 const embeds = require("./utilities/embeds");
@@ -32,27 +24,6 @@ let embedPermissions = 1;
 console.clear();
 console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("STARTING")}`);
 
-<<<<<<< HEAD
-//bot startup 
-const commandSpinner = ora(`${vukkytils.getString("STARTUP_LOADING_COMMANDS")}\n`).start();
-commandSpinner.prefixText = `[${vukkytils.getString("STARTUP")}]`;
-commandSpinner.spinner = "point";	
-commandSpinner.render();
-let commandsToLoad = commandFiles.length;
-for (const file of commandFiles) {
-	commandsToLoad--;
-	commandSpinner.text = `${format(vukkytils.getString("STARTUP_LOADING_SPECIFIC_COMMAND"), file, commandFiles.indexOf(file), commandFiles.length)}\n`;
-	try {
-		commandSpinner.render();
-		const command = require(`./commands/${file}`);
-		client.commands.set(command.name, command);
-		if (!command.name) {
-			commandSpinner.fail(`Couldn't load ${file}: No name`);
-			process.exit(1);
-		} else if (!command.execute) {
-			commandSpinner.fail(`Couldn't load ${file}: No execute function`);
-			process.exit(1);
-=======
 async function checkUpdates(forStartup) {
 	const updateChecker = ora("Checking for updates...").start();
 	updateChecker.prefixText = forStartup == true ? `[${vukkytils.getString("STARTUP")}]` : "[updater]";
@@ -109,7 +80,6 @@ function commandPrep(forStartup) {
 		if(commandsLoaded == commandFiles.length) {
 			commandSpinner.succeed(vukkytils.getString("STARTUP_COMMANDS_LOADED"));
 			if(forStartup == true) login();
->>>>>>> d20eb45fc01b12ff3b16288cb3e398b6f61eefb1
 		}
 	}
 }
