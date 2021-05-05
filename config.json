@@ -5,8 +5,8 @@
         "invalidCmdReminder": true,
         "prefixReminder": true,
         "owner": [
-            "372390836694155264",
-            "809301181679665162"
+            "708333380525228082",
+            "125644326037487616"
         ],
         "mysql": true,
         "language": "en",
@@ -17,7 +17,31 @@
     },
     "moderation": {
         "automod": {
-            "allowInviteLinks": false
+            "allowInviteLinks": false,
+            "allowInviteLinksBypassRoles": ["770972367227846667"],
+            "autoResponses": {
+                "enabled": true,
+                "responses": {
+                    "-installvukkybot": {
+                        "embed": {
+                            "title": "VukkyBot is available on GitHub!",
+                            "description": "You can also [read the documentation](https://docs.vukkyltd.xyz) if you need help.",
+                            "url": "https://github.com/vukkyltd/vukkybot",
+                            "footer": "VukkyBot runs on node.js with discord.js - VukkyBot requires Node 12 or above."
+                        }
+                    },
+                    "-runescapechannel": {
+                        "embed": {
+                            "title": "What is #runescape?",
+                            "description": "<#825832167556120597> is for discussion about Old School RuneScape and posts levelups of the Vukky Clan. When Vukky, Velocity, or Skelly levels up, a notification is sent there.",
+                            "footer": "If you're using this outside of Vukky's Chat Place, you can ignore it."
+                        }
+                    },
+                    "sus": {
+                        "text": "<:sus:826940247317151764>"
+                    }
+                }
+            }
         }
     },
     "counting": {
@@ -40,7 +64,10 @@
         "dmOwner": true
     },
     "reports": {
-        "enabled": true
+        "enabled": true,
+        "channelName": "reports",
+        "staffRoleName": "Staff"
+        
     },
     "commands": {
         "quiz": {
@@ -52,6 +79,11 @@
         },
         "wikipedia": {
             "site": "en.wikipedia.org"
+        },
+        "tweet": {
+            "blacklist": {
+                
+            }
         }
     }
 }

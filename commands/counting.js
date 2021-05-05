@@ -9,7 +9,7 @@ module.exports = {
 	description: "Make VukkyBot tell things about counting!",
 	cooldown: 0,
 	guildOnly: true,
-	mysql: true,
+	requiredAPIs: ["mysql"],
 	usage: "<highscore or current>",
 	execute(message, args) {
 		var con = mysql.createConnection({
@@ -24,7 +24,7 @@ module.exports = {
 		});
 		
 		if(args[0] == "highscore") {
-			sql = `SELECT highscore FROM counting WHERE (serverid = ${message.guild.id})`;
+			sql = `SELECT lastcounter FROM counting WHERE (serverid = ${message.guild.id})`;
 			con.query(sql, function (err, result) {
 				message.channel.send(`Highscore: ${result[0].highscore}`);
 				con.end();
@@ -37,7 +37,8 @@ module.exports = {
 					con.end();
 				});
 			} else {
-				sql = `SELECT highscore FROM counting WHERE (serverid = ${message.guild.id})`;
+				//i think this is what you ment? 
+				sql = `SELECT lastcounter FROM counting WHERE (serverid = ${message.guild.id})`;
 				con.query(sql, function (err, result) {
 					message.channel.send(`Highscore: ${result[0].highscore}`);
 					con.end();

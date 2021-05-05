@@ -39,9 +39,9 @@ module.exports = {
 		const helpEmbed = new Discord.MessageEmbed()
 			.setColor("#4b83c3")
 			.setTitle(`ℹ ${command.name}`)
-			.setDescription(command.description)
+			.setDescription(command.description || vukkytils.getString("HELP_NO_DESCRIPTION"))
 			.setTimestamp()
-			.setFooter(embeds.versionString, embeds.avatarURL);
+			.setFooter(embeds.versionString, embeds.getAvatarURL());
 
 		if (command.aliases) helpEmbed.addField(vukkytils.getString("HELP_ALIASES"), `${command.aliases.join(", ")}`, true);
 		if (command.usage) helpEmbed.addField(vukkytils.getString("HELP_USAGE"), `${prefix}${command.name} ${command.usage}`, true);
