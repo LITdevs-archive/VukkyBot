@@ -1,6 +1,6 @@
 name: Edited Config
 on:
-  pull_request:
+  pull_request_target:
     paths:
     - 'config.json'
 jobs:
