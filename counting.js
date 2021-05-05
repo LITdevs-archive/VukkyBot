@@ -8,7 +8,7 @@ var sql;
 const error = chalk.bold.red;
 const success = chalk.green;
 var servers = {};
-var cheader = `[${vukkytils.getString("COUNTING")}]`;
+var cheader = `[${vukkytils.getString("")}]`;
 
 function isInt(value) {
 	let x = parseFloat(value);
@@ -17,10 +17,10 @@ function isInt(value) {
 
 function shouldRun(logs) {
 	if(logs) {
-		if(!config.counting.enabled) return;
-		if(!config.misc.mysql) return console.log(`${cheader} ${error("MySQL is not enabled. MySQL is required for counting.")}`);
+		if(!config..enabled) return;
+		if(!config.misc.mysql) return console.log(`${cheader} ${error("MySQL is not enabled. MySQL is required for .")}`);
 	} else {
-		if(!config.counting.enabled) return;
+		if(!config..enabled) return;
 		if(!config.misc.mysql) return;
 	}
 	return true;
@@ -40,7 +40,7 @@ module.exports = {
 			if (err) {
 				return console.log(`${cheader} ${error("SQL connection failed. Maybe the credentials are invalid?")}`);
 			} else {
-				sql = "CREATE TABLE counting (serverid VARCHAR(255), number VARCHAR(255), lastcounter VARCHAR(255), highscore VARCHAR(255), id INT AUTO_INCREMENT PRIMARY KEY)";
+				sql = "CREATE TABLE  (serverid VARCHAR(255), number VARCHAR(255), lastcounter VARCHAR(255), highscore VARCHAR(255), id INT AUTO_INCREMENT PRIMARY KEY)";
 				con.query(sql, function (err, result) {
 					if (err) {
 						if(err.code == "ER_TABLE_EXISTS_ERROR") {
@@ -57,14 +57,14 @@ module.exports = {
 						database: process.env.SQL_DB
 					});
 					let serverid = server.id.toString();
-					sql = `SELECT * FROM counting WHERE serverid = ${server.id}`;
+					sql = `SELECT * FROM  WHERE serverid = ${server.id}`;
 					con.query(sql, function (err, result) {
 						if (err) {
-							console.log(`${cheader} ${error("Something went wrong in the counting startup!")}`);
+							console.log(`${cheader} ${error("Something went wrong in the  startup!")}`);
 							console.log(err);
 						} else {
 							if (result.length <= 0) {
-								sql = `INSERT INTO counting(serverid, number, lastcounter, highscore) VALUES (${server.id}, 0, 0, 0)`;
+								sql = `INSERT INTO (serverid, number, lastcounter, highscore) VALUES (${server.id}, 0, 0, 0)`;
 								con.query(sql, function (err, result) {
 									if (err) {
 										console.log(`${cheader} ${error("Failed to create row for server with ID:")} ${server.id}`);
@@ -108,10 +108,10 @@ module.exports = {
 		});
 		let server = message.guild;
 		let serverid = server.id.toString();
-		sql = `SELECT * FROM counting WHERE serverid = ${server.id}`;
+		sql = `SELECT * FROM  WHERE serverid = ${server.id}`;
 		con.query(sql, function (err, result) {
 			if (err) {
-				console.log(`${cheader} ${error("Something went wrong in the counting startup!")}`);
+				console.log(`${cheader} ${error("Something went wrong in the  startup!")}`);
 				console.log(err);
 			} else {
 				if (result.length <= 0) {
@@ -120,7 +120,7 @@ module.exports = {
 							console.log(`${cheader} ${error("Failed to connect to the database")}`);
 							console.log(err);
 						} else {
-							sql = `INSERT INTO counting(serverid, number, lastcounter, highscore) VALUES (${server.id}, 0, 0, 0)`;
+							sql = `INSERT INTO (serverid, number, lastcounter, highscore) VALUES (${server.id}, 0, 0, 0)`;
 							con.query(sql, function (err, result) {
 								if (err) {
 									console.log(`${cheader} ${error("Failed to create row for server with ID:")} ${server.id}`);
@@ -154,7 +154,7 @@ module.exports = {
 				if (parseInt(checkString) == parseInt(servers[message.guild.id].number) + 1) {
 					servers[message.guild.id].number = parseInt(checkString);
 					servers[message.guild.id].lastcounter = message.author.id;
-					sql = `UPDATE counting set number = ${parseInt(checkString)}, lastcounter = ${message.author.id} WHERE serverid = ${message.guild.id}`;
+					sql = `UPDATE  set number = ${parseInt(checkString)}, lastcounter = ${message.author.id} WHERE serverid = ${message.guild.id}`;
 					con.query(sql, function (err, result) {
 						if (err) {
 							console.log(err);
@@ -174,7 +174,7 @@ module.exports = {
 							database: process.env.SQL_DB
 						});
 
-						sql = `UPDATE counting set highscore = ${parseInt(checkString)} WHERE serverid = ${message.guild.id}`;
+						sql = `UPDATE  set highscore = ${parseInt(checkString)} WHERE serverid = ${message.guild.id}`;
 						con.query(sql, function (err, result) {
 							if (err) {
 								console.log(err);
@@ -188,7 +188,7 @@ module.exports = {
 					} else {	
 						message.react("✅");
 					}
-					let customEmoji = config.counting.customEmoji[servers[message.guild.id].number.toString()];
+					let customEmoji = config..customEmoji[servers[message.guild.id].number.toString()];
 					if (customEmoji != undefined) {
 						message.react(customEmoji);
 					}
@@ -206,7 +206,7 @@ module.exports = {
 						database: process.env.SQL_DB
 					});
 
-					sql = `UPDATE counting set number = 0, lastcounter = 0 WHERE serverid = ${message.guild.id}`;
+					sql = `UPDATE  set number = 0, lastcounter = 0 WHERE serverid = ${message.guild.id}`;
 					con.query(sql, function (err, result) {
 						if (err) {
 							console.log(err);
@@ -223,7 +223,7 @@ module.exports = {
 				message.channel.send(`<@${message.author.id}> screwed up! You can't count twice in a row!\nThe next number is **1**.`);
 				servers[message.guild.id].number = 0;
 				servers[message.guild.id].lastcounter = 0;
-				sql = `UPDATE counting set number = 0, lastcounter = 0 WHERE serverid = ${message.guild.id}`;
+				sql = `UPDATE  set number = 0, lastcounter = 0 WHERE serverid = ${message.guild.id}`;
 				con.query(sql, function (err, result) {
 					if (err) {
 						console.log(err);

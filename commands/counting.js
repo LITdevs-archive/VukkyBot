@@ -9,7 +9,7 @@ module.exports = {
 	description: "Make VukkyBot tell things about counting!",
 	cooldown: 0,
 	guildOnly: true,
-	mysql: true,
+	requiredAPIs: ["mysql"],
 	usage: "<highscore or current>",
 	execute(message, args) {
 		var con = mysql.createConnection({
@@ -22,23 +22,24 @@ module.exports = {
 		con.connect(function(err) {
 			if (err) console.log(err);
 		});
-		//removed ERR, as value was never read
+		
 		if(args[0] == "highscore") {
-			sql = `SELECT highscore FROM counting WHERE (serverid = ${message.guild.id})`;
-			con.query(sql, function (result) {
+			sql = `SELECT lastcounter FROM counting WHERE (serverid = ${message.guild.id})`;
+			con.query(sql, function (err, result) {
 				message.channel.send(`Highscore: ${result[0].highscore}`);
 				con.end();
 			});
 		} else {
 			if(args[0] == "current") {
 				sql = `SELECT number FROM counting WHERE (serverid = ${message.guild.id})`;
-				con.query(sql, function (result) {
+				con.query(sql, function (err, result) {
 					message.channel.send(`Current Number: ${result[0].number}`);
 					con.end();
 				});
 			} else {
-				sql = `SELECT highscore FROM counting WHERE (serverid = ${message.guild.id})`;
-				con.query(sql, function (result) {
+				//i think this is what you ment? 
+				sql = `SELECT lastcounter FROM counting WHERE (serverid = ${message.guild.id})`;
+				con.query(sql, function (err, result) {
 					message.channel.send(`Highscore: ${result[0].highscore}`);
 					con.end();
 				});
