@@ -16,7 +16,7 @@ module.exports = {
 	args: true,
 	cooldown: 0,
 	guildOnly: true,
-	mysql: true,
+	requiredAPIs: ["mysql"],
 	usage: "<warning id>",
 	aliases: ["delwarning", "deletewarning", "deletewarn"],
 	execute(message, args) {

@@ -84,6 +84,7 @@
 	"ABOUT_VUKKYBOT_BOT_VER": "Bot version",
 	"ABOUT_VUKKYBOT_DJS_VER": "discord.js version",
 	"ABOUT_VUKKYBOT_OS_INFO": "OS information",
+	"ABOUT_VUKKYBOT_BOT_OWNERS": "Bot owners",
 	"DATA_GOTTEN": "Here's your requested data!",
 	"CRYPTO_VALUE": "Value in USD",
 	"CRYPTO_VALUE_CHANGE": "Value change (from 24h ago)",
@@ -107,5 +108,9 @@
 	"INNER_VUKKY_ERROR": "The Vukky seems to be hiding...",
 	"INNER_VUKKY_USER_FETCH_ERROR": "The Vukky seems to be hiding... Are you sure that's a real person?",
 	"WARNING_CANT_SEE_OTHER": "Sorry, but you need the `MANAGE_MESSAGES` permission to see other people's warnings.",
-	"HELP_NO_DESCRIPTION": "It looks like this command doesn't have any description."
+	"HELP_NO_DESCRIPTION": "It looks like this command doesn't have any description.",
+	"MYSQL_MISSING_CREDENTIALS": "Some MySQL credentials are missing.",
+	"COMMAND_GUILD_ONLY": "%s can't be used in DMs.",
+	"COMMAND_BOT_OWNER_ONLY": "%s can only be used by the owners of this VukkyBot.",
+	"COMMAND_INVALID": "I've been looking around for a while now, but I don't think **%s** is a command."
 }

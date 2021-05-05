@@ -24,6 +24,7 @@ const prefix = process.env.BOT_PREFIX;
 client.commands = new Discord.Collection();
 let updateRemindedOn = null;
 const chokidar = require("chokidar");
+const chalk = require("chalk");
 
 const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
 let embedPermissions = 1;
@@ -84,7 +85,7 @@ async function checkUpdates(forStartup) {
 function commandPrep(forStartup) {
 	const commandSpinner = ora(`${vukkytils.getString("STARTUP_LOADING_COMMANDS")}\n`).start();
 	commandSpinner.prefixText = `[${vukkytils.getString("STARTUP")}]`;
-	commandSpinner.spinner = "point";	
+	commandSpinner.spinner = "shark";
 	commandSpinner.render();
 	let commandsLoaded = 0;
 	for (const file of commandFiles) {
@@ -157,7 +158,7 @@ client.once("ready", async () => {
 		"The Game (i lost)",
 		"RuneLite",
 		"RuneScape",
-		"Old School Runescape",
+		"Old School RuneScape",
 		"on Funorb",
 
 	];
@@ -202,6 +203,11 @@ client.once("ready", async () => {
 		}
 	});
 	embeds.setAvatarURL(client.user.displayAvatarURL());
+	if(config.misc.mysql) {
+		if(!process.env.SQL_HOST || !process.env.SQL_PASS || !process.env.SQL_USER || !process.env.SQL_DB) {
+			console.log(`[mysql] ${chalk.bold.red(vukkytils.getString("MYSQL_MISSING_CREDENTIALS"))}`);
+		}
+	}
 });
 
 const inviteSites = ["discord.gg/", "discord.com/invite/", "discordapp.com/invite/", "discord.co/invite/", "watchanimeattheoffice.com/invite/", "discord.media/invite/"];
@@ -233,7 +239,7 @@ client.on("message", async message => {
 				message.channel.send(embed);
 			}
 		} else {
-			message.channel.send("There's something wrong with this auto response! Contact the server administrator.");
+			message.channel.send("There's something wrong with this auto response! Contact the VukkyBot owner or server administrator.");
 		}
 	}
 
@@ -250,7 +256,7 @@ client.on("message", async message => {
 	// Make sure the command exists
 	if (!command) {
 		if(config.misc.invalidCmdReminder) {
-			let reply = `I've been looking around for a while now, but I don't think **${commandName}** is a command.`;
+			let reply = format(vukkytils.getString("COMMAND_INVALID"), `**${commandName}**`);
 			if (embedPermissions == 0) return message.channel.send(reply);
 			message.channel.send(embeds.errorEmbed(reply));
 		}
@@ -258,23 +264,35 @@ client.on("message", async message => {
 	}
 
 	// Handle various exports
-	if(command.mysql && !config.misc.mysql) {
-		if (embedPermissions == 0) return message.channel.send(`**${commandName}** is not enabled on this VukkyBot because MySQL is disabled!\nFor the hoster: See https://vukkyltd.github.io/VukkyBot/troubleshooting/mysqldisabled.html for instructions on how to enable it!`);
-		return message.channel.send(embeds.errorEmbed(`**${commandName}** is not enabled on this VukkyBot because MySQL is disabled!\nFor the hoster: See [the VukkyBot Documentation site](https://vukkyltd.github.io/VukkyBot/troubleshooting/mysqldisabled.html) for instructions on how to enable it!`));
+	const requiredAPIs = {
+		mysql: config.misc.mysql == true,
+		twitter: process.env.TWITTER_KEY != undefined && process.env.TWITTER_SECRET != undefined && process.env.TWITTER_ACCESS != undefined && process.env.TWITTER_ACCESS_SECRET != undefined
+	};
+	if(command.requiredAPIs) {
+		if(command.requiredAPIs.includes("mysql") && !requiredAPIs.mysql) {
+			if (embedPermissions == 0) return message.channel.send(`**${commandName}** is not enabled on this VukkyBot because it needs access to MySQL, but MySQL is disabled.\nFor the hoster: See https://vukkyltd.github.io/VukkyBot/troubleshooting/mysqldisabled.html for instructions on how to enable it!`);
+			return message.channel.send(embeds.errorEmbed(`**${commandName}** is not enabled on this VukkyBot because it needs access to MySQL, but MySQL is disabled.\nFor the hoster: See [the VukkyBot Documentation site](https://vukkyltd.github.io/VukkyBot/troubleshooting/mysqldisabled.html) for instructions on how to enable it!`));
+		}
+		if(command.requiredAPIs.includes("twitter") && !requiredAPIs.twitter) {
+			if (embedPermissions == 0) return message.channel.send(`**${commandName}** is not enabled on this VukkyBot because it needs access to the Twitter API, but I don't have access to the Twitter API...`);
+			return message.channel.send(embeds.errorEmbed(`**${commandName}** is not enabled on this VukkyBot because it needs access to the Twitter API, but I don't have access to the Twitter API...`));
+		}
 	}
 
 	if(command.disabled) {
-		if (embedPermissions == 0) return message.channel.send(`**${commandName}** is disabled.`);
-		return message.channel.send(embeds.errorEmbed(`**${commandName}** is disabled.`));
+		let errorMsg = `**${commandName}** is disabled.`;
+		if (embedPermissions == 0) return message.channel.send(errorMsg);
+		return message.channel.send(embeds.errorEmbed(errorMsg));
 	}
 
 	if(command.botOwnerOnly && !config.misc.owner.includes(message.author.id)) {
-		if (embedPermissions == 0) return message.channel.send(`**${commandName}** requires you to be the owner of this VukkyBot to use it.`);
-		return message.channel.send(embeds.errorEmbed(`**${commandName}** requires you to be the owner of this VukkyBot to use it.`));
+		let errorMsg = format(vukkytils.getString("COMMAND_BOT_OWNER_ONLY"), `**${commandName}**`);
+		if (embedPermissions == 0) return message.channel.send(errorMsg);
+		return message.channel.send(embeds.errorEmbed(errorMsg));
 	}
 
 	if (command.guildOnly && message.channel.type == "dm") {
-		return message.channel.send(embeds.errorEmbed(`**${commandName}** cannot be used inside DMs.`));
+		return message.channel.send(embeds.errorEmbed(format(vukkytils.getString("COMMAND_GUILD_ONLY"), `**${commandName}**`)));
 	}
 
 	if (command.args && !args.length) {
@@ -327,7 +345,9 @@ client.on("message", async message => {
 		if (now < expirationTime) {
 			const timeLeft = (expirationTime - now) / 1000;
 			console.log(timeLeft.toFixed(0));
-			return message.channel.send(embeds.cooldownEmbed(`You need to wait ${timeLeft.toFixed(1)} more second(s) before you can use the \`${command.name}\` command again.`));
+			let errorMsg = `You need to wait ${timeLeft.toFixed(1)} more second(s) before you can use the \`${command.name}\` command again.`;
+			if (embedPermissions == 0) return message.channel.send(errorMsg);
+			return message.channel.send(embeds.cooldownEmbed(errorMsg));
 		}
 	}
 

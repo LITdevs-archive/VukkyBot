@@ -16,6 +16,7 @@ module.exports = {
 	usage: "<content>",
 	guildOnly: true,
 	aliases: ["twt", "tw"],
+	requiredAPIs: ["twitter"],
 	execute(message, args) {
 		let attachments = [];
 		if(message.attachments.first()) attachments = message.attachments.map(attachment => attachment.url);
@@ -45,7 +46,7 @@ module.exports = {
 				if(!reaction || !reaction.emoji || !reaction.emoji.name) return message.channel.send("could not get result");
 				if(reaction.emoji.name == "⬆") {
 					await message.reactions.removeAll();
-					if(reaction.users.cache) console.log(`[twttr] tweet approved by ${reaction.users.cache.last().tag}: ${tweet}`);
+					if(reaction.users.cache) console.log(`[twttr] tweet by ${message.author.tag} (${message.author.id}) approved by ${reaction.users.cache.last().tag}: ${tweet}`);
 					var client = new Twitter({
 						consumer_key: process.env.TWITTER_KEY,
 						consumer_secret: process.env.TWITTER_SECRET,
@@ -68,7 +69,7 @@ module.exports = {
 										console.error(error);
 										await message.reactions.removeAll();
 										await message.react("❌");
-										message.reply("there was an error!", embeds.errorEmbed(`${error.message ? error.message : "Unknown error."}`));
+										message.reply("there was an error!", embeds.errorEmbed(error.message ? error.message : error[0].message ? error[0].message : "Unknown error."));
 									}
 								});
 							});
@@ -80,19 +81,20 @@ module.exports = {
 							.then(async function (tweet) {
 								await message.reactions.removeAll();
 								await message.react("✅");
+								console.log(`[twttr] tweet (https://twitter.com/i/status/${tweet.id_str}) by ${message.author.tag} (${message.author.id}) posted by ${reaction.users.cache.last().tag}: ${status.status}`);
 								message.reply(format(vukkytils.getString("TWEET_APPROVED"), `https://twitter.com/i/status/${tweet.id_str}`));
 							})
 							.catch(async function (error) {
 								await message.reactions.removeAll();
 								await message.react("❌");
-								message.reply("there was an error!", embeds.errorEmbed(`${error.message ? error.message : "Unknown error."}`));
-								throw error;
+								message.reply("there was an error!", embeds.errorEmbed(error.message ? error.message : error[0].message ? error[0].message : "Unknown error."));
+								console.error(error);
 							});
 					}
 				} else if (reaction.emoji.name == "⬇") {
 					if(!selfdownvote) {
 						await message.reactions.removeAll();
-						if(reaction.users.cache) console.log(`[twttr] tweet denied by ${reaction.users.cache.last().tag}: ${tweet}`);
+						if(reaction.users.cache) console.log(`[twttr] tweet by ${message.author.tag} (${message.author.id}) denied by ${reaction.users.cache.last().tag}: ${tweet}`);
 						await message.react("❌");
 						message.reply(vukkytils.getString("TWEET_DENIED"));
 					} else {
