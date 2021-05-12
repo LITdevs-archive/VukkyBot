@@ -31,7 +31,7 @@ console.clear();
 console.log(`[${vukkytils.getString("STARTUP")}] ${vukkytils.getString("STARTING")}`);
 
 async function checkUpdates(forStartup) {
-	const updateChecker = ora("Checking for updates...").start();
+	const updateChecker = ora("Checking for VukkyBot updates...").start();
 	updateChecker.prefixText = forStartup == true ? `[${vukkytils.getString("STARTUP")}]` : "[updater]";
 	updateChecker.spinner = "point";
 	updateChecker.render();
@@ -39,7 +39,7 @@ async function checkUpdates(forStartup) {
 		.then(res => res.json())
 		.then(json => {
 			if (json.version > pjson.version && updateRemindedOn !== json.version) {
-				updateChecker.warn(`${json.version} is now available!`);
+				updateChecker.warn(`VukkyBot ${json.version} is now available!`);
 				console.log(`[updater] https://github.com/VukkyLtd/VukkyBot/releases/tag/${json.version}`);
 				updateRemindedOn = json.version;
 				if (config.updateChecker.dmOwner) {
@@ -52,7 +52,7 @@ async function checkUpdates(forStartup) {
 				}
 				return true;
 			} else {
-				updateChecker.info("No new updates available.");
+				updateChecker.info("No new VukkyBot updates available.");
 				if(forStartup == true) commandPrep(true);
 				return false;
 			}
