@@ -14,17 +14,34 @@ const vukkytils = require("./utilities/vukkytils");
 const format = require("util").format;
 const prefix = process.env.BOT_PREFIX;
 client.commands = new Discord.Collection();
-let updateRemindedOn = null;
-const chokidar = require("chokidar");
+let updateRemindedOn, commandFiles, manifests = null;
 const chalk = require("chalk");
+const exec = require("await-exec");
 
-let commandFiles, manifests;
-glob("./modules/*/manifest.json", function(er, files) {
-	manifests = files;
-});
-glob("./modules/*/commands/*.js", function(er, files) {
-	commandFiles = files;
-});
+async function prepModules() {
+	const moduleSpinner = ora("Downloading modules...").start();
+	moduleSpinner.prefixText = `[${vukkytils.getString("STARTUP")}]`;
+	moduleSpinner.spinner = "point";
+	for (let i = 0; i < config.modules.installedModules.length; i++) {
+		const moduleToInstall = config.modules.installedModules[i];
+		moduleSpinner.text = `Downloading ${moduleToInstall}... (${config.modules.installedModules.indexOf(moduleToInstall)}/${config.modules.installedModules.length})`;
+		await exec(`cd modules && git clone ${moduleToInstall}`);
+	}
+	glob("./modules/*/manifest.json", function(er, files) {
+		manifests = files;
+	});
+	glob("./modules/*/commands/*.js", function(er, files) {
+		commandFiles = files;
+	});
+	moduleSpinner.succeed("Modules downloaded!");
+	if(config.updateChecker.enabled) {
+		checkUpdates(true);
+	} else {
+		commandPrep(true);
+	}
+}
+prepModules();
+
 let embedPermissions = 1;
 
 console.clear();
@@ -90,12 +107,6 @@ function commandPrep(forStartup) {
 	}
 }
 
-if(config.updateChecker.enabled) {
-	checkUpdates(true);
-} else {
-	commandPrep(true);
-}
-
 const cooldowns = new Discord.Collection();
 
 client.once("ready", async () => {
@@ -149,35 +160,6 @@ client.once("ready", async () => {
 			checkUpdates();
 		}, 7200000);
 	}
-	chokidar.watch("commands/*.js", {ignoreInitial: true}).on("all", (event, path) => {
-		path = path.substr(path.lastIndexOf("\\") + 1);
-		if(event == "add") {
-			const commandSpinner = ora(`Loading ${path}\n`).start();
-			commandSpinner.prefixText = "[autoreload]";
-			commandSpinner.spinner = "point";
-			try {
-				const command = require(`./commands/${path}`);
-				client.commands.set(command.name, command);
-				commandSpinner.succeed(`Loaded ${path}`);
-			} catch (error) {
-				commandSpinner.fail(`Couldn't load ${path}: ${error.message}`);
-				throw error;
-			}
-		} else if (event == "change") {
-			const commandSpinner = ora(`Reloading ${path}\n`).start();
-			commandSpinner.prefixText = "[autoreload]";
-			commandSpinner.spinner = "point";	
-			try {
-				delete require.cache[require.resolve(`./commands/${path}`)];
-				const command = require(`./commands/${path}`);
-				client.commands.set(command.name, command);
-				commandSpinner.succeed(`Reloaded ${path}`);
-			} catch (error) {
-				commandSpinner.fail(`Couldn't reload ${path}: ${error.message}`);
-				throw error;
-			}
-		}
-	});
 	embeds.setAvatarURL(client.user.displayAvatarURL());
 	if(config.misc.mysql) {
 		if(!process.env.SQL_HOST || !process.env.SQL_PASS || !process.env.SQL_USER || !process.env.SQL_DB) {
