@@ -13,6 +13,7 @@
     "comma-number": "^2.0.1",
     "discord.js": "^12.5.2",
     "dotenv": "^8.2.0",
+    "glob": "^7.1.7",
     "minecraft-server-util": "^3.4.4",
     "mysql": "^2.18.1",
     "ora": "^5.4.0",

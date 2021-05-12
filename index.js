@@ -1,7 +1,7 @@
 // Copyright (C) 2019-2021 Vukky, Gravity Assist, Skelly
 
 require("dotenv").config();
-const fs = require("fs");
+const glob = require("glob");
 const counting = require("./counting.js");
 const Discord = require("discord.js");
 const ora = require("ora");
@@ -18,7 +18,13 @@ let updateRemindedOn = null;
 const chokidar = require("chokidar");
 const chalk = require("chalk");
 
-const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
+let commandFiles, manifests;
+glob("./modules/*/manifest.json", function(er, files) {
+	manifests = files;
+});
+glob("./modules/*/commands/*.js", function(er, files) {
+	commandFiles = files;
+});
 let embedPermissions = 1;
 
 console.clear();
@@ -54,16 +60,16 @@ async function checkUpdates(forStartup) {
 }
 
 function commandPrep(forStartup) {
-	const commandSpinner = ora(`${vukkytils.getString("STARTUP_LOADING_COMMANDS")}\n`).start();
+	const commandSpinner = ora(`${vukkytils.getString("STARTUP_LOADING_MODULES")}\n`).start();
 	commandSpinner.prefixText = `[${vukkytils.getString("STARTUP")}]`;
 	commandSpinner.spinner = "shark";
 	commandSpinner.render();
 	let commandsLoaded = 0;
 	for (const file of commandFiles) {
-		commandSpinner.text = `${format(vukkytils.getString("STARTUP_LOADING_SPECIFIC_COMMAND"), file, commandFiles.indexOf(file), commandFiles.length)}\n`;
+		commandSpinner.text = `${format(vukkytils.getString("STARTUP_LOADING_SPECIFIC_MODULE"), require(`${file.split("/commands")[0]}/manifest.json`).name, manifests.indexOf(`${file.split("/commands")[0]}/manifest.json`), manifests.length)}\n`;
 		try {
 			commandSpinner.render();
-			const command = require(`./commands/${file}`);
+			const command = require(`${file}`);
 			client.commands.set(command.name, command);
 			if (!command.name) {
 				commandSpinner.fail(`Couldn't load ${file}: No name`);
@@ -78,7 +84,7 @@ function commandPrep(forStartup) {
 		}
 		commandsLoaded++;
 		if(commandsLoaded == commandFiles.length) {
-			commandSpinner.succeed(vukkytils.getString("STARTUP_COMMANDS_LOADED"));
+			commandSpinner.succeed(vukkytils.getString("STARTUP_MODULES_LOADED"));
 			if(forStartup == true) login();
 		}
 	}
