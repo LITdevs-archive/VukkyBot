@@ -78,45 +78,9 @@
                 }
             }
         },
-        "commands": {
-            "description": "Options for VukkyBot's commands",
-            "type": "object",
-            "properties": {
-                "quiz": {
-                    "description": "Options for the quiz command",
-                    "type": "object",
-                    "properties": {
-                        "timeSeconds": {
-                            "description": "How many seconds you have to answer a quiz question",
-                            "type": "integer"
-                        },
-                        "hints": {
-                            "description": "Toggles if hints should be enabled",
-                            "type": "boolean"
-                        }
-                    }
-                },
-                "giveawaydrop": {
-                    "description": "Options for the giveaway drop command",
-                    "type": "object",
-                    "properties": {
-                        "codes": {
-                            "description": "Toggles if Giveaway Drop Codes should be enabled",
-                            "type": "boolean"
-                        }
-                    }
-                },
-                "wikipedia": {
-                    "description": "Options for the wikipedia command",
-                    "type": "object",
-                    "properties": {
-                        "site": {
-                            "description": "Sets the Wikipedia to load from.",
-                            "type": "string"
-                        }
-                    }
-                }
-            }
+        "modules": {
+            "description": "Configure VukkyBot modules",
+            "type": "object"
         }
     }
 }

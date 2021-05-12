@@ -68,20 +68,25 @@
         "channelName": "reports",
         "staffRoleName": "Staff"
     },
-    "commands": {
-        "quiz": {
-            "timeSeconds": 30,
-            "hints": true
-        },
-        "giveawaydrop": {
-            "codes": true
-        },
-        "wikipedia": {
-            "site": "en.wikipedia.org"
-        },
-        "tweet": {
-            "blacklist": {
-                
+    "modules": {
+        "installedModules": [
+            "https://github.com/VukkyBot/core"
+        ],
+        "moduleSettings": {
+            "quiz": {
+                "timeSeconds": 30,
+                "hints": true
+            },
+            "giveawaydrop": {
+                "codes": true
+            },
+            "wikipedia": {
+                "site": "en.wikipedia.org"
+            },
+            "tweet": {
+                "blacklist": {
+                    
+                }
             }
         }
     }
