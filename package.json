@@ -11,7 +11,7 @@
     "chalk": "^4.1.0",
     "chokidar": "^3.5.1",
     "comma-number": "^2.0.1",
-    "discord.js": "^12.5.2",
+    "discord.js": "^12.5.3",
     "dotenv": "^8.2.0",
     "minecraft-server-util": "^3.4.4",
     "mysql": "^2.18.1",
