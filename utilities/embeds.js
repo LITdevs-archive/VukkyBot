@@ -1,13 +1,18 @@
+// Copyright (C) 2020-2021 Vukky, Gravity Assist
+
 const Discord = require("discord.js");
 const pjson = require("../package.json");
 const config = require("../config.json");
-const avatarURL = "https://i.imgur.com/H0sAkrl.png";
-const versionString = `This VukkyBot is on v${pjson.version} using discord.js ${pjson.dependencies["discord.js"].substring(1)}`;
+let avatarURL = "https://i.imgur.com/H0sAkrl.png";
+let versionString = `v${pjson.version} (discord.js ${pjson.dependencies["discord.js"].substring(1)})`;
 
 const vukkytils = require("./vukkytils");
 const format = require("util").format;
 
 module.exports = {
+	versionString,
+	getAvatarURL,
+	setAvatarURL,
 	errorEmbed,
 	warningEmbed,
 	infoEmbed,
@@ -27,8 +32,19 @@ module.exports = {
 	aboutEmbed,
 	covidEmbed,
 	warnsUserEmbed,
-	innerEmbed
+	innerEmbed,
+	reportEmbed,
+	reportActionEmbed,
+	tweetBlacklistEmbed,
+	wikipediaEmbed
 };
+
+function setAvatarURL(url) {
+	avatarURL = url;
+}
+function getAvatarURL() {
+	return avatarURL;
+}
 
 function errorEmbed(errorMsg) {
 	return new Discord.MessageEmbed()
@@ -42,7 +58,7 @@ function errorEmbed(errorMsg) {
 function warningEmbed(warningMsg) {
 	return new Discord.MessageEmbed()
 		.setColor("#ffc83d")
-		.setTitle("⚠ Warning:")
+		.setTitle(`⚠ ${vukkytils.getString("WARNING")}`)
 		.setDescription(warningMsg)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -51,7 +67,7 @@ function warningEmbed(warningMsg) {
 function infoEmbed(informationMsg) {
 	return new Discord.MessageEmbed()
 		.setColor("#4b83c3")
-		.setTitle("ℹ Information")
+		.setTitle(`ℹ ${vukkytils.getString("INFORMATION")}`)
 		.setDescription(informationMsg)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -60,7 +76,7 @@ function infoEmbed(informationMsg) {
 function successEmbed(successMsg) {
 	return new Discord.MessageEmbed()
 		.setColor("#16c60c")
-		.setTitle("✅ Success!")
+		.setTitle(`✅ ${vukkytils.getString("SUCCESS")}`)
 		.setDescription(successMsg)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -69,29 +85,26 @@ function successEmbed(successMsg) {
 function inputEmbed(detailsMsg) {
 	return new Discord.MessageEmbed()
 		.setColor("#99aab5")
-		.setTitle("⌨ Input requested!")
+		.setTitle(`⌨ ${vukkytils.getString("INPUT_REQUESTED")}`)
 		.setDescription(detailsMsg)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
 
 function GiveawayDrop(prize, dropped_by, code) {
-	let howToString;
-	let titleString;
+	let howToString = vukkytils.getString("GIVEAWAY_DROP_HOWTO");
+	let titleString = `🎁 ${vukkytils.getString("GIVEAWAY_DROP")}`;
 	if(code == true) {
-		howToString = "Be the first who reacts with :tada: to this message. More details in <#726070905750421545>\n\n**THIS GIVEAWAY DROP CONTAINS A SPECIAL CODE!**\nMake sure your DMs are open!!";
-		titleString = "🎁⌨ Giveaway Drop (with special code)";
-	} else {
-		howToString = "Be the first who reacts with :tada: to this message. More details in <#726070905750421545>";
-		titleString = "🎁 Giveaway Drop";
+		howToString = howToString.concat(vukkytils.getString("GIVEAWAY_DROP_HOWTO_CODE"));
+		titleString = `🎁⌨ ${vukkytils.getString("GIVEAWAY_DROP_CODE")}`;
 	}
 	return new Discord.MessageEmbed()
 		.setColor("#D0A33E")
 		.setTitle(titleString)
-		.addField("Prize", prize, false)
-		.addField("Winner", "No winner yet!", false)
-		.addField("How do I win?", howToString, false)
-		.setAuthor(`Started by ${dropped_by.tag}`)
+		.addField(vukkytils.getString("GIVEAWAY_PRIZE"), prize, false)
+		.addField(vukkytils.getString("GIVEAWAY_DROP_WINNER"), vukkytils.getString("GIVEAWAY_DROP_NO_WINNER_YET"), false)
+		.addField(vukkytils.getString("GIVEAWAY_DROP_HOWDOIWIN"), howToString, false)
+		.setAuthor(format(vukkytils.getString("GIVEAWAY_DROP_STARTED_BY"), dropped_by.tag))
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
@@ -99,10 +112,10 @@ function GiveawayDrop(prize, dropped_by, code) {
 function GiveawayWinner(prize, dropped_by, winner) {
 	return new Discord.MessageEmbed()
 		.setColor("#D000BC")
-		.setTitle("👑 Giveaway Drop winner!")
-		.addField("Prize", prize, false)
-		.addField("Winner", winner, false)
-		.setAuthor(`Started by ${dropped_by.tag}`)
+		.setTitle(`👑 ${vukkytils.getString("GIVEAWAY_DROP_WINNER")}`)
+		.addField(vukkytils.getString("GIVEAWAY_PRIZE"), prize, false)
+		.addField(vukkytils.getString("WINNER"), winner, false)
+		.setAuthor(format(vukkytils.getString("GIVEAWAY_DROP_STARTED_BY"), dropped_by.tag))
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
@@ -110,24 +123,24 @@ function GiveawayWinner(prize, dropped_by, winner) {
 function GiveawayInvalid(prize, dropped_by) {
 	return new Discord.MessageEmbed()
 		.setColor("#8EA5D0")
-		.setTitle("💸 Giveaway Drop expired...")
-		.addField("Prize", prize, false)
-		.addField("Winner", "This prize is unfortunately no longer valid. Maybe next time?", false)
-		.setAuthor(`Started by ${dropped_by.tag}`)
+		.setTitle(`💸 ${vukkytils.getString("GIVEAWAY_DROP_EXPIRED")}`)
+		.addField(vukkytils.getString("GIVEAWAY_PRIZE"), prize, false)
+		.setDescription(vukkytils.getString("GIVEAWAY_PRIZE_INVALID"))
+		.setAuthor(format(vukkytils.getString("GIVEAWAY_DROP_STARTED_BY"), dropped_by.tag))
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
 
 function quizStartEmbed(question, time, hint, author, categories) {
 	var description = `**Categories:** ${categories.join(", ")}\n\n${question}\nYou have ${time} seconds to answer!\n`;
-	author = (!author) ? "an unknown user" : author;
+	author = (!author) ? vukkytils.getString("QUIZ_UNKNOWN_USER") : author;
 	if(hint && config.commands.quiz.hints == true) {
-		description = description.concat(`\n💡 **Hint available.** ||${hint}||`);
+		description = description.concat(`\n💡 **${vukkytils.getString("QUIZ_HINT_AVAILABLE")}** ||${hint}||`);
 	}
 	description = description.concat(`\n📝 This question was brought to you by ${author} :)`);
 	return new Discord.MessageEmbed()
 		.setColor("#7289da")
-		.setTitle("❓ Are you ready? Here we go!")
+		.setTitle(`❓ ${vukkytils.getString("QUIZ_START")}`)
 		.setDescription(description)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -136,8 +149,8 @@ function quizStartEmbed(question, time, hint, author, categories) {
 function quizWinnerEmbed(winner) {
 	return new Discord.MessageEmbed()
 		.setColor("#ffc83d")
-		.setTitle("👑 Ding ding ding!")
-		.setDescription(`${winner.author} got the correct answer!`)
+		.setTitle(`👑 ${vukkytils.getString("QUIZ_WINNER_TITLE")}`)
+		.setDescription(format(vukkytils.getString("QUIZ_WINNER_DESCRIPTION"), winner.author))
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
@@ -145,7 +158,7 @@ function quizWinnerEmbed(winner) {
 function quizLoseEmbed(message) {
 	return new Discord.MessageEmbed()
 		.setColor("#be1931")
-		.setTitle("😅 Game over! No one wins.")
+		.setTitle(`😅 ${vukkytils.getString("QUIZ_GAME_OVER")}`)
 		.setDescription(message)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -154,7 +167,7 @@ function quizLoseEmbed(message) {
 function cooldownEmbed(message) {
 	return new Discord.MessageEmbed()
 		.setColor("#ffffff")
-		.setTitle("⏲ Slow down!")
+		.setTitle(`⏲ ${vukkytils.getString("SLOW_DOWN")}`)
 		.setDescription(message)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
@@ -164,10 +177,10 @@ function cryptoEmbed(coin, value, lastupdated, change24) {
 	return new Discord.MessageEmbed()
 		.setColor("#a7d28b")
 		.setTitle(`💰 ${coin} value`)
-		.setDescription("Here's your requested data!")
-		.addField("Value in USD", `$${value}`, true)
-		.addField("Value change (from 24h ago)", `$${change24}`, true)  
-		.addField("Last updated", lastupdated, true)
+		.setDescription(vukkytils.getString("DATA_GOTTEN"))
+		.addField(vukkytils.getString("CRYPTO_VALUE"), `$${value}`, true)
+		.addField(vukkytils.getString("CRYPTO_VALUE_CHANGE"), `$${change24}`, true)  
+		.addField(vukkytils.getString("CRYPTO_LAST_UPDATED"), lastupdated, true)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
@@ -186,11 +199,11 @@ function todayInHistoryEmbed(event, year, date, links) {
 	}
 	return new Discord.MessageEmbed()
 		.setColor("#aab8c2")
-		.setTitle("Today in History...")
+		.setTitle(vukkytils.getString("TIH"))
 		.setDescription(event)
-		.addField("Year", year, true)
-		.addField("Date", date, true)
-		.addField("Links", linkies.join(", "), true)
+		.addField(vukkytils.getString("TIH_YEAR"), year, true)
+		.addField(vukkytils.getString("TIH_DATE"), date, true)
+		.addField(vukkytils.getString("TIH_LINKS"), linkies.join(", "), true)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
@@ -198,7 +211,7 @@ function todayInHistoryEmbed(event, year, date, links) {
 function funFactEmbed(fact, category, image, source) {
 	return new Discord.MessageEmbed()
 		.setColor("#ffc83d")
-		.setTitle(`🧠 Did You Know: ${category}`)
+		.setTitle(`🧠 ${vukkytils.getString("DID_YOU_KNOW")} ${category}`)
 		.setDescription(fact)
 		.setTimestamp()
 		.setImage(image)
@@ -207,8 +220,7 @@ function funFactEmbed(fact, category, image, source) {
 }
 
 function duckEmbed(image) {
-	var message = image.toLowerCase().includes("gif") ? "A wild (animated) duck appears! 🦆" : "A wild duck appears! 🦆";
-	if(image.toLowerCase().includes("gif")) message = "A wild (animated) duck appears! 🦆";
+	var message = image.toLowerCase().includes("gif") ? vukkytils.getString("DUCK_ANIMATED") : vukkytils.getString("DUCK_NORMAL");
 	return new Discord.MessageEmbed()
 		.setColor("#8e562e")
 		.setTitle(message)
@@ -220,20 +232,21 @@ function duckEmbed(image) {
 function innerEmbed(image) {
 	return new Discord.MessageEmbed()
 		.setColor("#8e562e")
-		.setTitle("A wild inner Vukky appears!")
+		.setTitle(vukkytils.getString("HELLO_INNER_VUKKY"))
 		.setImage(image)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
 
-function aboutEmbed(botversion, discordjsversion, osinfo) {
+function aboutEmbed(botversion, discordjsversion, osinfo, owners) {
 	return new Discord.MessageEmbed()
 		.setColor("#4289c1")
-		.setTitle("💁‍♂️ About this VukkyBot")
+		.setTitle(`💁‍♂️ ${vukkytils.getString("ABOUT_VUKKYBOT_TITLE")}`)
 		.setDescription("Did you know? [VukkyBot is open source!](https://github.com/VukkyLtd/VukkyBot)")
-		.addField("Bot version", botversion, true)
-		.addField("discord.js version", discordjsversion, true)
-		.addField("OS information", osinfo, true)
+		.addField(vukkytils.getString("ABOUT_VUKKYBOT_BOT_VER"), botversion, true)
+		.addField(vukkytils.getString("ABOUT_VUKKYBOT_DJS_VER"), discordjsversion, true)
+		.addField(vukkytils.getString("ABOUT_VUKKYBOT_OS_INFO"), osinfo, true)
+		.addField(vukkytils.getString("ABOUT_VUKKYBOT_BOT_OWNERS"), owners, true)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }
@@ -241,16 +254,16 @@ function aboutEmbed(botversion, discordjsversion, osinfo) {
 function covidEmbed(flag, location, cases, casesToday, deaths, deathsToday, recovered, recoveredToday, active, critical, tests) {
 	return new Discord.MessageEmbed()
 		.setColor("#8e562e")
-		.setTitle(`COVID stats for ${location}`)
-		.addField("Cases", cases, true)
-		.addField("Cases today", casesToday, true)
-		.addField("Deaths", deaths, true)
-		.addField("Deaths today", deathsToday, true)		
-		.addField("Recovered", recovered, true)
-		.addField("Recovered today", recoveredToday, true)
-		.addField("Active", active, true)
-		.addField("Critical", critical, true)
-		.addField("Tests", tests, true)
+		.setTitle(format(vukkytils.getString("COVID_LOCATION"), location))
+		.addField(vukkytils.getString("COVID_CASES"), cases, true)
+		.addField(vukkytils.getString("COVID_CASES_TODAY"), casesToday, true)
+		.addField(vukkytils.getString("COVID_DEATHS"), deaths, true)
+		.addField(vukkytils.getString("COVID_DEATHS_TODAY"), deathsToday, true)		
+		.addField(vukkytils.getString("COVID_RECOVERED"), recovered, true)
+		.addField(vukkytils.getString("COVID_RECOVERED_TODAY"), recoveredToday, true)
+		.addField(vukkytils.getString("COVID_ACTIVE"), active, true)
+		.addField(vukkytils.getString("COVID_CRITICAL"), critical, true)
+		.addField(vukkytils.getString("COVID_TESTS"), tests, true)
 		.setTimestamp()
 		.setThumbnail(flag)
 		.setFooter(versionString, avatarURL);
@@ -261,6 +274,49 @@ function warnsUserEmbed(username, warns) {
 		.setColor("#ffcc4d")
 		.setTitle(`⚠ ${format(vukkytils.getString("WARNINGS_TITLE"), username)}`)
 		.setDescription(warns)
+		.setTimestamp()
+		.setFooter(versionString, avatarURL);
+}
+
+function reportEmbed(messageURL, reportedUser, reporter, messageContent) {
+	return new Discord.MessageEmbed()
+		.setColor("#ffcc4d")
+		.setTitle("A message was reported!")
+		.setDescription(messageContent)
+		.addField("Reported user", reportedUser, true)
+		.addField("Reporter", reporter, true)
+		.addField("Message link", messageURL, true)
+		.setTimestamp()
+		.setFooter(versionString, avatarURL);
+}
+
+function reportActionEmbed(title, messageContent, actionTakenBy) {
+	return new Discord.MessageEmbed()
+		.setColor("#ffcc4d")
+		.setTitle(title)
+		.setDescription(messageContent)
+		.addField("Action taken by", actionTakenBy, true)
+		.setTimestamp()
+		.setFooter(versionString, avatarURL);
+}
+
+function tweetBlacklistEmbed(blacklistReason) {
+	return new Discord.MessageEmbed()
+		.setColor("#ff0000")
+		.setTitle("⛔ You are not allowed to tweet.")
+		.setDescription(`You are blacklisted for ${blacklistReason}.`)
+		.setTimestamp()
+		.setFooter(versionString, avatarURL);
+}
+
+function wikipediaEmbed(title, shortdesc, desc, image, url) {
+	return new Discord.MessageEmbed()
+		.setColor("#ffc83d")
+		.setTitle(title)
+		.setAuthor(shortdesc)
+		.setDescription(desc)
+		.setThumbnail(image)
+		.setURL(url)
 		.setTimestamp()
 		.setFooter(versionString, avatarURL);
 }

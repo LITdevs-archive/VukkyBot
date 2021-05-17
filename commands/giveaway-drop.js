@@ -1,10 +1,12 @@
+// Copyright (C) 2020-2021 Vukky, Gravity Assist
+
 const embeds = require("../utilities/embeds");
 const config = require("../config.json");
 var specialCode;
 var specialCodeContents;
 
 function confirmDroppy(message, args) {
-	const prize = args.slice(2).join(" ");
+	const prize = args.slice(1).join(" ");
 	let stringy = `Do you want to make a giveaway drop with the prize ${prize}?`;
 	if(specialCode == true) { stringy = `Do you want to make a giveaway drop with the prize ${prize}, containing a code (**${specialCodeContents}**)?`;}
 	message.channel.send(embeds.inputEmbed(stringy))
@@ -85,7 +87,7 @@ module.exports = {
 		message.channel.send("Welcome to the giveaway drop creator!\n⚠ **Please note**: The prize name is logged for debugging purposes.");
 		if (message.member.permissions.has("ADMINISTRATOR") || message.member.roles.cache.find(r => r.name === "Drop Permissions")) {
 			if (message.mentions.channels.size !== 0) {
-				if (args.slice(2).join(" ")) {
+				if (args.slice(1).join(" ")) {
 					if(config.commands.giveawaydrop.codes == true) {
 						message.channel.send(embeds.inputEmbed("Does ths drop have a special code?"))
 							.then(checkmessage => {
