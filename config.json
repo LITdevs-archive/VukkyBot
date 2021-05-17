@@ -10,64 +10,15 @@
         ],
         "mysql": true,
         "language": "en",
-        "emoji": {
-            "error": "<:error:759701620777943062>",
-            "loading": "<a:offlinegif:757979855924101220>"
-        }
-    },
-    "moderation": {
-        "automod": {
-            "allowInviteLinks": false,
-            "allowInviteLinksBypassRoles": ["770972367227846667"],
-            "autoResponses": {
-                "enabled": true,
-                "responses": {
-                    "-installvukkybot": {
-                        "embed": {
-                            "title": "VukkyBot is available on GitHub!",
-                            "description": "You can also [read the documentation](https://docs.vukkyltd.xyz) if you need help.",
-                            "url": "https://github.com/vukkyltd/vukkybot",
-                            "footer": "VukkyBot runs on node.js with discord.js - VukkyBot requires Node 12 or above."
-                        }
-                    },
-                    "-runescapechannel": {
-                        "embed": {
-                            "title": "What is #runescape?",
-                            "description": "<#825832167556120597> is for discussion about Old School RuneScape and posts levelups of the Vukky Clan. When Vukky, Velocity, or Skelly levels up, a notification is sent there.",
-                            "footer": "If you're using this outside of Vukky's Chat Place, you can ignore it."
-                        }
-                    },
-                    "sus": {
-                        "text": "<:sus:826940247317151764>"
-                    }
-                }
-            }
-        }
+        "languageComment": "Currently, only English (en) and Finnish (fi) is supported."
     },
     "counting": {
         "enabled": true,
-        "channelName": "counting",
-        "customEmoji": {
-            "69420": "👀",
-            "10000": "🤯",
-            "2763": "✏️",
-            "1000": "🏆",
-            "420": "👀",
-            "100": "💯",
-            "69": "👀",
-            "42": "🧑‍🚀",
-            "21": "🧠"
-        }
+        "channelName": "counting"
     },
     "updateChecker": {
         "enabled": true,
         "dmOwner": true
-    },
-    "reports": {
-        "enabled": true,
-        "channelName": "reports",
-        "staffRoleName": "Staff"
-        
     },
     "commands": {
         "quiz": {
@@ -76,14 +27,6 @@
         },
         "giveawaydrop": {
             "codes": true
-        },
-        "wikipedia": {
-            "site": "en.wikipedia.org"
-        },
-        "tweet": {
-            "blacklist": {
-                
-            }
         }
     }
 }

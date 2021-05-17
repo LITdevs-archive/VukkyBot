@@ -12,7 +12,7 @@
     "BOT_TOKEN": {
       "description": "The token for your VukkyBot. Not your client secret!"
     },
-    "BOT_PREFIX": {
+    "PREFIX": {
       "description": "The prefix your VukkyBot will use.",
       "value": "v!"
     }

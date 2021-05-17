@@ -29,5 +29,4 @@ Toggles if the bot gives you hints for quiz questions. (default: `true`)
 ## giveawaydrop
 
 ### codes
-
 Toggles if the bot asks you for special codes while making a giveaway drop. If you set this to false, the special codes feature will be disabled. (default: `true`)

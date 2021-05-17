@@ -1,31 +1,28 @@
 {
   "name": "vukkybot",
-  "version": "3.0.0",
-  "date": "07/04/2021",
-  "dateFormat": "DD/MM/YYYY",
+  "version": "2.1.2",
   "description": "VukkyBot",
   "main": "index.js",
   "dependencies": {
-    "@vukkyutils/localization": "^2.2.0",
-    "canvacord": "^5.1.0",
     "chalk": "^4.1.0",
-    "chokidar": "^3.5.1",
     "comma-number": "^2.0.1",
-    "discord.js": "^12.5.2",
+    "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
-    "minecraft-server-util": "^3.4.4",
     "mysql": "^2.18.1",
-    "ora": "^5.4.0",
-    "twitter": "^1.7.1"
+    "pm2": "^4.5.1",
+    "vukkyutils": "^2.1.0"
   },
   "devDependencies": {
-    "eslint": "^7.22.0",
-    "inquirer": "^8.0.0",
-    "npm": "^7.8.0"
+    "eslint": "^7.16.0",
+    "inquirer": "^7.3.3",
+    "npm": "^6.14.10",
+    "ora": "^5.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "start": "pm2 start index.js --name VukkyBot -- --color && pm2 log",
+    "stop": "pm2 del VukkyBot",
+    "restart": "pm2 restart VukkyBot && pm2 log",
     "setup": "node setup.js",
     "lint": "npx eslint **/*.js",
     "lintfix": "npx eslint **/*.js --fix"

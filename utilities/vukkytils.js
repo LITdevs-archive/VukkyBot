@@ -1,10 +1,7 @@
-// Copyright (C) 2020-2021 Vukky
-
-const vukkytils = require("@vukkyutils/localization");
+const vukkytils = require("vukkyutils");
 const config = require("../config.json");
 
 vukkytils.setLanguage(config.misc.language);
-vukkytils.setSplitLanguagesMode(true);
-vukkytils.setSplitLanguagesLocation("../strings");
+vukkytils.loadStrings("../strings.json");
 
 module.exports = vukkytils;

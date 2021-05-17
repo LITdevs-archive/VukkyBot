@@ -1,6 +1,5 @@
 /docs
 /.github
+setup.js
 CONTRIBUTING.md
 README.md
-crowdin.yml
-.all-contributorsrc

@@ -1,11 +1,7 @@
-// Copyright (C) 2020-2021 vtheskeleton, Vukky
-
 const config = require("../config.json");
 require("dotenv").config();
 var mysql = require("mysql");
 const { errorEmbed, successEmbed } = require("../utilities/embeds.js");
-const vukkytils = require("../utilities/vukkytils");
-const format = require("util").format;
 
 function everythingIsFine(message, mentionedUser, args) {
 	let warnReason = args.slice(1).join(" ");
@@ -20,15 +16,16 @@ function everythingIsFine(message, mentionedUser, args) {
 		if (err) console.log(err);
 	});
 			
-	let sql = `INSERT INTO warnings (username, serverid, uid, reason) VALUES ('DEPRECATED', ${message.guild.id} , ${mentionedUser.id}, '${warnReason}')`;
+	let sql = `INSERT INTO warnings (username, serverid, uid, reason) VALUES ('${mentionedUser.username}', ${message.guild.id} , ${mentionedUser.id}, '${warnReason}')`;
 	con.query(sql, function (err, result) {
 		if (err)  {
-			message.channel.send(errorEmbed("See logs for more information."));
+			message.channel.send(errorEmbed("An error has occurred! See logs for more information."));
 			console.log(err);
 			con.end();
 		} else {
-			mentionedUser.send(format(vukkytils.getString("GOT_WARNED"), message.guild.name, warnReason));
-			message.channel.send(successEmbed(format(vukkytils.getString("WARNING_ADDED"), mentionedUser, warnReason)));
+			mentionedUser.send(`⚠ You were warned in **${message.guild.name}**, for ${warnReason}.`);
+			message.channel.send(successEmbed(`Warning added to ${mentionedUser}, for ${warnReason}.`));
+			console.log("1 warning added");
 			con.end();
 		}
 	});
@@ -41,10 +38,10 @@ module.exports = {
 	userPermissions: ["MANAGE_MESSAGES"],
 	usage: "<@user> <reason>",
 	cooldown: 0,
-	requiredAPIs: ["mysql"],
+	mysql: true,
 	guildOnly: true,
 	execute(message, args) {
-		if (args.slice(1).join(" ").length < 1) return message.channel.send(errorEmbed(`I was expecting more arguments!\nUsage: \`${process.env.BOT_PREFIX}warn <@user> <reason>\``));
+		if (args.slice(1).join(" ").length < 1) return message.channel.send(errorEmbed(`I was expecting more arguments!\nUsage: \`${process.env.PREFIX}warn <@user> <reason>\``));
 		let mentionedUser;
 		if (message.guild.member(message.mentions.users.first())) {
 			mentionedUser = message.guild.member(message.mentions.users.first()).user;
