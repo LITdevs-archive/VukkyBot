@@ -19,7 +19,7 @@
     "twitter": "^1.7.1"
   },
   "devDependencies": {
-    "eslint": "^7.26.0",
+    "eslint": "^7.27.0",
     "inquirer": "^8.0.0",
     "npm": "^7.13.0"
   },
