@@ -15,7 +15,7 @@
     "dotenv": "^10.0.0",
     "minecraft-server-util": "^3.5.1",
     "mysql": "^2.18.1",
-    "ora": "^5.4.0",
+    "ora": "^5.4.1",
     "twitter": "^1.7.1"
   },
   "devDependencies": {
