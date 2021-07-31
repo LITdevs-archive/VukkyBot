@@ -19,8 +19,8 @@
 	],
 	"SLAP_TYPES": "صفعة على الوجه كبيرة!",
 	"GIVE_USER": "%s يعطي %s %s",
-	"WARNINGS_TITLE": "تحذير لـ %s",
-	"NO_WARNINGS": "هذا الشخص ليس لديه تحذيرات.",
+	"WARNINGS_TITLE": "%s's warnings",
+	"NO_WARNINGS": "This person doesn't have any warnings! ✨",
 	"BOT_LOVE": "أوه، شكراً! ♥",
 	"BOT_PAIN": "لماذا حاولت؟ :(",
 	"CANT_HUG_SELF": "لا يمكنك حضن نفسك! سيكون ذلك سخيفا.",
@@ -29,12 +29,11 @@
 	"CANT_KICK_SELF": "لا يمكنك ان تضرب نفسك! سيكون ذلك سخيفا.",
 	"CANT_BAN_SELF": "لا يمكنك حظر نفسك! سيكون هذا سخيفا.",
 	"PING_REQUIRED": "تحتاج إلى وضع @ (اسم شخص #) شخص ما لاستخدام هذا الأمر.",
-	"TWEETING": "التغريد...",
 	"TWEET_APPROVED": "تمت الموافقة على تغريدتك من قبل المستخدم! هنا هو: %s",
 	"TWEET_DENIED": "تم رفض تغريدتك من قبل المستخدم.",
 	"TWEET_REPLYING_TO": "أنت تردّ على %s",
-	"WARNING_ADDED": "تم إضافة التحذير إلى %sلـ %s.",
-	"GOT_WARNED": "⚠ تم تحذيرك في **%s**، على %s.",
+	"WARNING_ADDED": "%s now has a warning for %s.",
+	"GOT_WARNED": "⚠ Hi! You got warned in **%s** for %s.",
 	"DISCOVERING_OTHER_VUKKY": "انتظر! انا استكشف الvukky الداخلية ل**%s**!",
 	"DISCOVERING_VUKKY": "انتظر! انا استكشف الvukky الداخلية اللتي تخص لك!",
 	"DISCOVERED_OTHER_VUKKY": "%s، هنا الفوكي الداخلي الخاص ب**%s**!",
@@ -50,7 +49,7 @@
 	"COVID_ACTIVE": "نشطة",
 	"COVID_CRITICAL": "الحرجة",
 	"COVID_TESTS": "الاختبارات",
-	"API_CREDIT": "شكراً ل <%s>!",
+	"API_CREDIT": "🌐 This response is powered by the nice people at <%s>.",
 	"DUCK_FINDING": "انتظر! أنا أجد بطًا لك... 🦆🦆🦆",
 	"ENV_PREFIX_RENAMED": "PREFIX هو الآن BOT_PREFIX. الرجاء تغيير ملف .env الخاص بك.",
 	"WARNING": "تنبيه",
@@ -81,7 +80,7 @@
 	"TIH_LINKS": "Links",
 	"DEBUG": "debug",
 	"DEBUG_DEV_MODE": "Developer mode is enabled.",
-	"GETTING_DATA": "Hold on! I'm getting the data...",
+	"GETTING_DATA": "Connecting to an external server...",
 	"WIKIPEDIA_DOESNT_EXIST": "`%s` doesn't exist.",
 	"WIKIPEDIA_INVALID_CHARS": "`%s` contains invalid characters.",
 	"WIKIPEDIA_NO_SHORT_DESC": "No short description availabile",
@@ -93,6 +92,7 @@
 	"ABOUT_VUKKYBOT_BOT_VER": "Bot version",
 	"ABOUT_VUKKYBOT_DJS_VER": "discord.js version",
 	"ABOUT_VUKKYBOT_OS_INFO": "OS information",
+	"ABOUT_VUKKYBOT_BOT_OWNERS": "Bot owners",
 	"DATA_GOTTEN": "Here's your requested data!",
 	"CRYPTO_VALUE": "Value in USD",
 	"CRYPTO_VALUE_CHANGE": "Value change (from 24h ago)",
@@ -114,5 +114,11 @@
 	"STARTUP_LOGIN_FAILED_INTERNET_UNAVAILABLE": "Login failed - your internet connection may be unavailable.",
 	"DISCORD_INVITES_DISABLED_AUTOMOD": "%s, **sending Discord invites** is disabled in this server.",
 	"INNER_VUKKY_ERROR": "The Vukky seems to be hiding...",
-	"INNER_VUKKY_USER_FETCH_ERROR": "The Vukky seems to be hiding... Are you sure that's a real person?"
+	"INNER_VUKKY_USER_FETCH_ERROR": "The Vukky seems to be hiding... Are you sure that's a real person?",
+	"WARNING_CANT_SEE_OTHER": "Sorry, but you need the `MANAGE_MESSAGES` permission to see other people's warnings.",
+	"HELP_NO_DESCRIPTION": "It looks like this command doesn't have any description.",
+	"MYSQL_MISSING_CREDENTIALS": "Some MySQL credentials are missing.",
+	"COMMAND_GUILD_ONLY": "%s can't be used in DMs.",
+	"COMMAND_BOT_OWNER_ONLY": "%s can only be used by the owners of this VukkyBot.",
+	"COMMAND_INVALID": "I've been looking around for a while now, but I don't think **%s** is a command."
 }
