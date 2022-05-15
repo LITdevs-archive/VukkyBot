@@ -24,7 +24,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/viluzi"><img src="https://avatars0.githubusercontent.com/u/47392011?v=4" width="100px;" alt=""/><br /><sub><b>viluzi</b></sub></a><br /><a href="https://github.com/VukkyLtd/VukkyBot/commits?author=viluzi" title="Code">💻</a> <a href="#translation-viluzi" title="Translation">🌍</a></td>
+    <td align="center"><a href="https://github.com/vtheskeleton"><img src="https://avatars0.githubusercontent.com/u/47392011?v=4" width="100px;" alt=""/><br /><sub><b>vtheskeleton</b></sub></a><br /><a href="https://github.com/VukkyLtd/VukkyBot/commits?author=vtheskeleton" title="Code">💻</a> <a href="#translation-vtheskeleton" title="Translation">🌍</a></td>
     <td align="center"><a href="https://github.com/Fvn556"><img src="https://avatars1.githubusercontent.com/u/68157424?v=4" width="100px;" alt=""/><br /><sub><b>Fvn556</b></sub></a><br /><a href="https://github.com/VukkyLtd/VukkyBot/commits?author=Fvn556" title="Code">💻</a></td>
   </tr>
 </table>
